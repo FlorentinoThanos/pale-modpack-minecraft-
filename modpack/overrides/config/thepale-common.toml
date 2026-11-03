@@ -1,0 +1,109 @@
+[world]
+	#Radius up to which terrain is untouched. From here land sinks into the ocean.
+	# Default: 1050.0
+	# Range: 0.0 ~ 3.0E7
+	landFalloffStartRadius = 1050.0
+	#Radius where land ends. Past it there is only ocean. Treated as landFalloffStartRadius + 1 if lower.
+	# Default: 1250.0
+	# Range: 0.0 ~ 3.0E7
+	landEndRadius = 1250.0
+	#Continentalness the ocean past landEndRadius is pulled toward. -0.75 is deep ocean in vanilla and Terralith.
+	#Do not go below -0.85: with Terralith, values under about -0.92 are its island zone and make land.
+	# Default: -0.75
+	# Range: -1.2 ~ 1.0
+	oceanContinentalness = -0.75
+	#How much of the normal continentalness still varies the ocean past landEndRadius (0 = flat target, 1 = no change).
+	# Default: 0.15
+	# Range: 0.0 ~ 1.0
+	oceanVariability = 0.15
+	#Radius from which the Overworld is entirely the Pale biome.
+	# Default: 1300.0
+	# Range: 0.0 ~ 3.0E7
+	paleBiomeRadius = 1300.0
+	#How ragged the island's outline is: every radius here (and the fog wall's) is stretched or shrunk by up to
+	#this share depending on the direction, in a pattern of lobes, bays and headlands that differs with the seed.
+	#0 = a circle. Fixed for each world when it is created (saved in thepale-world.json); worlds from before
+	#this setting stay round.
+	# Default: 0.25
+	# Range: 0.0 ~ 0.6
+	coastRoughness = 0.25
+	#New worlds get three islands: a mild starter island at (0, 0), a hot one 3500 to 4500 blocks south and a
+	#frozen one as far north, each 1000 to 1500 blocks in radius, with the Pale between them. false = one island.
+	#With three islands the radii in this file are measured from each island's coast: landEndRadius is the
+	#coast itself, paleBiomeRadius 50 past it, and so on. Fixed for each world when it is created.
+	threeIslands = true
+
+[poison]
+	#Radius where the poison starts (Overworld, survival and adventure only).
+	# Default: 1500.0
+	# Range: 0.0 ~ 3.0E7
+	poisonStartRadius = 1500.0
+	#Radius where the poison reaches full strength. Treated as poisonStartRadius + 1 if lower.
+	# Default: 2000.0
+	# Range: 0.0 ~ 3.0E7
+	poisonFullRadius = 2000.0
+
+[climate]
+	#Cold north (-Z), hot south (+Z): how much the place on the island decides the temperature, from 0 (the seed
+	#decides, as in vanilla) to 1 (only the place does). In between, the seed's noise still varies it locally.
+	#The south-east ends up the hottest, so the wet south-west keeps its jungles. Negative swaps north and south.
+	# Default: 0.7
+	# Range: -1.0 ~ 1.0
+	temperatureZones = 0.7
+	#Wet west (-X), dry east (+X): how much the place on the island decides the humidity, 0 to 1 as above.
+	#Negative swaps west and east.
+	# Default: 0.6
+	# Range: -1.0 ~ 1.0
+	humidityZones = 0.6
+	#Distance from (0, 0) at which the zones are at their extremes. Between there and the centre they change
+	#evenly. Only affects newly generated chunks; already generated ones keep their biomes.
+	# Default: 1000.0
+	# Range: 1.0 ~ 3.0E7
+	climateRadius = 1000.0
+
+[structures]
+	#Overworld structures normally spaced wider than this many chunks apart (woodland mansions: 80, Born in Chaos:
+	#up to 200) are spaced this far apart instead, so they get a few tries on the island. Their biome rules stay.
+	#0 leaves every structure as it is. Only affects newly generated chunks.
+	# Default: 40
+	# Range: 0 ~ 4096
+	maxStructureSpacing = 40
+	#When a new world is created with a random seed (the seed field left empty), try seeds until one puts every
+	#structure in requiredStructures on the island, and use it. A seed you type in is kept; the mod only tells you
+	#what's missing on it. Existing worlds are never touched.
+	searchSeed = true
+	#Structures the seed search wants on the island. One line per requirement; a line is met by any of the
+	#structures in it, separated by |, and a name ending in * means every structure whose name starts with it
+	#(minecraft:village_* = any village). Lines naming only structures from mods that aren't installed are
+	#skipped. /thepale survey lists the structures your game has.
+	requiredStructures = ["minecraft:village_*|terralith:fortified_*", "minecraft:desert_pyramid", "minecraft:jungle_pyramid", "minecraft:swamp_hut|terralith:witch_hut", "minecraft:igloo|terralith:igloo", "minecraft:mansion", "minecraft:monument", "minecraft:ancient_city", "minecraft:trial_chambers", "minecraft:pillager_outpost", "minecraft:trail_ruins", "born_in_chaos_v1:dark_tower_*", "born_in_chaos_v1:clown_caravan_*", "born_in_chaos_v1:observation_tower_*", "born_in_chaos_v1:farm", "born_in_chaos_v1:firewell", "born_in_chaos_v1:mound_of_hounds", "born_in_chaos_v1:infernal_pumpkin", "born_in_chaos_v1:grave*"]
+	#How long the seed search may take before it settles for the seed that came closest.
+	# Default: 60
+	# Range: 1 ~ 3600
+	maxSearchSeconds = 60
+	#For a new world, whatever in requiredStructures still isn't on the island (with any seed, your own too) gets
+	#one try of its structure set moved to a spot on the island where it fits: the right biome and workable
+	#ground. A structure whose biome isn't on the island at all can't be placed. Saved with the world
+	#(thepale-structure-pins.json).
+	pinMissingStructures = true
+	#Structures that generate only on the frozen northern island when the world has three islands; anywhere
+	#else in the Overworld they don't start. Their own biome rules still apply on that island. The seed search
+	#and the pins respect this. One structure id per line; * matches any run of characters
+	#(born_in_chaos_v1:dark_tower_* = Born in Chaos's dark towers). Only affects newly generated chunks.
+	frozenIslandOnlyStructures = ["born_in_chaos_v1:dark_tower_*"]
+
+[ores]
+	#Placed features (ores and the like) that generate only on the frozen northern island when the world has
+	#three islands; on the starter and hot islands, and in the Pale nearest them, they are skipped. One feature
+	#id per line; * matches any run of characters (oritech:ore_* = Oritech's nickel and platinum, oritech:uranium_*
+	#= its uranium). The server log lists which features matched at start-up. Overworld only (the End keeps its
+	#platinum). Only affects newly generated chunks; one-island worlds are untouched.
+	frozenIslandOnlyFeatures = ["oritech:ore_*", "oritech:uranium_*"]
+
+[mobs]
+	#Hostile mobs that never appear on the starter island when the world has three islands: natural spawns,
+	#spawners, mod events, all of them. Only hostile mobs (monster category) are stopped, and spawn eggs and
+	#/summon still work. Mobs already in the world are left alone. One entity id per line; * matches any run
+	#of characters (born_in_chaos_v1:* = every hostile mob from Born in Chaos); a line starting with ! is an exception
+	#(the player's own summoned allies). The server log lists the matches.
+	notOnStarterIsland = ["born_in_chaos_v1:*", "!born_in_chaos_v1:controlled_*", "!born_in_chaos_v1:*_controlled"]

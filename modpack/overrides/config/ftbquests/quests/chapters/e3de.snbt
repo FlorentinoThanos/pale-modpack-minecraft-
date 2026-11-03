@@ -1,0 +1,21 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "e3de"
+	group: ""
+	id: "1FD6FE05F119699F"
+	images: [ ]
+	order_index: 0
+	quest_links: [ ]
+	quests: [{
+		id: "1D53C4EA3C566819"
+		tasks: [{
+			entity: "born_in_chaos_v1:door_knight"
+			id: "1E376848E5AF44D9"
+			type: "kill"
+			value: 100L
+		}]
+		x: -0.5d
+		y: 0.0d
+	}]
+}

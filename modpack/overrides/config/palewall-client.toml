@@ -1,0 +1,23 @@
+#X coordinate of the centre of the wall.
+# Default: 0.0
+# Range: -3.0E7 ~ 3.0E7
+centerX = 0.0
+#Z coordinate of the centre of the wall.
+# Default: 0.0
+# Range: -3.0E7 ~ 3.0E7
+centerZ = 0.0
+#Radius of the innermost cylinder, in blocks. Going past it switches on the Pale camera fog.
+# Default: 1400.0
+# Range: 1.0 ~ 3.0E7
+innerRadius = 1400.0
+#Radius of the outermost cylinder, in blocks. The camera fog is at its thickest from here outwards.
+#Treated as innerRadius + 1 if set lower than that.
+# Default: 1520.0
+# Range: 1.0 ~ 3.0E7
+outerRadius = 1520.0
+#Number of cylinders, spaced evenly from innerRadius to outerRadius (5 gives a 30-block step with the default radii).
+# Default: 5
+# Range: 1 ~ 64
+layerCount = 5
+#Dimensions the wall and its fog appear in.
+dimensions = ["minecraft:overworld"]
