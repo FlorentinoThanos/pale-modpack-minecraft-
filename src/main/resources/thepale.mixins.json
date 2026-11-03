@@ -1,0 +1,24 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.example.thepale.mixin",
+  "plugin": "com.example.thepale.mixinsupport.ThePaleMixinPlugin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "BiomeSourceMixin",
+    "ChunkGeneratorStructureStateMixin",
+    "MultiNoiseBiomeSourceMixin",
+    "NetherPortalBlockMixin",
+    "PlacedFeatureMixin",
+    "PrimaryLevelDataAccessor",
+    "StructurePlacementAccessor",
+    "StructureMixin",
+    "WorldOptionsMixin"
+  ],
+  "client": [
+    "client.BiomeColorsMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

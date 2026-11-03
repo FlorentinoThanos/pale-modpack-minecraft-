@@ -1,0 +1,7 @@
+{
+  "ambient.hum": {
+    "sounds": [
+      { "name": "minecraft:ambient/nether/basalt_deltas/ambience", "stream": true, "volume": 0.35, "pitch": 0.7 }
+    ]
+  }
+}

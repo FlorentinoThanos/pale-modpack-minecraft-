@@ -1,0 +1,20 @@
+{
+  "thepale.configuration.title": "The Pale",
+  "thepale.configuration.world": "World",
+  "thepale.configuration.landFalloffStartRadius": "Land Falloff Start Radius",
+  "thepale.configuration.landEndRadius": "Land End Radius",
+  "thepale.configuration.oceanContinentalness": "Ocean Continentalness",
+  "thepale.configuration.oceanVariability": "Ocean Variability",
+  "thepale.configuration.paleBiomeRadius": "Pale Biome Radius",
+  "thepale.configuration.poison": "Poison",
+  "thepale.configuration.poisonStartRadius": "Poison Start Radius",
+  "thepale.configuration.poisonFullRadius": "Poison Full Radius",
+  "thepale.configuration.innerRadius": "Inner Radius",
+  "thepale.configuration.outerRadius": "Outer Radius",
+  "thepale.configuration.layerCount": "Layer Count",
+  "thepale.configuration.dimensions": "Dimensions",
+  "biome.thepale.the_pale": "The Pale",
+  "thepale.configuration.fogEntryVisibility": "Fog Visibility at Inner Radius",
+  "thepale.configuration.fogFullVisibility": "Fog Visibility at Outer Radius",
+  "message.thepale.portal_refused": "Something on the other side holds the portal shut."
+}

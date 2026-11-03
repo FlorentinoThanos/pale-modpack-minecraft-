@@ -1,0 +1,7 @@
+{
+  "type": "neoforge:remove_spawns",
+  "biomes": "thepale:the_pale",
+  "entity_types": {
+    "type": "neoforge:any"
+  }
+}

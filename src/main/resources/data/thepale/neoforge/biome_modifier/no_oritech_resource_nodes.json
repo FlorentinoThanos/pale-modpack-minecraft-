@@ -1,0 +1,17 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "oritech"
+    }
+  ],
+  "type": "neoforge:remove_features",
+  "biomes": {
+    "type": "neoforge:any"
+  },
+  "features": [
+    "oritech:resource_node_common",
+    "oritech:resource_node_other",
+    "oritech:resource_node_rare"
+  ]
+}

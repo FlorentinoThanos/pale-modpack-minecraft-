@@ -1,0 +1,46 @@
+modLoader = "javafml"
+loaderVersion = "[4,)"
+license = "All Rights Reserved"
+
+[[mods]]
+modId = "thepale"
+version = "1.7.4"
+displayName = "The Pale"
+credits = "World shape based on Oceanus by Lizdtre (MIT License)"
+description = '''
+The Pale: land ends around 1250 blocks from the world centre, the ocean beyond turns grey and poisonous, and a drifting fog wall rises around it.
+'''
+
+# Mixin configs must be listed here since NeoForge 20.5; the old MixinConfigs manifest entry is ignored.
+[[mixins]]
+config = "thepale.mixins.json"
+
+[[dependencies.thepale]]
+modId = "neoforge"
+type = "required"
+versionRange = "[21.1,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.thepale]]
+modId = "minecraft"
+type = "required"
+versionRange = "[1.21.1,1.22)"
+ordering = "NONE"
+side = "BOTH"
+
+# Not needed, but if Terralith is there our continents override has to load after it.
+[[dependencies.thepale]]
+modId = "terralith"
+type = "optional"
+versionRange = "[0,)"
+ordering = "AFTER"
+side = "BOTH"
+
+# Optional: with Distant Horizons the fog wall also shows in its far terrain.
+[[dependencies.thepale]]
+modId = "distanthorizons"
+type = "optional"
+versionRange = "[0,)"
+ordering = "NONE"
+side = "CLIENT"
