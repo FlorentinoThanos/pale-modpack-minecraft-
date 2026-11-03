@@ -33,6 +33,7 @@ public final class CommonConfig {
     private static final ModConfigSpec.DoubleValue POISON_FULL;
     private static final ModConfigSpec.ConfigValue<List<? extends String>> FROZEN_ISLAND_ONLY_FEATURES;
     private static final ModConfigSpec.ConfigValue<List<? extends String>> NOT_ON_STARTER_ISLAND;
+    private static final ModConfigSpec.ConfigValue<List<? extends String>> FROZEN_ISLAND_ONLY_MOBS;
 
     static {
         ModConfigSpec.Builder builder = new ModConfigSpec.Builder();
@@ -177,6 +178,21 @@ public final class CommonConfig {
                         "of characters (born_in_chaos_v1:* = every hostile mob from Born in Chaos); a line starting with ! is an exception",
                         "(the player's own summoned allies). The server log lists the matches.")
                 .defineListAllowEmpty("notOnStarterIsland", List.of("born_in_chaos_v1:*", "!born_in_chaos_v1:controlled_*", "!born_in_chaos_v1:*_controlled"), () -> "", value -> value instanceof String);
+        FROZEN_ISLAND_ONLY_MOBS = builder
+                .comment(
+                        "Mobs that appear only on the frozen northern island when the world has three islands: on the starter and",
+                        "hot islands, in the Pale and in the other dimensions they don't spawn (natural spawns, spawners, mod events,",
+                        "summons). Born in Chaos' Transmuting Elixir is refused on an Infernal Evil Pumpkin away from the north, so",
+                        "the elixir and the pumpkin are kept. Spawn eggs and /summon still work, and mobs already in the world are",
+                        "left alone. Same patterns as notOnStarterIsland (* and ! exceptions). The server log lists the matches.")
+                .defineListAllowEmpty("frozenIslandOnlyMobs", List.of(
+                        "born_in_chaos_v1:lord_pumpkinhead*",
+                        "born_in_chaos_v1:krampus",
+                        "born_in_chaos_v1:missioner",
+                        "born_in_chaos_v1:nightmare_stalker",
+                        "born_in_chaos_v1:dire_hound_leader",
+                        "born_in_chaos_v1:lifestealer*",
+                        "born_in_chaos_v1:mother_spider"), () -> "", value -> value instanceof String);
         builder.pop();
 
         SPEC = builder.build();
@@ -202,7 +218,8 @@ public final class CommonConfig {
             double poisonStart,
             double poisonFull,
             List<String> frozenIslandOnlyFeatures,
-            List<String> notOnStarterIsland) {}
+            List<String> notOnStarterIsland,
+            List<String> frozenIslandOnlyMobs) {}
 
     private static volatile Settings current = read(true);
 
@@ -248,7 +265,8 @@ public final class CommonConfig {
                 poisonStart,
                 Math.max(value(POISON_FULL, defaults), poisonStart + 1.0),
                 List.copyOf(defaults ? FROZEN_ISLAND_ONLY_FEATURES.getDefault() : FROZEN_ISLAND_ONLY_FEATURES.get()),
-                List.copyOf(defaults ? NOT_ON_STARTER_ISLAND.getDefault() : NOT_ON_STARTER_ISLAND.get()));
+                List.copyOf(defaults ? NOT_ON_STARTER_ISLAND.getDefault() : NOT_ON_STARTER_ISLAND.get()),
+                List.copyOf(defaults ? FROZEN_ISLAND_ONLY_MOBS.getDefault() : FROZEN_ISLAND_ONLY_MOBS.get()));
     }
 
     private static double value(ModConfigSpec.DoubleValue value, boolean useDefault) {

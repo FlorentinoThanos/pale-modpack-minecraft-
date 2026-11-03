@@ -33,6 +33,7 @@ public final class ThePale {
         NeoForge.EVENT_BUS.addListener(IslandMobs::onFinalizeSpawn);
         NeoForge.EVENT_BUS.addListener(IslandMobs::onEntityJoinLevel);
         NeoForge.EVENT_BUS.addListener(IslandMobs::onServerStarted);
+        NeoForge.EVENT_BUS.addListener(IslandMobs::onRightClickBlock);
         NeoForge.EVENT_BUS.addListener(IslandSurvey::onRegisterCommands);
         NeoForge.EVENT_BUS.addListener(SeedSearch::onPlayerLoggedIn);
         NeoForge.EVENT_BUS.addListener(ShapePayload::onPlayerLoggedIn);

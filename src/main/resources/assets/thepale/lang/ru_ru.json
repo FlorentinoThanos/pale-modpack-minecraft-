@@ -1,4 +1,5 @@
 {
   "biome.thepale.the_pale": "Серость",
-  "message.thepale.portal_refused": "Что-то по ту сторону держит портал закрытым."
+  "message.thepale.portal_refused": "Что-то по ту сторону держит портал закрытым.",
+  "message.thepale.north_only": "На этот зов откликается только холодный остров на севере."
 }

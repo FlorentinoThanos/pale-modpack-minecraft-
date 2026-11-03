@@ -67,6 +67,12 @@ nothing gets generated.
 
 ## Other mods
 
+- **North-only mobs** (`frozenIslandOnlyMobs` in `[mobs]`): Born in Chaos' Lord Pumpkinhead, Krampus, Missioner,
+  Nightmare Stalker, Dire Hound Leader, Lifestealer and Mother Spider appear only on the frozen island: not on the
+  starter or hot island, not in the Pale, not in the Nether or the End. Natural spawns, spawners and mod events are
+  all stopped; spawn eggs and `/summon` still work. The Transmuting Elixir is refused on an Infernal Evil Pumpkin
+  outside the north (the elixir and the pumpkin are kept, and the player is told only the north answers). The server
+  log lists the matches at start (`Only on the frozen island`).
 - **Mob spawns:** the Pale has none. Mods that add their mobs to every biome (`neoforge:any`, as Born in Chaos does)
   are undone by `data/thepale/neoforge/biome_modifier/the_pale_no_spawns.json`; the server log says
   `The Pale biome has no mob spawns` at start.
