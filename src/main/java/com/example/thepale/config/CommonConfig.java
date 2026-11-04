@@ -29,6 +29,9 @@ public final class CommonConfig {
     private static final ModConfigSpec.IntValue MAX_SEARCH_SECONDS;
     private static final ModConfigSpec.BooleanValue PIN_MISSING_STRUCTURES;
     private static final ModConfigSpec.ConfigValue<List<? extends String>> FROZEN_ISLAND_ONLY_STRUCTURES;
+    private static final ModConfigSpec.ConfigValue<List<? extends String>> KEEP_AWAY_FROM_VILLAGES;
+    private static final ModConfigSpec.ConfigValue<List<? extends String>> VILLAGE_STRUCTURE_SETS;
+    private static final ModConfigSpec.IntValue VILLAGE_CLEARANCE;
     private static final ModConfigSpec.DoubleValue POISON_START;
     private static final ModConfigSpec.DoubleValue POISON_FULL;
     private static final ModConfigSpec.ConfigValue<List<? extends String>> FROZEN_ISLAND_ONLY_FEATURES;
@@ -147,6 +150,23 @@ public final class CommonConfig {
                         "and the pins respect this. One structure id per line; * matches any run of characters",
                         "(born_in_chaos_v1:dark_tower_* = Born in Chaos's dark towers). Only affects newly generated chunks.")
                 .defineListAllowEmpty("frozenIslandOnlyStructures", List.of("born_in_chaos_v1:dark_tower_*"), () -> "", value -> value instanceof String);
+        KEEP_AWAY_FROM_VILLAGES = builder
+                .comment(
+                        "Structures that never start within villageClearance chunks of a village (of any set in villageStructureSets).",
+                        "Vanilla keeps its pillager outposts away from its own villages only, so Terralith's fortified villages",
+                        "got pillager towers in the middle. One structure id per line; * matches any run of characters.",
+                        "Only affects newly generated chunks.")
+                .defineListAllowEmpty("keepAwayFromVillages", List.of("minecraft:pillager_outpost", "terralith:desert_outpost"), () -> "", value -> value instanceof String);
+        VILLAGE_STRUCTURE_SETS = builder
+                .comment(
+                        "Structure sets whose structures count as villages for keepAwayFromVillages (minecraft:villages = the",
+                        "vanilla villages, terralith:rare_village = Terralith's fortified and fortified desert villages).")
+                .defineListAllowEmpty("villageStructureSets", List.of("minecraft:villages", "terralith:rare_village"), () -> "", value -> value instanceof String);
+        VILLAGE_CLEARANCE = builder
+                .comment(
+                        "How many chunks keepAwayFromVillages structures stay from the spot a village tries (in a square, as",
+                        "vanilla's own 10 chunks between outposts and villages). 0 turns this off.")
+                .defineInRange("villageClearance", 10, 0, 64);
         builder.pop();
 
         builder.push("poison");
@@ -215,6 +235,9 @@ public final class CommonConfig {
             int maxSearchSeconds,
             boolean pinMissingStructures,
             List<String> frozenIslandOnlyStructures,
+            List<String> keepAwayFromVillages,
+            List<String> villageStructureSets,
+            int villageClearance,
             double poisonStart,
             double poisonFull,
             List<String> frozenIslandOnlyFeatures,
@@ -262,6 +285,9 @@ public final class CommonConfig {
                 defaults ? MAX_SEARCH_SECONDS.getDefault() : MAX_SEARCH_SECONDS.get(),
                 defaults ? PIN_MISSING_STRUCTURES.getDefault() : PIN_MISSING_STRUCTURES.get(),
                 List.copyOf(defaults ? FROZEN_ISLAND_ONLY_STRUCTURES.getDefault() : FROZEN_ISLAND_ONLY_STRUCTURES.get()),
+                List.copyOf(defaults ? KEEP_AWAY_FROM_VILLAGES.getDefault() : KEEP_AWAY_FROM_VILLAGES.get()),
+                List.copyOf(defaults ? VILLAGE_STRUCTURE_SETS.getDefault() : VILLAGE_STRUCTURE_SETS.get()),
+                defaults ? VILLAGE_CLEARANCE.getDefault() : VILLAGE_CLEARANCE.get(),
                 poisonStart,
                 Math.max(value(POISON_FULL, defaults), poisonStart + 1.0),
                 List.copyOf(defaults ? FROZEN_ISLAND_ONLY_FEATURES.getDefault() : FROZEN_ISLAND_ONLY_FEATURES.get()),

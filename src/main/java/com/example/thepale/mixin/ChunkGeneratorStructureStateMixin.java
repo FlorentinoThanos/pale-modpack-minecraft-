@@ -3,6 +3,7 @@ package com.example.thepale.mixin;
 import com.example.thepale.worldgen.PaleBiomeSource;
 import com.example.thepale.worldgen.PaleShape;
 import com.example.thepale.worldgen.PaleStructures;
+import com.example.thepale.worldgen.VillageClearance;
 import java.util.List;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
@@ -27,7 +28,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * For the Overworld (the biome source the Pale is switched on for), hands world generation copies of the structure
  * sets with rare structures spread out more densely and the world's pinned structures in place
  * ({@link com.example.thepale.worldgen.PaleStructures}). Everything that asks where structures go (generation, /locate,
- * maps, eyes of ender) goes through this state.
+ * maps, eyes of ender) goes through this state. Every dimension's random state also learns where its villages go, so
+ * outposts can keep away from them ({@link VillageClearance}).
  */
 @Mixin(ChunkGeneratorStructureState.class)
 public abstract class ChunkGeneratorStructureStateMixin {
@@ -49,11 +51,13 @@ public abstract class ChunkGeneratorStructureStateMixin {
     private static void thepale$spreadOutRareStructures(
             RandomState random, long seed, BiomeSource biomes, HolderLookup<StructureSet> sets,
             CallbackInfoReturnable<ChunkGeneratorStructureState> cir) {
+        ChunkGeneratorStructureStateMixin state = (ChunkGeneratorStructureStateMixin) (Object) cir.getReturnValue();
+        List<Holder<StructureSet>> original = state.possibleStructureSets;
         if (biomes instanceof PaleBiomeSource pale && pale.thepale$paleBiome() != null) {
-            ChunkGeneratorStructureStateMixin state = (ChunkGeneratorStructureStateMixin) (Object) cir.getReturnValue();
-            state.possibleStructureSets = PaleStructures.adjust(state.possibleStructureSets);
+            state.possibleStructureSets = PaleStructures.adjust(original);
             state.thepale$layout = PaleShape.server();
         }
+        VillageClearance.remember(random, original, state.possibleStructureSets);
     }
 
     /** With three islands the strongholds (and the way to the End) are on the hot island. Eyes of ender find them anywhere. */

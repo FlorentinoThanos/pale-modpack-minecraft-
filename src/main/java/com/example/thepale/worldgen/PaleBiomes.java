@@ -59,6 +59,7 @@ public final class PaleBiomes {
             PaleShape.onServerAboutToStart(server);
             IslandFeatures.onServerAboutToStart(server);
             IslandStructures.onServerAboutToStart(server);
+            VillageClearance.reset();
             SeedSearch.onServerAboutToStart(server, overworld);
         } else if (source instanceof MultiNoiseBiomeSource) {
             LOGGER.error("[thepale] MultiNoiseBiomeSourceMixin was not applied, so the Pale biome will not generate");
