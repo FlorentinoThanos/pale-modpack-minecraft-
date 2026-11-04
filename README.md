@@ -60,6 +60,12 @@ A structure whose biome isn't on the island at all can't be placed; the first pl
 `requiredStructures` lines can name alternatives (`a|b`) and prefixes (`minecraft:village_*`); lines for mods that
 aren't installed are skipped.
 
+**Outposts keep away from villages** (`keepAwayFromVillages`, `villageStructureSets`, `villageClearance`): vanilla
+keeps pillager outposts 10 chunks from its own villages only, so Terralith's fortified villages (and villages moved by
+a pin) could get a pillager tower in the middle, and Terralith's desert outposts ignored villages entirely. Now
+`minecraft:pillager_outpost` and `terralith:desert_outpost` don't start within 10 chunks of a vanilla village or a
+Terralith fortified village. `/locate`, the seed search and the pins see the same. Only affects newly generated chunks.
+
 `/thepale survey` (operators) reports the island: the biomes with their share, every structure with how many and
 where one is, and which biomes and structures the world has that the island doesn't. It writes
 `thepale-survey.txt` and a biome map, `thepale-survey.png`, into the world folder. It reads the world generator, so

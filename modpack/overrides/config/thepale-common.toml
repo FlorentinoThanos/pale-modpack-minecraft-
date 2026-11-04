@@ -91,6 +91,19 @@
 	#and the pins respect this. One structure id per line; * matches any run of characters
 	#(born_in_chaos_v1:dark_tower_* = Born in Chaos's dark towers). Only affects newly generated chunks.
 	frozenIslandOnlyStructures = ["born_in_chaos_v1:dark_tower_*"]
+	#Structures that never start within villageClearance chunks of a village (of any set in villageStructureSets).
+	#Vanilla keeps its pillager outposts away from its own villages only, so Terralith's fortified villages
+	#got pillager towers in the middle. One structure id per line; * matches any run of characters.
+	#Only affects newly generated chunks.
+	keepAwayFromVillages = ["minecraft:pillager_outpost", "terralith:desert_outpost"]
+	#Structure sets whose structures count as villages for keepAwayFromVillages (minecraft:villages = the
+	#vanilla villages, terralith:rare_village = Terralith's fortified and fortified desert villages).
+	villageStructureSets = ["minecraft:villages", "terralith:rare_village"]
+	#How many chunks keepAwayFromVillages structures stay from the spot a village tries (in a square, as
+	#vanilla's own 10 chunks between outposts and villages). 0 turns this off.
+	# Default: 10
+	# Range: 0 ~ 64
+	villageClearance = 10
 
 [ores]
 	#Placed features (ores and the like) that generate only on the frozen northern island when the world has
