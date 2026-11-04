@@ -1,0 +1,14 @@
+{
+  "enchantment.paleenchants.insight": "Озарение",
+  "enchantment.paleenchants.insight.desc": "Больше опыта с мобов и блоков, добытых этим предметом.",
+  "enchantment.paleenchants.leech": "Пиявка",
+  "enchantment.paleenchants.leech.desc": "Убийство моба восстанавливает здоровье.",
+  "enchantment.paleenchants.smashing": "Дробление",
+  "enchantment.paleenchants.smashing.desc": "Руда раскалывается в дроблёную руду (Create) или выпадает вдвое больше.",
+  "enchantment.paleenchants.smelting": "Переплавка",
+  "enchantment.paleenchants.smelting.desc": "Добытые блоки выпадают уже переплавленными, как из печи.",
+  "enchantment.paleenchants.soulbound": "Связь с душой",
+  "enchantment.paleenchants.soulbound.desc": "Остаётся с тобой после смерти. Каждая смерть может ослабить чары; на высоких уровнях это реже.",
+  "enchantment.paleenchants.vorpal": "Обезглавливание",
+  "enchantment.paleenchants.vorpal.desc": "Шанс сокрушительного удара и шанс забрать голову убитого."
+}

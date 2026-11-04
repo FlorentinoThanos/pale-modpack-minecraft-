@@ -1,0 +1,14 @@
+{
+  "enchantment.paleenchants.insight": "Insight",
+  "enchantment.paleenchants.insight.desc": "More experience from mobs killed and blocks mined with this item.",
+  "enchantment.paleenchants.leech": "Leech",
+  "enchantment.paleenchants.leech.desc": "Killing a mob restores health.",
+  "enchantment.paleenchants.smashing": "Smashing",
+  "enchantment.paleenchants.smashing.desc": "Ores break into crushed ore (Create) or drop twice as much.",
+  "enchantment.paleenchants.smelting": "Smelting",
+  "enchantment.paleenchants.smelting.desc": "Mined blocks drop already smelted, as if by a furnace.",
+  "enchantment.paleenchants.soulbound": "Soulbound",
+  "enchantment.paleenchants.soulbound.desc": "Stays with you when you die. Each death may weaken it; higher levels are safer.",
+  "enchantment.paleenchants.vorpal": "Vorpal",
+  "enchantment.paleenchants.vorpal.desc": "Chance of a devastating strike, and of taking the head of what you kill."
+}

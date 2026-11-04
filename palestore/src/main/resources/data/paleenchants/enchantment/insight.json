@@ -1,0 +1,18 @@
+{
+  "description": {"translate": "enchantment.paleenchants.insight"},
+  "supported_items": "#paleenchants:enchantable/tools_and_weapons",
+  "weight": 5,
+  "max_level": 3,
+  "min_cost": {"base": 10, "per_level_above_first": 9},
+  "max_cost": {"base": 60, "per_level_above_first": 9},
+  "anvil_cost": 2,
+  "slots": ["mainhand"],
+  "effects": {
+    "minecraft:block_experience": [
+      {"effect": {"type": "minecraft:multiply", "factor": {"type": "minecraft:linear", "base": 1.5, "per_level_above_first": 0.5}}}
+    ],
+    "minecraft:mob_experience": [
+      {"effect": {"type": "minecraft:multiply", "factor": {"type": "minecraft:linear", "base": 1.5, "per_level_above_first": 0.5}}}
+    ]
+  }
+}
