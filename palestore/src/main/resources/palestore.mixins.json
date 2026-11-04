@@ -1,0 +1,21 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.example.palestore.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "AnvilMenuMixin",
+    "enchant.EnchantmentHelperMixin",
+    "enchant.EnchantRandomlyFunctionMixin",
+    "EnchantmentMenuMixin",
+    "SlotMixin",
+    "ResultSlotAccessor"
+  ],
+  "client": [
+    "EnchantmentScreenMixin",
+    "AbstractContainerScreenAccessorMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

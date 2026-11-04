@@ -1,0 +1,11 @@
+{
+  "description": {"translate": "enchantment.paleenchants.soulbound"},
+  "supported_items": "#minecraft:enchantable/vanishing",
+  "weight": 1,
+  "max_level": 3,
+  "min_cost": {"base": 20, "per_level_above_first": 10},
+  "max_cost": {"base": 70, "per_level_above_first": 10},
+  "anvil_cost": 8,
+  "exclusive_set": "minecraft:vanishing_curse",
+  "slots": ["any"]
+}
