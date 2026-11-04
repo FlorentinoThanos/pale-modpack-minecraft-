@@ -565,6 +565,10 @@
 		}
 		{
 			dependencies: ["C30EEFC8CC04719E"]
+			icon: {
+				count: 1
+				id: "minecraft:obsidian"
+			}
 			id: "84E8CC486B087199"
 			rewards: [
 				{
@@ -585,11 +589,20 @@
 			size: 1.5d
 			tasks: [
 				{
-					count: 10L
+					count: 1L
 					id: "E03B388031C7260B"
 					item: {
 						count: 1
-						id: "minecraft:obsidian"
+						id: "minecraft:lava_bucket"
+					}
+					type: "item"
+				}
+				{
+					count: 1L
+					id: "70CE08BB7F68D984"
+					item: {
+						count: 1
+						id: "minecraft:water_bucket"
 					}
 					type: "item"
 				}

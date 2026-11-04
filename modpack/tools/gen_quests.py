@@ -134,10 +134,11 @@ chapter("mild", "minecraft:oak_sapling", "Тихий остров", "The Mild Is
     Q("mild/diamonds", 10, 0, "Алмазы", "Diamonds", "Алмазную кирку пока не скрафтить: её рецепт в Pale Store откроется в Незере. А вот алмазы уже пригодятся.",
       "You can't craft a diamond pickaxe yet: Pale Store unlocks its recipe once you reach the Nether. The diamonds will still come in handy.",
       [item("minecraft:diamond", 5)], [xp(120)], ["mild/armor"]),
-    Q("mild/obsidian", 12, 0, "Обсидиан", "Obsidian", "Десять блоков обсидиана: рамка портала в Незер. Через Незер лежит путь на юг.",
-      "Ten blocks of obsidian: the frame of a Nether portal. The way south goes through the Nether.",
-      [item("minecraft:obsidian", 10)], [xp(150), give("minecraft:flint_and_steel")], ["mild/diamonds"],
-      shape="hexagon", size=1.5),
+    Q("mild/obsidian", 12, 0, "Литой портал", "Cast Portal",
+      "Обсидиан без алмазной кирки не добыть, а её рецепт откроется только в Незере. Поэтому портал отливают на месте: выложи форму из камня, залей лаву ведром в каждую ячейку рамки и полей сверху водой. Лава станет обсидианом прямо в рамке. Ещё готовый обсидиан бывает в разрушенных порталах.",
+      "You can't mine obsidian without a diamond pickaxe, and its recipe only unlocks in the Nether. So cast the portal in place: build a stone mould, pour lava into each frame cell and pour water over it. The lava turns into obsidian right in the frame. Ruined portals also hold ready obsidian.",
+      [item("minecraft:lava_bucket"), item("minecraft:water_bucket")], [xp(150), give("minecraft:flint_and_steel")], ["mild/diamonds"],
+      icon="minecraft:obsidian", shape="hexagon", size=1.5),
 ])
 
 # ================================================================ 2. Путь на юг
@@ -145,7 +146,7 @@ NETHER_SOUTH = area("minecraft:the_nether", -100, 0, 430, 200, 128, 140)
 chapter("nether", "minecraft:netherrack", "Путь на юг", "The Way South",
         "Через Незер: 4000 блоков там всего 500.",
         "Through the Nether: 4000 blocks are only 500 there.", [
-    Q("nether/enter", 0, 0, "Глубже вниз", "Deeper Down", "Построй портал и войди в Незер. Pale Store сразу откроет рецепт алмазной кирки.",
+    Q("nether/enter", 0, 0, "Глубже вниз", "Deeper Down", "Зажги литой портал и войди в Незер. Pale Store сразу откроет рецепт алмазной кирки.",
       "Build a portal and step into the Nether. Pale Store unlocks the diamond pickaxe recipe right away.",
       [dim("minecraft:the_nether")], [xp(150)], ["mild/obsidian"], icon="minecraft:obsidian", shape="hexagon", size=1.5),
     Q("nether/pick", 2, -2, "Алмазная кирка", "Diamond Pickaxe", "Теперь её можно скрафтить.", "Now you can craft one.",
