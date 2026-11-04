@@ -1,0 +1,601 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "mild"
+	group: "EFA7D509EB9A847A"
+	icon: {
+		count: 1
+		id: "minecraft:oak_sapling"
+	}
+	id: "52326DE657CCE52E"
+	images: [ ]
+	order_index: 0
+	quest_links: [ ]
+	quests: [
+		{
+			icon: {
+				count: 1
+				id: "minecraft:compass"
+			}
+			id: "E541143ABF1D324D"
+			rewards: [
+				{
+					id: "85E2FF9FC900E1B6"
+					item: {
+						count: 8
+						id: "minecraft:bread"
+					}
+					type: "item"
+				}
+			]
+			shape: "hexagon"
+			size: 1.5d
+			tasks: [
+				{
+					id: "26D81166AB578CD2"
+					type: "checkmark"
+				}
+			]
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["E541143ABF1D324D"]
+			id: "A7B4FD4982C710F5"
+			rewards: [
+				{
+					id: "E7976B5B894CA595"
+					type: "xp"
+					xp: 20
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "CA47B266F581BC4E"
+					item: {
+						count: 1
+						id: "minecraft:crafting_table"
+					}
+					type: "item"
+				}
+			]
+			x: 2.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["A7B4FD4982C710F5"]
+			id: "18BAE9E1D07C3F7C"
+			rewards: [
+				{
+					id: "E2E73712842B45AB"
+					type: "xp"
+					xp: 30
+				}
+				{
+					id: "AB12A23A5DE0BA47"
+					item: {
+						count: 8
+						id: "minecraft:coal"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "693A552290E79C6D"
+					item: {
+						count: 1
+						id: "minecraft:stone_pickaxe"
+					}
+					type: "item"
+				}
+				{
+					count: 1L
+					id: "65E61BF7BD54E6CB"
+					item: {
+						count: 1
+						id: "minecraft:furnace"
+					}
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["A7B4FD4982C710F5"]
+			icon: {
+				count: 1
+				id: "minecraft:red_bed"
+			}
+			id: "32B2FC7FC1FE0154"
+			rewards: [
+				{
+					id: "42DD3C3800CD1617"
+					type: "xp"
+					xp: 30
+				}
+			]
+			tasks: [
+				{
+					advancement: "minecraft:adventure/sleep_in_bed"
+					criterion: ""
+					id: "7D49BD8D0B9FA3F3"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["18BAE9E1D07C3F7C"]
+			id: "63B83E7FF2A56CF8"
+			rewards: [
+				{
+					id: "630E672294D25E40"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [
+				{
+					count: 16L
+					id: "4DC1B46B1563AC77"
+					item: {
+						count: 1
+						id: "minecraft:iron_ingot"
+					}
+					type: "item"
+				}
+			]
+			x: 6.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["63B83E7FF2A56CF8"]
+			id: "7703C7EC764575C8"
+			rewards: [
+				{
+					id: "0A73EB9A44FFF26A"
+					type: "xp"
+					xp: 30
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "561857A2BBDCD481"
+					item: {
+						count: 1
+						id: "minecraft:shield"
+					}
+					type: "item"
+				}
+			]
+			x: 8.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["63B83E7FF2A56CF8"]
+			icon: {
+				count: 1
+				id: "minecraft:iron_chestplate"
+			}
+			id: "6761B1DEDF496C79"
+			rewards: [
+				{
+					id: "B5E40767B4B9A655"
+					type: "xp"
+					xp: 100
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "894464346AD0DF26"
+					item: {
+						count: 1
+						id: "minecraft:iron_helmet"
+					}
+					type: "item"
+				}
+				{
+					count: 1L
+					id: "411B2868E47104EC"
+					item: {
+						count: 1
+						id: "minecraft:iron_chestplate"
+					}
+					type: "item"
+				}
+				{
+					count: 1L
+					id: "DA7D05ECAE48C7D4"
+					item: {
+						count: 1
+						id: "minecraft:iron_leggings"
+					}
+					type: "item"
+				}
+				{
+					count: 1L
+					id: "DCDECEA8AFA86A3A"
+					item: {
+						count: 1
+						id: "minecraft:iron_boots"
+					}
+					type: "item"
+				}
+			]
+			x: 8.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["63B83E7FF2A56CF8"]
+			icon: {
+				count: 1
+				id: "cold_sweat:waterskin"
+			}
+			id: "06F27455A8C1762B"
+			rewards: [
+				{
+					id: "BD5765F4C42128A7"
+					type: "xp"
+					xp: 40
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "2C5A8CB2220D1B7E"
+					item: {
+						count: 1
+						id: "minecraft:bucket"
+					}
+					type: "item"
+				}
+				{
+					count: 1L
+					id: "81635D353C8F2B45"
+					item: {
+						count: 1
+						id: "cold_sweat:waterskin"
+					}
+					type: "item"
+				}
+			]
+			x: 8.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["06F27455A8C1762B"]
+			id: "A1E2F25A0165C779"
+			rewards: [
+				{
+					id: "3CB4AB6F706B2FF9"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "2A42A1108F1E6524"
+					item: {
+						count: 1
+						id: "cold_sweat:thermometer"
+					}
+					type: "item"
+				}
+			]
+			x: 10.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["A1E2F25A0165C779"]
+			id: "9168863FAED2584D"
+			rewards: [
+				{
+					id: "6F800E9884A792EB"
+					type: "xp"
+					xp: 60
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "1122F08E1FD827C6"
+					item: {
+						count: 1
+						id: "cold_sweat:sewing_table"
+					}
+					type: "item"
+				}
+			]
+			x: 12.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["63B83E7FF2A56CF8"]
+			icon: {
+				count: 1
+				id: "minecraft:gray_dye"
+			}
+			id: "A5EF27E3BF9A238A"
+			rewards: [
+				{
+					id: "C97BEE5015B72E1F"
+					type: "xp"
+					xp: 80
+				}
+			]
+			shape: "diamond"
+			tasks: [
+				{
+					biome: "thepale:the_pale"
+					id: "EC56022E7332F69A"
+					type: "biome"
+				}
+			]
+			x: 6.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["A7B4FD4982C710F5"]
+			icon: {
+				count: 1
+				id: "minecraft:bell"
+			}
+			id: "4D65D68F96EC4E41"
+			rewards: [
+				{
+					id: "B660BE97D2A29868"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "7819AF522391444F"
+					item: {
+						count: 4
+						id: "minecraft:emerald"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					id: "856C80D65D70C955"
+					structure: "#minecraft:village"
+					type: "structure"
+				}
+			]
+			x: 2.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["63B83E7FF2A56CF8"]
+			id: "60E9D60176116959"
+			rewards: [
+				{
+					id: "8535CC608BEC9734"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [
+				{
+					count: 16L
+					id: "FDBC424ADAB35603"
+					item: {
+						count: 1
+						id: "create:andesite_alloy"
+					}
+					type: "item"
+				}
+			]
+			x: 6.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["60E9D60176116959"]
+			id: "9249DF6F4BA122E6"
+			rewards: [
+				{
+					id: "7E0240F881F7EFBA"
+					type: "xp"
+					xp: 60
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "14680AF71B65B2D7"
+					item: {
+						count: 1
+						id: "create:water_wheel"
+					}
+					type: "item"
+				}
+				{
+					count: 8L
+					id: "143C8EF234A727BE"
+					item: {
+						count: 1
+						id: "create:cogwheel"
+					}
+					type: "item"
+				}
+				{
+					count: 8L
+					id: "1E70FBC0EE2B99D5"
+					item: {
+						count: 1
+						id: "create:shaft"
+					}
+					type: "item"
+				}
+			]
+			x: 8.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["9249DF6F4BA122E6"]
+			id: "CB03880F1C26F0ED"
+			rewards: [
+				{
+					id: "BFBF3674B65D5278"
+					type: "xp"
+					xp: 80
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "2E07CDAF249B6CC0"
+					item: {
+						count: 1
+						id: "create:mechanical_press"
+					}
+					type: "item"
+				}
+				{
+					count: 8L
+					id: "2E2DB7BE8A2AFFCF"
+					item: {
+						count: 1
+						id: "create:iron_sheet"
+					}
+					type: "item"
+				}
+			]
+			x: 10.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["CB03880F1C26F0ED"]
+			id: "B27FB98BDF2373BA"
+			rewards: [
+				{
+					id: "8EDCB7008B44B84A"
+					type: "xp"
+					xp: 80
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "41535C3C2A53F94B"
+					item: {
+						count: 1
+						id: "create:mechanical_mixer"
+					}
+					type: "item"
+				}
+				{
+					count: 1L
+					id: "10DA7FE1B1D52511"
+					item: {
+						count: 1
+						id: "create:basin"
+					}
+					type: "item"
+				}
+			]
+			x: 12.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["CB03880F1C26F0ED"]
+			id: "DFC8884BF979CF66"
+			rewards: [
+				{
+					id: "213B0BF76BE30589"
+					type: "xp"
+					xp: 100
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "E8D7F6E4CD5D61EC"
+					item: {
+						count: 1
+						id: "create:mechanical_drill"
+					}
+					type: "item"
+				}
+				{
+					count: 1L
+					id: "A842963390D8620C"
+					item: {
+						count: 1
+						id: "create:mechanical_saw"
+					}
+					type: "item"
+				}
+			]
+			x: 12.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["6761B1DEDF496C79"]
+			id: "C30EEFC8CC04719E"
+			rewards: [
+				{
+					id: "9340CFA25A90E0D0"
+					type: "xp"
+					xp: 120
+				}
+			]
+			tasks: [
+				{
+					count: 5L
+					id: "CE49F27BFB54B2B4"
+					item: {
+						count: 1
+						id: "minecraft:diamond"
+					}
+					type: "item"
+				}
+			]
+			x: 10.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["C30EEFC8CC04719E"]
+			id: "84E8CC486B087199"
+			rewards: [
+				{
+					id: "081741531ECC3467"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "7148F8E970ED45ED"
+					item: {
+						count: 1
+						id: "minecraft:flint_and_steel"
+					}
+					type: "item"
+				}
+			]
+			shape: "hexagon"
+			size: 1.5d
+			tasks: [
+				{
+					count: 10L
+					id: "E03B388031C7260B"
+					item: {
+						count: 1
+						id: "minecraft:obsidian"
+					}
+					type: "item"
+				}
+			]
+			x: 12.0d
+			y: 0.0d
+		}
+	]
+}
