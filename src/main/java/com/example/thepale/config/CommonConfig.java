@@ -37,6 +37,7 @@ public final class CommonConfig {
     private static final ModConfigSpec.ConfigValue<List<? extends String>> FROZEN_ISLAND_ONLY_FEATURES;
     private static final ModConfigSpec.ConfigValue<List<? extends String>> NOT_ON_STARTER_ISLAND;
     private static final ModConfigSpec.ConfigValue<List<? extends String>> FROZEN_ISLAND_ONLY_MOBS;
+    private static final ModConfigSpec.ConfigValue<List<? extends Number>> RAMPAGE_SPEED_BONUS;
 
     static {
         ModConfigSpec.Builder builder = new ModConfigSpec.Builder();
@@ -215,6 +216,17 @@ public final class CommonConfig {
                         "born_in_chaos_v1:mother_spider"), () -> "", value -> value instanceof String);
         builder.pop();
 
+        builder.push("effects");
+        RAMPAGE_SPEED_BONUS = builder
+                .comment(
+                        "Movement speed bonus of Born in Chaos' Rampage, in percent, for its five levels from Light to Rampant",
+                        "(Born in Chaos itself gives 15, 30, 50, 75, 100). Applies to every source of Rampage: the Great Reaper Axe,",
+                        "the full Dark Metal set at low health and the potion. Damage and attack speed stay as Born in Chaos has them.",
+                        "An effect already running keeps its old bonus until it ends.")
+                .defineList("rampageSpeedBonus", List.<Number>of(5.0, 10.0, 15.0, 20.0, 25.0), () -> 0.0,
+                        value -> value instanceof Number n && n.doubleValue() >= 0.0 && n.doubleValue() <= 1000.0);
+        builder.pop();
+
         SPEC = builder.build();
     }
 
@@ -242,7 +254,8 @@ public final class CommonConfig {
             double poisonFull,
             List<String> frozenIslandOnlyFeatures,
             List<String> notOnStarterIsland,
-            List<String> frozenIslandOnlyMobs) {}
+            List<String> frozenIslandOnlyMobs,
+            List<Double> rampageSpeedBonus) {}
 
     private static volatile Settings current = read(true);
 
@@ -262,6 +275,7 @@ public final class CommonConfig {
     private static void refresh(ModConfig config) {
         if (config.getSpec() == SPEC) {
             current = read(false);
+            com.example.thepale.EffectTweaks.onConfigChanged();
         }
     }
 
@@ -292,7 +306,9 @@ public final class CommonConfig {
                 Math.max(value(POISON_FULL, defaults), poisonStart + 1.0),
                 List.copyOf(defaults ? FROZEN_ISLAND_ONLY_FEATURES.getDefault() : FROZEN_ISLAND_ONLY_FEATURES.get()),
                 List.copyOf(defaults ? NOT_ON_STARTER_ISLAND.getDefault() : NOT_ON_STARTER_ISLAND.get()),
-                List.copyOf(defaults ? FROZEN_ISLAND_ONLY_MOBS.getDefault() : FROZEN_ISLAND_ONLY_MOBS.get()));
+                List.copyOf(defaults ? FROZEN_ISLAND_ONLY_MOBS.getDefault() : FROZEN_ISLAND_ONLY_MOBS.get()),
+                (defaults ? RAMPAGE_SPEED_BONUS.getDefault() : RAMPAGE_SPEED_BONUS.get()).stream()
+                        .map(Number::doubleValue).toList());
     }
 
     private static double value(ModConfigSpec.DoubleValue value, boolean useDefault) {
