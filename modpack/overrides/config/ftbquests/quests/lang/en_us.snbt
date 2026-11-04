@@ -1,3 +1,191 @@
 {
-	chapter.1FD6FE05F119699F.title: "e3de"
+	chapter.24C62B88537DAC31.chapter_subtitle: ["Through the Nether: 4000 blocks are only 500 there."]
+	chapter.24C62B88537DAC31.title: "The Way South"
+	chapter.38EE5D196554F12F.chapter_subtitle: ["The dragon guards the wings you need to reach the north."]
+	chapter.38EE5D196554F12F.title: "The End"
+	chapter.3EFF447036D93718.chapter_subtitle: ["Deserts to the east, jungle to the west. And the first spawn of chaos."]
+	chapter.3EFF447036D93718.title: "The Hot Island"
+	chapter.52326DE657CCE52E.chapter_subtitle: ["The beginning. It is safe here, as long as you stay away from the fog."]
+	chapter.52326DE657CCE52E.title: "The Mild Island"
+	chapter.A2F1E7462ABF2081.chapter_subtitle: ["The most dangerous island. Only on wings, and only for those who are ready."]
+	chapter.A2F1E7462ABF2081.title: "The Cold Island"
+	chapter.F9A621A1BF5E6BF3.chapter_subtitle: ["Pale Store: enchanting costs 125, 250 and 500 XP points. The anvil is free."]
+	chapter.F9A621A1BF5E6BF3.title: "Enchanting"
+	chapter_group.EFA7D509EB9A847A.title: "The Pale"
+	quest.03D22BFB7454B85E.quest_desc: ["A chance of a crushing blow and of taking a head."]
+	quest.03D22BFB7454B85E.title: "Vorpal"
+	quest.0410BCFCA686EEC7.quest_desc: ["Fly about 4000 blocks north (negative Z) and land on the snowy plains."]
+	quest.0410BCFCA686EEC7.title: "Northern Shore"
+	quest.06F27455A8C1762B.quest_desc: ["A bucket and a waterskin. Down south, water saves you from the heat."]
+	quest.06F27455A8C1762B.title: "Water to Go"
+	quest.0725FBD8C4BB5DC8.quest_desc: ["8 bookshelves unlock the second option (250 points), 15 the third (500 points)."]
+	quest.0725FBD8C4BB5DC8.title: "Library"
+	quest.0749A1C45B0EA552.quest_desc: ["And back: rotation into electricity."]
+	quest.0749A1C45B0EA552.title: "Alternator"
+	quest.07F4FAD00FE4552B.quest_desc: ["This elixir wakes Lord Pumpkinhead. It only works in the north."]
+	quest.07F4FAD00FE4552B.title: "Transmuting Elixir"
+	quest.0D95AD042A8F6753.quest_desc: ["Dangerous, but there is gold and netherite."]
+	quest.0D95AD042A8F6753.title: "Bastion"
+	quest.0DB0D487322A1055.quest_desc: ["Find a jungle temple."]
+	quest.0DB0D487322A1055.title: "Jungle Temple"
+	quest.0EAC18A57865D6D9.quest_desc: ["Defeat Krampus."]
+	quest.0EAC18A57865D6D9.title: "Krampus"
+	quest.0F69B198F20785A0.quest_desc: ["You need it to make brass."]
+	quest.0F69B198F20785A0.title: "Blaze Burner"
+	quest.101F5B869F1FB6B7.quest_desc: ["Defeat the Dire Hound Leader."]
+	quest.101F5B869F1FB6B7.title: "Hound Leader"
+	quest.117325654E654D62.quest_desc: ["Kill blazes and take their rods."]
+	quest.117325654E654D62.title: "Blazes"
+	quest.18BAE9E1D07C3F7C.quest_desc: ["A stone pickaxe and a furnace."]
+	quest.18BAE9E1D07C3F7C.title: "Stone Age"
+	quest.1ACB00F411AF529B.quest_desc: ["The warm, wet west of the island."]
+	quest.1ACB00F411AF529B.title: "Jungle"
+	quest.1D5F79045F5A2E07.quest_desc: ["A hearth warms your whole home."]
+	quest.1D5F79045F5A2E07.title: "Hearth"
+	quest.2911A7A19AAE3F00.quest_desc: ["More XP from mobs and blocks."]
+	quest.2911A7A19AAE3F00.title: "Insight"
+	quest.30061128D7FADAE9.quest_desc: ["The item stays with you when you die. The most precious book; you have to earn it."]
+	quest.30061128D7FADAE9.title: "Soulbound"
+	quest.302FAE3B4175F575.quest_desc: ["Twelve eyes of ender. They lead to the stronghold."]
+	quest.302FAE3B4175F575.title: "Eye of Ender"
+	quest.316BDBE7B30479D1.quest_desc: ["Armour of hoglin hide protects you from heat. You will want it in the south."]
+	quest.316BDBE7B30479D1.title: "Hoglin Hide"
+	quest.32B2FC7FC1FE0154.quest_desc: ["Sleep in a bed."]
+	quest.32B2FC7FC1FE0154.title: "Survive the Night"
+	quest.3D753A32456BDA7A.quest_desc: ["Ore cracks into Create's crushed ore."]
+	quest.3D753A32456BDA7A.title: "Smashing"
+	quest.3DB556DE613B82CC.quest_desc: ["Build a portal and step into the Nether. Pale Store unlocks the diamond pickaxe recipe right away."]
+	quest.3DB556DE613B82CC.title: "Deeper Down"
+	quest.3DF6E6E5D0A4B668.quest_desc: ["Double your ore."]
+	quest.3DF6E6E5D0A4B668.title: "Pulverizer and Furnace"
+	quest.3EA38D8286E0AE6D.quest_desc: ["Warmth you can carry around."]
+	quest.3EA38D8286E0AE6D.title: "Soulspring Lamp"
+	quest.3F2B1450BCEDB172.quest_desc: ["Dark towers stand only in the north."]
+	quest.3F2B1450BCEDB172.title: "Dark Tower"
+	quest.48184452CD411FD3.quest_desc: ["Defeat a Fallen Chaos Knight."]
+	quest.48184452CD411FD3.title: "Fallen Knight"
+	quest.4D2A2718A56AA656.quest_desc: ["Fur armour keeps you warm."]
+	quest.4D2A2718A56AA656.title: "Goat Fur"
+	quest.4D65D68F96EC4E41.quest_desc: ["Find a village."]
+	quest.4D65D68F96EC4E41.title: "Neighbours"
+	quest.5030EEC3E619C095.quest_desc: ["Craft a hoglin hide chestplate."]
+	quest.5030EEC3E619C095.title: "Heatproof Armour"
+	quest.51B38A5ECBABCC27.quest_desc: ["The first option costs 125 XP points and needs no bookshelves."]
+	quest.51B38A5ECBABCC27.title: "Enchanting Table"
+	quest.54C4910398E90581.quest_desc: ["Armour from a chameleon's molt adapts to heat and cold."]
+	quest.54C4910398E90581.title: "Chameleon"
+	quest.551B2870D03B979D.quest_desc: ["Cools your home when it's scorching outside."]
+	quest.551B2870D03B979D.title: "Icebox"
+	quest.5882B5D6552E7AB1.quest_desc: ["In this pack the anvil takes no XP and is never \"too expensive\"."]
+	quest.5882B5D6552E7AB1.title: "Anvil"
+	quest.5C108A9D1926801A.quest_desc: ["Now you can craft one."]
+	quest.5C108A9D1926801A.title: "Diamond Pickaxe"
+	quest.5C84789238F902A5.quest_desc: ["Walk about 500 blocks south through the Nether (positive Z) and build a portal there. It leads to the hot island."]
+	quest.5C84789238F902A5.title: "Portal South"
+	quest.60E9D60176116959.quest_desc: ["The base of everything in Create."]
+	quest.60E9D60176116959.title: "Andesite Alloy"
+	quest.613049AD6949A8E3.quest_desc: ["Copper and zinc in a heated basin."]
+	quest.613049AD6949A8E3.title: "Brass"
+	quest.6167BC54D7B958AC.quest_desc: ["It's a long flight. Bring plenty of rockets."]
+	quest.6167BC54D7B958AC.title: "Rockets"
+	quest.63B83E7FF2A56CF8.quest_desc: ["Find and smelt some iron."]
+	quest.63B83E7FF2A56CF8.title: "Iron"
+	quest.6732D54B22BF2CF3.quest_desc: ["Find an End city past the outer islands."]
+	quest.6732D54B22BF2CF3.title: "End City"
+	quest.6761B1DEDF496C79.quest_desc: ["A full set of iron armour."]
+	quest.6761B1DEDF496C79.title: "Iron Armour"
+	quest.6BB18A9229DC45A1.quest_desc: ["You crossed all three islands and beat everything that hid in the north."]
+	quest.6BB18A9229DC45A1.title: "Master of the Pale"
+	quest.6EE5AAD137ED2402.quest_desc: ["Defeat the Mother Spider."]
+	quest.6EE5AAD137ED2402.title: "Mother Spider"
+	quest.70DEC128677ACF04.quest_desc: ["Create's machines need it."]
+	quest.70DEC128677ACF04.title: "Quartz"
+	quest.73B6764D68F79C2D.quest_desc: ["Defeat the Missioner."]
+	quest.73B6764D68F79C2D.title: "Missioner"
+	quest.73FB8B12389506A9.quest_desc: ["The only way to the cold island. A portal from the Nether won't open there."]
+	quest.73FB8B12389506A9.title: "Elytra"
+	quest.76D15F539177341F.quest_desc: ["It hunts in the dark."]
+	quest.76D15F539177341F.title: "Nightmare Stalker"
+	quest.7703C7EC764575C8.quest_desc: ["Useful against arrows and against what lives on the other islands."]
+	quest.7703C7EC764575C8.title: "Shield"
+	quest.78126D00318DA7F3.quest_desc: ["Red cliffs in the east."]
+	quest.78126D00318DA7F3.title: "Badlands"
+	quest.7E137323D2F00F6F.quest_desc: ["Nickel, platinum and uranium exist only on the cold island."]
+	quest.7E137323D2F00F6F.title: "Northern Ores"
+	quest.7FAA8C6F650E5E31.quest_desc: ["Find the ice spikes."]
+	quest.7FAA8C6F650E5E31.title: "Ice Spikes"
+	quest.83C119B689CF5F32.quest_desc: ["Gather dark metal ingots and forge a chestplate."]
+	quest.83C119B689CF5F32.title: "Dark Metal"
+	quest.84E8CC486B087199.quest_desc: ["You can't mine obsidian without a diamond pickaxe, and its recipe only unlocks in the Nether. So cast the portal in place: build a stone mould, pour lava into each frame cell and pour water over it. The lava turns into obsidian right in the frame. Ruined portals also hold ready obsidian."]
+	quest.84E8CC486B087199.title: "Cast Portal"
+	quest.88C63890BCA3FB67.quest_desc: ["Oritech's laser arm mines from afar."]
+	quest.88C63890BCA3FB67.title: "Laser Arm"
+	quest.910FEA79D7E519D8.quest_desc: ["Killing a mob heals you."]
+	quest.910FEA79D7E519D8.title: "Leech"
+	quest.9168863FAED2584D.quest_desc: ["Sews insulation right into your armour, for heat or for cold."]
+	quest.9168863FAED2584D.title: "Sewing Table"
+	quest.9249DF6F4BA122E6.quest_desc: ["A water wheel and some cogs give you your first rotation."]
+	quest.9249DF6F4BA122E6.title: "Water Power"
+	quest.9FBB5CFB93AA3119.quest_desc: ["Collect it in bottles."]
+	quest.9FBB5CFB93AA3119.title: "Dragon's Breath"
+	quest.A0B1FA5A024DD50C.quest_desc: ["Create Additions turns electricity into rotation."]
+	quest.A0B1FA5A024DD50C.title: "Electric Motor"
+	quest.A0F83F209478D8DF.quest_desc: ["A steam engine on a fluid tank with a burner."]
+	quest.A0F83F209478D8DF.title: "Steam"
+	quest.A1E2F25A0165C779.quest_desc: ["Cold Sweat tracks your body temperature. A thermometer shows how warm it is around you."]
+	quest.A1E2F25A0165C779.title: "Thermometer"
+	quest.A5EF27E3BF9A238A.quest_desc: ["Walk to the grey shore. Go no further: the fog is poison."]
+	quest.A5EF27E3BF9A238A.title: "Edge of the World"
+	quest.A7B4FD4982C710F5.quest_desc: ["Craft a crafting table."]
+	quest.A7B4FD4982C710F5.title: "First Planks"
+	quest.ABC6EC38598954EB.quest_desc: ["Careful, you'll want it for a reactor."]
+	quest.ABC6EC38598954EB.title: "Uranium"
+	quest.AC365A657D57407F.quest_desc: ["Drills ore nodes forever."]
+	quest.AC365A657D57407F.title: "Deep Drill"
+	quest.B27FB98BDF2373BA.quest_desc: ["A mixer over a basin mixes what you can't craft by hand."]
+	quest.B27FB98BDF2373BA.title: "Mixer"
+	quest.B2F1403AB0B6753D.quest_desc: ["Mined blocks drop already smelted. Here's a book."]
+	quest.B2F1403AB0B6753D.title: "Smelting"
+	quest.C30EEFC8CC04719E.quest_desc: ["You can't craft a diamond pickaxe yet: Pale Store unlocks its recipe once you reach the Nether. The diamonds will still come in handy."]
+	quest.C30EEFC8CC04719E.title: "Diamonds"
+	quest.C988A9961035406B.quest_desc: ["Enter the End portal."]
+	quest.C988A9961035406B.title: "The End?"
+	quest.C99AB36B29666371.quest_desc: ["Pour the elixir on an infernal pumpkin and defeat the Lord."]
+	quest.C99AB36B29666371.title: "Lord Pumpkinhead"
+	quest.CB03880F1C26F0ED.quest_desc: ["A mechanical press turns ingots into sheets."]
+	quest.CB03880F1C26F0ED.title: "Press"
+	quest.CE4C20E946F41672.quest_desc: ["The heart of Create's advanced machines."]
+	quest.CE4C20E946F41672.title: "Precision Mechanism"
+	quest.D0B8518015D93474.quest_desc: ["Shulker shells for boxes."]
+	quest.D0B8518015D93474.title: "Shulkers"
+	quest.D8A86AB5D40AE123.quest_desc: ["Your first Oritech generator."]
+	quest.D8A86AB5D40AE123.title: "Oritech"
+	quest.DFC8884BF979CF66.quest_desc: ["A mechanical drill and saw dig and chop on their own."]
+	quest.DFC8884BF979CF66.title: "Automation"
+	quest.E14CFE4398E3FC6C.quest_desc: ["Defeat the Lifestealer."]
+	quest.E14CFE4398E3FC6C.title: "Lifestealer"
+	quest.E2BF3F56EC398E2B.quest_desc: ["Climb above 500 blocks: no fog and no poison up there. Below lies a sea of clouds with the islands as holes in it."]
+	quest.E2BF3F56EC398E2B.title: "Above the Clouds"
+	quest.E53992FFD62EEE01.quest_desc: ["All three strongholds are on the hot island, half way out from its centre."]
+	quest.E53992FFD62EEE01.title: "Stronghold"
+	quest.E541143ABF1D324D.quest_desc: ["Land ends about 1250 blocks from the centre. Beyond it lies a grey, poisonous sea behind a wall of fog. Two more islands wait somewhere past it."]
+	quest.E541143ABF1D324D.title: "Welcome to the Pale"
+	quest.E9D79ACF1091D28A.quest_desc: ["Slay the Ender Dragon."]
+	quest.E9D79ACF1091D28A.title: "The Dragon"
+	quest.EADA0FE986A758A0.quest_desc: ["Enchant any item."]
+	quest.EADA0FE986A758A0.title: "First Enchantment"
+	quest.EB453C03F34C6392.quest_desc: ["Oritech's foundry makes steel."]
+	quest.EB453C03F34C6392.title: "Steel"
+	quest.ECA11DA32F4F7DDE.quest_desc: ["Find a Nether fortress."]
+	quest.ECA11DA32F4F7DDE.title: "Fortress"
+	quest.EE4CB3B7BB11E21C.quest_desc: ["Step out of the portal and find the desert. Drink water and watch your thermometer."]
+	quest.EE4CB3B7BB11E21C.title: "Southern Sands"
+	quest.F2F9FEBA0B99A12B.quest_desc: ["Deep in the Nether."]
+	quest.F2F9FEBA0B99A12B.title: "Ancient Debris"
+	quest.F33D147DABDE9D02.quest_desc: ["A jetpack with elytra makes flying between islands easier."]
+	quest.F33D147DABDE9D02.title: "Jetpack"
+	quest.FA2BCD9950313F2F.quest_desc: ["Find a desert pyramid. Mind the floor."]
+	quest.FA2BCD9950313F2F.title: "Pyramid"
+	quest.FB503FD5B2AE693A.quest_desc: ["There were none on the starter island. Here there are."]
+	quest.FB503FD5B2AE693A.title: "Spawn of Chaos"
 }
