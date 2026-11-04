@@ -1,0 +1,207 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "end"
+	group: "EFA7D509EB9A847A"
+	icon: {
+		count: 1
+		id: "minecraft:end_stone"
+	}
+	id: "38EE5D196554F12F"
+	images: [ ]
+	order_index: 3
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: ["E53992FFD62EEE01"]
+			icon: {
+				count: 1
+				id: "minecraft:end_portal_frame"
+			}
+			id: "C988A9961035406B"
+			rewards: [
+				{
+					id: "B7E92E7A42D15B57"
+					type: "xp"
+					xp: 300
+				}
+			]
+			shape: "hexagon"
+			size: 1.5d
+			tasks: [
+				{
+					dimension: "minecraft:the_end"
+					id: "3FC5FDCB8FDF466D"
+					type: "dimension"
+				}
+			]
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["C988A9961035406B"]
+			icon: {
+				count: 1
+				id: "minecraft:dragon_head"
+			}
+			id: "E9D79ACF1091D28A"
+			rewards: [
+				{
+					id: "A360D6F07789FD90"
+					type: "xp"
+					xp: 1000
+				}
+				{
+					id: "D6CD682C94D639A6"
+					item: {
+						count: 2
+						id: "minecraft:golden_apple"
+					}
+					type: "item"
+				}
+			]
+			shape: "gear"
+			size: 2.0d
+			tasks: [
+				{
+					entity: "minecraft:ender_dragon"
+					id: "CFADB73F72A87DBC"
+					type: "kill"
+					value: 1L
+				}
+			]
+			x: 2.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["E9D79ACF1091D28A"]
+			id: "9FBB5CFB93AA3119"
+			rewards: [
+				{
+					id: "B71905FB38B4399E"
+					type: "xp"
+					xp: 100
+				}
+			]
+			tasks: [
+				{
+					count: 4L
+					id: "F4BD6B1E099F9E2D"
+					item: {
+						count: 1
+						id: "minecraft:dragon_breath"
+					}
+					type: "item"
+				}
+			]
+			x: 2.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["E9D79ACF1091D28A"]
+			icon: {
+				count: 1
+				id: "minecraft:purpur_block"
+			}
+			id: "6732D54B22BF2CF3"
+			rewards: [
+				{
+					id: "1B6B034F796C04AE"
+					type: "xp"
+					xp: 300
+				}
+			]
+			tasks: [
+				{
+					id: "8AAD3638EFFEDE9A"
+					structure: "minecraft:end_city"
+					type: "structure"
+				}
+			]
+			x: 4.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["6732D54B22BF2CF3"]
+			id: "D0B8518015D93474"
+			rewards: [
+				{
+					id: "97441FFDF29F440A"
+					type: "xp"
+					xp: 200
+				}
+			]
+			tasks: [
+				{
+					count: 4L
+					id: "81D09D00BF22DCD6"
+					item: {
+						count: 1
+						id: "minecraft:shulker_shell"
+					}
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["6732D54B22BF2CF3"]
+			id: "73FB8B12389506A9"
+			rewards: [
+				{
+					id: "675BB140B51FE115"
+					type: "xp"
+					xp: 500
+				}
+			]
+			shape: "hexagon"
+			size: 1.5d
+			tasks: [
+				{
+					count: 1L
+					id: "D95564D2422464A6"
+					item: {
+						count: 1
+						id: "minecraft:elytra"
+					}
+					type: "item"
+				}
+			]
+			x: 6.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["73FB8B12389506A9"]
+			id: "6167BC54D7B958AC"
+			rewards: [
+				{
+					id: "47B9191BC5AFCEFE"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "C9398BD3555E3BFC"
+					item: {
+						count: 32
+						id: "minecraft:firework_rocket"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					count: 64L
+					id: "C76CEC07501AE30F"
+					item: {
+						count: 1
+						id: "minecraft:firework_rocket"
+					}
+					type: "item"
+				}
+			]
+			x: 6.0d
+			y: 2.0d
+		}
+	]
+}
