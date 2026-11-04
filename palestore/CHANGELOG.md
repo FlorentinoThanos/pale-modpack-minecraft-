@@ -4,7 +4,7 @@ Changes made during this conversation, from the supplied 0.3.0 source through th
 
 ## 0.6.0 — Current
 
-- Merged Pale Enchantments 1.0.0 into Pale Store; the separate `paleenchants` jar is no longer needed (remove it from `mods`).
+- Merged Pale Enchantments 1.0.0 into Pale Store; remove the separate `paleenchants` jar from `mods`. Pale Store is marked incompatible with it, so the launcher says so instead of crashing.
 - Six enchantments: Insight, Leech, Smashing, Smelting, Soulbound and Vorpal. They come from the enchanting table and from dungeon/chest loot.
 - The enchanting table offers at most level III (as in 0.5.2); Leech IV only comes from combining two Leech III on the anvil.
 - The enchantments keep their `paleenchants:` ids, so items enchanted with Pale Enchantments 1.0.0 keep them.

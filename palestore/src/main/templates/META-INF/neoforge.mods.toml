@@ -36,3 +36,12 @@ config = "palestore.mixins.json"
     versionRange="[19,)"
     ordering="NONE"
     side="CLIENT"
+
+# Pale Enchantments is built into Pale Store since 0.6.0; the old separate jar clashes with it.
+[[dependencies.${mod_id}]]
+    modId="paleenchants"
+    type="incompatible"
+    reason="Pale Enchantments is now part of Pale Store. Remove paleenchants-1.0.0.jar from the mods folder."
+    versionRange="[0,)"
+    ordering="NONE"
+    side="BOTH"
