@@ -266,16 +266,12 @@
 			size: 1.5d
 			tasks: [
 				{
-					d: 140
 					dimension: "minecraft:the_nether"
-					h: 128
 					id: "7B6A2D30FC96C1C1"
 					ignore_dimension: false
+					position: [I; -100, 0, 430]
+					size: [I; 200, 128, 140]
 					type: "location"
-					w: 200
-					x: -100
-					y: 0
-					z: 430
 				}
 			]
 			x: 8.0d

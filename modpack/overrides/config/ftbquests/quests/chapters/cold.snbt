@@ -30,16 +30,12 @@
 			size: 1.5d
 			tasks: [
 				{
-					d: 60000000
 					dimension: "minecraft:overworld"
-					h: 1500
 					id: "B1B5928B517C456A"
 					ignore_dimension: false
+					position: [I; -30000000, 500, -30000000]
+					size: [I; 60000000, 1500, 60000000]
 					type: "location"
-					w: 60000000
-					x: -30000000
-					y: 500
-					z: -30000000
 				}
 			]
 			x: 0.0d

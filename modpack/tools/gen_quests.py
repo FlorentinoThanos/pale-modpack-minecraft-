@@ -14,6 +14,10 @@ import shutil
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "overrides", "config", "ftbquests", "quests")
 
 
+class IntArray(list):
+    """Written as an SNBT int array: [I; 1, 2, 3]."""
+
+
 def qid(key):
     return hashlib.sha1(("thepale:" + key).encode()).hexdigest()[:16].upper()
 
@@ -48,8 +52,9 @@ def check():
 
 
 def area(dimension, x, y, z, w, h, d):
+    # FTB Quests reads these as int arrays "position" [x, y, z] and "size" [w, h, d]
     return {"type": "location", "dimension": dimension, "ignore_dimension": False,
-            "x": x, "y": y, "z": z, "w": w, "h": h, "d": d}
+            "position": IntArray([x, y, z]), "size": IntArray([w, h, d])}
 
 
 # ---------------------------------------------------------------- rewards
@@ -357,6 +362,8 @@ def fix_numbers(o, parent=None):
             else:
                 out[k] = Int(v)
         return out
+    if isinstance(o, IntArray):
+        return o
     if isinstance(o, list):
         return [fix_numbers(x, parent) for x in o]
     return o
@@ -364,6 +371,7 @@ def fix_numbers(o, parent=None):
 
 class Int(int):
     pass
+
 
 
 class Long(int):
@@ -382,6 +390,8 @@ def snbt2(v, ind=0):
         return f"{v}d"
     if isinstance(v, str):
         return '"' + v.replace("\\", "\\\\").replace('"', '\\"') + '"'
+    if isinstance(v, IntArray):
+        return "[I; " + ", ".join(str(int(x)) for x in v) + "]"
     if isinstance(v, list):
         if not v:
             return "[ ]"
