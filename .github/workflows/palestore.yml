@@ -1,0 +1,26 @@
+name: Build Pale Store
+
+on:
+  push:
+    paths: ['palestore/**', '.github/workflows/palestore.yml']
+  pull_request:
+    paths: ['palestore/**', '.github/workflows/palestore.yml']
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: palestore
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+      - uses: gradle/actions/setup-gradle@v4
+      - run: chmod +x gradlew && ./gradlew build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: palestore-jar
+          path: palestore/build/libs/*.jar

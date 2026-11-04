@@ -3,3 +3,5 @@ build/
 run/
 run-server/
 libs/
+# Pale Store compiles against the JEI jar it carries.
+!palestore/libs/
