@@ -107,3 +107,10 @@
 	#of characters (born_in_chaos_v1:* = every hostile mob from Born in Chaos); a line starting with ! is an exception
 	#(the player's own summoned allies). The server log lists the matches.
 	notOnStarterIsland = ["born_in_chaos_v1:*", "!born_in_chaos_v1:controlled_*", "!born_in_chaos_v1:*_controlled"]
+
+[effects]
+	#Movement speed bonus of Born in Chaos' Rampage, in percent, for its five levels from Light to Rampant
+	#(Born in Chaos itself gives 15, 30, 50, 75, 100). Applies to every source of Rampage: the Great Reaper Axe,
+	#the full Dark Metal set at low health and the potion. Damage and attack speed stay as Born in Chaos has them.
+	#An effect already running keeps its old bonus until it ends.
+	rampageSpeedBonus = [5.0, 10.0, 15.0, 20.0, 25.0]
