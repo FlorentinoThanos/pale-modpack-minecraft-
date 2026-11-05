@@ -1,10 +1,12 @@
 {
   "palestore.category.title": "Recipe Store",
   "palestore.requirement": "Unlock requirement:",
-  "palestore.advancement.nether": "We Need to Go Deeper",
   "palestore.status.unlocked": "Unlocked",
   "palestore.enchant.xp.requirement": "%s XP required",
   "palestore.status.locked": "Locked",
   "palestore.message.unlocked": "Recipe unlocked: %s",
-  "palestore.message.locked": "%s is locked. Earn the %s advancement to craft it"
+  "palestore.message.locked": "%s is locked. Complete the quest to craft it",
+  "palestore.offer.bed.requirement": "Quest: Stone Age",
+  "palestore.offer.ladder.requirement": "Quest: Torches",
+  "palestore.offer.diamond_pickaxe.requirement": "Quest: Into the Nether"
 }

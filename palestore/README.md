@@ -1,7 +1,16 @@
 # Pale Store (NeoForge 1.21.1, JEI 19.70)
 
-A recipe store inside JEI. The Diamond Pickaxe crafting recipe unlocks when the player earns the
-vanilla "We Need to Go Deeper" advancement by entering the Nether.
+A recipe store inside JEI. Some crafting recipes are locked until a quest opens them:
+
+| Offer | Locks | Opened by quest (chapter 1) |
+|---|---|---|
+| `palestore:bed` | every bed (`#minecraft:beds`) | Stone Age |
+| `palestore:ladder` | ladder | Torches |
+| `palestore:diamond_pickaxe` | diamond pickaxe | Into the Nether |
+
+Each offer is unlocked by an advancement `palestore:unlock/<name>` that has no trigger of its own; the FTB Quests
+reward runs `/advancement grant @p only palestore:unlock/<name>`. `palestore:quest/has_bed` and
+`palestore:quest/has_cooked_meat` are helper advancements the quests check (any bed, any cooked meat).
 
 ## Build
 Needs Java 21 and internet (Gradle downloads NeoForge/Minecraft).
@@ -41,7 +50,7 @@ The table offers at most level III. Higher levels (Leech IV) only come from the 
 ## Testing
 - In JEI press R on a Diamond Pickaxe: while locked you only see the "Recipe Store" tab.
   Press U on an Emerald to open the store directly.
-- Earn "We Need to Go Deeper" by entering the Nether; the crafting recipe then unlocks automatically.
+- `/advancement grant @s only palestore:unlock/diamond_pickaxe` unlocks it by hand; `revoke` locks it again.
 
 ## Known limits
 - Crafting result slots are gated directly, so locked results should not flash or be obtainable by shift-clicking.

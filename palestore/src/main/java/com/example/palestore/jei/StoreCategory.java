@@ -32,14 +32,14 @@ public class StoreCategory extends AbstractRecipeCategory<Offer> {
     public void setRecipe(IRecipeLayoutBuilder builder, Offer offer, IFocusGroup focuses) {
         builder.addOutputSlot(134, 8)
                 .setStandardSlotBackground()
-                .addItemStack(new ItemStack(offer.result()));
+                .addItemStack(new ItemStack(offer.icon()));
     }
 
     @Override
     public void draw(Offer offer, IRecipeSlotsView slots, GuiGraphics graphics, double mouseX, double mouseY) {
         var font = Minecraft.getInstance().font;
         graphics.drawString(font, Component.translatable("palestore.requirement"), 8, 5, 0xFF555555, false);
-        graphics.drawString(font, Component.translatable("palestore.advancement.nether"), 8, 17, 0xFF555555, false);
+        graphics.drawString(font, Component.translatable(offer.requirementKey()), 8, 17, 0xFF555555, false);
         Component status = Component.translatable(ClientUnlocks.has(offer.id())
                 ? "palestore.status.unlocked" : "palestore.status.locked");
         int color = ClientUnlocks.has(offer.id()) ? 0xFF3B9A2A : 0xFFB02020;

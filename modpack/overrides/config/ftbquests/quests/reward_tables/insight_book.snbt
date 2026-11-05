@@ -1,0 +1,52 @@
+{
+	id: "412962825CC1473A"
+	loot_size: 1
+	order_index: 1
+	rewards: [
+		{
+			id: "E5764861D5E74E87"
+			item: {
+				components: {
+					"minecraft:stored_enchantments": {
+						levels: {
+							"paleenchants:insight": 1
+						}
+					}
+				}
+				count: 1
+				id: "minecraft:enchanted_book"
+			}
+			type: "item"
+		}
+		{
+			id: "5398014D0A28BB46"
+			item: {
+				components: {
+					"minecraft:stored_enchantments": {
+						levels: {
+							"paleenchants:insight": 2
+						}
+					}
+				}
+				count: 1
+				id: "minecraft:enchanted_book"
+			}
+			type: "item"
+		}
+		{
+			id: "8BB04021B7D58CD5"
+			item: {
+				components: {
+					"minecraft:stored_enchantments": {
+						levels: {
+							"paleenchants:insight": 3
+						}
+					}
+				}
+				count: 1
+				id: "minecraft:enchanted_book"
+			}
+			type: "item"
+		}
+	]
+}
