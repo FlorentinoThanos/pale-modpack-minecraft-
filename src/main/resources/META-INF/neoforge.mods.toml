@@ -4,7 +4,7 @@ license = "All Rights Reserved"
 
 [[mods]]
 modId = "thepale"
-version = "1.9.1"
+version = "1.10.0"
 displayName = "The Pale"
 credits = "World shape based on Oceanus by Lizdtre (MIT License)"
 description = '''
@@ -44,3 +44,11 @@ type = "optional"
 versionRange = "[0,)"
 ordering = "NONE"
 side = "CLIENT"
+
+# Not needed, but with Create Diesel Generators our oil_biomes tag (oil only on the hot island) must load after its own.
+[[dependencies.thepale]]
+modId = "createdieselgenerators"
+type = "optional"
+versionRange = "[0,)"
+ordering = "AFTER"
+side = "BOTH"

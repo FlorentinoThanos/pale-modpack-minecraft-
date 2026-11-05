@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "blacklist_item_id_regex": "pickaxe",
+  "blacklist_item_id_regex": "pickaxe|born_in_chaos_v1:(bonescaller_staff|staff_of_magic_arrows|pumpkinstaffa|staffof_blindness)",
   "fallback_compatibility": [
     {
       "item_id_regex": "claymore|great_sword|greatsword",

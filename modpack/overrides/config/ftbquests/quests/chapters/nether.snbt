@@ -9,7 +9,7 @@
 	}
 	id: "24C62B88537DAC31"
 	images: [ ]
-	order_index: 1
+	order_index: 4
 	quest_links: [ ]
 	quests: [
 		{
@@ -276,6 +276,479 @@
 			]
 			x: 8.0d
 			y: 0.0d
+		}
+		{
+			dependencies: ["3DB556DE613B82CC"]
+			icon: {
+				count: 1
+				id: "minecraft:soul_sand"
+			}
+			id: "CAD349C8E447E551"
+			rewards: [
+				{
+					id: "CA1E79C6D89EAFD9"
+					type: "xp"
+					xp: 80
+				}
+			]
+			tasks: [
+				{
+					biome: "minecraft:soul_sand_valley"
+					id: "7FC888A8F9CDEA50"
+					type: "biome"
+				}
+			]
+			x: 2.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["3DB556DE613B82CC"]
+			icon: {
+				count: 1
+				id: "minecraft:basalt"
+			}
+			id: "91E96124CD295ED1"
+			rewards: [
+				{
+					id: "45A8A9BBB4785EEB"
+					type: "xp"
+					xp: 80
+				}
+			]
+			tasks: [
+				{
+					biome: "minecraft:basalt_deltas"
+					id: "B3BCAE693811132C"
+					type: "biome"
+				}
+			]
+			x: 4.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["3DB556DE613B82CC"]
+			icon: {
+				count: 1
+				id: "minecraft:warped_fungus"
+			}
+			id: "C46F1EF791847FB7"
+			rewards: [
+				{
+					id: "B365DF793CE37ADE"
+					type: "xp"
+					xp: 80
+				}
+			]
+			tasks: [
+				{
+					biome: "minecraft:warped_forest"
+					id: "85D7166A90AFC3F2"
+					type: "biome"
+				}
+			]
+			x: 0.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["3DB556DE613B82CC"]
+			icon: {
+				count: 1
+				id: "minecraft:crimson_fungus"
+			}
+			id: "C7932ED33706A4C0"
+			rewards: [
+				{
+					id: "568BA31A1DAD12BF"
+					type: "xp"
+					xp: 80
+				}
+			]
+			tasks: [
+				{
+					biome: "minecraft:crimson_forest"
+					id: "009141A230A6AD0A"
+					type: "biome"
+				}
+			]
+			x: 0.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["ECA11DA32F4F7DDE"]
+			icon: {
+				count: 1
+				id: "minecraft:wither_skeleton_skull"
+			}
+			id: "88E43EDD19DAD254"
+			rewards: [
+				{
+					id: "2C5676E7404A4B8B"
+					type: "xp"
+					xp: 250
+				}
+			]
+			tasks: [
+				{
+					entity: "minecraft:wither_skeleton"
+					id: "13E51B2954F9F8EF"
+					type: "kill"
+					value: 10L
+				}
+				{
+					count: 3L
+					id: "97C5C1B2172BD48E"
+					item: {
+						count: 1
+						id: "minecraft:wither_skeleton_skull"
+					}
+					type: "item"
+				}
+			]
+			x: 6.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["88E43EDD19DAD254"]
+			icon: {
+				count: 1
+				id: "minecraft:nether_star"
+			}
+			id: "AD9C6B5CDD4A72BE"
+			rewards: [
+				{
+					id: "CE155AD69FED9AFB"
+					type: "xp"
+					xp: 1000
+				}
+				{
+					id: "226FD01838840F95"
+					item: {
+						count: 2
+						id: "minecraft:golden_apple"
+					}
+					type: "item"
+				}
+			]
+			shape: "gear"
+			size: 1.75d
+			tasks: [
+				{
+					entity: "minecraft:wither"
+					id: "685DEC2C9B618255"
+					type: "kill"
+					value: 1L
+				}
+			]
+			x: 8.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["AD9C6B5CDD4A72BE"]
+			id: "A53F64A34921796E"
+			rewards: [
+				{
+					id: "0F9FF18A9F1E7DF0"
+					type: "xp"
+					xp: 300
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "CB3C5907A2F64773"
+					item: {
+						count: 1
+						id: "minecraft:beacon"
+					}
+					type: "item"
+				}
+			]
+			x: 10.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["F2F9FEBA0B99A12B"]
+			id: "4AF3B98939A68C16"
+			rewards: [
+				{
+					id: "F7746FAFB0754B39"
+					type: "xp"
+					xp: 300
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "EFE506295E07BD31"
+					item: {
+						count: 1
+						id: "minecraft:netherite_ingot"
+					}
+					type: "item"
+				}
+			]
+			x: 8.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["0D95AD042A8F6753"]
+			id: "F519FB621D212C41"
+			rewards: [
+				{
+					id: "56B49B211C892A22"
+					type: "xp"
+					xp: 200
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "4FE724BDBB6822CF"
+					item: {
+						count: 1
+						id: "minecraft:netherite_upgrade_smithing_template"
+					}
+					type: "item"
+				}
+			]
+			x: 10.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["0769CB83115313F0", "5C84789238F902A5"]
+			id: "40E96E0C16725E6F"
+			rewards: [
+				{
+					id: "8CB1E5A2E3E370E8"
+					type: "xp"
+					xp: 150
+				}
+			]
+			tasks: [
+				{
+					count: 8L
+					id: "1C84A20BBC97747C"
+					item: {
+						count: 1
+						id: "create:railway_casing"
+					}
+					type: "item"
+				}
+			]
+			x: 6.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["40E96E0C16725E6F"]
+			icon: {
+				count: 1
+				id: "railways:track_blackstone"
+			}
+			id: "208A23D769C58F86"
+			rewards: [
+				{
+					id: "DB8286C33A6ACA7F"
+					type: "xp"
+					xp: 200
+				}
+			]
+			tasks: [
+				{
+					count: 128L
+					id: "9BBDF621A53753B1"
+					item: {
+						count: 1
+						id: "railways:track_blackstone"
+					}
+					type: "item"
+				}
+			]
+			x: 8.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["208A23D769C58F86"]
+			id: "6DEBB1F3E3BB250B"
+			rewards: [
+				{
+					id: "21FAFB46686A3D58"
+					type: "xp"
+					xp: 150
+				}
+			]
+			tasks: [
+				{
+					count: 2L
+					id: "4E52A59147804BFE"
+					item: {
+						count: 1
+						id: "create:track_station"
+					}
+					type: "item"
+				}
+				{
+					count: 4L
+					id: "8B75292BDC1F065C"
+					item: {
+						count: 1
+						id: "create:track_signal"
+					}
+					type: "item"
+				}
+			]
+			x: 10.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["6DEBB1F3E3BB250B"]
+			icon: {
+				count: 1
+				id: "create:controls"
+			}
+			id: "72AFD2AB490C73FB"
+			rewards: [
+				{
+					id: "34618DB57031C3FC"
+					type: "xp"
+					xp: 300
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "A62BFD186F483C2D"
+					item: {
+						count: 1
+						id: "create:controls"
+					}
+					type: "item"
+				}
+				{
+					advancement: "create:train"
+					criterion: ""
+					id: "D455E0623A1A26CF"
+					type: "advancement"
+				}
+			]
+			x: 10.0d
+			y: 8.0d
+		}
+		{
+			dependencies: ["6DEBB1F3E3BB250B"]
+			id: "C1A3A86D29FCD841"
+			rewards: [
+				{
+					id: "351325722753BF49"
+					type: "xp"
+					xp: 80
+				}
+			]
+			tasks: [
+				{
+					count: 2L
+					id: "465D594D860514C1"
+					item: {
+						count: 1
+						id: "railways:semaphore"
+					}
+					type: "item"
+				}
+			]
+			x: 8.0d
+			y: 8.0d
+		}
+		{
+			dependencies: ["208A23D769C58F86"]
+			id: "902FBF4C0345BAC6"
+			rewards: [
+				{
+					id: "1EAD260E74C31CD8"
+					type: "xp"
+					xp: 100
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "59830B8C93C3D502"
+					item: {
+						count: 1
+						id: "railways:handcar"
+					}
+					type: "item"
+				}
+			]
+			x: 6.0d
+			y: 8.0d
+		}
+		{
+			dependencies: ["72AFD2AB490C73FB"]
+			icon: {
+				count: 1
+				id: "create:schedule"
+			}
+			id: "14DDFEAA378A2E3A"
+			rewards: [
+				{
+					id: "CE4AA3060DB98B53"
+					type: "xp"
+					xp: 300
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "3165D491F8CEDFF4"
+					item: {
+						count: 1
+						id: "create:schedule"
+					}
+					type: "item"
+				}
+				{
+					advancement: "create:conductor"
+					criterion: ""
+					id: "BA18310F3EA6891D"
+					type: "advancement"
+				}
+			]
+			x: 12.0d
+			y: 8.0d
+		}
+		{
+			dependencies: ["72AFD2AB490C73FB"]
+			icon: {
+				count: 1
+				id: "create:track_station"
+			}
+			id: "0EAF82EF4005A48C"
+			rewards: [
+				{
+					id: "44365148273A94A5"
+					type: "xp"
+					xp: 500
+				}
+			]
+			shape: "hexagon"
+			size: 1.5d
+			tasks: [
+				{
+					advancement: "create:conductor"
+					criterion: ""
+					id: "84AB68AE3FA70A8A"
+					type: "advancement"
+				}
+				{
+					dimension: "minecraft:the_nether"
+					id: "5A7E293123D88A55"
+					ignore_dimension: false
+					position: [I; -100, 0, 430]
+					size: [I; 200, 128, 140]
+					type: "location"
+				}
+			]
+			x: 12.0d
+			y: 6.0d
 		}
 	]
 }

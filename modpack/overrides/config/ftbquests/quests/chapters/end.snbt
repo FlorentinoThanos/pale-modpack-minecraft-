@@ -9,7 +9,7 @@
 	}
 	id: "38EE5D196554F12F"
 	images: [ ]
-	order_index: 3
+	order_index: 7
 	quest_links: [ ]
 	quests: [
 		{
@@ -201,6 +201,149 @@
 				}
 			]
 			x: 6.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["73FB8B12389506A9"]
+			icon: {
+				count: 1
+				id: "minecraft:elytra"
+			}
+			id: "D5876116D09A4A94"
+			rewards: [
+				{
+					id: "11D3F4519996944D"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [
+				{
+					id: "5DC53196F094C03B"
+					type: "checkmark"
+				}
+			]
+			x: 8.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["C988A9961035406B", "3A2B381694E7803D"]
+			id: "C8F69B71BADEC961"
+			rewards: [
+				{
+					id: "02ADF4D6E30A57E9"
+					type: "xp"
+					xp: 150
+				}
+			]
+			tasks: [
+				{
+					count: 32L
+					id: "A8F3DE0C6A7C47E9"
+					item: {
+						count: 1
+						id: "aeronautics:end_stone_powder"
+					}
+					type: "item"
+				}
+			]
+			x: 2.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["E9D79ACF1091D28A"]
+			id: "90EADDECB31F69A8"
+			rewards: [
+				{
+					id: "6E75F586118D4040"
+					type: "xp"
+					xp: 100
+				}
+			]
+			tasks: [
+				{
+					count: 16L
+					id: "D040D4A63AAF1F26"
+					item: {
+						count: 1
+						id: "minecraft:chorus_fruit"
+					}
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["D0B8518015D93474"]
+			id: "9EA7A6A20FFADAD8"
+			rewards: [
+				{
+					id: "231DF435EC0F4CA1"
+					type: "xp"
+					xp: 150
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "9D3E1662549D1EBD"
+					item: {
+						count: 1
+						id: "minecraft:shulker_box"
+					}
+					type: "item"
+				}
+			]
+			x: 6.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["E9D79ACF1091D28A"]
+			id: "470CD1309BE79D82"
+			rewards: [
+				{
+					id: "D25E2A154E7E65AE"
+					type: "xp"
+					xp: 200
+				}
+			]
+			tasks: [
+				{
+					count: 4L
+					id: "EDE091CA36B3D5C1"
+					item: {
+						count: 1
+						id: "oritech:raw_platinum"
+					}
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["E9D79ACF1091D28A"]
+			id: "3186683A79A07234"
+			rewards: [
+				{
+					id: "D80FF327744A0628"
+					type: "xp"
+					xp: 300
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "BE1A3F16410F6645"
+					item: {
+						count: 1
+						id: "minecraft:dragon_egg"
+					}
+					type: "item"
+				}
+			]
+			x: 0.0d
 			y: 2.0d
 		}
 	]

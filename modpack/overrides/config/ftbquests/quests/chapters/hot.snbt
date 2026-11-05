@@ -9,7 +9,7 @@
 	}
 	id: "3EFF447036D93718"
 	images: [ ]
-	order_index: 2
+	order_index: 5
 	quest_links: [ ]
 	quests: [
 		{
@@ -593,6 +593,356 @@
 			]
 			x: 8.0d
 			y: 4.0d
+		}
+		{
+			dependencies: ["EE4CB3B7BB11E21C"]
+			icon: {
+				count: 1
+				id: "minecraft:acacia_sapling"
+			}
+			id: "7124E0DD608F7300"
+			rewards: [
+				{
+					id: "F89D19D6C905A2B5"
+					type: "xp"
+					xp: 80
+				}
+			]
+			tasks: [
+				{
+					biome: "#c:is_savanna"
+					id: "EA4809E3C2917558"
+					type: "biome"
+				}
+			]
+			x: -2.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["EE4CB3B7BB11E21C"]
+			icon: {
+				count: 1
+				id: "minecraft:cut_sandstone"
+			}
+			id: "25A53111B7CABE72"
+			rewards: [
+				{
+					id: "202F3E004690F703"
+					type: "xp"
+					xp: 100
+				}
+			]
+			tasks: [
+				{
+					id: "E7BAAEC8D2205FF8"
+					structure: "minecraft:village_desert"
+					type: "structure"
+				}
+			]
+			x: -4.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["0DB0D487322A1055"]
+			id: "1328AAFF05BF887F"
+			rewards: [
+				{
+					id: "19643C046E05E7C7"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [
+				{
+					count: 32L
+					id: "00C5A81386B93B9B"
+					item: {
+						count: 1
+						id: "minecraft:bamboo"
+					}
+					type: "item"
+				}
+			]
+			x: -6.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["1ACB00F411AF529B"]
+			id: "7A4739014C49CFD3"
+			rewards: [
+				{
+					id: "FA1F663474FC15A1"
+					type: "xp"
+					xp: 60
+				}
+			]
+			tasks: [
+				{
+					count: 16L
+					id: "14456564A40C547C"
+					item: {
+						count: 1
+						id: "minecraft:cocoa_beans"
+					}
+					type: "item"
+				}
+			]
+			x: -6.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["1ACB00F411AF529B"]
+			icon: {
+				count: 1
+				id: "minecraft:feather"
+			}
+			id: "32F918D1F51D5B09"
+			rewards: [
+				{
+					id: "83B971E41FD2CEDC"
+					type: "xp"
+					xp: 60
+				}
+			]
+			tasks: [
+				{
+					advancement: "minecraft:husbandry/tame_an_animal"
+					criterion: ""
+					id: "D416BF03A8664114"
+					type: "advancement"
+				}
+			]
+			x: -4.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["25A53111B7CABE72"]
+			icon: {
+				count: 1
+				id: "minecraft:rotten_flesh"
+			}
+			id: "31AB0EE4C074E86D"
+			rewards: [
+				{
+					id: "4F70CFDC3DDC53A4"
+					type: "xp"
+					xp: 100
+				}
+			]
+			tasks: [
+				{
+					entity: "minecraft:husk"
+					id: "1250F4F63BA519D0"
+					type: "kill"
+					value: 10L
+				}
+			]
+			x: -4.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["551B2870D03B979D"]
+			id: "19BFB3CE701A8231"
+			rewards: [
+				{
+					id: "A23C753CF844CCB4"
+					type: "xp"
+					xp: 100
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "D003E9AFF6096672"
+					item: {
+						count: 1
+						id: "cold_sweat:boiler"
+					}
+					type: "item"
+				}
+				{
+					count: 1L
+					id: "BEDA99099A595AC1"
+					item: {
+						count: 1
+						id: "cold_sweat:smokestack"
+					}
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["54C4910398E90581"]
+			icon: {
+				count: 1
+				id: "cold_sweat:chameleon_molt"
+			}
+			id: "199A32EA805BCBC4"
+			rewards: [
+				{
+					id: "C45D0C7E259CAF66"
+					type: "xp"
+					xp: 150
+				}
+			]
+			tasks: [
+				{
+					advancement: "cold_sweat:tame_chameleon"
+					criterion: ""
+					id: "F756A9F38E079C10"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["54C4910398E90581", "9168863FAED2584D"]
+			icon: {
+				count: 1
+				id: "cold_sweat:sewing_table"
+			}
+			id: "65FEB118B7BA1765"
+			rewards: [
+				{
+					id: "9B2661E452D24635"
+					type: "xp"
+					xp: 150
+				}
+			]
+			tasks: [
+				{
+					advancement: "cold_sweat:insulate_armor"
+					criterion: ""
+					id: "FB95F7AC22354DA5"
+					type: "advancement"
+				}
+			]
+			x: 6.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["FB503FD5B2AE693A", "7124E0DD608F7300"]
+			icon: {
+				count: 1
+				id: "born_in_chaos_v1:intoxicating_dagger"
+			}
+			id: "0D35E616BE5B4892"
+			rewards: [
+				{
+					id: "1CB7E8E8C59A98FF"
+					type: "xp"
+					xp: 200
+				}
+			]
+			tasks: [
+				{
+					id: "79C750E09C4800DF"
+					structure: "born_in_chaos_v1:clown_caravan_savanna"
+					type: "structure"
+				}
+			]
+			x: 0.0d
+			y: -6.0d
+		}
+		{
+			dependencies: ["FB503FD5B2AE693A"]
+			icon: {
+				count: 1
+				id: "born_in_chaos_v1:fire_dust"
+			}
+			id: "E6FBABA20A32879D"
+			rewards: [
+				{
+					id: "8F3B2305B7E1CAF0"
+					type: "xp"
+					xp: 200
+				}
+			]
+			tasks: [
+				{
+					id: "0EC6F8C62C150645"
+					structure: "born_in_chaos_v1:firewell"
+					type: "structure"
+				}
+			]
+			x: 2.0d
+			y: -6.0d
+		}
+		{
+			dependencies: ["FB503FD5B2AE693A"]
+			icon: {
+				count: 1
+				id: "born_in_chaos_v1:evil_carved_pumpkin"
+			}
+			id: "F1D741031868AB0C"
+			rewards: [
+				{
+					id: "FA1657D7D512B85E"
+					type: "xp"
+					xp: 200
+				}
+			]
+			tasks: [
+				{
+					id: "0FC28AD08189C15D"
+					structure: "born_in_chaos_v1:farm"
+					type: "structure"
+				}
+			]
+			x: 4.0d
+			y: -6.0d
+		}
+		{
+			dependencies: ["FB503FD5B2AE693A"]
+			icon: {
+				count: 1
+				id: "born_in_chaos_v1:gravestone_icon"
+			}
+			id: "F4270BCBAB292772"
+			rewards: [
+				{
+					id: "7D87D506F051AEF8"
+					type: "xp"
+					xp: 200
+				}
+			]
+			tasks: [
+				{
+					advancement: "born_in_chaos_v1:grave_ravager"
+					criterion: ""
+					id: "A4E1EA3B9C05A19C"
+					type: "advancement"
+				}
+			]
+			x: 6.0d
+			y: -6.0d
+		}
+		{
+			dependencies: ["FB503FD5B2AE693A"]
+			icon: {
+				count: 1
+				id: "born_in_chaos_v1:black_argillite"
+			}
+			id: "09DFA446653ADFDB"
+			rewards: [
+				{
+					id: "E6617EF5B6AD9785"
+					type: "xp"
+					xp: 200
+				}
+			]
+			tasks: [
+				{
+					id: "4D6D8F3505BB490F"
+					structure: "born_in_chaos_v1:observation_tower_plains"
+					type: "structure"
+				}
+			]
+			x: 8.0d
+			y: -6.0d
 		}
 	]
 }

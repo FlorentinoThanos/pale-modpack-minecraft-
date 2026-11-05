@@ -9,7 +9,7 @@
 	}
 	id: "F9A621A1BF5E6BF3"
 	images: [ ]
-	order_index: 5
+	order_index: 11
 	quest_links: [ ]
 	quests: [
 		{
@@ -334,6 +334,112 @@
 			]
 			x: 8.0d
 			y: 0.0d
+		}
+		{
+			dependencies: ["0410BCFCA686EEC7"]
+			icon: {
+				count: 1
+				id: "minecraft:elytra"
+			}
+			id: "B4EDD3D4B260DC0A"
+			rewards: [
+				{
+					id: "1725276F7D5FC45B"
+					item: {
+						components: {
+							"minecraft:stored_enchantments": {
+								levels: {
+									"betterarcheology:soaring_winds": 1
+								}
+							}
+						}
+						count: 1
+						id: "minecraft:enchanted_book"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					id: "C6453D23FE700947"
+					type: "checkmark"
+				}
+			]
+			x: 10.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["EF5337DC970DB68C", "5882B5D6552E7AB1"]
+			icon: {
+				count: 1
+				id: "minecraft:iron_sword"
+			}
+			id: "E8057D6B78C4CC00"
+			rewards: [
+				{
+					id: "FB3CAB2DA153E400"
+					item: {
+						components: {
+							"minecraft:stored_enchantments": {
+								levels: {
+									"betterarcheology:penetrating_strike": 1
+								}
+							}
+						}
+						count: 1
+						id: "minecraft:enchanted_book"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					entity: "minecraft:ravager"
+					id: "962000153EE6532B"
+					type: "kill"
+					value: 1L
+				}
+			]
+			x: 10.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["5882B5D6552E7AB1"]
+			icon: {
+				count: 1
+				id: "minecraft:diamond_pickaxe"
+			}
+			id: "BE9A70573691E0A3"
+			rewards: [
+				{
+					id: "67806C94C46CC209"
+					item: {
+						components: {
+							"minecraft:stored_enchantments": {
+								levels: {
+									"betterarcheology:tunneling": 1
+								}
+							}
+						}
+						count: 1
+						id: "minecraft:enchanted_book"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					count: 256L
+					id: "B20EDC5E11C10B7B"
+					item: {
+						count: 1
+						id: "minecraft:cobbled_deepslate"
+					}
+					type: "item"
+				}
+			]
+			x: 10.0d
+			y: 1.0d
 		}
 	]
 }
