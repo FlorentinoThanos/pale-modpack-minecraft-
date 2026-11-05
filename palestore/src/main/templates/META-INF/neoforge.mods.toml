@@ -1,0 +1,47 @@
+modLoader="javafml"
+loaderVersion="${loader_version_range}"
+license="${mod_license}"
+
+[[mods]]
+modId="${mod_id}"
+version="${mod_version}"
+displayName="${mod_name}"
+description='''
+Recipe store inside JEI: unlock locked crafting recipes by paying XP.
+Also adds six enchantments: Insight, Leech, Smashing, Smelting, Soulbound and Vorpal.
+'''
+
+# Mixin configs must be listed here (same as in thepale).
+[[mixins]]
+config = "palestore.mixins.json"
+
+[[dependencies.${mod_id}]]
+    modId="neoforge"
+    type="required"
+    versionRange="[${neo_version},)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.${mod_id}]]
+    modId="minecraft"
+    type="required"
+    versionRange="${minecraft_version_range}"
+    ordering="NONE"
+    side="BOTH"
+
+# The store lives inside JEI, so the client needs it.
+[[dependencies.${mod_id}]]
+    modId="jei"
+    type="required"
+    versionRange="[19,)"
+    ordering="NONE"
+    side="CLIENT"
+
+# Pale Enchantments is built into Pale Store since 0.6.0; the old separate jar clashes with it.
+[[dependencies.${mod_id}]]
+    modId="paleenchants"
+    type="incompatible"
+    reason="Pale Enchantments is now part of Pale Store. Remove paleenchants-1.0.0.jar from the mods folder."
+    versionRange="[0,)"
+    ordering="NONE"
+    side="BOTH"

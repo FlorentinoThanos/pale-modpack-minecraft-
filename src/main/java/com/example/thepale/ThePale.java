@@ -38,6 +38,8 @@ public final class ThePale {
         NeoForge.EVENT_BUS.addListener(SeedSearch::onPlayerLoggedIn);
         NeoForge.EVENT_BUS.addListener(ShapePayload::onPlayerLoggedIn);
         modBus.addListener(ShapePayload::onRegisterPayloads);
+        modBus.addListener(EffectTweaks::onCommonSetup);
+        NeoForge.EVENT_BUS.addListener(EffectTweaks::onPlayerTick);
     }
 
     public static ResourceLocation id(String path) {

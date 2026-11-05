@@ -1,0 +1,281 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "nether"
+	group: "EFA7D509EB9A847A"
+	icon: {
+		count: 1
+		id: "minecraft:netherrack"
+	}
+	id: "24C62B88537DAC31"
+	images: [ ]
+	order_index: 1
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: ["84E8CC486B087199"]
+			icon: {
+				count: 1
+				id: "minecraft:obsidian"
+			}
+			id: "3DB556DE613B82CC"
+			rewards: [
+				{
+					id: "815063A70486C910"
+					type: "xp"
+					xp: 150
+				}
+			]
+			shape: "hexagon"
+			size: 1.5d
+			tasks: [
+				{
+					dimension: "minecraft:the_nether"
+					id: "398549401344D91A"
+					type: "dimension"
+				}
+			]
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["3DB556DE613B82CC"]
+			id: "5C108A9D1926801A"
+			rewards: [
+				{
+					id: "A7F8600B2B8792F0"
+					type: "xp"
+					xp: 80
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "9C3E413572A1D59C"
+					item: {
+						count: 1
+						id: "minecraft:diamond_pickaxe"
+					}
+					type: "item"
+				}
+			]
+			x: 2.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["3DB556DE613B82CC"]
+			id: "70DEC128677ACF04"
+			rewards: [
+				{
+					id: "764D3C6373D25E35"
+					type: "xp"
+					xp: 60
+				}
+			]
+			tasks: [
+				{
+					count: 32L
+					id: "A0A7FA35A07CE6C3"
+					item: {
+						count: 1
+						id: "minecraft:quartz"
+					}
+					type: "item"
+				}
+			]
+			x: 2.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["3DB556DE613B82CC"]
+			icon: {
+				count: 1
+				id: "minecraft:nether_bricks"
+			}
+			id: "ECA11DA32F4F7DDE"
+			rewards: [
+				{
+					id: "7B4BC40B5F2F6DB6"
+					type: "xp"
+					xp: 100
+				}
+			]
+			tasks: [
+				{
+					id: "7788FAAA546FA3CB"
+					structure: "minecraft:fortress"
+					type: "structure"
+				}
+			]
+			x: 4.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["ECA11DA32F4F7DDE"]
+			icon: {
+				count: 1
+				id: "minecraft:blaze_rod"
+			}
+			id: "117325654E654D62"
+			rewards: [
+				{
+					id: "480FF6323E68A3A0"
+					type: "xp"
+					xp: 150
+				}
+			]
+			tasks: [
+				{
+					entity: "minecraft:blaze"
+					id: "025333BA92950654"
+					type: "kill"
+					value: 8L
+				}
+				{
+					count: 8L
+					id: "3C17EC6261A66C86"
+					item: {
+						count: 1
+						id: "minecraft:blaze_rod"
+					}
+					type: "item"
+				}
+			]
+			x: 6.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["3DB556DE613B82CC"]
+			id: "316BDBE7B30479D1"
+			rewards: [
+				{
+					id: "AA6907B0A6799BF8"
+					type: "xp"
+					xp: 80
+				}
+			]
+			tasks: [
+				{
+					count: 6L
+					id: "2E187B8E9A4F07EB"
+					item: {
+						count: 1
+						id: "cold_sweat:hoglin_hide"
+					}
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["316BDBE7B30479D1"]
+			id: "5030EEC3E619C095"
+			rewards: [
+				{
+					id: "DF1B28B5F9AD213A"
+					type: "xp"
+					xp: 100
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "56E1D1A51D28FE56"
+					item: {
+						count: 1
+						id: "cold_sweat:hoglin_chestplate"
+					}
+					type: "item"
+				}
+			]
+			x: 6.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["3DB556DE613B82CC"]
+			icon: {
+				count: 1
+				id: "minecraft:gilded_blackstone"
+			}
+			id: "0D95AD042A8F6753"
+			rewards: [
+				{
+					id: "9039EB99C2E39BF1"
+					type: "xp"
+					xp: 120
+				}
+			]
+			tasks: [
+				{
+					id: "D2941C823F25B778"
+					structure: "minecraft:bastion_remnant"
+					type: "structure"
+				}
+			]
+			x: 4.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["0D95AD042A8F6753"]
+			id: "F2F9FEBA0B99A12B"
+			rewards: [
+				{
+					id: "AAFA2093F3490ED0"
+					type: "xp"
+					xp: 200
+				}
+			]
+			tasks: [
+				{
+					count: 4L
+					id: "57E5337D107208BA"
+					item: {
+						count: 1
+						id: "minecraft:ancient_debris"
+					}
+					type: "item"
+				}
+			]
+			x: 6.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["117325654E654D62"]
+			icon: {
+				count: 1
+				id: "minecraft:compass"
+			}
+			id: "5C84789238F902A5"
+			rewards: [
+				{
+					id: "8D5583FBE9796B90"
+					type: "xp"
+					xp: 200
+				}
+				{
+					id: "7586B442624E394B"
+					item: {
+						count: 10
+						id: "minecraft:obsidian"
+					}
+					type: "item"
+				}
+			]
+			shape: "hexagon"
+			size: 1.5d
+			tasks: [
+				{
+					dimension: "minecraft:the_nether"
+					id: "7B6A2D30FC96C1C1"
+					ignore_dimension: false
+					position: [I; -100, 0, 430]
+					size: [I; 200, 128, 140]
+					type: "location"
+				}
+			]
+			x: 8.0d
+			y: 0.0d
+		}
+	]
+}

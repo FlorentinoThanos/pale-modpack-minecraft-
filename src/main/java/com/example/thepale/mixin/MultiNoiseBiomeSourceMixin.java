@@ -1,8 +1,10 @@
 package com.example.thepale.mixin;
 
+import com.example.thepale.worldgen.MildBiomes;
 import com.example.thepale.worldgen.PaleBiomeSource;
 import com.example.thepale.worldgen.PaleBiomes;
 import com.example.thepale.worldgen.PaleClimate;
+import com.example.thepale.worldgen.PaleShape;
 import com.google.common.collect.ImmutableSet;
 import java.util.Set;
 import net.minecraft.core.Holder;
@@ -27,9 +29,17 @@ public abstract class MultiNoiseBiomeSourceMixin implements PaleBiomeSource {
     @Shadow
     public abstract Holder<Biome> getNoiseBiome(Climate.TargetPoint target);
 
+    @Shadow
+    protected abstract Climate.ParameterList<Holder<Biome>> parameters();
+
     @Unique
     @Nullable
     private volatile Holder<Biome> thepale$paleBiome;
+
+    /** The climate table without cold and hot biomes, for the mild island ({@link MildBiomes}); built on first use. */
+    @Unique
+    @Nullable
+    private volatile Climate.ParameterList<Holder<Biome>> thepale$mildParameters;
 
     @Unique
     @Nullable
@@ -39,6 +49,7 @@ public abstract class MultiNoiseBiomeSourceMixin implements PaleBiomeSource {
     public void thepale$setPaleBiome(@Nullable Holder<Biome> biome) {
         thepale$paleBiome = biome;
         thepale$possibleWithPale = null;
+        thepale$mildParameters = null;
     }
 
     @Override
@@ -73,7 +84,22 @@ public abstract class MultiNoiseBiomeSourceMixin implements PaleBiomeSource {
         if (PaleBiomes.isInPale(blockX, blockZ)) {
             cir.setReturnValue(pale);
         } else {
-            cir.setReturnValue(getNoiseBiome(PaleClimate.shift(sampler.sample(x, y, z), blockX, blockZ)));
+            Climate.TargetPoint target = PaleClimate.shift(sampler.sample(x, y, z), blockX, blockZ);
+            if (PaleShape.server().nearest(blockX, blockZ).kind() == PaleShape.Kind.MILD) {
+                cir.setReturnValue(thepale$mildParameters().findValue(target));
+            } else {
+                cir.setReturnValue(getNoiseBiome(target));
+            }
         }
+    }
+
+    @Unique
+    private Climate.ParameterList<Holder<Biome>> thepale$mildParameters() {
+        Climate.ParameterList<Holder<Biome>> mild = thepale$mildParameters;
+        if (mild == null) {
+            mild = MildBiomes.filter(parameters());
+            thepale$mildParameters = mild;
+        }
+        return mild;
     }
 }

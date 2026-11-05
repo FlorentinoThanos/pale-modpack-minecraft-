@@ -29,11 +29,16 @@ public final class CommonConfig {
     private static final ModConfigSpec.IntValue MAX_SEARCH_SECONDS;
     private static final ModConfigSpec.BooleanValue PIN_MISSING_STRUCTURES;
     private static final ModConfigSpec.ConfigValue<List<? extends String>> FROZEN_ISLAND_ONLY_STRUCTURES;
+    private static final ModConfigSpec.ConfigValue<List<? extends String>> KEEP_AWAY_FROM_VILLAGES;
+    private static final ModConfigSpec.ConfigValue<List<? extends String>> VILLAGE_STRUCTURE_SETS;
+    private static final ModConfigSpec.IntValue VILLAGE_CLEARANCE;
     private static final ModConfigSpec.DoubleValue POISON_START;
     private static final ModConfigSpec.DoubleValue POISON_FULL;
     private static final ModConfigSpec.ConfigValue<List<? extends String>> FROZEN_ISLAND_ONLY_FEATURES;
     private static final ModConfigSpec.ConfigValue<List<? extends String>> NOT_ON_STARTER_ISLAND;
     private static final ModConfigSpec.ConfigValue<List<? extends String>> FROZEN_ISLAND_ONLY_MOBS;
+    private static final ModConfigSpec.ConfigValue<List<? extends Number>> RAMPAGE_SPEED_BONUS;
+    private static final ModConfigSpec.IntValue DARK_METAL_SET_STRENGTH;
 
     static {
         ModConfigSpec.Builder builder = new ModConfigSpec.Builder();
@@ -147,6 +152,23 @@ public final class CommonConfig {
                         "and the pins respect this. One structure id per line; * matches any run of characters",
                         "(born_in_chaos_v1:dark_tower_* = Born in Chaos's dark towers). Only affects newly generated chunks.")
                 .defineListAllowEmpty("frozenIslandOnlyStructures", List.of("born_in_chaos_v1:dark_tower_*"), () -> "", value -> value instanceof String);
+        KEEP_AWAY_FROM_VILLAGES = builder
+                .comment(
+                        "Structures that never start within villageClearance chunks of a village (of any set in villageStructureSets).",
+                        "Vanilla keeps its pillager outposts away from its own villages only, so Terralith's fortified villages",
+                        "got pillager towers in the middle. One structure id per line; * matches any run of characters.",
+                        "Only affects newly generated chunks.")
+                .defineListAllowEmpty("keepAwayFromVillages", List.of("minecraft:pillager_outpost", "terralith:desert_outpost"), () -> "", value -> value instanceof String);
+        VILLAGE_STRUCTURE_SETS = builder
+                .comment(
+                        "Structure sets whose structures count as villages for keepAwayFromVillages (minecraft:villages = the",
+                        "vanilla villages, terralith:rare_village = Terralith's fortified and fortified desert villages).")
+                .defineListAllowEmpty("villageStructureSets", List.of("minecraft:villages", "terralith:rare_village"), () -> "", value -> value instanceof String);
+        VILLAGE_CLEARANCE = builder
+                .comment(
+                        "How many chunks keepAwayFromVillages structures stay from the spot a village tries (in a square, as",
+                        "vanilla's own 10 chunks between outposts and villages). 0 turns this off.")
+                .defineInRange("villageClearance", 10, 0, 64);
         builder.pop();
 
         builder.push("poison");
@@ -195,6 +217,22 @@ public final class CommonConfig {
                         "born_in_chaos_v1:mother_spider"), () -> "", value -> value instanceof String);
         builder.pop();
 
+        builder.push("effects");
+        RAMPAGE_SPEED_BONUS = builder
+                .comment(
+                        "Movement speed bonus of Born in Chaos' Rampage, in percent, for its five levels from Light to Rampant",
+                        "(Born in Chaos itself gives 15, 30, 50, 75, 100). Applies to every source of Rampage: the Great Reaper Axe,",
+                        "the full Dark Metal set at low health and the potion. Damage and attack speed stay as Born in Chaos has them.",
+                        "An effect already running keeps its old bonus until it ends.")
+                .defineList("rampageSpeedBonus", List.<Number>of(5.0, 10.0, 15.0, 20.0, 25.0), () -> 0.0,
+                        value -> value instanceof Number n && n.doubleValue() >= 0.0 && n.doubleValue() <= 1000.0);
+        DARK_METAL_SET_STRENGTH = builder
+                .comment(
+                        "Level of Strength a player gets while wearing all four pieces of Born in Chaos' Dark Metal armour",
+                        "(1 = Strength I). 0 turns this off. Strength also keeps the Dark Warblade from making its wielder tired.")
+                .defineInRange("darkMetalSetStrength", 1, 0, 5);
+        builder.pop();
+
         SPEC = builder.build();
     }
 
@@ -215,11 +253,16 @@ public final class CommonConfig {
             int maxSearchSeconds,
             boolean pinMissingStructures,
             List<String> frozenIslandOnlyStructures,
+            List<String> keepAwayFromVillages,
+            List<String> villageStructureSets,
+            int villageClearance,
             double poisonStart,
             double poisonFull,
             List<String> frozenIslandOnlyFeatures,
             List<String> notOnStarterIsland,
-            List<String> frozenIslandOnlyMobs) {}
+            List<String> frozenIslandOnlyMobs,
+            List<Double> rampageSpeedBonus,
+            int darkMetalSetStrength) {}
 
     private static volatile Settings current = read(true);
 
@@ -239,6 +282,7 @@ public final class CommonConfig {
     private static void refresh(ModConfig config) {
         if (config.getSpec() == SPEC) {
             current = read(false);
+            com.example.thepale.EffectTweaks.onConfigChanged();
         }
     }
 
@@ -262,11 +306,17 @@ public final class CommonConfig {
                 defaults ? MAX_SEARCH_SECONDS.getDefault() : MAX_SEARCH_SECONDS.get(),
                 defaults ? PIN_MISSING_STRUCTURES.getDefault() : PIN_MISSING_STRUCTURES.get(),
                 List.copyOf(defaults ? FROZEN_ISLAND_ONLY_STRUCTURES.getDefault() : FROZEN_ISLAND_ONLY_STRUCTURES.get()),
+                List.copyOf(defaults ? KEEP_AWAY_FROM_VILLAGES.getDefault() : KEEP_AWAY_FROM_VILLAGES.get()),
+                List.copyOf(defaults ? VILLAGE_STRUCTURE_SETS.getDefault() : VILLAGE_STRUCTURE_SETS.get()),
+                defaults ? VILLAGE_CLEARANCE.getDefault() : VILLAGE_CLEARANCE.get(),
                 poisonStart,
                 Math.max(value(POISON_FULL, defaults), poisonStart + 1.0),
                 List.copyOf(defaults ? FROZEN_ISLAND_ONLY_FEATURES.getDefault() : FROZEN_ISLAND_ONLY_FEATURES.get()),
                 List.copyOf(defaults ? NOT_ON_STARTER_ISLAND.getDefault() : NOT_ON_STARTER_ISLAND.get()),
-                List.copyOf(defaults ? FROZEN_ISLAND_ONLY_MOBS.getDefault() : FROZEN_ISLAND_ONLY_MOBS.get()));
+                List.copyOf(defaults ? FROZEN_ISLAND_ONLY_MOBS.getDefault() : FROZEN_ISLAND_ONLY_MOBS.get()),
+                (defaults ? RAMPAGE_SPEED_BONUS.getDefault() : RAMPAGE_SPEED_BONUS.get()).stream()
+                        .map(Number::doubleValue).toList(),
+                defaults ? DARK_METAL_SET_STRENGTH.getDefault() : DARK_METAL_SET_STRENGTH.get());
     }
 
     private static double value(ModConfigSpec.DoubleValue value, boolean useDefault) {

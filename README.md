@@ -60,6 +60,12 @@ A structure whose biome isn't on the island at all can't be placed; the first pl
 `requiredStructures` lines can name alternatives (`a|b`) and prefixes (`minecraft:village_*`); lines for mods that
 aren't installed are skipped.
 
+**Outposts keep away from villages** (`keepAwayFromVillages`, `villageStructureSets`, `villageClearance`): vanilla
+keeps pillager outposts 10 chunks from its own villages only, so Terralith's fortified villages (and villages moved by
+a pin) could get a pillager tower in the middle, and Terralith's desert outposts ignored villages entirely. Now
+`minecraft:pillager_outpost` and `terralith:desert_outpost` don't start within 10 chunks of a vanilla village or a
+Terralith fortified village. `/locate`, the seed search and the pins see the same. Only affects newly generated chunks.
+
 `/thepale survey` (operators) reports the island: the biomes with their share, every structure with how many and
 where one is, and which biomes and structures the world has that the island doesn't. It writes
 `thepale-survey.txt` and a biome map, `thepale-survey.png`, into the world folder. It reads the world generator, so
@@ -73,6 +79,12 @@ nothing gets generated.
   all stopped; spawn eggs and `/summon` still work. The Transmuting Elixir is refused on an Infernal Evil Pumpkin
   outside the north (the elixir and the pumpkin are kept, and the player is told only the north answers). The server
   log lists the matches at start (`Only on the frozen island`).
+- **Rampage speed** (`rampageSpeedBonus` in `[effects]`): the movement speed bonus of Born in Chaos' five Rampage
+  levels is 5, 10, 15, 20 and 25% instead of the mod's 15, 30, 50, 75 and 100%. Damage and attack speed are left
+  as they are. Covers every source of Rampage (Great Reaper Axe, full Dark Metal set at low health, the potion);
+  the server log says `Rampage movement speed set to` at start.
+- **Dark Metal set** (`darkMetalSetStrength` in `[effects]`): wearing all four pieces of Born in Chaos' Dark Metal
+  armour gives Strength I (0 turns it off). Strength also keeps the Dark Warblade from tiring its wielder.
 - **Mob spawns:** the Pale has none. Mods that add their mobs to every biome (`neoforge:any`, as Born in Chaos does)
   are undone by `data/thepale/neoforge/biome_modifier/the_pale_no_spawns.json`; the server log says
   `The Pale biome has no mob spawns` at start.
