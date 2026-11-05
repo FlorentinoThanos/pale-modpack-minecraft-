@@ -1,57 +1,57 @@
 {
 	chapter.52326DE657CCE52E.chapter_subtitle: ["The main path: from your first crafting table to the crossing to the hot island."]
 	chapter.52326DE657CCE52E.title: "The Mild Island"
-	chapter_group.EFA7D509EB9A847A.title: "The Pale"
+	chapter_group.6FA7D509EB9A847A.title: "The Pale"
 	quest.06F27455A8C1762B.quest_desc: ["Make a bucket. The reward is a random Insight book, I to III."]
 	quest.06F27455A8C1762B.title: "Bucket"
+	quest.0D317297C92105F5.quest_desc: ["Enchant items on the table 30 times. Next comes the Death List chapter."]
+	quest.0D317297C92105F5.title: "Enchanter"
 	quest.11EE6307F604292F.quest_desc: ["Without a diamond pickaxe you can't mine obsidian, so cast the portal in place: build a mould, pour lava into each frame cell and pour water over it. Ruined portals also hold obsidian. Enter the Nether to unlock the diamond pickaxe recipe."]
 	quest.11EE6307F604292F.title: "Into the Nether"
 	quest.142A7D5B0E76BB45.quest_desc: ["Breed any two animals."]
 	quest.142A7D5B0E76BB45.title: "New Arrivals"
+	quest.158DB0DBDAB97DEE.quest_desc: ["Insulate any piece of armour on a sewing table."]
+	quest.158DB0DBDAB97DEE.title: "Lining Up"
 	quest.18BAE9E1D07C3F7C.quest_desc: ["Make a stone pickaxe. The reward unlocks the bed recipe, which is locked until then."]
 	quest.18BAE9E1D07C3F7C.title: "Stone Age"
 	quest.238CF919ACEEAA52.quest_desc: ["When it gets too cold around you (at night or high in the mountains), warm up next to a warm block such as a campfire."]
 	quest.238CF919ACEEAA52.title: "Huddle Close"
+	quest.27B4FD4982C710F5.quest_desc: ["Craft a crafting table."]
+	quest.27B4FD4982C710F5.title: "Crafting Table"
 	quest.2B84337841810FE1.quest_desc: ["Put a smokestack on a boiler or an icebox."]
 	quest.2B84337841810FE1.title: "Getting Cozy"
 	quest.32B2FC7FC1FE0154.quest_desc: ["Make a bed of any colour. Now you can sleep through the night."]
 	quest.32B2FC7FC1FE0154.title: "A Bed of Your Own"
+	quest.347ECC69BCE02B07.quest_desc: ["Make iron leggings and boots."]
+	quest.347ECC69BCE02B07.title: "Iron Legs"
+	quest.3739C0C06C989C7E.quest_desc: ["Make an enchanting table."]
+	quest.3739C0C06C989C7E.title: "Enchanting Table"
 	quest.3C8B601B55377999.quest_desc: ["Go down into any cave biome."]
 	quest.3C8B601B55377999.title: "Underground"
+	quest.430EEFC8CC04719E.quest_desc: ["Mine 5 diamonds. You can't craft a diamond pickaxe yet: its recipe unlocks in the Nether."]
+	quest.430EEFC8CC04719E.title: "Diamonds"
+	quest.43D38460798BDC87.quest_desc: ["Plant any crop."]
+	quest.43D38460798BDC87.title: "First Crop"
 	quest.46CDA9D5A810A1B4.quest_desc: ["Build a campfire and cook some meat on it. Next comes the kitchen: the Farmer's Delight chapter."]
 	quest.46CDA9D5A810A1B4.title: "Campfire Dinner"
+	quest.47F23E6BC846E84A.quest_desc: ["Deflect an arrow with a shield."]
+	quest.47F23E6BC846E84A.title: "Not Today"
+	quest.4FEBB1AD4B9148A2.quest_desc: ["Make some torches. The reward unlocks the ladder recipe."]
+	quest.4FEBB1AD4B9148A2.title: "Torches"
+	quest.52D4A2355D369CE6.quest_desc: ["Caves explored, iron on. Take a longer fire resistance."]
+	quest.52D4A2355D369CE6.title: "Ready for the Heat"
+	quest.5F7D080C32D1BF06.quest_desc: ["Mine some coal."]
+	quest.5F7D080C32D1BF06.title: "Coal"
 	quest.63B83E7FF2A56CF8.quest_desc: ["An iron pickaxe can mine diamonds. The fire resistance reward helps around lava."]
 	quest.63B83E7FF2A56CF8.title: "Iron Pickaxe"
-	quest.8D317297C92105F5.quest_desc: ["Enchant items on the table 30 times. Next comes the Death List chapter."]
-	quest.8D317297C92105F5.title: "Enchanter"
-	quest.958DB0DBDAB97DEE.quest_desc: ["Insulate any piece of armour on a sewing table."]
-	quest.958DB0DBDAB97DEE.title: "Lining Up"
-	quest.A7B4FD4982C710F5.quest_desc: ["Craft a crafting table."]
-	quest.A7B4FD4982C710F5.title: "Crafting Table"
-	quest.B47ECC69BCE02B07.quest_desc: ["Make iron leggings and boots."]
-	quest.B47ECC69BCE02B07.title: "Iron Legs"
-	quest.B739C0C06C989C7E.quest_desc: ["Make an enchanting table."]
-	quest.B739C0C06C989C7E.title: "Enchanting Table"
-	quest.C30EEFC8CC04719E.quest_desc: ["Mine 5 diamonds. You can't craft a diamond pickaxe yet: its recipe unlocks in the Nether."]
-	quest.C30EEFC8CC04719E.title: "Diamonds"
-	quest.C3D38460798BDC87.quest_desc: ["Plant any crop."]
-	quest.C3D38460798BDC87.title: "First Crop"
-	quest.C7F23E6BC846E84A.quest_desc: ["Deflect an arrow with a shield."]
-	quest.C7F23E6BC846E84A.title: "Not Today"
-	quest.CFEBB1AD4B9148A2.quest_desc: ["Make some torches. The reward unlocks the ladder recipe."]
-	quest.CFEBB1AD4B9148A2.title: "Torches"
-	quest.D2D4A2355D369CE6.quest_desc: ["Caves explored, iron on. Take a longer fire resistance."]
-	quest.D2D4A2355D369CE6.title: "Ready for the Heat"
-	quest.DF7D080C32D1BF06.quest_desc: ["Mine some coal."]
-	quest.DF7D080C32D1BF06.title: "Coal"
-	quest.E541143ABF1D324D.quest_desc: ["Land ends about 1250 blocks from here. Past it lies a grey, poisonous sea behind a wall of fog. Two more islands wait somewhere beyond it. Start small."]
-	quest.E541143ABF1D324D.title: "Grey Horizon"
-	quest.E55E5A51D507619D.quest_desc: ["Bring 15 bookshelves (they are not taken) and place them around the table: that gives the strongest enchantments."]
-	quest.E55E5A51D507619D.title: "Full Power"
-	quest.F99E7F1C5D6A46BF.quest_desc: ["The hot island lies 3500 to 4500 blocks south; in the Nether that is 8 times closer. Head south to around x 0, z 500 (x −60 to 60, z 440 to 560). A portal built there leads to the hot island."]
-	quest.F99E7F1C5D6A46BF.title: "The Road South"
+	quest.6541143ABF1D324D.quest_desc: ["Land ends about 1250 blocks from here. Past it lies a grey, poisonous sea behind a wall of fog. Two more islands wait somewhere beyond it. Start small."]
+	quest.6541143ABF1D324D.title: "Grey Horizon"
+	quest.655E5A51D507619D.quest_desc: ["Bring 15 bookshelves (they are not taken) and place them around the table: that gives the strongest enchantments."]
+	quest.655E5A51D507619D.title: "Full Power"
+	quest.799E7F1C5D6A46BF.quest_desc: ["The hot island lies 3500 to 4500 blocks south; in the Nether that is 8 times closer. Head south to around x 0, z 500 (x −60 to 60, z 440 to 560). A portal built there leads to the hot island."]
+	quest.799E7F1C5D6A46BF.title: "The Road South"
+	reward_table.0E28176B09638154.title: "Iron Tool"
+	reward_table.23C91D56D4883B5C.title: "Efficiency Book"
 	reward_table.412962825CC1473A.title: "Insight Book"
-	reward_table.8E28176B09638154.title: "Iron Tool"
-	reward_table.A3C91D56D4883B5C.title: "Efficiency Book"
-	reward_table.D2C654FC8A195807.title: "Protection Book"
+	reward_table.52C654FC8A195807.title: "Protection Book"
 }

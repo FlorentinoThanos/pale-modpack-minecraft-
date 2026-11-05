@@ -1,10 +1,10 @@
 {
-	id: "A3C91D56D4883B5C"
+	id: "23C91D56D4883B5C"
 	loot_size: 1
 	order_index: 2
 	rewards: [
 		{
-			id: "EFDD761A32A1B42D"
+			id: "6FDD761A32A1B42D"
 			item: {
 				components: {
 					"minecraft:stored_enchantments": {

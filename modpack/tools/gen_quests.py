@@ -31,7 +31,10 @@ class IntArray(list):
 
 
 def qid(key):
-    return hashlib.sha1(("thepale:" + key).encode()).hexdigest()[:16].upper()
+    # FTB Quests reads ids as signed longs and silently replaces any id with the top bit set (first hex digit 8-F)
+    # with a random one, which breaks dependencies. So the top bit is cleared; ids that already had it clear stay.
+    v = int(hashlib.sha1(("thepale:" + key).encode()).hexdigest()[:16], 16) & 0x7FFFFFFFFFFFFFFF
+    return f"{v:016X}"
 
 
 # ---------------------------------------------------------------- tasks
@@ -94,8 +97,7 @@ def unlock(name):
 
 
 def table_long(key):
-    v = int(qid("table/" + key), 16)
-    return v - (1 << 64) if v >= 1 << 63 else v
+    return int(qid("table/" + key), 16)
 
 
 def choice(key):
@@ -131,8 +133,8 @@ def table(key, ru, en, rewards):
     TABLES.append(dict(key=key, ru=ru, en=en, rewards=rewards))
 
 
-def chapter(key, icon, ru, en, ru_sub, en_sub, quests):
-    CHAPTERS.append(dict(key=key, icon=icon, ru=ru, en=en, ru_sub=ru_sub, en_sub=en_sub, quests=quests))
+def chapter(key, icon, ru, en, ru_sub, en_sub, quests, scale=1.0):
+    CHAPTERS.append(dict(key=key, icon=icon, ru=ru, en=en, ru_sub=ru_sub, en_sub=en_sub, quests=quests, scale=scale))
 
 
 # ================================================================ 1. Тихий остров (3.0, составлена вместе с Max)
@@ -229,7 +231,7 @@ chapter("mild", "minecraft:oak_sapling", "Тихий остров", "The Mild Is
     Q("mild/enchanter", 6.5, -3.25, "Чародей", "Enchanter", "Зачаруй предметы на столе 30 раз. Дальше глава Death List.",
       "Enchant items on the table 30 times. Next comes the Death List chapter.",
       [stat("minecraft:enchant_item", 30)], [], ["mild/bookshelves"], icon="minecraft:experience_bottle"),
-])
+], scale=1.5)
 
 
 # ================================================================ 2. Путь на юг
@@ -1054,7 +1056,7 @@ def main():
             for n, r in enumerate(q.rewards):
                 r = dict(r, id=qid(f"{q.key}/reward{n}"))
                 rewards.append(fix_numbers(r, "reward"))
-            quest = {"id": id_, "x": float(q.x), "y": float(q.y), "tasks": tasks, "rewards": rewards}
+            quest = {"id": id_, "x": float(q.x) * c["scale"], "y": float(q.y) * c["scale"], "tasks": tasks, "rewards": rewards}
             if q.deps:
                 quest["dependencies"] = [qid(d) for d in q.deps]
             if q.icon:

@@ -1,10 +1,10 @@
 {
-	id: "8E28176B09638154"
+	id: "0E28176B09638154"
 	loot_size: 1
 	order_index: 0
 	rewards: [
 		{
-			id: "F5380933E6C88E16"
+			id: "75380933E6C88E16"
 			item: {
 				count: 1
 				id: "minecraft:iron_hoe"
@@ -12,7 +12,7 @@
 			type: "item"
 		}
 		{
-			id: "A7E2F7EA9C6D6EBA"
+			id: "27E2F7EA9C6D6EBA"
 			item: {
 				count: 1
 				id: "minecraft:iron_shovel"

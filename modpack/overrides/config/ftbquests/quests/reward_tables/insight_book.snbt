@@ -4,7 +4,7 @@
 	order_index: 1
 	rewards: [
 		{
-			id: "E5764861D5E74E87"
+			id: "65764861D5E74E87"
 			item: {
 				components: {
 					"minecraft:stored_enchantments": {
@@ -34,7 +34,7 @@
 			type: "item"
 		}
 		{
-			id: "8BB04021B7D58CD5"
+			id: "0BB04021B7D58CD5"
 			item: {
 				components: {
 					"minecraft:stored_enchantments": {
