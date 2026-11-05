@@ -38,6 +38,7 @@ public final class CommonConfig {
     private static final ModConfigSpec.ConfigValue<List<? extends String>> NOT_ON_STARTER_ISLAND;
     private static final ModConfigSpec.ConfigValue<List<? extends String>> FROZEN_ISLAND_ONLY_MOBS;
     private static final ModConfigSpec.ConfigValue<List<? extends Number>> RAMPAGE_SPEED_BONUS;
+    private static final ModConfigSpec.IntValue DARK_METAL_SET_STRENGTH;
 
     static {
         ModConfigSpec.Builder builder = new ModConfigSpec.Builder();
@@ -225,6 +226,11 @@ public final class CommonConfig {
                         "An effect already running keeps its old bonus until it ends.")
                 .defineList("rampageSpeedBonus", List.<Number>of(5.0, 10.0, 15.0, 20.0, 25.0), () -> 0.0,
                         value -> value instanceof Number n && n.doubleValue() >= 0.0 && n.doubleValue() <= 1000.0);
+        DARK_METAL_SET_STRENGTH = builder
+                .comment(
+                        "Level of Strength a player gets while wearing all four pieces of Born in Chaos' Dark Metal armour",
+                        "(1 = Strength I). 0 turns this off. Strength also keeps the Dark Warblade from making its wielder tired.")
+                .defineInRange("darkMetalSetStrength", 1, 0, 5);
         builder.pop();
 
         SPEC = builder.build();
@@ -255,7 +261,8 @@ public final class CommonConfig {
             List<String> frozenIslandOnlyFeatures,
             List<String> notOnStarterIsland,
             List<String> frozenIslandOnlyMobs,
-            List<Double> rampageSpeedBonus) {}
+            List<Double> rampageSpeedBonus,
+            int darkMetalSetStrength) {}
 
     private static volatile Settings current = read(true);
 
@@ -308,7 +315,8 @@ public final class CommonConfig {
                 List.copyOf(defaults ? NOT_ON_STARTER_ISLAND.getDefault() : NOT_ON_STARTER_ISLAND.get()),
                 List.copyOf(defaults ? FROZEN_ISLAND_ONLY_MOBS.getDefault() : FROZEN_ISLAND_ONLY_MOBS.get()),
                 (defaults ? RAMPAGE_SPEED_BONUS.getDefault() : RAMPAGE_SPEED_BONUS.get()).stream()
-                        .map(Number::doubleValue).toList());
+                        .map(Number::doubleValue).toList(),
+                defaults ? DARK_METAL_SET_STRENGTH.getDefault() : DARK_METAL_SET_STRENGTH.get());
     }
 
     private static double value(ModConfigSpec.DoubleValue value, boolean useDefault) {

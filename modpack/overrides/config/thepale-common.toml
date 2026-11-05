@@ -127,3 +127,8 @@
 	#the full Dark Metal set at low health and the potion. Damage and attack speed stay as Born in Chaos has them.
 	#An effect already running keeps its old bonus until it ends.
 	rampageSpeedBonus = [5.0, 10.0, 15.0, 20.0, 25.0]
+	#Level of Strength a player gets while wearing all four pieces of Born in Chaos' Dark Metal armour
+	#(1 = Strength I). 0 turns this off. Strength also keeps the Dark Warblade from making its wielder tired.
+	# Default: 1
+	# Range: 0 ~ 5
+	darkMetalSetStrength = 1

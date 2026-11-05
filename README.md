@@ -83,6 +83,8 @@ nothing gets generated.
   levels is 5, 10, 15, 20 and 25% instead of the mod's 15, 30, 50, 75 and 100%. Damage and attack speed are left
   as they are. Covers every source of Rampage (Great Reaper Axe, full Dark Metal set at low health, the potion);
   the server log says `Rampage movement speed set to` at start.
+- **Dark Metal set** (`darkMetalSetStrength` in `[effects]`): wearing all four pieces of Born in Chaos' Dark Metal
+  armour gives Strength I (0 turns it off). Strength also keeps the Dark Warblade from tiring its wielder.
 - **Mob spawns:** the Pale has none. Mods that add their mobs to every biome (`neoforge:any`, as Born in Chaos does)
   are undone by `data/thepale/neoforge/biome_modifier/the_pale_no_spawns.json`; the server log says
   `The Pale biome has no mob spawns` at start.
