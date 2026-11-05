@@ -12,7 +12,7 @@ import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 /**
  * The poison of the Pale, server side. Once a second, past poisonStartRadius in the Overworld (survival and adventure
  * only): Hunger III, Wither II (III from 35% of the way to poisonFullRadius, V from 70%) and direct wither damage
- * from 1 to 6.
+ * from 1 to 6. High up it thins out, but only for players in the air (see {@link #altitudeStrength}).
  */
 public final class PalePoison {
     private static final int INTERVAL_TICKS = 20;
@@ -36,7 +36,7 @@ public final class PalePoison {
         double z = player.getZ();
         double depth = (PaleShape.server().effectiveRadius(x, z) - config.poisonStart()) / (config.poisonFull() - config.poisonStart());
         // High above the Pale (elytra) the air is clean.
-        depth = Math.min(depth, 1.0) * PaleAltitude.strength(player.getY());
+        depth = Math.min(depth, 1.0) * altitudeStrength(player);
         if (depth <= 0) {
             return;
         }
@@ -44,5 +44,17 @@ public final class PalePoison {
         player.addEffect(new MobEffectInstance(MobEffects.WITHER, EFFECT_TICKS, witherAmplifier, false, true, true));
         player.addEffect(new MobEffectInstance(MobEffects.HUNGER, EFFECT_TICKS, HUNGER_III, false, true, true));
         player.hurt(player.damageSources().wither(), (float) (1 + Math.min(depth, 1) * 5));
+    }
+
+    /**
+     * How much of the poison is left at the player's height. The clear air from y 450 up is for wings: a player
+     * standing on something or riding it there (a Create Aeronautics airship, a seat on a contraption) gets the full
+     * poison, so the north stays an elytra flight away. Nothing natural stands that high: the world ends at y 320.
+     */
+    static float altitudeStrength(Player player) {
+        if (player.getY() >= PaleAltitude.CLEARS_FROM && (player.onGround() || player.isPassenger())) {
+            return 1.0F;
+        }
+        return PaleAltitude.strength(player.getY());
     }
 }

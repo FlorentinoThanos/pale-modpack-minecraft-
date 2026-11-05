@@ -1,0 +1,560 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "archeology"
+	group: "EFA7D509EB9A847A"
+	icon: {
+		count: 1
+		id: "minecraft:brush"
+	}
+	id: "AED18204A08D5527"
+	images: [ ]
+	order_index: 2
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: ["D67EFDB2909E622E"]
+			id: "4DE3B4D8BEDB744D"
+			rewards: [
+				{
+					id: "5298EC7CD95AB89E"
+					type: "xp"
+					xp: 40
+				}
+			]
+			shape: "hexagon"
+			size: 1.5d
+			tasks: [
+				{
+					count: 1L
+					id: "C123CE582E08074F"
+					item: {
+						count: 1
+						id: "minecraft:brush"
+					}
+					type: "item"
+				}
+			]
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["4DE3B4D8BEDB744D"]
+			icon: {
+				count: 1
+				id: "minecraft:suspicious_gravel"
+			}
+			id: "7A2A3B6158360931"
+			rewards: [
+				{
+					id: "56E0D7292B217F7D"
+					type: "xp"
+					xp: 100
+				}
+			]
+			tasks: [
+				{
+					id: "002F998B61B37A01"
+					structure: "minecraft:trail_ruins"
+					type: "structure"
+				}
+				{
+					advancement: "minecraft:adventure/salvage_sherd"
+					criterion: ""
+					id: "A75FE728FB0195A9"
+					type: "advancement"
+				}
+			]
+			x: 2.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["4DE3B4D8BEDB744D"]
+			id: "01719B67D1524ABF"
+			rewards: [
+				{
+					id: "2B7A72060510A579"
+					type: "xp"
+					xp: 60
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "1D70505025B3864B"
+					item: {
+						count: 1
+						id: "betterarcheology:iron_brush"
+					}
+					type: "item"
+				}
+			]
+			x: 2.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["01719B67D1524ABF", "C30EEFC8CC04719E"]
+			id: "9EC8A39A8FFEF516"
+			rewards: [
+				{
+					id: "FBC13C8EDD293343"
+					type: "xp"
+					xp: 120
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "DFC785380D2B495E"
+					item: {
+						count: 1
+						id: "betterarcheology:diamond_brush"
+					}
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["9EC8A39A8FFEF516", "F2F9FEBA0B99A12B"]
+			id: "4C3B43921837B846"
+			rewards: [
+				{
+					id: "63CA44EA7FB2C0DF"
+					type: "xp"
+					xp: 200
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "38F596213C2E35FD"
+					item: {
+						count: 1
+						id: "betterarcheology:netherite_brush"
+					}
+					type: "item"
+				}
+			]
+			x: 6.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["4DE3B4D8BEDB744D"]
+			icon: {
+				count: 1
+				id: "betterarcheology:fossiliferous_dirt"
+			}
+			id: "B8424CBA31AEF41A"
+			rewards: [
+				{
+					id: "8784DB141D924BD6"
+					type: "xp"
+					xp: 100
+				}
+			]
+			tasks: [
+				{
+					advancement: "betterarcheology:fossil_found"
+					criterion: ""
+					id: "9C267191100D4C37"
+					type: "advancement"
+				}
+			]
+			x: 2.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["B8424CBA31AEF41A"]
+			id: "8580B33A9D0FFD4D"
+			rewards: [
+				{
+					id: "E4571C262C718790"
+					type: "xp"
+					xp: 100
+				}
+			]
+			tasks: [
+				{
+					count: 4L
+					id: "B9A91C40D97B2E1C"
+					item: {
+						count: 1
+						id: "betterarcheology:artifact_shards"
+					}
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["8580B33A9D0FFD4D"]
+			id: "E35516F1AD254645"
+			rewards: [
+				{
+					id: "9F49F279E29823FF"
+					type: "xp"
+					xp: 100
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "8D441639FF64FDA1"
+					item: {
+						count: 1
+						id: "betterarcheology:archeology_table"
+					}
+					type: "item"
+				}
+			]
+			x: 6.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["E35516F1AD254645"]
+			id: "2BC86194802C313D"
+			rewards: [
+				{
+					id: "77724AC2C5B3DC28"
+					type: "xp"
+					xp: 150
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "61120DE1B50A1F62"
+					item: {
+						count: 1
+						id: "betterarcheology:unidentified_artifact"
+					}
+					type: "item"
+				}
+			]
+			x: 8.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["2BC86194802C313D"]
+			id: "FD7FFD8C48C4CE4C"
+			rewards: [
+				{
+					id: "412DB9F3801AE341"
+					type: "xp"
+					xp: 250
+				}
+			]
+			shape: "hexagon"
+			size: 1.25d
+			tasks: [
+				{
+					count: 1L
+					id: "CE57B7605CFB7F22"
+					item: {
+						count: 1
+						id: "betterarcheology:identified_artifact"
+					}
+					type: "item"
+				}
+			]
+			x: 10.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["7A2A3B6158360931"]
+			icon: {
+				count: 1
+				id: "betterarcheology:loot_vase"
+			}
+			id: "B0036867805EA6D5"
+			rewards: [
+				{
+					id: "3D429016DAD71034"
+					type: "xp"
+					xp: 60
+				}
+			]
+			tasks: [
+				{
+					advancement: "betterarcheology:loot_vase_broken"
+					criterion: ""
+					id: "31381B98113744D4"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["4DE3B4D8BEDB744D"]
+			icon: {
+				count: 1
+				id: "minecraft:mossy_stone_bricks"
+			}
+			id: "F1B68E3780D7E7E9"
+			rewards: [
+				{
+					id: "F40444C8FE622E08"
+					type: "xp"
+					xp: 120
+				}
+			]
+			tasks: [
+				{
+					id: "C9B079853903F580"
+					structure: "betterarcheology:stonehenge_grassy"
+					type: "structure"
+				}
+			]
+			x: 0.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["4DE3B4D8BEDB744D"]
+			icon: {
+				count: 1
+				id: "minecraft:coarse_dirt"
+			}
+			id: "96B8A826CE2236BB"
+			rewards: [
+				{
+					id: "2912F4503CB14875"
+					type: "xp"
+					xp: 120
+				}
+			]
+			tasks: [
+				{
+					id: "BDE195D50623836E"
+					structure: "betterarcheology:tumulus_grassy"
+					type: "structure"
+				}
+			]
+			x: 2.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["4DE3B4D8BEDB744D"]
+			icon: {
+				count: 1
+				id: "minecraft:cobblestone_wall"
+			}
+			id: "2B9728110E64F29A"
+			rewards: [
+				{
+					id: "0CA162E1BFE386EB"
+					type: "xp"
+					xp: 100
+				}
+			]
+			tasks: [
+				{
+					id: "9EB6356A3E769434"
+					structure: "betterarcheology:villager_grave"
+					type: "structure"
+				}
+			]
+			x: 4.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["4DE3B4D8BEDB744D"]
+			icon: {
+				count: 1
+				id: "minecraft:oak_fence"
+			}
+			id: "C8D47269F11D1242"
+			rewards: [
+				{
+					id: "C88A8A575E5107E8"
+					type: "xp"
+					xp: 120
+				}
+			]
+			tasks: [
+				{
+					id: "CF34009ADC2D5C69"
+					structure: "betterarcheology:mott"
+					type: "structure"
+				}
+			]
+			x: 6.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["4DE3B4D8BEDB744D"]
+			icon: {
+				count: 1
+				id: "betterarcheology:rotten_planks"
+			}
+			id: "517FB6433E9F7852"
+			rewards: [
+				{
+					id: "0692F5B12B434472"
+					type: "xp"
+					xp: 200
+				}
+			]
+			tasks: [
+				{
+					id: "240C2B6724A46A24"
+					structure: "betterarcheology:catacombs"
+					type: "structure"
+				}
+			]
+			x: 8.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["4DE3B4D8BEDB744D", "EE4CB3B7BB11E21C"]
+			icon: {
+				count: 1
+				id: "minecraft:sandstone"
+			}
+			id: "DE60743011A9253E"
+			rewards: [
+				{
+					id: "C5A83CB8D40E90F7"
+					type: "xp"
+					xp: 200
+				}
+			]
+			tasks: [
+				{
+					id: "B10D5D8CDD8777C9"
+					structure: "betterarcheology:desert_obelisk"
+					type: "structure"
+				}
+			]
+			x: 10.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["4DE3B4D8BEDB744D", "1ACB00F411AF529B"]
+			icon: {
+				count: 1
+				id: "minecraft:cracked_stone_bricks"
+			}
+			id: "A0A1040529E200F6"
+			rewards: [
+				{
+					id: "F81A84EA62AA5288"
+					type: "xp"
+					xp: 200
+				}
+			]
+			tasks: [
+				{
+					id: "282DECC0899CD6DD"
+					structure: "betterarcheology:temple_jungle"
+					type: "structure"
+				}
+			]
+			x: 10.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["4DE3B4D8BEDB744D", "78126D00318DA7F3"]
+			icon: {
+				count: 1
+				id: "minecraft:terracotta"
+			}
+			id: "38EB49361605C5E3"
+			rewards: [
+				{
+					id: "BA063DAA360D8C8F"
+					type: "xp"
+					xp: 200
+				}
+			]
+			tasks: [
+				{
+					id: "394024BFD4F83D39"
+					structure: "betterarcheology:mesa_ruins"
+					type: "structure"
+				}
+			]
+			x: 10.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["DE60743011A9253E"]
+			icon: {
+				count: 1
+				id: "minecraft:campfire"
+			}
+			id: "BC624DE76152228A"
+			rewards: [
+				{
+					id: "22B33D3FA0A0E799"
+					type: "xp"
+					xp: 150
+				}
+			]
+			tasks: [
+				{
+					id: "1B46479ABA0FFC15"
+					structure: "betterarcheology:archeologist_camp_sand"
+					type: "structure"
+				}
+			]
+			x: 12.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["FD7FFD8C48C4CE4C"]
+			icon: {
+				count: 1
+				id: "betterarcheology:bomb"
+			}
+			id: "5E872F3E60538106"
+			rewards: [
+				{
+					id: "1259E043007ABF3E"
+					type: "xp"
+					xp: 100
+				}
+			]
+			tasks: [
+				{
+					advancement: "betterarcheology:used_bomb_item"
+					criterion: ""
+					id: "DAB93C5B4E69842A"
+					type: "advancement"
+				}
+			]
+			x: 12.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["FD7FFD8C48C4CE4C", "38EB49361605C5E3", "A0A1040529E200F6"]
+			icon: {
+				count: 1
+				id: "betterarcheology:creeper_fossil"
+			}
+			id: "0F55A4D4E51A5010"
+			rewards: [
+				{
+					id: "6121D480C168C949"
+					type: "xp"
+					xp: 800
+				}
+			]
+			shape: "gear"
+			size: 1.75d
+			tasks: [
+				{
+					advancement: "betterarcheology:all_fossils_found"
+					criterion: ""
+					id: "D9FD7E28080D8750"
+					type: "advancement"
+				}
+			]
+			x: 14.0d
+			y: 0.0d
+		}
+	]
+}

@@ -32,7 +32,8 @@ ragged island, older worlds stay round. The server sends the layout to each clie
 - **Cold island:** only on elytra. From 450 blocks up the Pale thins out and from 500 there's no fog and no poison;
   below lies a sea of clouds (y 335 to 435) with the islands as holes in it. A portal from the Nether won't open a
   new portal on the cold island (or in the Pale around it): the player sees "Something on the other side holds the
-  portal shut". A portal built there by somebody who flew in works both ways.
+  portal shut". A portal built there by somebody who flew in works both ways. The clean air up high is for wings
+  only: a player standing on something or riding it there (a Create Aeronautics airship, a seat) gets the full poison.
 - **The End:** the three strongholds are on the hot island, half way out from its centre. Eyes of ender lead there
   from anywhere.
 
@@ -95,6 +96,17 @@ nothing gets generated.
 - **Oritech:** its resource nodes (the boulders of deepslate and ore it scatters on the surface for its deep drill)
   are taken out of world generation everywhere (`data/thepale/neoforge/biome_modifier/no_oritech_resource_nodes.json`).
   Its ores, oil springs and uranium patches stay. Without resource nodes the deep drill has nothing to mine.
+- **Ores and oil by island** (`[ores]`): `frozenIslandOnlyFeatures` keeps Oritech's nickel, platinum and uranium and
+  Create New Age's thorium on the frozen island, `hotIslandOnlyFeatures` keeps Oritech's oil springs on the hot one.
+  Create Diesel Generators' oil isn't a feature: The Pale replaces its `createdieselgenerators:oil_biomes` tag with
+  desert, badlands and savanna biomes, which only the hot island has.
+- **Create Aeronautics (Sable):** `data/thepale/dimension_physics/overworld.json` sets the Overworld's air pressure:
+  Sable's own curve up to y 240, then down to nothing at y 300. Balloons and propellers lose their lift and thrust
+  with the pressure, so no airship climbs to the clean air from y 450. (Levitite only holds a ship up, it doesn't
+  lift it.)
+- **Better Combat:** Born in Chaos' Dark Warblade fights as a claymore, the Great Reaper Axe as a double axe, the
+  Skullbreaker Hammer as a hammer, the pitchfork as a spear and the Nightmare Scythe as a scythe
+  (`data/born_in_chaos_v1/weapon_attributes/`). The pack's fallback config leaves Born in Chaos' staffs out.
 - **Sodium:** works; the fog wall, camera fog and ash render as usual.
 - **Shader packs (Iris, e.g. Complementary):** packs draw their own fog and ignore the game's, so with one on The
   Pale lays its fog over the finished frame instead (before the HUD). In the open sea of the Pale the distance each

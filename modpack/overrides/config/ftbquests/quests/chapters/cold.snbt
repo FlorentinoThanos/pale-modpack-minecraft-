@@ -9,7 +9,7 @@
 	}
 	id: "A2F1E7462ABF2081"
 	images: [ ]
-	order_index: 4
+	order_index: 9
 	quest_links: [ ]
 	quests: [
 		{
@@ -581,6 +581,536 @@
 			]
 			x: 18.0d
 			y: 0.0d
+		}
+		{
+			dependencies: ["0410BCFCA686EEC7", "12FA3EC976BE3DD8"]
+			icon: {
+				count: 1
+				id: "farmersdelight:beef_stew"
+			}
+			id: "4F3DD01B4E09985C"
+			rewards: [
+				{
+					id: "6F4529B2EC5AC563"
+					type: "xp"
+					xp: 150
+				}
+			]
+			tasks: [
+				{
+					advancement: "farmersdelight:main/eat_nourishing_food"
+					criterion: ""
+					id: "CE8EEF6EDD3EE398"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["4D2A2718A56AA656"]
+			icon: {
+				count: 1
+				id: "cold_sweat:goat_fur_helmet"
+			}
+			id: "BB1137C51525EBB2"
+			rewards: [
+				{
+					id: "7265BCB3E369B75B"
+					type: "xp"
+					xp: 250
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "5F6F8A3B442693E7"
+					item: {
+						count: 1
+						id: "cold_sweat:goat_fur_helmet"
+					}
+					type: "item"
+				}
+				{
+					count: 1L
+					id: "2B2AC4AA91AC5586"
+					item: {
+						count: 1
+						id: "cold_sweat:goat_fur_chestplate"
+					}
+					type: "item"
+				}
+				{
+					count: 1L
+					id: "C97418FB5324B994"
+					item: {
+						count: 1
+						id: "cold_sweat:goat_fur_leggings"
+					}
+					type: "item"
+				}
+				{
+					count: 1L
+					id: "BDD01324E9941BD5"
+					item: {
+						count: 1
+						id: "cold_sweat:goat_fur_boots"
+					}
+					type: "item"
+				}
+			]
+			x: 6.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["BB1137C51525EBB2", "9168863FAED2584D"]
+			icon: {
+				count: 1
+				id: "cold_sweat:sewing_table"
+			}
+			id: "8C29D21D55168A37"
+			rewards: [
+				{
+					id: "3220BF9B95F8700D"
+					type: "xp"
+					xp: 300
+				}
+			]
+			tasks: [
+				{
+					advancement: "cold_sweat:full_insulation"
+					criterion: ""
+					id: "11EC85573D518863"
+					type: "advancement"
+				}
+			]
+			x: 8.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["0410BCFCA686EEC7"]
+			icon: {
+				count: 1
+				id: "minecraft:white_wool"
+			}
+			id: "B467FCEF22AFFB9C"
+			rewards: [
+				{
+					id: "77560D3AF926D8FD"
+					type: "xp"
+					xp: 100
+				}
+			]
+			tasks: [
+				{
+					advancement: "cold_sweat:huddle_close"
+					criterion: ""
+					id: "6F8C3928CB0CA3A8"
+					type: "advancement"
+				}
+			]
+			x: 10.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["0410BCFCA686EEC7"]
+			icon: {
+				count: 1
+				id: "minecraft:snow_block"
+			}
+			id: "131B785C57D41901"
+			rewards: [
+				{
+					id: "994A2CEF8B920E98"
+					type: "xp"
+					xp: 150
+				}
+			]
+			tasks: [
+				{
+					id: "5A152C6561D8D0D9"
+					structure: "minecraft:igloo"
+					type: "structure"
+				}
+			]
+			x: 0.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["131B785C57D41901"]
+			icon: {
+				count: 1
+				id: "minecraft:blue_ice"
+			}
+			id: "245821AFD7698303"
+			rewards: [
+				{
+					id: "2753FE90C0F30BEC"
+					type: "xp"
+					xp: 250
+				}
+			]
+			tasks: [
+				{
+					id: "124529D92B0983D2"
+					structure: "terralith:underground/frosted_dungeon"
+					type: "structure"
+				}
+			]
+			x: 0.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["7FAA8C6F650E5E31"]
+			icon: {
+				count: 1
+				id: "minecraft:packed_ice"
+			}
+			id: "19F3064FF15A3876"
+			rewards: [
+				{
+					id: "A6628601893092E5"
+					type: "xp"
+					xp: 200
+				}
+			]
+			tasks: [
+				{
+					id: "BD13D9BB626A69BD"
+					structure: "terralith:glacial_hut"
+					type: "structure"
+				}
+			]
+			x: 2.0d
+			y: -6.0d
+		}
+		{
+			dependencies: ["0410BCFCA686EEC7"]
+			icon: {
+				count: 1
+				id: "minecraft:tipped_arrow"
+			}
+			id: "67433EA0672EC136"
+			rewards: [
+				{
+					id: "3F2EF396A91B0116"
+					type: "xp"
+					xp: 150
+				}
+			]
+			tasks: [
+				{
+					entity: "minecraft:stray"
+					id: "C64F8AD9F3B5FDB7"
+					type: "kill"
+					value: 10L
+				}
+			]
+			x: 0.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["0EAC18A57865D6D9"]
+			icon: {
+				count: 1
+				id: "born_in_chaos_v1:frostbitten_blade"
+			}
+			id: "D2C48897B0391DA4"
+			rewards: [
+				{
+					id: "93F5663332B8B0A8"
+					type: "xp"
+					xp: 300
+				}
+			]
+			tasks: [
+				{
+					count: 8L
+					id: "04984EF22ED094CF"
+					item: {
+						count: 1
+						id: "born_in_chaos_v1:permafrost_shard"
+					}
+					type: "item"
+				}
+				{
+					count: 1L
+					id: "302CBB0BCEC6C197"
+					item: {
+						count: 1
+						id: "born_in_chaos_v1:frostbitten_blade"
+					}
+					type: "item"
+				}
+			]
+			x: 16.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["D2C48897B0391DA4"]
+			id: "83294AA7A21B24F9"
+			rewards: [
+				{
+					id: "DDDC3380F8557633"
+					type: "xp"
+					xp: 300
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "C7CDB031DAB3C8DB"
+					item: {
+						count: 1
+						id: "born_in_chaos_v1:stormcallers_horn"
+					}
+					type: "item"
+				}
+			]
+			x: 16.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["C99AB36B29666371"]
+			id: "5DB63DF388B56201"
+			rewards: [
+				{
+					id: "836E6BD9EE276D42"
+					type: "xp"
+					xp: 500
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "65972B7C9B424376"
+					item: {
+						count: 1
+						id: "born_in_chaos_v1:soulbane"
+					}
+					type: "item"
+				}
+			]
+			x: 18.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["73B6764D68F79C2D"]
+			icon: {
+				count: 1
+				id: "born_in_chaos_v1:charmof_power"
+			}
+			id: "7B988246F90F6F1C"
+			rewards: [
+				{
+					id: "B5ACE6741921AA5E"
+					type: "xp"
+					xp: 400
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "D9CF7435FE913B8D"
+					item: {
+						count: 1
+						id: "born_in_chaos_v1:charmof_power"
+					}
+					type: "item"
+				}
+				{
+					count: 1L
+					id: "4D2DFE23BBD6C37C"
+					item: {
+						count: 1
+						id: "born_in_chaos_v1:charmof_resistance"
+					}
+					type: "item"
+				}
+				{
+					count: 1L
+					id: "36BAE5289AF5B38D"
+					item: {
+						count: 1
+						id: "born_in_chaos_v1:charmof_endurance"
+					}
+					type: "item"
+				}
+			]
+			x: 12.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["7E137323D2F00F6F"]
+			icon: {
+				count: 1
+				id: "create_new_age:thorium_ore"
+			}
+			id: "8B0F1DC398076B5B"
+			rewards: [
+				{
+					id: "C127F7766D3AE1CD"
+					type: "xp"
+					xp: 300
+				}
+			]
+			tasks: [
+				{
+					count: 8L
+					id: "4030CDA906ECC68B"
+					item: {
+						count: 1
+						id: "create_new_age:thorium"
+					}
+					type: "item"
+				}
+			]
+			x: 6.0d
+			y: -6.0d
+		}
+		{
+			dependencies: ["8B0F1DC398076B5B", "B3ED485838982C35"]
+			id: "543F9A4131886D34"
+			rewards: [
+				{
+					id: "3443F73C94E5E541"
+					type: "xp"
+					xp: 400
+				}
+			]
+			tasks: [
+				{
+					count: 8L
+					id: "D334F666167D5A64"
+					item: {
+						count: 1
+						id: "create_new_age:reactor_casing"
+					}
+					type: "item"
+				}
+				{
+					count: 4L
+					id: "CC1610CEFFE43372"
+					item: {
+						count: 1
+						id: "create_new_age:reactor_glass"
+					}
+					type: "item"
+				}
+			]
+			x: 8.0d
+			y: -6.0d
+		}
+		{
+			dependencies: ["543F9A4131886D34"]
+			id: "1ED8F23282518DB7"
+			rewards: [
+				{
+					id: "2365D59D935FAA50"
+					type: "xp"
+					xp: 400
+				}
+			]
+			tasks: [
+				{
+					count: 4L
+					id: "58B9D0C79001EA7E"
+					item: {
+						count: 1
+						id: "create_new_age:reactor_rod"
+					}
+					type: "item"
+				}
+				{
+					count: 1L
+					id: "4271628014881151"
+					item: {
+						count: 1
+						id: "create_new_age:reactor_fuel_acceptor"
+					}
+					type: "item"
+				}
+			]
+			x: 10.0d
+			y: -6.0d
+		}
+		{
+			dependencies: ["1ED8F23282518DB7"]
+			id: "BDC87E3032B044AB"
+			rewards: [
+				{
+					id: "96BBC45296489C58"
+					type: "xp"
+					xp: 500
+				}
+			]
+			tasks: [
+				{
+					count: 4L
+					id: "94D92B41268DB640"
+					item: {
+						count: 1
+						id: "create_new_age:nuclear_fuel"
+					}
+					type: "item"
+				}
+			]
+			x: 10.0d
+			y: -8.0d
+		}
+		{
+			dependencies: ["BDC87E3032B044AB"]
+			icon: {
+				count: 1
+				id: "create_new_age:reactor_rod"
+			}
+			id: "7C20E04BF684FF68"
+			rewards: [
+				{
+					id: "8F6C11F19C0DEC57"
+					type: "xp"
+					xp: 800
+				}
+			]
+			shape: "hexagon"
+			size: 1.5d
+			tasks: [
+				{
+					count: 4L
+					id: "C59A4BF6AF96B9EB"
+					item: {
+						count: 1
+						id: "create_new_age:reactor_heat_vent"
+					}
+					type: "item"
+				}
+			]
+			x: 12.0d
+			y: -6.0d
+		}
+		{
+			dependencies: ["F33D147DABDE9D02"]
+			id: "62F3540ABB01B79E"
+			rewards: [
+				{
+					id: "6D0CD7671EE52B04"
+					type: "xp"
+					xp: 500
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "13706C00DE6DDFE3"
+					item: {
+						count: 1
+						id: "oritech:exo_chestplate"
+					}
+					type: "item"
+				}
+			]
+			x: 10.0d
+			y: -2.0d
 		}
 	]
 }

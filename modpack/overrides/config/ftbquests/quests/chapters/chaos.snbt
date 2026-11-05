@@ -1,0 +1,923 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "chaos"
+	group: "EFA7D509EB9A847A"
+	icon: {
+		count: 1
+		id: "born_in_chaos_v1:dark_metal_ingot"
+	}
+	id: "87E315186D30B614"
+	images: [ ]
+	order_index: 10
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: ["FB503FD5B2AE693A"]
+			icon: {
+				count: 1
+				id: "born_in_chaos_v1:darkwarblade"
+			}
+			id: "A2A6BF64C165711A"
+			rewards: [
+				{
+					id: "53D4BE547C85DC97"
+					type: "xp"
+					xp: 30
+				}
+			]
+			shape: "hexagon"
+			size: 1.5d
+			tasks: [
+				{
+					id: "197A2C996DF12A7D"
+					type: "checkmark"
+				}
+			]
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["A2A6BF64C165711A"]
+			icon: {
+				count: 1
+				id: "born_in_chaos_v1:corpse_maggot"
+			}
+			id: "DBF65E1459529D27"
+			rewards: [
+				{
+					id: "8FAF42553A9639D1"
+					type: "xp"
+					xp: 80
+				}
+			]
+			tasks: [
+				{
+					entity: "born_in_chaos_v1:decaying_zombie"
+					id: "02E5C90EE9BDE48A"
+					type: "kill"
+					value: 5L
+				}
+			]
+			x: 2.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["DBF65E1459529D27"]
+			icon: {
+				count: 1
+				id: "minecraft:barrel"
+			}
+			id: "48D30221A261736D"
+			rewards: [
+				{
+					id: "5C5ED497A3E87177"
+					type: "xp"
+					xp: 100
+				}
+			]
+			tasks: [
+				{
+					entity: "born_in_chaos_v1:barrel_zombie"
+					id: "F0151F87779FB2F2"
+					type: "kill"
+					value: 3L
+				}
+			]
+			x: 4.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["48D30221A261736D"]
+			icon: {
+				count: 1
+				id: "born_in_chaos_v1:intoxicating_dagger"
+			}
+			id: "24EC6E0898270BEB"
+			rewards: [
+				{
+					id: "FC601CA22ADEE5AB"
+					type: "xp"
+					xp: 150
+				}
+			]
+			tasks: [
+				{
+					entity: "born_in_chaos_v1:zombie_clown"
+					id: "56A7DAEDE7CF380A"
+					type: "kill"
+					value: 3L
+				}
+			]
+			x: 6.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["24EC6E0898270BEB"]
+			icon: {
+				count: 1
+				id: "born_in_chaos_v1:wood_splitter_axe"
+			}
+			id: "BF3D52997756353E"
+			rewards: [
+				{
+					id: "5E97200474BF27B4"
+					type: "xp"
+					xp: 150
+				}
+			]
+			tasks: [
+				{
+					entity: "born_in_chaos_v1:zombie_lumberjack"
+					id: "FB0A03F771DC6B35"
+					type: "kill"
+					value: 1L
+				}
+				{
+					count: 1L
+					id: "A74571BFBFB935A2"
+					item: {
+						count: 1
+						id: "born_in_chaos_v1:wood_splitter_axe"
+					}
+					type: "item"
+				}
+			]
+			x: 8.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["24EC6E0898270BEB"]
+			icon: {
+				count: 1
+				id: "minecraft:fishing_rod"
+			}
+			id: "CDAA5FFB4B8FBD43"
+			rewards: [
+				{
+					id: "DC038FC6E5CF861F"
+					type: "xp"
+					xp: 120
+				}
+			]
+			tasks: [
+				{
+					entity: "born_in_chaos_v1:zombie_fisherman"
+					id: "3B925741CA445F93"
+					type: "kill"
+					value: 2L
+				}
+			]
+			x: 10.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["BF3D52997756353E"]
+			icon: {
+				count: 1
+				id: "born_in_chaos_v1:monster_flesh"
+			}
+			id: "CF2C221048E9A69F"
+			rewards: [
+				{
+					id: "CF0EADA764CEE5E2"
+					type: "xp"
+					xp: 150
+				}
+			]
+			tasks: [
+				{
+					entity: "born_in_chaos_v1:zombie_bruiser"
+					id: "9D6010EF580E7BCC"
+					type: "kill"
+					value: 2L
+				}
+			]
+			x: 12.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["A2A6BF64C165711A"]
+			icon: {
+				count: 1
+				id: "born_in_chaos_v1:skullbreaker_hammer"
+			}
+			id: "8C9D2F40DB85901F"
+			rewards: [
+				{
+					id: "1F6D8C26AE388A4E"
+					type: "xp"
+					xp: 150
+				}
+			]
+			tasks: [
+				{
+					entity: "born_in_chaos_v1:skeleton_thrasher"
+					id: "2D3CD6CBCED6204F"
+					type: "kill"
+					value: 3L
+				}
+			]
+			x: 2.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["8C9D2F40DB85901F"]
+			icon: {
+				count: 1
+				id: "born_in_chaos_v1:damned_demomans_hat_helmet"
+			}
+			id: "9AA6D5A556DD3D2D"
+			rewards: [
+				{
+					id: "6CBD1B7AC25264C2"
+					type: "xp"
+					xp: 150
+				}
+			]
+			tasks: [
+				{
+					entity: "born_in_chaos_v1:skeleton_demoman"
+					id: "F467D85BB15666AD"
+					type: "kill"
+					value: 2L
+				}
+			]
+			x: 4.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["8C9D2F40DB85901F"]
+			icon: {
+				count: 1
+				id: "minecraft:bone"
+			}
+			id: "7C24CF8E8AEE2B20"
+			rewards: [
+				{
+					id: "697AF7A4E51A2BFF"
+					type: "xp"
+					xp: 100
+				}
+			]
+			tasks: [
+				{
+					entity: "born_in_chaos_v1:decrepit_skeleton"
+					id: "77C8465FBD368766"
+					type: "kill"
+					value: 5L
+				}
+			]
+			x: 6.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["7C24CF8E8AEE2B20"]
+			icon: {
+				count: 1
+				id: "born_in_chaos_v1:fused_bone"
+			}
+			id: "CB0F891B4036C99F"
+			rewards: [
+				{
+					id: "247683591157CBBE"
+					type: "xp"
+					xp: 200
+				}
+			]
+			tasks: [
+				{
+					entity: "born_in_chaos_v1:siamese_skeletons"
+					id: "99E3196AF42CAE53"
+					type: "kill"
+					value: 1L
+				}
+			]
+			x: 8.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["7C24CF8E8AEE2B20"]
+			icon: {
+				count: 1
+				id: "born_in_chaos_v1:bundle_of_bones"
+			}
+			id: "488FD18B22E2650A"
+			rewards: [
+				{
+					id: "6418C4A0BF2A047F"
+					type: "xp"
+					xp: 120
+				}
+			]
+			tasks: [
+				{
+					entity: "born_in_chaos_v1:bone_imp"
+					id: "7CFA7CD6731F56FB"
+					type: "kill"
+					value: 3L
+				}
+			]
+			x: 10.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["CB0F891B4036C99F"]
+			icon: {
+				count: 1
+				id: "born_in_chaos_v1:orbofthe_summoner"
+			}
+			id: "BF3D3BFEDA85A930"
+			rewards: [
+				{
+					id: "A1E6E6EA289D4CCD"
+					type: "xp"
+					xp: 400
+				}
+			]
+			tasks: [
+				{
+					entity: "born_in_chaos_v1:supreme_bonescaller"
+					id: "6F347D64F3D4048D"
+					type: "kill"
+					value: 1L
+				}
+			]
+			x: 12.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["A2A6BF64C165711A"]
+			icon: {
+				count: 1
+				id: "born_in_chaos_v1:hound_trap"
+			}
+			id: "B9D24F2994467FEB"
+			rewards: [
+				{
+					id: "A6A8A3D9D2A3E57D"
+					type: "xp"
+					xp: 150
+				}
+			]
+			tasks: [
+				{
+					entity: "born_in_chaos_v1:dread_hound"
+					id: "8480B4986BA8C878"
+					type: "kill"
+					value: 5L
+				}
+			]
+			x: 2.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["B9D24F2994467FEB"]
+			icon: {
+				count: 1
+				id: "born_in_chaos_v1:closed_hound_trap"
+			}
+			id: "F3CB050C8F07B87F"
+			rewards: [
+				{
+					id: "E1CFCA626E558E07"
+					type: "xp"
+					xp: 200
+				}
+			]
+			tasks: [
+				{
+					id: "49BA50E42F718340"
+					structure: "born_in_chaos_v1:mound_of_hounds"
+					type: "structure"
+				}
+			]
+			x: 4.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["A2A6BF64C165711A"]
+			icon: {
+				count: 1
+				id: "born_in_chaos_v1:phantom_powder"
+			}
+			id: "6EFA5BF4CC56454A"
+			rewards: [
+				{
+					id: "6AB788DD5936E47F"
+					type: "xp"
+					xp: 150
+				}
+			]
+			tasks: [
+				{
+					entity: "born_in_chaos_v1:phantom_creeper"
+					id: "41724C74C80E283A"
+					type: "kill"
+					value: 2L
+				}
+			]
+			x: 6.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["A2A6BF64C165711A"]
+			icon: {
+				count: 1
+				id: "born_in_chaos_v1:ethereal_spirit"
+			}
+			id: "12DFBF3A38E8F8C8"
+			rewards: [
+				{
+					id: "B479CB726170CFB5"
+					type: "xp"
+					xp: 200
+				}
+			]
+			tasks: [
+				{
+					entity: "born_in_chaos_v1:restless_spirit"
+					id: "F6ADE2B65B602710"
+					type: "kill"
+					value: 3L
+				}
+				{
+					entity: "born_in_chaos_v1:seared_spirit"
+					id: "70FCC21DCD2D6EBA"
+					type: "kill"
+					value: 2L
+				}
+			]
+			x: 8.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["12DFBF3A38E8F8C8"]
+			icon: {
+				count: 1
+				id: "born_in_chaos_v1:fire_dust"
+			}
+			id: "8315F2415B866728"
+			rewards: [
+				{
+					id: "F050E2EE5E8646E2"
+					type: "xp"
+					xp: 120
+				}
+			]
+			tasks: [
+				{
+					entity: "born_in_chaos_v1:firelight"
+					id: "2D11081EB0FA6FB6"
+					type: "kill"
+					value: 3L
+				}
+			]
+			x: 10.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["A2A6BF64C165711A"]
+			icon: {
+				count: 1
+				id: "born_in_chaos_v1:bloody_gadfly_eye"
+			}
+			id: "9A14DAD479DC44C0"
+			rewards: [
+				{
+					id: "9488238C0FF30526"
+					type: "xp"
+					xp: 120
+				}
+			]
+			tasks: [
+				{
+					entity: "born_in_chaos_v1:corpse_fly"
+					id: "91C94AA330907D12"
+					type: "kill"
+					value: 5L
+				}
+				{
+					entity: "born_in_chaos_v1:bloody_gadfly"
+					id: "A5E86DA83FAC9CA6"
+					type: "kill"
+					value: 3L
+				}
+			]
+			x: 2.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["A2A6BF64C165711A"]
+			icon: {
+				count: 1
+				id: "born_in_chaos_v1:shell_mace"
+			}
+			id: "403796E887FF3760"
+			rewards: [
+				{
+					id: "C04B4E9F0CEDDCE3"
+					type: "xp"
+					xp: 150
+				}
+			]
+			tasks: [
+				{
+					entity: "born_in_chaos_v1:thornshell_crab"
+					id: "A51CC1D331640450"
+					type: "kill"
+					value: 3L
+				}
+			]
+			x: 4.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["A2A6BF64C165711A"]
+			icon: {
+				count: 1
+				id: "born_in_chaos_v1:rotten_fish"
+			}
+			id: "CCBE9AD642E91296"
+			rewards: [
+				{
+					id: "5B537CB7A3431ADB"
+					type: "xp"
+					xp: 150
+				}
+			]
+			tasks: [
+				{
+					entity: "born_in_chaos_v1:corpse_fish"
+					id: "6A8FAC5E60ECD1EB"
+					type: "kill"
+					value: 3L
+				}
+				{
+					entity: "born_in_chaos_v1:glutton_fish"
+					id: "089BF7BF1DC6B7E4"
+					type: "kill"
+					value: 1L
+				}
+			]
+			x: 6.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["A2A6BF64C165711A"]
+			icon: {
+				count: 1
+				id: "born_in_chaos_v1:diamond_termite_shard"
+			}
+			id: "FE9F3C3908AE7FEE"
+			rewards: [
+				{
+					id: "B6F3D0C7E04A0A07"
+					type: "xp"
+					xp: 200
+				}
+			]
+			tasks: [
+				{
+					entity: "born_in_chaos_v1:diamond_termite"
+					id: "92AE48DE5D5FEB4F"
+					type: "kill"
+					value: 2L
+				}
+			]
+			x: 8.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["A2A6BF64C165711A"]
+			icon: {
+				count: 1
+				id: "born_in_chaos_v1:evil_carved_pumpkin"
+			}
+			id: "70D959C60DCE3CA1"
+			rewards: [
+				{
+					id: "8878D63EE2DC7005"
+					type: "xp"
+					xp: 250
+				}
+			]
+			tasks: [
+				{
+					entity: "born_in_chaos_v1:pumpkinhead"
+					id: "B7BB5F098F8F6973"
+					type: "kill"
+					value: 1L
+				}
+				{
+					entity: "born_in_chaos_v1:pumpkin_bruiser"
+					id: "49C66BF30375B551"
+					type: "kill"
+					value: 2L
+				}
+			]
+			x: 10.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["70D959C60DCE3CA1"]
+			icon: {
+				count: 1
+				id: "born_in_chaos_v1:pumpkinstaffa"
+			}
+			id: "08EFDAF4AFF27FBA"
+			rewards: [
+				{
+					id: "459B4C714E129855"
+					type: "xp"
+					xp: 400
+				}
+			]
+			tasks: [
+				{
+					entity: "born_in_chaos_v1:sir_pumpkinhead"
+					id: "E71377501BCD497E"
+					type: "kill"
+					value: 1L
+				}
+			]
+			x: 12.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["12DFBF3A38E8F8C8"]
+			icon: {
+				count: 1
+				id: "born_in_chaos_v1:scarlet_stained_glass"
+			}
+			id: "B4121C8FCBEF4EC1"
+			rewards: [
+				{
+					id: "2073CD6125152669"
+					type: "xp"
+					xp: 300
+				}
+			]
+			tasks: [
+				{
+					entity: "born_in_chaos_v1:scarlet_persecutor"
+					id: "BB8F6F89D78F2607"
+					type: "kill"
+					value: 1L
+				}
+			]
+			x: 12.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["83C119B689CF5F32"]
+			id: "307AC4D150AA61CC"
+			rewards: [
+				{
+					id: "64CA4FC67241DF33"
+					type: "xp"
+					xp: 150
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "4C7985629E56B661"
+					item: {
+						count: 1
+						id: "born_in_chaos_v1:dark_ritual_dagger"
+					}
+					type: "item"
+				}
+			]
+			x: 0.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["83C119B689CF5F32"]
+			id: "D7663AC209CBDFA4"
+			rewards: [
+				{
+					id: "E0AFED9D3AC76DC1"
+					type: "xp"
+					xp: 250
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "E4895B6A8BB7D03C"
+					item: {
+						count: 1
+						id: "born_in_chaos_v1:great_reaper_axe"
+					}
+					type: "item"
+				}
+			]
+			x: 2.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["83C119B689CF5F32"]
+			id: "D4320B3D256A2A18"
+			rewards: [
+				{
+					id: "CA6B4764CDC8373E"
+					type: "xp"
+					xp: 250
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "70C3E99D4F49FEA0"
+					item: {
+						count: 1
+						id: "born_in_chaos_v1:skullbreaker_hammer"
+					}
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["83C119B689CF5F32"]
+			id: "A8D9ED4CB99978FF"
+			rewards: [
+				{
+					id: "69485B67270C0E3C"
+					type: "xp"
+					xp: 300
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "FB17EA5CE9BAD12D"
+					item: {
+						count: 1
+						id: "born_in_chaos_v1:nightmare_scythe"
+					}
+					type: "item"
+				}
+			]
+			x: 6.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["403796E887FF3760"]
+			id: "8E586753D20A5A43"
+			rewards: [
+				{
+					id: "341A119FDF4718CA"
+					type: "xp"
+					xp: 200
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "10A45892AF54A224"
+					item: {
+						count: 1
+						id: "born_in_chaos_v1:spiny_shell_armor_chestplate"
+					}
+					type: "item"
+				}
+			]
+			x: 8.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["83C119B689CF5F32"]
+			id: "6979AD411F5C780D"
+			rewards: [
+				{
+					id: "A221E1EB6FE5D8E5"
+					type: "xp"
+					xp: 300
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "68EBDBEC7CAD139A"
+					item: {
+						count: 1
+						id: "born_in_chaos_v1:nightmare_mantleofthe_night_chestplate"
+					}
+					type: "item"
+				}
+			]
+			x: 10.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["83C119B689CF5F32"]
+			icon: {
+				count: 1
+				id: "born_in_chaos_v1:dark_metal_armor_helmet"
+			}
+			id: "BE7BA3D77DAA1ED3"
+			rewards: [
+				{
+					id: "6D014E4A77F0BAB8"
+					type: "xp"
+					xp: 600
+				}
+			]
+			shape: "hexagon"
+			size: 1.5d
+			tasks: [
+				{
+					count: 1L
+					id: "A350945D8D210581"
+					item: {
+						count: 1
+						id: "born_in_chaos_v1:dark_metal_armor_helmet"
+					}
+					type: "item"
+				}
+				{
+					count: 1L
+					id: "2263DFC9F83FAAD8"
+					item: {
+						count: 1
+						id: "born_in_chaos_v1:dark_metal_armor_chestplate"
+					}
+					type: "item"
+				}
+				{
+					count: 1L
+					id: "AA91544E71A4A90B"
+					item: {
+						count: 1
+						id: "born_in_chaos_v1:dark_metal_armor_leggings"
+					}
+					type: "item"
+				}
+				{
+					count: 1L
+					id: "FE898901FCC78205"
+					item: {
+						count: 1
+						id: "born_in_chaos_v1:dark_metal_armor_boots"
+					}
+					type: "item"
+				}
+			]
+			x: 12.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["D7663AC209CBDFA4"]
+			id: "3C7B37315B41515F"
+			rewards: [
+				{
+					id: "E435A6176BCCDFBA"
+					type: "xp"
+					xp: 200
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "62E2B366432EF4E3"
+					item: {
+						count: 1
+						id: "born_in_chaos_v1:potion_of_rampage"
+					}
+					type: "item"
+				}
+			]
+			x: 14.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["CF2C221048E9A69F", "BF3D3BFEDA85A930", "08EFDAF4AFF27FBA", "B4121C8FCBEF4EC1", "FE9F3C3908AE7FEE", "F3CB050C8F07B87F"]
+			icon: {
+				count: 1
+				id: "born_in_chaos_v1:chaos_icon"
+			}
+			id: "4530B3D62C2A74A6"
+			rewards: [
+				{
+					id: "4D254DF420EB6080"
+					type: "xp"
+					xp: 1500
+				}
+			]
+			shape: "gear"
+			size: 2.0d
+			tasks: [
+				{
+					id: "0536FBB55F328876"
+					type: "checkmark"
+				}
+			]
+			x: 14.0d
+			y: 0.0d
+		}
+	]
+}

@@ -610,5 +610,587 @@
 			x: 12.0d
 			y: 0.0d
 		}
+		{
+			dependencies: ["E541143ABF1D324D"]
+			icon: {
+				count: 1
+				id: "minecraft:skeleton_skull"
+			}
+			id: "15DAC2DE5BA7190E"
+			rewards: [
+				{
+					id: "D7A2FCC10A164A14"
+					type: "xp"
+					xp: 20
+				}
+			]
+			tasks: [
+				{
+					id: "87BD1856459CC71D"
+					type: "checkmark"
+				}
+			]
+			x: 0.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["E541143ABF1D324D"]
+			icon: {
+				count: 1
+				id: "minecraft:chest"
+			}
+			id: "1C160C2289A70D2A"
+			rewards: [
+				{
+					id: "9247B2F06DD70586"
+					type: "xp"
+					xp: 20
+				}
+			]
+			tasks: [
+				{
+					id: "B2BC30777E59C671"
+					type: "checkmark"
+				}
+			]
+			x: 0.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["4D65D68F96EC4E41"]
+			icon: {
+				count: 1
+				id: "minecraft:dark_oak_sapling"
+			}
+			id: "CDF3B18A3D57CD81"
+			rewards: [
+				{
+					id: "1BC5174041B41A5E"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [
+				{
+					biome: "minecraft:dark_forest"
+					id: "13699D179627D614"
+					type: "biome"
+				}
+			]
+			x: 2.0d
+			y: -6.0d
+		}
+		{
+			dependencies: ["4D65D68F96EC4E41"]
+			icon: {
+				count: 1
+				id: "minecraft:spruce_sapling"
+			}
+			id: "0D7160B3C6A9FBEB"
+			rewards: [
+				{
+					id: "958E9FBF92E4088F"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [
+				{
+					biome: "minecraft:taiga"
+					id: "E9DC975DF71AEA66"
+					type: "biome"
+				}
+			]
+			x: 4.0d
+			y: -6.0d
+		}
+		{
+			dependencies: ["4D65D68F96EC4E41"]
+			icon: {
+				count: 1
+				id: "minecraft:lily_pad"
+			}
+			id: "D98E9E19AB6E1041"
+			rewards: [
+				{
+					id: "FCCDA7B17D036FA3"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [
+				{
+					biome: "minecraft:swamp"
+					id: "BB48F460E4148D9C"
+					type: "biome"
+				}
+			]
+			x: 0.0d
+			y: -6.0d
+		}
+		{
+			dependencies: ["CDF3B18A3D57CD81", "6761B1DEDF496C79"]
+			icon: {
+				count: 1
+				id: "minecraft:dark_oak_log"
+			}
+			id: "3FC09F55AE6D1C15"
+			rewards: [
+				{
+					id: "BB29375441025208"
+					type: "xp"
+					xp: 150
+				}
+			]
+			tasks: [
+				{
+					id: "CF5C506D731704CF"
+					structure: "minecraft:mansion"
+					type: "structure"
+				}
+			]
+			x: 2.0d
+			y: -8.0d
+		}
+		{
+			dependencies: ["3FC09F55AE6D1C15"]
+			id: "20CB63E08F1E0369"
+			rewards: [
+				{
+					id: "FCB9078C93AB3E7C"
+					type: "xp"
+					xp: 200
+				}
+			]
+			tasks: [
+				{
+					entity: "minecraft:evoker"
+					id: "C957940E5A83CBDC"
+					type: "kill"
+					value: 1L
+				}
+				{
+					count: 1L
+					id: "8CF09B4ED160E6FA"
+					item: {
+						count: 1
+						id: "minecraft:totem_of_undying"
+					}
+					type: "item"
+				}
+			]
+			x: 2.0d
+			y: -10.0d
+		}
+		{
+			dependencies: ["0D7160B3C6A9FBEB", "7703C7EC764575C8"]
+			icon: {
+				count: 1
+				id: "minecraft:crossbow"
+			}
+			id: "DE17EC8E24A4E902"
+			rewards: [
+				{
+					id: "CB9AAD4368EB0F66"
+					type: "xp"
+					xp: 120
+				}
+			]
+			tasks: [
+				{
+					id: "647D28E3571FCF03"
+					structure: "minecraft:pillager_outpost"
+					type: "structure"
+				}
+				{
+					entity: "minecraft:pillager"
+					id: "0FD58A7602C265A9"
+					type: "kill"
+					value: 5L
+				}
+			]
+			x: 4.0d
+			y: -8.0d
+		}
+		{
+			dependencies: ["DE17EC8E24A4E902"]
+			icon: {
+				count: 1
+				id: "minecraft:white_banner"
+			}
+			id: "EF5337DC970DB68C"
+			rewards: [
+				{
+					id: "21C41D997F151B3E"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "13568302CD3E719D"
+					item: {
+						count: 16
+						id: "minecraft:emerald"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					advancement: "minecraft:adventure/hero_of_the_village"
+					criterion: ""
+					id: "482DBB38C3CC58D5"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: -10.0d
+		}
+		{
+			dependencies: ["D98E9E19AB6E1041"]
+			icon: {
+				count: 1
+				id: "minecraft:cauldron"
+			}
+			id: "F24365EB011E31E6"
+			rewards: [
+				{
+					id: "F1A325C8AFEA0252"
+					type: "xp"
+					xp: 100
+				}
+			]
+			tasks: [
+				{
+					id: "B177343E1B00F216"
+					structure: "minecraft:swamp_hut"
+					type: "structure"
+				}
+			]
+			x: 0.0d
+			y: -8.0d
+		}
+		{
+			dependencies: ["A5EF27E3BF9A238A", "6761B1DEDF496C79"]
+			icon: {
+				count: 1
+				id: "minecraft:trial_key"
+			}
+			id: "E30FD8AB50DCEDE6"
+			rewards: [
+				{
+					id: "1CC8E1C7CCC7CC6A"
+					type: "xp"
+					xp: 200
+				}
+			]
+			tasks: [
+				{
+					id: "FF7B538390C18FC7"
+					structure: "minecraft:trial_chambers"
+					type: "structure"
+				}
+				{
+					count: 1L
+					id: "7C51D42581B9A884"
+					item: {
+						count: 1
+						id: "minecraft:trial_key"
+					}
+					type: "item"
+				}
+			]
+			x: 6.0d
+			y: -6.0d
+		}
+		{
+			dependencies: ["E30FD8AB50DCEDE6"]
+			icon: {
+				count: 1
+				id: "minecraft:breeze_rod"
+			}
+			id: "29DEE39DC40AF8FA"
+			rewards: [
+				{
+					id: "020951777DF01464"
+					type: "xp"
+					xp: 200
+				}
+			]
+			tasks: [
+				{
+					entity: "minecraft:breeze"
+					id: "1EA514739DECBEA1"
+					type: "kill"
+					value: 1L
+				}
+				{
+					count: 2L
+					id: "3CD07D61A48DA35A"
+					item: {
+						count: 1
+						id: "minecraft:breeze_rod"
+					}
+					type: "item"
+				}
+			]
+			x: 6.0d
+			y: -8.0d
+		}
+		{
+			dependencies: ["29DEE39DC40AF8FA"]
+			id: "2B03AC2016EFDA62"
+			rewards: [
+				{
+					id: "3263D235594D65CE"
+					type: "xp"
+					xp: 300
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "A9C998E91E7A0872"
+					item: {
+						count: 1
+						id: "minecraft:mace"
+					}
+					type: "item"
+				}
+			]
+			x: 6.0d
+			y: -10.0d
+		}
+		{
+			dependencies: ["A5EF27E3BF9A238A"]
+			icon: {
+				count: 1
+				id: "minecraft:prismarine"
+			}
+			id: "96662A2C539A4849"
+			rewards: [
+				{
+					id: "0ACF46828BF7E6B7"
+					type: "xp"
+					xp: 200
+				}
+			]
+			tasks: [
+				{
+					id: "DFAD012EDFB36B27"
+					structure: "minecraft:monument"
+					type: "structure"
+				}
+				{
+					count: 16L
+					id: "E63DF177FA3499E2"
+					item: {
+						count: 1
+						id: "minecraft:prismarine_shard"
+					}
+					type: "item"
+				}
+			]
+			x: 8.0d
+			y: -6.0d
+		}
+		{
+			dependencies: ["96662A2C539A4849"]
+			icon: {
+				count: 1
+				id: "minecraft:wet_sponge"
+			}
+			id: "32AEDB852A3794DC"
+			rewards: [
+				{
+					id: "04FF4DE27CF867C0"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "37E76B34E777AA7C"
+					item: {
+						count: 4
+						id: "minecraft:sponge"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					entity: "minecraft:elder_guardian"
+					id: "E27F8D9B1F0F6F7E"
+					type: "kill"
+					value: 1L
+				}
+			]
+			x: 8.0d
+			y: -8.0d
+		}
+		{
+			dependencies: ["C30EEFC8CC04719E"]
+			icon: {
+				count: 1
+				id: "minecraft:sculk_catalyst"
+			}
+			id: "422E7DAB6ECB47AE"
+			rewards: [
+				{
+					id: "D06236FB8B393659"
+					type: "xp"
+					xp: 300
+				}
+			]
+			tasks: [
+				{
+					id: "82561EA05BBF6E17"
+					structure: "minecraft:ancient_city"
+					type: "structure"
+				}
+				{
+					count: 4L
+					id: "6AAD3966756108CB"
+					item: {
+						count: 1
+						id: "minecraft:echo_shard"
+					}
+					type: "item"
+				}
+			]
+			x: 10.0d
+			y: -6.0d
+		}
+		{
+			dependencies: ["422E7DAB6ECB47AE"]
+			id: "FE48AF787B5579EB"
+			rewards: [
+				{
+					id: "14DBBE0BCFD84DA6"
+					type: "xp"
+					xp: 200
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "C8172A27222EF819"
+					item: {
+						count: 1
+						id: "minecraft:recovery_compass"
+					}
+					type: "item"
+				}
+			]
+			x: 10.0d
+			y: -8.0d
+		}
+		{
+			dependencies: ["A7B4FD4982C710F5"]
+			icon: {
+				count: 1
+				id: "minecraft:wheat"
+			}
+			id: "AB65C5715EF15246"
+			rewards: [
+				{
+					id: "A8C56B42E30579B5"
+					type: "xp"
+					xp: 40
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "D66AC644B4AE74D9"
+					item: {
+						count: 1
+						id: "minecraft:iron_hoe"
+					}
+					type: "item"
+				}
+				{
+					count: 32L
+					id: "1C30DC5646A96461"
+					item: {
+						count: 1
+						id: "minecraft:wheat"
+					}
+					type: "item"
+				}
+			]
+			x: 2.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["AB65C5715EF15246"]
+			id: "045A076D45D3D97B"
+			rewards: [
+				{
+					id: "2F5793B00EE2C406"
+					type: "xp"
+					xp: 40
+				}
+			]
+			tasks: [
+				{
+					count: 16L
+					id: "30E819452F74968E"
+					item: {
+						count: 1
+						id: "minecraft:white_wool"
+					}
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["18BAE9E1D07C3F7C"]
+			id: "D67EFDB2909E622E"
+			rewards: [
+				{
+					id: "BB19B26C9047FAAA"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [
+				{
+					count: 32L
+					id: "4580E69DE01EAA0C"
+					item: {
+						count: 1
+						id: "minecraft:copper_ingot"
+					}
+					type: "item"
+				}
+			]
+			x: 6.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["18BAE9E1D07C3F7C"]
+			id: "7D928C9992FECDFD"
+			rewards: [
+				{
+					id: "1BAD49450BDC5F38"
+					type: "xp"
+					xp: 60
+				}
+			]
+			tasks: [
+				{
+					count: 16L
+					id: "8A8918749E8EE4D1"
+					item: {
+						count: 1
+						id: "create:zinc_ingot"
+					}
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: 4.0d
+		}
 	]
 }

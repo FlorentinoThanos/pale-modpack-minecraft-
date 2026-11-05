@@ -35,6 +35,7 @@ public final class CommonConfig {
     private static final ModConfigSpec.DoubleValue POISON_START;
     private static final ModConfigSpec.DoubleValue POISON_FULL;
     private static final ModConfigSpec.ConfigValue<List<? extends String>> FROZEN_ISLAND_ONLY_FEATURES;
+    private static final ModConfigSpec.ConfigValue<List<? extends String>> HOT_ISLAND_ONLY_FEATURES;
     private static final ModConfigSpec.ConfigValue<List<? extends String>> NOT_ON_STARTER_ISLAND;
     private static final ModConfigSpec.ConfigValue<List<? extends String>> FROZEN_ISLAND_ONLY_MOBS;
     private static final ModConfigSpec.ConfigValue<List<? extends Number>> RAMPAGE_SPEED_BONUS;
@@ -188,7 +189,14 @@ public final class CommonConfig {
                         "id per line; * matches any run of characters (oritech:ore_* = Oritech's nickel and platinum, oritech:uranium_*",
                         "= its uranium). The server log lists which features matched at start-up. Overworld only (the End keeps its",
                         "platinum). Only affects newly generated chunks; one-island worlds are untouched.")
-                .defineListAllowEmpty("frozenIslandOnlyFeatures", List.of("oritech:ore_*", "oritech:uranium_*"), () -> "", value -> value instanceof String);
+                .defineListAllowEmpty("frozenIslandOnlyFeatures", List.of("oritech:ore_*", "oritech:uranium_*", "create_new_age:thorium_ore"), () -> "", value -> value instanceof String);
+        HOT_ISLAND_ONLY_FEATURES = builder
+                .comment(
+                        "The same for the hot southern island: these placed features generate there and nowhere else in the",
+                        "Overworld (oritech:oil_spring* = Oritech's oil springs). Same patterns as frozenIslandOnlyFeatures.",
+                        "Create Diesel Generators' oil isn't a feature: The Pale limits it to desert, badlands and savanna biomes",
+                        "through the createdieselgenerators:oil_biomes tag instead.")
+                .defineListAllowEmpty("hotIslandOnlyFeatures", List.of("oritech:oil_spring*"), () -> "", value -> value instanceof String);
         builder.pop();
 
         builder.push("mobs");
@@ -259,6 +267,7 @@ public final class CommonConfig {
             double poisonStart,
             double poisonFull,
             List<String> frozenIslandOnlyFeatures,
+            List<String> hotIslandOnlyFeatures,
             List<String> notOnStarterIsland,
             List<String> frozenIslandOnlyMobs,
             List<Double> rampageSpeedBonus,
@@ -312,6 +321,7 @@ public final class CommonConfig {
                 poisonStart,
                 Math.max(value(POISON_FULL, defaults), poisonStart + 1.0),
                 List.copyOf(defaults ? FROZEN_ISLAND_ONLY_FEATURES.getDefault() : FROZEN_ISLAND_ONLY_FEATURES.get()),
+                List.copyOf(defaults ? HOT_ISLAND_ONLY_FEATURES.getDefault() : HOT_ISLAND_ONLY_FEATURES.get()),
                 List.copyOf(defaults ? NOT_ON_STARTER_ISLAND.getDefault() : NOT_ON_STARTER_ISLAND.get()),
                 List.copyOf(defaults ? FROZEN_ISLAND_ONLY_MOBS.getDefault() : FROZEN_ISLAND_ONLY_MOBS.get()),
                 (defaults ? RAMPAGE_SPEED_BONUS.getDefault() : RAMPAGE_SPEED_BONUS.get()).stream()

@@ -184,7 +184,21 @@
 	# ⌄ 
 	"Temperature-Affecting Foods" = [
 	    ["cold_sweat:soul_sprout", -20, "{}", 1200],
-	    ["cold_sweat:filled_waterskin", "{item:cold_sweat:temperature}"]
+	    ["cold_sweat:filled_waterskin", "{item:cold_sweat:temperature}"],
+	    ["farmersdelight:beef_stew", 10, "{}", 1200],
+	    ["farmersdelight:chicken_soup", 10, "{}", 1200],
+	    ["farmersdelight:vegetable_soup", 10, "{}", 1200],
+	    ["farmersdelight:fish_stew", 10, "{}", 1200],
+	    ["farmersdelight:pumpkin_soup", 10, "{}", 1200],
+	    ["farmersdelight:baked_cod_stew", 10, "{}", 1200],
+	    ["farmersdelight:noodle_soup", 10, "{}", 1200],
+	    ["farmersdelight:bone_broth", 10, "{}", 1200],
+	    ["farmersdelight:onion_soup", 10, "{}", 1200],
+	    ["farmersdelight:hot_cocoa", 15, "{}", 1800],
+	    ["farmersdelight:apple_cider", 10, "{}", 1200],
+	    ["farmersdelight:melon_popsicle", -15, "{}", 1200],
+	    ["farmersdelight:melon_juice", -10, "{}", 1200],
+	    ["farmersdelight:fruit_salad", -5, "{}", 1200]
 	]
 	#─────────────────────────────────────────────────────────────────────────
 	# Defines how much a waterskin will change the player's body temperature when used

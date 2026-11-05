@@ -7,51 +7,191 @@
 	chapter.3EFF447036D93718.title: "Горячий остров"
 	chapter.52326DE657CCE52E.chapter_subtitle: ["Начало. Здесь безопасно, пока ты не подходишь к туману."]
 	chapter.52326DE657CCE52E.title: "Тихий остров"
+	chapter.87E315186D30B614.chapter_subtitle: ["Порождения хаоса живут на горячем и холодном островах. На стартовом их нет."]
+	chapter.87E315186D30B614.title: "Бестиарий хаоса"
 	chapter.A2F1E7462ABF2081.chapter_subtitle: ["Самый опасный остров. Только на крыльях и только для тех, кто готов."]
 	chapter.A2F1E7462ABF2081.title: "Холодный остров"
+	chapter.A920D939556DC7BD.chapter_subtitle: ["Farmer's Delight: горячий суп греет на севере, мороженое охлаждает на юге."]
+	chapter.A920D939556DC7BD.title: "Кухня"
+	chapter.AED18204A08D5527.chapter_subtitle: ["Под песком и землёй лежат остатки тех, кто жил здесь до Бледноты."]
+	chapter.AED18204A08D5527.title: "Археология"
+	chapter.BC1E489A1ED8C2DB.chapter_subtitle: ["Корабли Create Aeronautics. Над Бледнотой воздух редеет: к высоте 300 ни шар, ни винт уже не тянут."]
+	chapter.BC1E489A1ED8C2DB.title: "Небо"
+	chapter.C6121B1B8CF045BA.chapter_subtitle: ["Нефть есть только на горячем острове: в пустынях, пустошах и саваннах. Ток идёт отсюда."]
+	chapter.C6121B1B8CF045BA.title: "Нефть и ток"
 	chapter.F9A621A1BF5E6BF3.chapter_subtitle: ["Pale Store: зачарования стоят 125, 250 и 500 очков опыта. Наковальня бесплатна."]
 	chapter.F9A621A1BF5E6BF3.title: "Зачарования"
+	chapter.FE8FCA9C94726E5A.chapter_subtitle: ["Create: от ремня до механической руки. Всё, что крутится."]
+	chapter.FE8FCA9C94726E5A.title: "Механика"
 	chapter_group.EFA7D509EB9A847A.title: "The Pale"
+	quest.00969B7E7A07CF4F.quest_desc: ["Мощнее, если собрать из нескольких."]
+	quest.00969B7E7A07CF4F.title: "Большой двигатель"
+	quest.01719B67D1524ABF.quest_desc: ["Быстрее и крепче обычной."]
+	quest.01719B67D1524ABF.title: "Железная кисть"
 	quest.03D22BFB7454B85E.quest_desc: ["Шанс сокрушительного удара и чужой головы."]
 	quest.03D22BFB7454B85E.title: "Обезглавливание"
 	quest.0410BCFCA686EEC7.quest_desc: ["Лети на север (ось Z в минус) примерно 4000 блоков и сядь на снежной равнине."]
 	quest.0410BCFCA686EEC7.title: "Северный берег"
+	quest.045A076D45D3D97B.quest_desc: ["Шерсть пригодится для кровати, а позже для воздушного шара."]
+	quest.045A076D45D3D97B.title: "Шерсть"
+	quest.06303D3A946FF551.quest_desc: ["Поворачивает и разбирает детали Create."]
+	quest.06303D3A946FF551.title: "Гаечный ключ"
+	quest.06E84370328D5709.quest_desc: ["Приготовь и съешь все блюда из списка достижения Farmer's Delight."]
+	quest.06E84370328D5709.title: "Шеф-повар"
 	quest.06F27455A8C1762B.quest_desc: ["Ведро и бурдюк. На юге вода спасает от жары."]
 	quest.06F27455A8C1762B.title: "Вода с собой"
 	quest.0725FBD8C4BB5DC8.quest_desc: ["8 полок открывают второй вариант (250 очков), 15 полок третий (500 очков)."]
 	quest.0725FBD8C4BB5DC8.title: "Библиотека"
 	quest.0749A1C45B0EA552.quest_desc: ["И обратно: вращение в электричество."]
 	quest.0749A1C45B0EA552.title: "Генератор"
+	quest.0769CB83115313F0.quest_desc: ["Обсидиан в порошок, порошок в лист. Нужен для поездов."]
+	quest.0769CB83115313F0.title: "Прочный лист"
 	quest.07F4FAD00FE4552B.quest_desc: ["Этим эликсиром будят Лорда Тыквоголового. Работает только на севере."]
 	quest.07F4FAD00FE4552B.title: "Превращающий эликсир"
+	quest.08A8A131FFBDFBE1.quest_desc: ["Ремень из сушёной ламинарии везёт предметы."]
+	quest.08A8A131FFBDFBE1.title: "Конвейер"
+	quest.08EFDAF4AFF27FBA.quest_desc: ["Всадник без головы, младший брат Лорда."]
+	quest.08EFDAF4AFF27FBA.title: "Сэр Тыквоголовый"
+	quest.09DFA446653ADFDB.quest_desc: ["С неё видно полостров."]
+	quest.09DFA446653ADFDB.title: "Сторожевая башня"
+	quest.09F337429BFEAAC2.quest_desc: ["Магнетит нужен для магнитов New Age."]
+	quest.09F337429BFEAAC2.title: "Магнетит"
+	quest.0D35E616BE5B4892.quest_desc: ["Фургон клоунов-зомби в саванне."]
+	quest.0D35E616BE5B4892.title: "Цирк уродов"
+	quest.0D395F6CC34368F9.quest_desc: ["Быстрее и сильнее."]
+	quest.0D395F6CC34368F9.title: "Усиленный мотор"
+	quest.0D58FFF06C46B766.quest_desc: ["Стильно."]
+	quest.0D58FFF06C46B766.title: "Очки пилота"
+	quest.0D7160B3C6A9FBEB.quest_desc: ["Северная часть острова прохладнее: там тайга."]
+	quest.0D7160B3C6A9FBEB.title: "Прохладный север"
 	quest.0D95AD042A8F6753.quest_desc: ["Опасно, но там есть золото и незерит."]
 	quest.0D95AD042A8F6753.title: "Бастион"
 	quest.0DB0D487322A1055.quest_desc: ["Найди храм в джунглях."]
 	quest.0DB0D487322A1055.title: "Храм в джунглях"
+	quest.0E0D5DC6409042D9.quest_desc: ["Нефтяные бочки хранят много и ставятся на поезда и корабли."]
+	quest.0E0D5DC6409042D9.title: "Бочки"
 	quest.0EAC18A57865D6D9.quest_desc: ["Победи Крампуса."]
 	quest.0EAC18A57865D6D9.title: "Крампус"
+	quest.0EAF82EF4005A48C.quest_desc: ["Доберись поездом по Незеру до южного портала. Через Бледноту в обычном мире рельсы не помогут: в тумане яд, и пассажир не доедет."]
+	quest.0EAF82EF4005A48C.title: "Южная магистраль"
+	quest.0F55A4D4E51A5010.quest_desc: ["Найди все окаменелости."]
+	quest.0F55A4D4E51A5010.title: "Палеонтолог"
 	quest.0F69B198F20785A0.quest_desc: ["Нужна, чтобы плавить латунь."]
 	quest.0F69B198F20785A0.title: "Горелка ифрита"
 	quest.101F5B869F1FB6B7.quest_desc: ["Победи вожака ужасных гончих."]
 	quest.101F5B869F1FB6B7.title: "Вожак гончих"
 	quest.117325654E654D62.quest_desc: ["Убей ифритов и забери их стержни."]
 	quest.117325654E654D62.title: "Ифриты"
+	quest.11C14F27ECDF1677.quest_desc: ["Табло и связь показывают, что творится на заводе."]
+	quest.11C14F27ECDF1677.title: "Табло"
+	quest.12DFBF3A38E8F8C8.quest_desc: ["Духов лучше бить Духорезом."]
+	quest.12DFBF3A38E8F8C8.title: "Неупокоенные духи"
+	quest.12FA3EC976BE3DD8.quest_desc: ["Овощной суп. Тёплая еда в этой сборке греет тело на минуту (Cold Sweat)."]
+	quest.12FA3EC976BE3DD8.title: "Горячий суп"
+	quest.131B785C57D41901.quest_desc: ["Найди иглу."]
+	quest.131B785C57D41901.title: "Иглу"
+	quest.1328AAFF05BF887F.quest_desc: ["В джунглях растёт бамбук."]
+	quest.1328AAFF05BF887F.title: "Бамбук"
+	quest.14DDFEAA378A2E3A.quest_desc: ["Дай поезду расписание, и он будет ездить сам."]
+	quest.14DDFEAA378A2E3A.title: "Расписание"
+	quest.15DAC2DE5BA7190E.quest_desc: ["Когда ты умираешь, вещи не рассыпаются по земле: они остаются в твоём теле (мод Corpse). Вернись к нему и открой. Не умирай в тумане Бледноты: тело останется в ядовитой воде, и достать его будет почти невозможно."]
+	quest.15DAC2DE5BA7190E.title: "Последний приют"
 	quest.18BAE9E1D07C3F7C.quest_desc: ["Каменная кирка и печь."]
 	quest.18BAE9E1D07C3F7C.title: "Каменный век"
+	quest.194D3DA28B456106.quest_desc: ["Картофельная пушка на борту."]
+	quest.194D3DA28B456106.title: "Бортовая пушка"
+	quest.19648A5B291B91DD.quest_desc: ["Катушки и щётки превращают вращение в ток."]
+	quest.19648A5B291B91DD.title: "Генератор New Age"
+	quest.199A32EA805BCBC4.quest_desc: ["Приручи хамелеона. Он ищет биомы."]
+	quest.199A32EA805BCBC4.title: "Ручной хамелеон"
+	quest.19BFB3CE701A8231.quest_desc: ["Бойлер Cold Sweat с дымоходом греет дом. Ночи в пустыне холодные."]
+	quest.19BFB3CE701A8231.title: "Дымоход"
+	quest.19F3064FF15A3876.quest_desc: ["Хижина Terralith среди ледников."]
+	quest.19F3064FF15A3876.title: "Ледниковая хижина"
 	quest.1ACB00F411AF529B.quest_desc: ["Тёплый и влажный запад острова."]
 	quest.1ACB00F411AF529B.title: "Джунгли"
+	quest.1C160C2289A70D2A.quest_desc: ["Сядь (Shift) и нажми ПКМ пустыми руками по сундуку: Carry On позволит унести его вместе с содержимым. Так же можно носить животных. Боссов, жителей и машины носить нельзя."]
+	quest.1C160C2289A70D2A.title: "Переезд"
+	quest.1D4A0C4B85EEE138.quest_desc: ["Органический компост превращает землю в плодородную почву."]
+	quest.1D4A0C4B85EEE138.title: "Компост"
 	quest.1D5F79045F5A2E07.quest_desc: ["Очаг греет весь дом."]
 	quest.1D5F79045F5A2E07.title: "Очаг"
+	quest.1ED8F23282518DB7.quest_desc: ["Регулирующие стержни и приёмник топлива."]
+	quest.1ED8F23282518DB7.title: "Стержни"
+	quest.1FF17CAE3B00FA82.quest_desc: ["Переправь груз с одного острова на другой кораблём или поездом без людей на борту: человека туман убьёт, а сундуки нет. Отметь квест, когда груз дошёл."]
+	quest.1FF17CAE3B00FA82.title: "Грузовой рейс"
+	quest.20868A679437C189.quest_desc: ["Разделяет вещества."]
+	quest.20868A679437C189.title: "Центрифуга"
+	quest.208A23D769C58F86.quest_desc: ["500 блоков пути по Незеру. Steam 'n' Rails добавляет рельсы из любого дерева, есть и из чернокамня."]
+	quest.208A23D769C58F86.title: "Рельсы"
+	quest.20CB63E08F1E0369.quest_desc: ["Его роняет призыватель из особняка. Он спасает от смерти один раз."]
+	quest.20CB63E08F1E0369.title: "Тотем бессмертия"
+	quest.223D579A7340DAB6.quest_desc: ["Запас энергии Oritech."]
+	quest.223D579A7340DAB6.title: "Батарея"
+	quest.2250439ED9817711.quest_desc: ["Предметы падают по желобу вниз."]
+	quest.2250439ED9817711.title: "Желоб"
+	quest.2253A3492757C92D.quest_desc: ["Вентилятор через воду моет, через огонь коптит, через лаву плавит."]
+	quest.2253A3492757C92D.title: "Вентилятор"
+	quest.231B3FF73838F5B4.quest_desc: ["Держит корабль ровно."]
+	quest.231B3FF73838F5B4.title: "Гироскопический винт"
+	quest.23E18FD346E5EB6D.quest_desc: ["Холодная еда охлаждает. На юге это спасение."]
+	quest.23E18FD346E5EB6D.title: "Эскимо"
+	quest.245821AFD7698303.quest_desc: ["Подземелье Terralith во льду."]
+	quest.245821AFD7698303.title: "Ледяное подземелье"
+	quest.24EC6E0898270BEB.quest_desc: ["От его ножа кружится голова."]
+	quest.24EC6E0898270BEB.title: "Зомби-клоун"
+	quest.2560ED259730DE07.quest_desc: ["Заряженный алмаз и провод из него."]
+	quest.2560ED259730DE07.title: "Заряженный алмаз"
+	quest.25A53111B7CABE72.quest_desc: ["Найди деревню на юге."]
+	quest.25A53111B7CABE72.title: "Пустынная деревня"
 	quest.2911A7A19AAE3F00.quest_desc: ["Больше опыта с мобов и блоков."]
 	quest.2911A7A19AAE3F00.title: "Озарение"
+	quest.2931A0DEA9C7E111.quest_desc: ["Собирает сложные детали Oritech."]
+	quest.2931A0DEA9C7E111.title: "Сборщик"
+	quest.29DEE39DC40AF8FA.quest_desc: ["Победи вихря и забери его стержень."]
+	quest.29DEE39DC40AF8FA.title: "Вихрь"
+	quest.2B03AC2016EFDA62.quest_desc: ["Тяжёлое ядро из хранилища и стержень вихря."]
+	quest.2B03AC2016EFDA62.title: "Булава"
+	quest.2B9728110E64F29A.quest_desc: ["Кого-то здесь похоронили давным-давно."]
+	quest.2B9728110E64F29A.title: "Могила жителя"
+	quest.2BC86194802C313D.quest_desc: ["Собери артефакт из осколков."]
+	quest.2BC86194802C313D.title: "Неопознанный артефакт"
+	quest.2C37D36732A5C6B1.quest_desc: ["Есть способ сделать его переливчатым. Найди его сам."]
+	quest.2C37D36732A5C6B1.title: "Перламутровый левитит"
+	quest.2DC5EE261E60B32E.quest_desc: ["Нефть, дизель, ток New Age и Oritech: у тебя своя энергосеть."]
+	quest.2DC5EE261E60B32E.title: "Электрификация юга"
+	quest.2ED21E7294C3E747.quest_desc: ["Показывают скорость и нагрузку механизмов."]
+	quest.2ED21E7294C3E747.title: "Очки инженера"
 	quest.30061128D7FADAE9.quest_desc: ["Предмет остаётся с тобой после смерти. Самая ценная книга, её надо заслужить."]
 	quest.30061128D7FADAE9.title: "Связь с душой"
 	quest.302FAE3B4175F575.quest_desc: ["Двенадцать око Эндера. Они ведут к крепости."]
 	quest.302FAE3B4175F575.title: "Око Эндера"
+	quest.307AC4D150AA61CC.quest_desc: ["Жертва лечит и даёт Силу."]
+	quest.307AC4D150AA61CC.title: "Ритуальный кинжал"
 	quest.316BDBE7B30479D1.quest_desc: ["Броня из шкуры хоглина защищает от жары. На юге она очень нужна."]
 	quest.316BDBE7B30479D1.title: "Шкура хоглина"
+	quest.3186683A79A07234.quest_desc: ["Забери яйцо с портала."]
+	quest.3186683A79A07234.title: "Яйцо дракона"
+	quest.31AB0EE4C074E86D.quest_desc: ["Зомби юга не горят на солнце."]
+	quest.31AB0EE4C074E86D.title: "Кадавры"
+	quest.32AEDB852A3794DC.quest_desc: ["Победи древнего стража."]
+	quest.32AEDB852A3794DC.title: "Древний страж"
 	quest.32B2FC7FC1FE0154.quest_desc: ["Поспи в кровати."]
 	quest.32B2FC7FC1FE0154.title: "Пережить ночь"
+	quest.32F918D1F51D5B09.quest_desc: ["Приручи попугая семенами."]
+	quest.32F918D1F51D5B09.title: "Попугай"
+	quest.37E632692EC464C9.quest_desc: ["Подшипник, кривошип и голова качалки над скважиной."]
+	quest.37E632692EC464C9.title: "Качалка"
+	quest.38EB49361605C5E3.quest_desc: ["Руины среди красных скал."]
+	quest.38EB49361605C5E3.title: "Руины в пустошах"
+	quest.3A2B381694E7803D.quest_desc: ["Пара колёс дробит руду с бонусом."]
+	quest.3A2B381694E7803D.title: "Дробильные колёса"
+	quest.3B51F18BE0C1DC07.quest_desc: ["Горелка греет воздух в оболочке."]
+	quest.3B51F18BE0C1DC07.title: "Горелка"
+	quest.3B7110855E76678A.quest_desc: ["Мелет зерно в муку и руду в крошку."]
+	quest.3B7110855E76678A.title: "Жернов"
+	quest.3C7B37315B41515F.quest_desc: ["Свари зелье ярости."]
+	quest.3C7B37315B41515F.title: "Ярость"
 	quest.3D753A32456BDA7A.quest_desc: ["Руда раскалывается в дроблёную руду Create."]
 	quest.3D753A32456BDA7A.title: "Дробление"
 	quest.3DB556DE613B82CC.quest_desc: ["Зажги литой портал и войди в Незер. Pale Store сразу откроет рецепт алмазной кирки."]
@@ -62,16 +202,58 @@
 	quest.3EA38D8286E0AE6D.title: "Фонарь душ"
 	quest.3F2B1450BCEDB172.quest_desc: ["Тёмные башни стоят только на севере."]
 	quest.3F2B1450BCEDB172.title: "Тёмная башня"
+	quest.3FC09F55AE6D1C15.quest_desc: ["Найди лесной особняк. Внутри разбойники, будь готов."]
+	quest.3FC09F55AE6D1C15.title: "Особняк"
+	quest.403796E887FF3760.quest_desc: ["Его панцирь идёт на булаву и броню."]
+	quest.403796E887FF3760.title: "Шипастый краб"
+	quest.40E96E0C16725E6F.quest_desc: ["Корпус поезда делают из прочного листа."]
+	quest.40E96E0C16725E6F.title: "Ж/д корпус"
+	quest.422E7DAB6ECB47AE.quest_desc: ["Глубоко под островом. Не шуми: там ходит Хранитель."]
+	quest.422E7DAB6ECB47AE.title: "Древний город"
+	quest.4241441FD3688E2A.quest_desc: ["На сковороде жарят прямо на огне. Ею ещё и бьют."]
+	quest.4241441FD3688E2A.title: "Сковорода"
+	quest.4530B3D62C2A74A6.quest_desc: ["Ты знаешь всех, кто приходит из хаоса."]
+	quest.4530B3D62C2A74A6.title: "Охотник на хаос"
+	quest.45FFCDBF36A6DFBD.quest_desc: ["Лучший нож."]
+	quest.45FFCDBF36A6DFBD.title: "Незеритовый нож"
+	quest.460B7A96112A144C.quest_desc: ["Порошок эндерняка, цинк и вода в нагретом миксере."]
+	quest.460B7A96112A144C.title: "Левититовая смесь"
+	quest.470CD1309BE79D82.quest_desc: ["В эндерняке Края есть платиновая руда Oritech. Это единственное место кроме севера."]
+	quest.470CD1309BE79D82.title: "Платина Края"
 	quest.48184452CD411FD3.quest_desc: ["Победи падшего рыцаря хаоса."]
 	quest.48184452CD411FD3.title: "Падший рыцарь"
+	quest.488FD18B22E2650A.title: "Костяной бес"
+	quest.48D30221A261736D.title: "Зомби в бочке"
+	quest.4956927C60DB5470.quest_desc: ["Пресс и миксер работают и над подставкой."]
+	quest.4956927C60DB5470.title: "Подставка"
+	quest.4AF3B98939A68C16.quest_desc: ["Незеритовый слиток из обломков и золота."]
+	quest.4AF3B98939A68C16.title: "Незерит"
+	quest.4AF81EC30CC8CB4C.quest_desc: ["Перекладывает предметы между машинами."]
+	quest.4AF81EC30CC8CB4C.title: "Механическая рука"
+	quest.4C3B43921837B846.quest_desc: ["Самая быстрая кисть."]
+	quest.4C3B43921837B846.title: "Незеритовая кисть"
 	quest.4D2A2718A56AA656.quest_desc: ["Меховая броня держит тепло."]
 	quest.4D2A2718A56AA656.title: "Козий мех"
 	quest.4D65D68F96EC4E41.quest_desc: ["Найди деревню."]
 	quest.4D65D68F96EC4E41.title: "Соседи"
+	quest.4DE3B4D8BEDB744D.quest_desc: ["Кистью счищают подозрительный песок и гравий."]
+	quest.4DE3B4D8BEDB744D.title: "Кисть"
+	quest.4DE8002A1CA820C6.quest_desc: ["Превращает постройку в летающее тело."]
+	quest.4DE8002A1CA820C6.title: "Физический сборщик"
+	quest.4ED7BFC0BBD81AF3.quest_desc: ["Стыковочный разъём сцепляет два корабля."]
+	quest.4ED7BFC0BBD81AF3.title: "Стыковка"
+	quest.4F3DD01B4E09985C.quest_desc: ["Съешь горячий суп или рагу на севере: тёплая еда греет тело на минуту."]
+	quest.4F3DD01B4E09985C.title: "Горячий ужин"
 	quest.5030EEC3E619C095.quest_desc: ["Скрафти нагрудник из шкуры хоглина."]
 	quest.5030EEC3E619C095.title: "Жаростойкий доспех"
+	quest.504DC36A93504B96.quest_desc: ["Подшипник пропеллера на латунном корпусе."]
+	quest.504DC36A93504B96.title: "Пропеллер"
+	quest.517FB6433E9F7852.quest_desc: ["Подземные ходы под тайгой или джунглями."]
+	quest.517FB6433E9F7852.title: "Катакомбы"
 	quest.51B38A5ECBABCC27.quest_desc: ["Первый вариант на столе стоит 125 очков опыта и не требует полок."]
 	quest.51B38A5ECBABCC27.title: "Стол зачарований"
+	quest.543F9A4131886D34.quest_desc: ["Корпус реактора собирают на линии сборки."]
+	quest.543F9A4131886D34.title: "Корпус реактора"
 	quest.54C4910398E90581.quest_desc: ["Броня из линьки хамелеона подстраивается под жару и холод."]
 	quest.54C4910398E90581.title: "Хамелеон"
 	quest.551B2870D03B979D.quest_desc: ["Охлаждает дом, когда снаружи жара."]
@@ -82,110 +264,396 @@
 	quest.5C108A9D1926801A.title: "Алмазная кирка"
 	quest.5C84789238F902A5.quest_desc: ["Пройди по Незеру примерно 500 блоков на юг (ось Z в плюс) и построй там портал. Он выведет на горячий остров."]
 	quest.5C84789238F902A5.title: "Портал на юг"
+	quest.5DB63DF388B56201.quest_desc: ["Меч Лорда Тыквоголового."]
+	quest.5DB63DF388B56201.title: "Губитель душ"
+	quest.5DF86C2C9CDC9B68.quest_desc: ["Солнечная нагревательная пластина. На юге солнца хватает."]
+	quest.5DF86C2C9CDC9B68.title: "Солнце юга"
+	quest.5E872F3E60538106.quest_desc: ["Бомбу археологов находят в раскопках. Брось её."]
+	quest.5E872F3E60538106.title: "Бомба"
+	quest.5F45460CF8DB57E9.quest_desc: ["Наполни оболочку горячим воздухом."]
+	quest.5F45460CF8DB57E9.title: "Голова в облаках"
 	quest.60E9D60176116959.quest_desc: ["Основа всего в Create."]
 	quest.60E9D60176116959.title: "Андезитовый сплав"
 	quest.613049AD6949A8E3.quest_desc: ["Медь и цинк в нагретой чаше."]
 	quest.613049AD6949A8E3.title: "Латунь"
 	quest.6167BC54D7B958AC.quest_desc: ["Перелёт долгий. Возьми много ракет."]
 	quest.6167BC54D7B958AC.title: "Фейерверки"
+	quest.62F3540ABB01B79E.quest_desc: ["Экзоброня Oritech из северных металлов."]
+	quest.62F3540ABB01B79E.title: "Экзоброня"
 	quest.63B83E7FF2A56CF8.quest_desc: ["Найди и переплавь железо."]
 	quest.63B83E7FF2A56CF8.title: "Железо"
+	quest.65767D70F184842D.quest_desc: ["Поставь на стол целое блюдо: жареную курицу, пастуший пирог или окорок."]
+	quest.65767D70F184842D.title: "Пир"
+	quest.65FEB118B7BA1765.quest_desc: ["Вшей защиту от жары в броню на швейном столе."]
+	quest.65FEB118B7BA1765.title: "Утеплитель"
 	quest.6732D54B22BF2CF3.quest_desc: ["Найди город Края за внешними островами."]
 	quest.6732D54B22BF2CF3.title: "Город Края"
+	quest.67433EA0672EC136.quest_desc: ["Скелеты севера стреляют замедляющими стрелами."]
+	quest.67433EA0672EC136.title: "Зимогоры"
 	quest.6761B1DEDF496C79.quest_desc: ["Полный комплект железной брони."]
 	quest.6761B1DEDF496C79.title: "Железный доспех"
+	quest.6979AD411F5C780D.quest_desc: ["Нагрудник из кожи монстров и тёмного металла."]
+	quest.6979AD411F5C780D.title: "Мантия ночи"
+	quest.6A1F76BBF7EF695D.quest_desc: ["Маленький винт для точного манёвра."]
+	quest.6A1F76BBF7EF695D.title: "Умный пропеллер"
 	quest.6BB18A9229DC45A1.quest_desc: ["Ты прошёл все три острова и одолел всех, кто прятался на севере."]
 	quest.6BB18A9229DC45A1.title: "Хозяин Серости"
+	quest.6D38E250FBC69D36.quest_desc: ["Медный провод и соединители."]
+	quest.6D38E250FBC69D36.title: "Провода"
+	quest.6DEBB1F3E3BB250B.quest_desc: ["Станция у каждого портала."]
+	quest.6DEBB1F3E3BB250B.title: "Станции"
 	quest.6EE5AAD137ED2402.quest_desc: ["Победи Матерь пауков."]
 	quest.6EE5AAD137ED2402.title: "Матерь пауков"
+	quest.6EFA5BF4CC56454A.quest_desc: ["Взрывается дважды."]
+	quest.6EFA5BF4CC56454A.title: "Призрачный крипер"
+	quest.70D959C60DCE3CA1.quest_desc: ["Тыквоголовый и его громилы."]
+	quest.70D959C60DCE3CA1.title: "Тыквенная братия"
 	quest.70DEC128677ACF04.quest_desc: ["Нужен для механизмов Create."]
 	quest.70DEC128677ACF04.title: "Кварц"
+	quest.7124E0DD608F7300.quest_desc: ["Сухая саванна между пустыней и джунглями."]
+	quest.7124E0DD608F7300.title: "Саванна"
+	quest.72AFD2AB490C73FB.quest_desc: ["Собери поезд: тележка на рельсах, корпус, пульт."]
+	quest.72AFD2AB490C73FB.title: "Поезд"
 	quest.73B6764D68F79C2D.quest_desc: ["Победи Миссионера."]
 	quest.73B6764D68F79C2D.title: "Миссионер"
 	quest.73FB8B12389506A9.quest_desc: ["Единственный путь на холодный остров. Портал из Незера туда не откроется."]
 	quest.73FB8B12389506A9.title: "Элитры"
+	quest.75903FFDBAF9F5C8.quest_desc: ["Набери ведро дизеля."]
+	quest.75903FFDBAF9F5C8.title: "Дизель"
 	quest.76D15F539177341F.quest_desc: ["Он охотится в темноте."]
 	quest.76D15F539177341F.title: "Кошмарный сталкер"
 	quest.7703C7EC764575C8.quest_desc: ["Пригодится против стрел и того, что живёт на других островах."]
 	quest.7703C7EC764575C8.title: "Щит"
 	quest.78126D00318DA7F3.quest_desc: ["Красные скалы на востоке."]
 	quest.78126D00318DA7F3.title: "Пустоши"
+	quest.7A2A3B6158360931.quest_desc: ["Найди руины тропы и раскопай черепок."]
+	quest.7A2A3B6158360931.title: "Тропа"
+	quest.7A4739014C49CFD3.quest_desc: ["Какао-бобы растут на стволах джунглей."]
+	quest.7A4739014C49CFD3.title: "Какао"
+	quest.7AB4822E28BE3D8A.quest_desc: ["Oritech находит свою нефть в источниках: они тоже только на юге."]
+	quest.7AB4822E28BE3D8A.title: "Нефтяной источник"
+	quest.7B988246F90F6F1C.quest_desc: ["Миссионер роняет амулеты. Собери три разных."]
+	quest.7B988246F90F6F1C.title: "Амулеты"
+	quest.7C20E04BF684FF68.quest_desc: ["Собери реактор с отводом тепла. Держи его подальше от дома."]
+	quest.7C20E04BF684FF68.title: "Реактор"
+	quest.7C24CF8E8AEE2B20.title: "Дряхлый скелет"
+	quest.7D512533CA7EC7A3.quest_desc: ["Кладёшь продукт, бьёшь ножом, получаешь нарезку."]
+	quest.7D512533CA7EC7A3.title: "Разделочная доска"
+	quest.7D928C9992FECDFD.quest_desc: ["Цинковая руда Create залегает неглубоко. Без неё не будет латуни."]
+	quest.7D928C9992FECDFD.title: "Цинк"
 	quest.7E137323D2F00F6F.quest_desc: ["Никель, платина и уран есть только на холодном острове."]
 	quest.7E137323D2F00F6F.title: "Северные руды"
+	quest.7EBD1CB374F2E544.quest_desc: ["Дроблёная руда плюс промывка дают больше металла."]
+	quest.7EBD1CB374F2E544.title: "Дроблёная руда"
 	quest.7FAA8C6F650E5E31.quest_desc: ["Найди ледяные шпили."]
 	quest.7FAA8C6F650E5E31.title: "Ледяные шпили"
+	quest.8315F2415B866728.title: "Огонёк"
+	quest.83294AA7A21B24F9.quest_desc: ["Рог Крампуса и мерзлота дают рог снежной бури."]
+	quest.83294AA7A21B24F9.title: "Рог бури"
 	quest.83C119B689CF5F32.quest_desc: ["Собери слитки тёмного металла и скуй нагрудник."]
 	quest.83C119B689CF5F32.title: "Тёмный металл"
+	quest.8448AC785A06ADA3.quest_desc: ["Кварц Незера и редстоун. Отполируй и сделай электронную лампу."]
+	quest.8448AC785A06ADA3.title: "Розовый кварц"
 	quest.84E8CC486B087199.quest_desc: ["Обсидиан без алмазной кирки не добыть, а её рецепт откроется только в Незере. Поэтому портал отливают на месте: выложи форму из камня, залей лаву ведром в каждую ячейку рамки и полей сверху водой. Лава станет обсидианом прямо в рамке. Ещё готовый обсидиан бывает в разрушенных порталах."]
 	quest.84E8CC486B087199.title: "Литой портал"
+	quest.8580B33A9D0FFD4D.quest_desc: ["Их находят в раскопках. Из осколков собирают артефакт."]
+	quest.8580B33A9D0FFD4D.title: "Осколки артефактов"
+	quest.884AB390024C4487.quest_desc: ["Набери ведро сырой нефти."]
+	quest.884AB390024C4487.title: "Сырая нефть"
 	quest.88C63890BCA3FB67.quest_desc: ["Лазерная рука Oritech добывает на расстоянии."]
 	quest.88C63890BCA3FB67.title: "Лазер"
+	quest.88E43EDD19DAD254.quest_desc: ["Черепа скелетов-иссушителей из крепости."]
+	quest.88E43EDD19DAD254.title: "Черепа"
+	quest.8B0F1DC398076B5B.quest_desc: ["Ториевая руда Create New Age есть только на холодном острове, рядом с ураном Oritech."]
+	quest.8B0F1DC398076B5B.title: "Торий"
+	quest.8C29D21D55168A37.quest_desc: ["Утепли весь комплект брони на швейном столе."]
+	quest.8C29D21D55168A37.title: "Полное утепление"
+	quest.8C9D2F40DB85901F.quest_desc: ["Его молот оглушает."]
+	quest.8C9D2F40DB85901F.title: "Скелет-громила"
+	quest.8E586753D20A5A43.quest_desc: ["Броня из панцирей краба."]
+	quest.8E586753D20A5A43.title: "Шипастый панцирь"
+	quest.902FBF4C0345BAC6.quest_desc: ["Маленькая дрезина Steam 'n' Rails для проверки пути."]
+	quest.902FBF4C0345BAC6.title: "Дрезина"
+	quest.90EADDECB31F69A8.quest_desc: ["Плоды хоруса с внешних островов."]
+	quest.90EADDECB31F69A8.title: "Хорус"
 	quest.910FEA79D7E519D8.quest_desc: ["Убийство моба лечит тебя."]
 	quest.910FEA79D7E519D8.title: "Пиявка"
 	quest.9168863FAED2584D.quest_desc: ["На нём шьют утепление и охлаждение прямо в броню."]
 	quest.9168863FAED2584D.title: "Швейный стол"
+	quest.91E96124CD295ED1.quest_desc: ["Самое неприятное место в Незере."]
+	quest.91E96124CD295ED1.title: "Базальтовые дельты"
 	quest.9249DF6F4BA122E6.quest_desc: ["Водяное колесо и шестерни дают первое вращение."]
 	quest.9249DF6F4BA122E6.title: "Сила воды"
+	quest.92B0A497F3B3C723.quest_desc: ["Ведёт корабль по курсу."]
+	quest.92B0A497F3B3C723.title: "Штурманский стол"
+	quest.96662A2C539A4849.quest_desc: ["Найди подводную крепость у берега. Возьми зелья подводного дыхания."]
+	quest.96662A2C539A4849.title: "Подводная крепость"
+	quest.96B8A826CE2236BB.quest_desc: ["Найди травяной курган."]
+	quest.96B8A826CE2236BB.title: "Курган"
+	quest.9A14DAD479DC44C0.quest_desc: ["Мелкие, но надоедливые."]
+	quest.9A14DAD479DC44C0.title: "Мухи и оводы"
+	quest.9AA6D5A556DD3D2D.quest_desc: ["Держись подальше, он бросает бомбы."]
+	quest.9AA6D5A556DD3D2D.title: "Скелет-подрывник"
+	quest.9ABF12682BDB7BDA.quest_desc: ["Срежь ножом высокую траву."]
+	quest.9ABF12682BDB7BDA.title: "Солома"
+	quest.9BE59DC6B19706C5.quest_desc: ["Медный баллон и шлем держат воздух под водой."]
+	quest.9BE59DC6B19706C5.title: "Водолаз"
+	quest.9D886E01C48B1318.quest_desc: ["Греет сильнее всего. Возьми с собой на север."]
+	quest.9D886E01C48B1318.title: "Горячий шоколад"
+	quest.9EA7A6A20FFADAD8.quest_desc: ["Ящик, который носят с собой. Перелёт на север станет проще."]
+	quest.9EA7A6A20FFADAD8.title: "Шалкеровый ящик"
+	quest.9EC8A39A8FFEF516.quest_desc: ["Ещё быстрее."]
+	quest.9EC8A39A8FFEF516.title: "Алмазная кисть"
 	quest.9FBB5CFB93AA3119.quest_desc: ["Набери его в бутылки."]
 	quest.9FBB5CFB93AA3119.title: "Дыхание дракона"
+	quest.A0A1040529E200F6.quest_desc: ["Храм археологов в джунглях юга."]
+	quest.A0A1040529E200F6.title: "Затерянный храм"
 	quest.A0B1FA5A024DD50C.quest_desc: ["Create Additions превращает электричество во вращение."]
 	quest.A0B1FA5A024DD50C.title: "Электромотор"
 	quest.A0F83F209478D8DF.quest_desc: ["Паровой двигатель над резервуаром с горелкой."]
 	quest.A0F83F209478D8DF.title: "Пар"
 	quest.A1E2F25A0165C779.quest_desc: ["Cold Sweat следит за температурой тела. Градусник показывает, насколько тепло вокруг."]
 	quest.A1E2F25A0165C779.title: "Градусник"
+	quest.A2A6BF64C165711A.quest_desc: ["Better Combat меняет бой: оружие бьёт сериями, у каждого своя дальность. Тёмный боевой клинок стал двуручным мечом, Секира жнеца двуручным топором, Молот-черепокол двуручным молотом, а вилы копьём. Посохи хаоса бьют по ПКМ, как раньше."]
+	quest.A2A6BF64C165711A.title: "Новый бой"
+	quest.A2F60D1C29A9AEB9.quest_desc: ["Offroad добавляет колёса. Корабль может ездить и по земле."]
+	quest.A2F60D1C29A9AEB9.title: "Вездеход"
+	quest.A4C762C823CD57D6.quest_desc: ["Стреляет едой. Лучше, чем кажется."]
+	quest.A4C762C823CD57D6.title: "Картофельная пушка"
+	quest.A53F64A34921796E.quest_desc: ["Звезда Незера и обсидиан."]
+	quest.A53F64A34921796E.title: "Маяк"
 	quest.A5EF27E3BF9A238A.quest_desc: ["Дойди до серого берега. Дальше не ходи: в тумане яд."]
 	quest.A5EF27E3BF9A238A.title: "Край мира"
+	quest.A6B24DBE2B9ECE71.quest_desc: ["Самый мощный двигатель Diesel Generators."]
+	quest.A6B24DBE2B9ECE71.title: "Огромный двигатель"
+	quest.A6B3E224BE0B43A2.quest_desc: ["Капуста растёт у берегов, лук на равнинах. Собери оба."]
+	quest.A6B3E224BE0B43A2.title: "Дикие овощи"
 	quest.A7B4FD4982C710F5.quest_desc: ["Сделай верстак."]
 	quest.A7B4FD4982C710F5.title: "Первые доски"
+	quest.A856DFEB22633543.quest_desc: ["И обратно: ток во вращение."]
+	quest.A856DFEB22633543.title: "Мотор New Age"
+	quest.A8D9ED4CB99978FF.quest_desc: ["Вампиризм и иссушение."]
+	quest.A8D9ED4CB99978FF.title: "Коса кошмара"
+	quest.AB65C5715EF15246.quest_desc: ["Мотыга и пшеница. Еды на островах мало."]
+	quest.AB65C5715EF15246.title: "Ферма"
 	quest.ABC6EC38598954EB.quest_desc: ["Осторожно, он пригодится для реактора."]
 	quest.ABC6EC38598954EB.title: "Уран"
 	quest.AC365A657D57407F.quest_desc: ["Бурит рудные жилы бесконечно."]
 	quest.AC365A657D57407F.title: "Глубинный бур"
+	quest.AD9C6B5CDD4A72BE.quest_desc: ["Призови и победи Иссушителя. Подальше от дома."]
+	quest.AD9C6B5CDD4A72BE.title: "Иссушитель"
+	quest.B0036867805EA6D5.quest_desc: ["Разбей вазу с добычей."]
+	quest.B0036867805EA6D5.title: "Ваза"
+	quest.B1AFBE8CAAB3188F.quest_desc: ["Оболочку шара шьют из шерсти и палок."]
+	quest.B1AFBE8CAAB3188F.title: "Оболочка"
 	quest.B27FB98BDF2373BA.quest_desc: ["Миксер с чашей смешивает то, что нельзя скрафтить руками."]
 	quest.B27FB98BDF2373BA.title: "Миксер"
 	quest.B2F1403AB0B6753D.quest_desc: ["Добытые блоки сразу выпадают переплавленными. Держи книгу."]
 	quest.B2F1403AB0B6753D.title: "Переплавка"
+	quest.B3ED485838982C35.quest_desc: ["Железо, заряженное в энергайзере."]
+	quest.B3ED485838982C35.title: "Заряженное железо"
+	quest.B4121C8FCBEF4EC1.title: "Алый преследователь"
+	quest.B467FCEF22AFFB9C.quest_desc: ["Прижмись к другу или к питомцу, чтобы согреться."]
+	quest.B467FCEF22AFFB9C.title: "Погреться вместе"
+	quest.B4EDD3D4B260DC0A.quest_desc: ["Древнее зачарование для элитр. Заслужи его перелётом на север."]
+	quest.B4EDD3D4B260DC0A.title: "Парящий ветер"
+	quest.B69E05F385946290.quest_desc: ["Подшипник ветряка и паруса вращают без воды."]
+	quest.B69E05F385946290.title: "Ветряк"
+	quest.B8424CBA31AEF41A.quest_desc: ["Раскопай любую окаменелость."]
+	quest.B8424CBA31AEF41A.title: "Окаменелость"
+	quest.B941662BD692035B.quest_desc: ["Тепло во вращение."]
+	quest.B941662BD692035B.title: "Двигатель Стирлинга"
+	quest.B9D24F2994467FEB.quest_desc: ["Охотятся стаей."]
+	quest.B9D24F2994467FEB.title: "Ужасные гончие"
+	quest.BB0147D256A72E76.quest_desc: ["Нож режет траву на солому, а мясо на куски. С ним начинается кухня. AppleSkin покажет, сколько сытости даёт каждое блюдо."]
+	quest.BB0147D256A72E76.title: "Нож"
+	quest.BB1137C51525EBB2.quest_desc: ["Полный комплект брони из козьего меха."]
+	quest.BB1137C51525EBB2.title: "Полная шуба"
+	quest.BC624DE76152228A.quest_desc: ["Кто-то копал здесь до тебя."]
+	quest.BC624DE76152228A.title: "Лагерь археологов"
+	quest.BDC87E3032B044AB.quest_desc: ["Топливо из тория."]
+	quest.BDC87E3032B044AB.title: "Ядерное топливо"
+	quest.BE7BA3D77DAA1ED3.quest_desc: ["Полный комплект тёмного металла. В этой сборке он даёт Силу I."]
+	quest.BE7BA3D77DAA1ED3.title: "Рыцарь хаоса"
+	quest.BE9A70573691E0A3.quest_desc: ["Кирка копает сразу несколько блоков."]
+	quest.BE9A70573691E0A3.title: "Проходка"
+	quest.BF0DD4D605F5FA46.quest_desc: ["Нагрей смесь, и она кристаллизуется. Левитит держит корабль в воздухе, но поднять его сам не может."]
+	quest.BF0DD4D605F5FA46.title: "Левитит"
+	quest.BF3D3BFEDA85A930.quest_desc: ["Старший из призывателей костей."]
+	quest.BF3D3BFEDA85A930.title: "Верховный призыватель"
+	quest.BF3D52997756353E.quest_desc: ["Его топор колет и щиты."]
+	quest.BF3D52997756353E.title: "Зомби-лесоруб"
+	quest.BF4BF63D52649624.quest_desc: ["Воронки берут и кладут предметы в сундуки и на ремень."]
+	quest.BF4BF63D52649624.title: "Воронки"
+	quest.BF93180CA875881A.quest_desc: ["Дизель даёт вращение без воды и ветра."]
+	quest.BF93180CA875881A.title: "Дизельный двигатель"
+	quest.C03B1C7C6E38BC53.quest_desc: ["Тесто, томатный соус и фарш."]
+	quest.C03B1C7C6E38BC53.title: "Паста с фрикадельками"
+	quest.C1A3A86D29FCD841.quest_desc: ["Семафор показывает, свободен ли путь."]
+	quest.C1A3A86D29FCD841.title: "Семафор"
 	quest.C30EEFC8CC04719E.quest_desc: ["Алмазную кирку пока не скрафтить: её рецепт в Pale Store откроется в Незере. А вот алмазы уже пригодятся."]
 	quest.C30EEFC8CC04719E.title: "Алмазы"
+	quest.C46F1EF791847FB7.quest_desc: ["Здесь почти не нападают."]
+	quest.C46F1EF791847FB7.title: "Искажённый лес"
+	quest.C48A5C767908D1E4.quest_desc: ["Ферментер делает биотопливо из растений. Это запасной путь без нефти."]
+	quest.C48A5C767908D1E4.title: "Масло из семян"
+	quest.C7932ED33706A4C0.quest_desc: ["Хоглины пасутся в багровом лесу."]
+	quest.C7932ED33706A4C0.title: "Багровый лес"
+	quest.C8D47269F11D1242.quest_desc: ["Старое укрепление на холме в лесу."]
+	quest.C8D47269F11D1242.title: "Мотт"
+	quest.C8F69B71BADEC961.quest_desc: ["Дробильные колёса превращают эндерняк в порошок. Из него делают левитит для кораблей."]
+	quest.C8F69B71BADEC961.title: "Порошок эндерняка"
 	quest.C988A9961035406B.quest_desc: ["Войди в портал Края."]
 	quest.C988A9961035406B.title: "Конец?"
+	quest.C98A2D2CD3B01050.quest_desc: ["Поставь котёл на плиту. В нём варят супы и рагу."]
+	quest.C98A2D2CD3B01050.title: "Котёл"
 	quest.C99AB36B29666371.quest_desc: ["Полей эликсиром адскую тыкву и победи Лорда."]
 	quest.C99AB36B29666371.title: "Лорд Тыквоголовый"
+	quest.C9A60CFC6CC71D67.quest_desc: ["Заряжает железо и золото током."]
+	quest.C9A60CFC6CC71D67.title: "Энергайзер"
+	quest.C9CD56A57D4E55A4.quest_desc: ["Разливает жидкость в бутылки и на детали."]
+	quest.C9CD56A57D4E55A4.title: "Разливщик"
+	quest.CA556D7CD9BDBF91.quest_desc: ["Симметричные паруса ловят ветер."]
+	quest.CA556D7CD9BDBF91.title: "Паруса"
+	quest.CAD349C8E447E551.quest_desc: ["Синий огонь и песок душ."]
+	quest.CAD349C8E447E551.title: "Долина душ"
 	quest.CB03880F1C26F0ED.quest_desc: ["Механический пресс делает листы из слитков."]
 	quest.CB03880F1C26F0ED.title: "Пресс"
+	quest.CB0F891B4036C99F.quest_desc: ["Два черепа, один хребет."]
+	quest.CB0F891B4036C99F.title: "Сиамские скелеты"
+	quest.CC8251E4D1C6AA30.quest_desc: ["Контроллер на колонне из резервуаров разгоняет нефть на фракции."]
+	quest.CC8251E4D1C6AA30.title: "Перегонка"
+	quest.CCBE9AD642E91296.quest_desc: ["Гадость из воды."]
+	quest.CCBE9AD642E91296.title: "Рыбы-трупоеды"
+	quest.CDAA5FFB4B8FBD43.quest_desc: ["Живёт у воды."]
+	quest.CDAA5FFB4B8FBD43.title: "Зомби-рыбак"
+	quest.CDF3B18A3D57CD81.quest_desc: ["Найди тёмный лес. Там стоят особняки."]
+	quest.CDF3B18A3D57CD81.title: "Тёмный лес"
 	quest.CE4C20E946F41672.quest_desc: ["Сердце сложных машин Create."]
 	quest.CE4C20E946F41672.title: "Точный механизм"
+	quest.CE4E427D54CEA209.quest_desc: ["Остатки перегонки идут на асфальт. По нему быстрее бегать."]
+	quest.CE4E427D54CEA209.title: "Асфальт"
+	quest.CF2C221048E9A69F.quest_desc: ["Бьёт больно."]
+	quest.CF2C221048E9A69F.title: "Зомби-громила"
 	quest.D0B8518015D93474.quest_desc: ["Панцири шалкеров для ящиков."]
 	quest.D0B8518015D93474.title: "Шалкеры"
+	quest.D2C48897B0391DA4.quest_desc: ["Осколки вечной мерзлоты. Из них куют Морозный клинок."]
+	quest.D2C48897B0391DA4.title: "Вечная мерзлота"
+	quest.D4320B3D256A2A18.quest_desc: ["Удар в прыжке оглушает."]
+	quest.D4320B3D256A2A18.title: "Молот-черепокол"
+	quest.D58294EEFE87A521.quest_desc: ["Поднимает груз на канате."]
+	quest.D58294EEFE87A521.title: "Лебёдка"
+	quest.D5876116D09A4A94.quest_desc: ["Элитры надеваются в отдельный слот (Elytra Slot), так что нагрудник остаётся на месте. На север лети в утеплённом нагруднике."]
+	quest.D5876116D09A4A94.title: "Слот для крыльев"
+	quest.D67EFDB2909E622E.quest_desc: ["Медь нужна и для Create, и для бурдюка."]
+	quest.D67EFDB2909E622E.title: "Медь"
+	quest.D7663AC209CBDFA4.quest_desc: ["Каждое убийство разгоняет Rampage."]
+	quest.D7663AC209CBDFA4.title: "Секира жнеца"
+	quest.D88E282B1E8AB802.quest_desc: ["Насос и трубы качают воду, лаву и всё, что течёт."]
+	quest.D88E282B1E8AB802.title: "Насос"
 	quest.D8A86AB5D40AE123.quest_desc: ["Первый генератор Oritech."]
 	quest.D8A86AB5D40AE123.title: "Oritech"
+	quest.D98E9E19AB6E1041.quest_desc: ["Найди болото. Там растёт дикий рис и живут ведьмы."]
+	quest.D98E9E19AB6E1041.title: "Болото"
+	quest.D9E931CC418BB150.quest_desc: ["Промой гравий: из него выпадают самородки."]
+	quest.D9E931CC418BB150.title: "Промывка"
+	quest.DBF65E1459529D27.title: "Гниющий зомби"
+	quest.DC7BBA04424DE05D.quest_desc: ["Большая солнечная панель Oritech."]
+	quest.DC7BBA04424DE05D.title: "Солнечная панель"
+	quest.DDBB3C9CFBE1A7F0.quest_desc: ["Механическая рука, которая кликает за тебя."]
+	quest.DDBB3C9CFBE1A7F0.title: "Установщик"
+	quest.DE17EC8E24A4E902.quest_desc: ["Найди аванпост разбойников. Они стоят подальше от деревень."]
+	quest.DE17EC8E24A4E902.title: "Аванпост"
+	quest.DE1F5A5408C7DBDF.quest_desc: ["Крафтит большие рецепты сам."]
+	quest.DE1F5A5408C7DBDF.title: "Механический крафтер"
+	quest.DE60743011A9253E.quest_desc: ["Обелиск стоит в пустыне горячего острова."]
+	quest.DE60743011A9253E.title: "Обелиск"
 	quest.DFC8884BF979CF66.quest_desc: ["Механическая дрель и пила рубят и копают сами."]
 	quest.DFC8884BF979CF66.title: "Автоматизация"
 	quest.E14CFE4398E3FC6C.quest_desc: ["Победи Похитителя жизни."]
 	quest.E14CFE4398E3FC6C.title: "Похититель жизни"
+	quest.E257C11FF030B148.quest_desc: ["Говяжье рагу сытнее и тоже греет."]
+	quest.E257C11FF030B148.title: "Рагу"
 	quest.E2BF3F56EC398E2B.quest_desc: ["Поднимись выше 500 блоков: там нет ни тумана, ни яда. Внизу море облаков, острова видны как дыры в нём."]
 	quest.E2BF3F56EC398E2B.title: "Над облаками"
+	quest.E30FD8AB50DCEDE6.quest_desc: ["Найди испытательные палаты под землёй и добудь ключ испытаний."]
+	quest.E30FD8AB50DCEDE6.title: "Испытания"
+	quest.E35516F1AD254645.quest_desc: ["На нём опознают артефакты."]
+	quest.E35516F1AD254645.title: "Стол археолога"
+	quest.E41005752AAF6989.quest_desc: ["Запусти пропеллер на корабле."]
+	quest.E41005752AAF6989.title: "Тяга"
 	quest.E53992FFD62EEE01.quest_desc: ["Все три крепости стоят на горячем острове, на полпути от центра к берегу."]
 	quest.E53992FFD62EEE01.title: "Крепость Края"
 	quest.E541143ABF1D324D.quest_desc: ["Земля кончается примерно в 1250 блоках от центра. Дальше лежит серое ядовитое море и стена тумана. Где-то за ним есть ещё два острова."]
 	quest.E541143ABF1D324D.title: "Добро пожаловать в Серость"
+	quest.E62C24D6541B96D3.quest_desc: ["Бур для подземной машины."]
+	quest.E62C24D6541B96D3.title: "Буровой подшипник"
+	quest.E6BB1CC21F626DDD.quest_desc: ["Из соломы ткут холст."]
+	quest.E6BB1CC21F626DDD.title: "Холст"
+	quest.E6FBABA20A32879D.quest_desc: ["Колодец, полный огня."]
+	quest.E6FBABA20A32879D.title: "Огненный колодец"
+	quest.E8057D6B78C4CC00.quest_desc: ["Удар проходит сквозь броню."]
+	quest.E8057D6B78C4CC00.title: "Пробивающий удар"
+	quest.E9AD1F3470900340.quest_desc: ["Показывает высоту и давление. Давление падает с высотой, и тяга вместе с ним."]
+	quest.E9AD1F3470900340.title: "Датчик высоты"
 	quest.E9D79ACF1091D28A.quest_desc: ["Убей Эндер-дракона."]
 	quest.E9D79ACF1091D28A.title: "Дракон"
 	quest.EADA0FE986A758A0.quest_desc: ["Зачаруй любой предмет."]
 	quest.EADA0FE986A758A0.title: "Первые чары"
 	quest.EB453C03F34C6392.quest_desc: ["Литейная Oritech делает сталь."]
 	quest.EB453C03F34C6392.title: "Сталь"
+	quest.EBBFE927BFD7CC3F.quest_desc: ["Сканер показывает, сколько нефти под чанком. Ищи в пустыне, пустошах и саванне: на других островах её нет."]
+	quest.EBBFE927BFD7CC3F.title: "Нефтеразведка"
+	quest.EC204740A618AA15.quest_desc: ["Поднимись на корабле как можно выше. Около высоты 300 воздуха уже нет, и корабль дальше не идёт. А выше 450, где нет яда, стоять на палубе нельзя: Бледнота отпускает только тех, кто летит на крыльях."]
+	quest.EC204740A618AA15.title: "Потолок Бледноты"
+	quest.EC7E43831A5017C0.quest_desc: ["Измеритель нагрузки показывает, сколько сети ещё можно нагрузить."]
+	quest.EC7E43831A5017C0.title: "Нагрузка"
 	quest.ECA11DA32F4F7DDE.quest_desc: ["Найди крепость Незера."]
 	quest.ECA11DA32F4F7DDE.title: "Крепость"
+	quest.EDD0B934A341F1F9.quest_desc: ["Дикий рис растёт в болотах и джунглях. Его сажают в воду."]
+	quest.EDD0B934A341F1F9.title: "Рис"
+	quest.EE36748374FCDE66.quest_desc: ["Дикие помидоры растут только в жарких краях. Это горячий остров."]
+	quest.EE36748374FCDE66.title: "Помидоры"
 	quest.EE4CB3B7BB11E21C.quest_desc: ["Выйди из портала и найди пустыню. Пей воду и следи за градусником."]
 	quest.EE4CB3B7BB11E21C.title: "Пески юга"
+	quest.EE686D1726C68213.quest_desc: ["Большой склад из железных листов."]
+	quest.EE686D1726C68213.title: "Хранилище"
+	quest.EF5337DC970DB68C.quest_desc: ["Отбей набег на деревню."]
+	quest.EF5337DC970DB68C.title: "Набег"
+	quest.F1B68E3780D7E7E9.quest_desc: ["Найди каменный круг на равнинах."]
+	quest.F1B68E3780D7E7E9.title: "Каменный круг"
+	quest.F1D741031868AB0C.quest_desc: ["Здесь растут злые тыквы."]
+	quest.F1D741031868AB0C.title: "Проклятая ферма"
+	quest.F24365EB011E31E6.quest_desc: ["Найди хижину ведьмы на болоте."]
+	quest.F24365EB011E31E6.title: "Хижина ведьмы"
+	quest.F2F4E7B325137CB1.quest_desc: ["Штурвал и рычаг тяги."]
+	quest.F2F4E7B325137CB1.title: "Штурвал"
 	quest.F2F9FEBA0B99A12B.quest_desc: ["Глубоко в Незере."]
 	quest.F2F9FEBA0B99A12B.title: "Древние обломки"
 	quest.F33D147DABDE9D02.quest_desc: ["Ранец с элитрами: летать между островами станет проще."]
 	quest.F33D147DABDE9D02.title: "Реактивный ранец"
+	quest.F3CB050C8F07B87F.quest_desc: ["Логово гончих."]
+	quest.F3CB050C8F07B87F.title: "Курган гончих"
+	quest.F4270BCBAB292772.quest_desc: ["Разрой проклятую могилу."]
+	quest.F4270BCBAB292772.title: "Могилы"
+	quest.F519FB621D212C41.quest_desc: ["Шаблон улучшения лежит в бастионе."]
+	quest.F519FB621D212C41.title: "Улучшение"
+	quest.F697D66FB4E0E128.quest_desc: ["Плита греет всё, что стоит на ней."]
+	quest.F697D66FB4E0E128.title: "Плита"
+	quest.F7BCEC682CE4FE4C.quest_desc: ["Ещё одна фракция."]
+	quest.F7BCEC682CE4FE4C.title: "Бензин"
+	quest.F9BC6FA18749A3B5.quest_desc: ["Для проводов и магнитов получше."]
+	quest.F9BC6FA18749A3B5.title: "Заряженное золото"
 	quest.FA2BCD9950313F2F.quest_desc: ["Найди пустынную пирамиду. Осторожно с полом."]
 	quest.FA2BCD9950313F2F.title: "Пирамида"
 	quest.FB503FD5B2AE693A.quest_desc: ["На стартовом острове их не было. Здесь они есть."]
 	quest.FB503FD5B2AE693A.title: "Порождения хаоса"
+	quest.FBBFEBF366BDE7D3.quest_desc: ["Трубы для предметов и энергии."]
+	quest.FBBFEBF366BDE7D3.title: "Трубы Oritech"
+	quest.FD7FFD8C48C4CE4C.quest_desc: ["Опознай артефакт на столе. Внутри одно из трёх древних зачарований."]
+	quest.FD7FFD8C48C4CE4C.title: "Опознанный артефакт"
+	quest.FE48AF787B5579EB.quest_desc: ["Он показывает, где ты умер в последний раз. С модом Corpse это дорога к твоим вещам. Осколки эха есть только в древних городах."]
+	quest.FE48AF787B5579EB.title: "Компас восстановления"
+	quest.FE9F3C3908AE7FEE.quest_desc: ["Он ест алмазную руду."]
+	quest.FE9F3C3908AE7FEE.title: "Алмазный термит"
 }
