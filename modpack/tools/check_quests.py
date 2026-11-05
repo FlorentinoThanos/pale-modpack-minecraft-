@@ -6,6 +6,10 @@ output) or known to drop or generate.
     python3 modpack/tools/check_quests.py <minecraft-1.21.1-client.jar> <mods folder or jars...>
 
 The client jar is in .minecraft/versions/1.21.1/1.21.1.jar. Exit code 1 when something is missing.
+
+Names come from the jars' language files and models, and a few mods name things there that they never register
+(Steam 'n' Rails' tracks for other mods' woods, Better Archeology's "identified artifact"). So also start a server
+with the quests once: FTB Quests logs "Tried to load invalid item" for every item that doesn't exist.
 """
 import io
 import json
@@ -85,7 +89,7 @@ FOUND = re.compile(
     r"totem_of_undying|shulker_shell|elytra|dragon_egg|dragon_breath|chorus_fruit|wither_skeleton_skull|"
     r"netherite_upgrade_smithing_template|ender_pearl|lava_bucket|water_bucket|.*_ingot|redstone|coal|"
     r"rotten_flesh|bone|feather|egg|.*_log|cobblestone|stone|.*_fungus|soul_sand|basalt)$"
-    r"|^oritech:raw_.*|^create:(zinc_ingot|crushed_raw_.*)|^born_in_chaos_v1:.*|^betterarcheology:(artifact_shards|unidentified_artifact|identified_artifact)"
+    r"|^oritech:raw_.*|^create:(zinc_ingot|crushed_raw_.*)|^born_in_chaos_v1:.*|^betterarcheology:(artifact_shards|unidentified_artifact)"
     r"|^cold_sweat:(goat_fur|hoglin_hide|chameleon_molt)|^farmersdelight:(cabbage|onion|rice|tomato|straw)"
     r"|^create_new_age:(thorium|magnetite_block)|^createdieselgenerators:(crude_oil_bucket|diesel_bucket|gasoline_bucket)"
     r"|^aeronautics:levitite_blend_bucket$")

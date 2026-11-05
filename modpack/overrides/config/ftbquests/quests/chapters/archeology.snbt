@@ -239,6 +239,10 @@
 		}
 		{
 			dependencies: ["2BC86194802C313D"]
+			icon: {
+				count: 1
+				id: "minecraft:enchanted_book"
+			}
 			id: "FD7FFD8C48C4CE4C"
 			rewards: [
 				{
@@ -251,13 +255,8 @@
 			size: 1.25d
 			tasks: [
 				{
-					count: 1L
 					id: "CE57B7605CFB7F22"
-					item: {
-						count: 1
-						id: "betterarcheology:identified_artifact"
-					}
-					type: "item"
+					type: "checkmark"
 				}
 			]
 			x: 10.0d

@@ -475,7 +475,7 @@
 	quest.BDC87E3032B044AB.title: "Nuclear Fuel"
 	quest.BE7BA3D77DAA1ED3.quest_desc: ["A full set of dark metal. In this pack it gives Strength I."]
 	quest.BE7BA3D77DAA1ED3.title: "Chaos Knight"
-	quest.BE9A70573691E0A3.quest_desc: ["A pickaxe digs several blocks at once."]
+	quest.BE9A70573691E0A3.quest_desc: ["A pickaxe digs several blocks at once. Earn the book by digging deepslate."]
 	quest.BE9A70573691E0A3.title: "Tunneling"
 	quest.BF0DD4D605F5FA46.quest_desc: ["Heat the blend and it crystallises. Levitite holds a ship up, but can't lift it on its own."]
 	quest.BF0DD4D605F5FA46.title: "Levitite"
@@ -592,7 +592,7 @@
 	quest.E6BB1CC21F626DDD.title: "Canvas"
 	quest.E6FBABA20A32879D.quest_desc: ["A well full of fire."]
 	quest.E6FBABA20A32879D.title: "Firewell"
-	quest.E8057D6B78C4CC00.quest_desc: ["The blow goes through armour."]
+	quest.E8057D6B78C4CC00.quest_desc: ["The blow goes through armour. Earn the book by beating a ravager from a raid."]
 	quest.E8057D6B78C4CC00.title: "Penetrating Strike"
 	quest.E9AD1F3470900340.quest_desc: ["It shows height and air pressure. Pressure drops with height, and so does thrust."]
 	quest.E9AD1F3470900340.title: "Altitude Sensor"
@@ -650,8 +650,8 @@
 	quest.FB503FD5B2AE693A.title: "Spawn of Chaos"
 	quest.FBBFEBF366BDE7D3.quest_desc: ["Pipes for items and energy."]
 	quest.FBBFEBF366BDE7D3.title: "Oritech Pipes"
-	quest.FD7FFD8C48C4CE4C.quest_desc: ["Identify the artifact on the table. It holds one of three ancient enchantments."]
-	quest.FD7FFD8C48C4CE4C.title: "Identified Artifact"
+	quest.FD7FFD8C48C4CE4C.quest_desc: ["Put an unidentified artifact on the archeology table. It turns into a book with one of three ancient enchantments: Soaring Winds, Penetrating Strike or Tunneling."]
+	quest.FD7FFD8C48C4CE4C.title: "Identify an Artifact"
 	quest.FE48AF787B5579EB.quest_desc: ["It points to where you last died. With the Corpse mod that's the way back to your things. Echo shards come only from ancient cities."]
 	quest.FE48AF787B5579EB.title: "Recovery Compass"
 	quest.FE9F3C3908AE7FEE.quest_desc: ["It eats diamond ore."]

@@ -369,7 +369,7 @@
 			y: -1.0d
 		}
 		{
-			dependencies: ["FD7FFD8C48C4CE4C", "5882B5D6552E7AB1"]
+			dependencies: ["EF5337DC970DB68C", "5882B5D6552E7AB1"]
 			icon: {
 				count: 1
 				id: "minecraft:iron_sword"
@@ -394,20 +394,17 @@
 			]
 			tasks: [
 				{
-					count: 1L
+					entity: "minecraft:ravager"
 					id: "962000153EE6532B"
-					item: {
-						count: 1
-						id: "betterarcheology:identified_artifact"
-					}
-					type: "item"
+					type: "kill"
+					value: 1L
 				}
 			]
 			x: 10.0d
 			y: 0.0d
 		}
 		{
-			dependencies: ["FD7FFD8C48C4CE4C", "5882B5D6552E7AB1"]
+			dependencies: ["5882B5D6552E7AB1"]
 			icon: {
 				count: 1
 				id: "minecraft:diamond_pickaxe"
@@ -432,11 +429,11 @@
 			]
 			tasks: [
 				{
-					count: 1L
+					count: 256L
 					id: "B20EDC5E11C10B7B"
 					item: {
 						count: 1
-						id: "betterarcheology:identified_artifact"
+						id: "minecraft:cobbled_deepslate"
 					}
 					type: "item"
 				}
