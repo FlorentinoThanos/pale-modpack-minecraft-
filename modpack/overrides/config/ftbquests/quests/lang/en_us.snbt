@@ -1,12 +1,24 @@
 {
+	chapter.24C62B88537DAC31.chapter_subtitle: ["Fire, fortresses and the short way south: one block here is eight up top."]
+	chapter.24C62B88537DAC31.title: "The Nether"
 	chapter.52326DE657CCE52E.chapter_subtitle: ["The main path: from your first crafting table to the crossing to the hot island."]
 	chapter.52326DE657CCE52E.title: "The Mild Island"
 	chapter_group.6FA7D509EB9A847A.title: "The Pale"
+	quest.03FA7F1DAE6ECFF3.quest_desc: ["Brew any potion."]
+	quest.03FA7F1DAE6ECFF3.title: "Home Brew"
 	quest.06F27455A8C1762B.quest_desc: ["Make a bucket. The reward is a random Insight book, I to III."]
 	quest.06F27455A8C1762B.title: "Bucket"
+	quest.0BC8FFA36F43ED32.quest_desc: ["The netherite upgrade template is in bastion chests."]
+	quest.0BC8FFA36F43ED32.title: "Upgrade Template"
 	quest.0D317297C92105F5.quest_desc: ["Enchant items on the table 30 times. Next comes the Death List chapter."]
 	quest.0D317297C92105F5.title: "Enchanter"
-	quest.11EE6307F604292F.quest_desc: ["Without a diamond pickaxe you can't mine obsidian, so cast the portal in place: build a mould, pour lava into each frame cell and pour water over it. Ruined portals also hold obsidian. Enter the Nether to unlock the diamond pickaxe recipe."]
+	quest.0D95AD042A8F6753.quest_desc: ["Dangerous, but full of gold, templates and debris."]
+	quest.0D95AD042A8F6753.title: "Bastion"
+	quest.117325654E654D62.quest_desc: ["Kill 8 blazes and collect 6 blaze rods."]
+	quest.117325654E654D62.title: "Blazes"
+	quest.11E96124CD295ED1.quest_desc: ["The nastiest place in the Nether."]
+	quest.11E96124CD295ED1.title: "Basalt Deltas"
+	quest.11EE6307F604292F.quest_desc: ["Without a diamond pickaxe you can't mine obsidian, so cast the portal in place: build a mould, pour lava into each frame cell and pour water over it. Ruined portals also hold obsidian. Enter the Nether to unlock the diamond pickaxe recipe and the Nether chapter."]
 	quest.11EE6307F604292F.title: "Into the Nether"
 	quest.142A7D5B0E76BB45.quest_desc: ["Breed any two animals."]
 	quest.142A7D5B0E76BB45.title: "New Arrivals"
@@ -16,10 +28,18 @@
 	quest.18BAE9E1D07C3F7C.title: "Stone Age"
 	quest.238CF919ACEEAA52.quest_desc: ["When it gets too cold around you (at night or high in the mountains), warm up next to a warm block such as a campfire."]
 	quest.238CF919ACEEAA52.title: "Huddle Close"
+	quest.253F64A34921796E.quest_desc: ["A nether star and obsidian."]
+	quest.253F64A34921796E.title: "Beacon"
 	quest.27B4FD4982C710F5.quest_desc: ["Craft a crafting table."]
 	quest.27B4FD4982C710F5.title: "Crafting Table"
+	quest.295417956A1A5F30.quest_desc: ["Distract a piglin with gold."]
+	quest.295417956A1A5F30.title: "Oh Shiny"
 	quest.2B84337841810FE1.quest_desc: ["Put a smokestack on a boiler or an icebox."]
 	quest.2B84337841810FE1.title: "Getting Cozy"
+	quest.2D9C6B5CDD4A72BE.quest_desc: ["Summon and defeat the Wither. Far from home."]
+	quest.2D9C6B5CDD4A72BE.title: "The Wither"
+	quest.316BDBE7B30479D1.quest_desc: ["Hoglins graze in the crimson forest."]
+	quest.316BDBE7B30479D1.title: "Hoglin Hide"
 	quest.32B2FC7FC1FE0154.quest_desc: ["Make a bed of any colour. Now you can sleep through the night."]
 	quest.32B2FC7FC1FE0154.title: "A Bed of Your Own"
 	quest.347ECC69BCE02B07.quest_desc: ["Make iron leggings and boots."]
@@ -28,30 +48,61 @@
 	quest.3739C0C06C989C7E.title: "Enchanting Table"
 	quest.3C8B601B55377999.quest_desc: ["Go down into any cave biome."]
 	quest.3C8B601B55377999.title: "Underground"
+	quest.3D852B29B66B7CE6.quest_desc: ["Collect 3 wither skeleton skulls."]
+	quest.3D852B29B66B7CE6.title: "Skulls"
 	quest.430EEFC8CC04719E.quest_desc: ["Mine 5 diamonds. You can't craft a diamond pickaxe yet: its recipe unlocks in the Nether."]
 	quest.430EEFC8CC04719E.title: "Diamonds"
 	quest.43D38460798BDC87.quest_desc: ["Plant any crop."]
 	quest.43D38460798BDC87.title: "First Crop"
+	quest.440A8F85CAA3A124.quest_desc: ["Make a brewing stand. Nether wart grows in fortresses."]
+	quest.440A8F85CAA3A124.title: "Brewing Stand"
+	quest.446F1EF791847FB7.quest_desc: ["Hardly anything attacks you here. A good spot for a camp."]
+	quest.446F1EF791847FB7.title: "Warped Forest"
 	quest.46CDA9D5A810A1B4.quest_desc: ["Build a campfire and cook some meat on it. Next comes the kitchen: the Farmer's Delight chapter."]
 	quest.46CDA9D5A810A1B4.title: "Campfire Dinner"
+	quest.47932ED33706A4C0.quest_desc: ["Hoglins graze here."]
+	quest.47932ED33706A4C0.title: "Crimson Forest"
 	quest.47F23E6BC846E84A.quest_desc: ["Deflect an arrow with a shield."]
 	quest.47F23E6BC846E84A.title: "Not Today"
+	quest.49315C954FA0B6F5.quest_desc: ["Potions, heatproof armour and a road through the Nether: time to head for the hot island."]
+	quest.49315C954FA0B6F5.title: "Ready for the South"
+	quest.4AD349C8E447E551.quest_desc: ["Blue fire and soul sand."]
+	quest.4AD349C8E447E551.title: "Soul Sand Valley"
+	quest.4AF3B98939A68C16.quest_desc: ["An ingot from scrap and gold."]
+	quest.4AF3B98939A68C16.title: "Netherite"
+	quest.4FDFE63DCAAA6E64.quest_desc: ["Visit every Nether biome."]
+	quest.4FDFE63DCAAA6E64.title: "Hot Tourist"
 	quest.4FEBB1AD4B9148A2.quest_desc: ["Make some torches. The reward unlocks the ladder recipe."]
 	quest.4FEBB1AD4B9148A2.title: "Torches"
+	quest.5030EEC3E619C095.quest_desc: ["A hoglin hide chestplate keeps the heat out. The hot island is hard without one."]
+	quest.5030EEC3E619C095.title: "Heatproof Armour"
 	quest.52D4A2355D369CE6.quest_desc: ["Caves explored, iron on. Take a longer fire resistance."]
 	quest.52D4A2355D369CE6.title: "Ready for the Heat"
+	quest.5C108A9D1926801A.quest_desc: ["The recipe is open. Craft a diamond pickaxe: you need it for debris and obsidian."]
+	quest.5C108A9D1926801A.title: "Diamond Pickaxe"
 	quest.5F7D080C32D1BF06.quest_desc: ["Mine some coal."]
 	quest.5F7D080C32D1BF06.title: "Coal"
+	quest.60C79CE55B3A8D6D.quest_desc: ["Upgrade a diamond pickaxe at a smithing table."]
+	quest.60C79CE55B3A8D6D.title: "Netherite Pickaxe"
 	quest.63B83E7FF2A56CF8.quest_desc: ["An iron pickaxe can mine diamonds. The fire resistance reward helps around lava."]
 	quest.63B83E7FF2A56CF8.title: "Iron Pickaxe"
 	quest.6541143ABF1D324D.quest_desc: ["Land ends about 1250 blocks from here. Past it lies a grey, poisonous sea behind a wall of fog. Two more islands wait somewhere beyond it. Start small."]
 	quest.6541143ABF1D324D.title: "Grey Horizon"
 	quest.655E5A51D507619D.quest_desc: ["Bring 15 bookshelves (they are not taken) and place them around the table: that gives the strongest enchantments."]
 	quest.655E5A51D507619D.title: "Full Power"
+	quest.66E7BBE525F27832.quest_desc: ["You are in the Nether. One block here is eight in the Overworld, so the hot island is only about 500 blocks south. Look around first: fortresses, bastions and debris are close, and you will need them."]
+	quest.66E7BBE525F27832.title: "A Warm Welcome"
+	quest.6CA11DA32F4F7DDE.quest_desc: ["Find a Nether fortress."]
+	quest.6CA11DA32F4F7DDE.title: "Fortress"
+	quest.72F9FEBA0B99A12B.quest_desc: ["Deep in the Nether, below y 20. Needs a diamond pickaxe."]
+	quest.72F9FEBA0B99A12B.title: "Ancient Debris"
 	quest.799E7F1C5D6A46BF.quest_desc: ["The hot island lies 3500 to 4500 blocks south; in the Nether that is 8 times closer. Head south to around x 0, z 500 (x −60 to 60, z 440 to 560). A portal built there leads to the hot island."]
 	quest.799E7F1C5D6A46BF.title: "The Road South"
+	quest.7E599DE624740DA1.quest_desc: ["A soul-fire lamp keeps the temperature around you steady. Useful both south and north."]
+	quest.7E599DE624740DA1.title: "Soulspring Lamp"
 	reward_table.0E28176B09638154.title: "Iron Tool"
 	reward_table.23C91D56D4883B5C.title: "Efficiency Book"
+	reward_table.36E06677A3FA83E2.title: "Fire Protection Book"
 	reward_table.412962825CC1473A.title: "Insight Book"
 	reward_table.52C654FC8A195807.title: "Protection Book"
 }
