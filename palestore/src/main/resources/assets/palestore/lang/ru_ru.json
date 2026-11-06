@@ -1,10 +1,12 @@
 {
   "palestore.category.title": "Магазин рецептов",
   "palestore.requirement": "Требование для открытия:",
-  "palestore.advancement.nether": "Нам нужно глубже",
   "palestore.status.unlocked": "Открыт",
   "palestore.enchant.xp.requirement": "Требуется опыта: %s",
   "palestore.status.locked": "Закрыт",
   "palestore.message.unlocked": "Рецепт открыт: %s",
-  "palestore.message.locked": "%s закрыт. Получи достижение «%s», чтобы создать этот предмет"
+  "palestore.message.locked": "%s закрыт. Выполни квест, чтобы создать этот предмет",
+  "palestore.offer.bed.requirement": "Квест «Каменный век»",
+  "palestore.offer.ladder.requirement": "Квест «Факелы»",
+  "palestore.offer.diamond_pickaxe.requirement": "Квест «В Незер»"
 }

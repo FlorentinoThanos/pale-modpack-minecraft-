@@ -18,12 +18,23 @@ import shutil
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "overrides", "config", "ftbquests", "quests")
 
 
+class Int(int):
+    pass
+
+
+class Long(int):
+    pass
+
+
 class IntArray(list):
     """Written as an SNBT int array: [I; 1, 2, 3]."""
 
 
 def qid(key):
-    return hashlib.sha1(("thepale:" + key).encode()).hexdigest()[:16].upper()
+    # FTB Quests reads ids as signed longs and silently replaces any id with the top bit set (first hex digit 8-F)
+    # with a random one, which breaks dependencies. So the top bit is cleared; ids that already had it clear stay.
+    v = int(hashlib.sha1(("thepale:" + key).encode()).hexdigest()[:16], 16) & 0x7FFFFFFFFFFFFFFF
+    return f"{v:016X}"
 
 
 # ---------------------------------------------------------------- tasks
@@ -51,6 +62,10 @@ def adv(a):
     return {"type": "advancement", "advancement": a, "criterion": ""}
 
 
+def stat(st, n):
+    return {"type": "stat", "stat": st, "value": n}
+
+
 def check():
     return {"type": "checkmark"}
 
@@ -70,6 +85,29 @@ def give(i, n=1):
     return {"type": "item", "item": {"id": i, "count": n}}
 
 
+def potion(p):
+    return {"type": "item", "item": {"id": "minecraft:potion", "count": 1, "components": {
+        "minecraft:potion_contents": {"potion": p}}}}
+
+
+def unlock(name):
+    """Pale Store: opens a locked recipe (palestore:unlock/<name>, see ShopOffers.java)."""
+    return {"type": "command", "command": f"/advancement grant @p only palestore:unlock/{name}",
+            "elevate_perms": True, "permission_level": 2, "silent": True}
+
+
+def table_long(key):
+    return int(qid("table/" + key), 16)
+
+
+def choice(key):
+    return {"type": "choice", "table_id": Long(table_long(key))}
+
+
+def rand(key):
+    return {"type": "random", "table_id": Long(table_long(key))}
+
+
 def book(enchant, level=1):
     return {"type": "item", "item": {"id": "minecraft:enchanted_book", "count": 1, "components": {
         "minecraft:stored_enchantments": {"levels": {enchant: level}}}}}
@@ -78,107 +116,224 @@ def book(enchant, level=1):
 # ---------------------------------------------------------------- quests
 # Q(key, x, y, ru_title, en_title, ru_desc, en_desc, tasks, rewards, deps, icon=None, shape=None, size=None)
 class Q:
-    def __init__(self, key, x, y, ru, en, ru_d, en_d, tasks, rewards, deps=(), icon=None, shape=None, size=None):
+    def __init__(self, key, x, y, ru, en, ru_d, en_d, tasks, rewards, deps=(), icon=None, shape=None, size=None,
+                 extra=None):
         self.__dict__.update(locals())
         del self.__dict__["self"]
 
 
 CHAPTERS = []
+TABLES = []
+
+# Chapters written into the quest book. 3.0 is being rewritten with Max chapter by chapter; the 2.0 chapters below
+# stay in this file as material but are not written until they are redone.
+BUILD = ["mild", "nether"]
 
 
-def chapter(key, icon, ru, en, ru_sub, en_sub, quests):
-    CHAPTERS.append(dict(key=key, icon=icon, ru=ru, en=en, ru_sub=ru_sub, en_sub=en_sub, quests=quests))
+def table(key, ru, en, rewards):
+    TABLES.append(dict(key=key, ru=ru, en=en, rewards=rewards))
 
 
-# ================================================================ 1. Тихий остров
+def chapter(key, icon, ru, en, ru_sub, en_sub, quests, scale=1.0):
+    CHAPTERS.append(dict(key=key, icon=icon, ru=ru, en=en, ru_sub=ru_sub, en_sub=en_sub, quests=quests, scale=scale))
+
+
+# ================================================================ 1. Тихий остров (3.0, составлена вместе с Max)
+# Прямой путь 1..8 по ряду y = 0, ветки по схеме Max (notes/quests/chapter-1-scheme.png в файлах проекта).
+FIRE_RES = potion("minecraft:fire_resistance")          # 3:00
+LONG_FIRE_RES = potion("minecraft:long_fire_resistance")  # 8:00
+
+table("iron_tool", "Железный инструмент", "Iron Tool",
+      [give("minecraft:iron_hoe"), give("minecraft:iron_shovel")])
+table("insight_book", "Книга «Озарение»", "Insight Book", [book("paleenchants:insight", n) for n in (1, 2, 3)])
+table("efficiency_book", "Книга «Эффективность»", "Efficiency Book", [book("minecraft:efficiency", n) for n in (1, 2, 3)])
+table("protection_book", "Книга «Защита»", "Protection Book", [book("minecraft:protection", n) for n in (1, 2, 3)])
+
 chapter("mild", "minecraft:oak_sapling", "Тихий остров", "The Mild Island",
-        "Начало. Здесь безопасно, пока ты не подходишь к туману.",
-        "The beginning. It is safe here, as long as you stay away from the fog.", [
-    Q("mild/welcome", 0, 0, "Добро пожаловать в Серость", "Welcome to the Pale",
-      "Земля кончается примерно в 1250 блоках от центра. Дальше лежит серое ядовитое море и стена тумана. Где-то за ним есть ещё два острова.",
-      "Land ends about 1250 blocks from the centre. Beyond it lies a grey, poisonous sea behind a wall of fog. Two more islands wait somewhere past it.",
+        "Главный путь: от первого верстака до перехода на горячий остров.",
+        "The main path: from your first crafting table to the crossing to the hot island.", [
+    # ---- прямой путь
+    Q("mild/welcome", 0, 0, "Серый горизонт", "Grey Horizon",
+      "Земля кончается примерно в 1250 блоках отсюда. Дальше серое ядовитое море и стена тумана. Где-то за ним есть ещё два острова. Начни с малого.",
+      "Land ends about 1250 blocks from here. Past it lies a grey, poisonous sea behind a wall of fog. Two more islands wait somewhere beyond it. Start small.",
       [check()], [give("minecraft:bread", 8)], icon="minecraft:compass", shape="hexagon", size=1.5),
-    Q("mild/table", 2, 0, "Первые доски", "First Planks", "Сделай верстак.", "Craft a crafting table.",
-      [item("minecraft:crafting_table")], [xp(20)], ["mild/welcome"]),
-    Q("mild/stone", 4, 0, "Каменный век", "Stone Age", "Каменная кирка и печь.", "A stone pickaxe and a furnace.",
-      [item("minecraft:stone_pickaxe"), item("minecraft:furnace")], [xp(30), give("minecraft:coal", 8)], ["mild/table"]),
-    Q("mild/bed", 4, -2, "Пережить ночь", "Survive the Night", "Поспи в кровати.", "Sleep in a bed.",
-      [adv("minecraft:adventure/sleep_in_bed")], [xp(30)], ["mild/table"], icon="minecraft:red_bed"),
-    Q("mild/iron", 6, 0, "Железо", "Iron", "Найди и переплавь железо.", "Find and smelt some iron.",
-      [item("minecraft:iron_ingot", 16)], [xp(50)], ["mild/stone"]),
-    Q("mild/shield", 8, -2, "Щит", "Shield", "Пригодится против стрел и того, что живёт на других островах.",
-      "Useful against arrows and against what lives on the other islands.",
-      [item("minecraft:shield")], [xp(30)], ["mild/iron"]),
-    Q("mild/armor", 8, 0, "Железный доспех", "Iron Armour", "Полный комплект железной брони.", "A full set of iron armour.",
-      [item("minecraft:iron_helmet"), item("minecraft:iron_chestplate"), item("minecraft:iron_leggings"), item("minecraft:iron_boots")],
-      [xp(100)], ["mild/iron"], icon="minecraft:iron_chestplate"),
-    Q("mild/bucket", 8, 2, "Вода с собой", "Water to Go", "Ведро и бурдюк. На юге вода спасает от жары.",
-      "A bucket and a waterskin. Down south, water saves you from the heat.",
-      [item("minecraft:bucket"), item("cold_sweat:waterskin")], [xp(40)], ["mild/iron"], icon="cold_sweat:waterskin"),
-    Q("mild/thermo", 10, 2, "Градусник", "Thermometer", "Cold Sweat следит за температурой тела. Градусник показывает, насколько тепло вокруг.",
-      "Cold Sweat tracks your body temperature. A thermometer shows how warm it is around you.",
-      [item("cold_sweat:thermometer")], [xp(50)], ["mild/bucket"]),
-    Q("mild/sewing", 12, 2, "Швейный стол", "Sewing Table", "На нём шьют утепление и охлаждение прямо в броню.",
-      "Sews insulation right into your armour, for heat or for cold.",
-      [item("cold_sweat:sewing_table")], [xp(60)], ["mild/thermo"]),
-    Q("mild/coast", 6, -4, "Край мира", "Edge of the World", "Дойди до серого берега. Дальше не ходи: в тумане яд.",
-      "Walk to the grey shore. Go no further: the fog is poison.",
-      [biome("thepale:the_pale")], [xp(80)], ["mild/iron"], icon="minecraft:gray_dye", shape="diamond"),
-    Q("mild/village", 2, -2, "Соседи", "Neighbours", "Найди деревню.", "Find a village.",
-      [structure("#minecraft:village")], [xp(50), give("minecraft:emerald", 4)], ["mild/table"], icon="minecraft:bell"),
-    # Create, first steps
-    Q("mild/alloy", 6, 4, "Андезитовый сплав", "Andesite Alloy", "Основа всего в Create.", "The base of everything in Create.",
-      [item("create:andesite_alloy", 16)], [xp(50)], ["mild/iron"]),
-    Q("mild/wheel", 8, 4, "Сила воды", "Water Power", "Водяное колесо и шестерни дают первое вращение.",
-      "A water wheel and some cogs give you your first rotation.",
-      [item("create:water_wheel"), item("create:cogwheel", 8), item("create:shaft", 8)], [xp(60)], ["mild/alloy"]),
-    Q("mild/press", 10, 4, "Пресс", "Press", "Механический пресс делает листы из слитков.", "A mechanical press turns ingots into sheets.",
-      [item("create:mechanical_press"), item("create:iron_sheet", 8)], [xp(80)], ["mild/wheel"]),
-    Q("mild/mixer", 12, 4, "Миксер", "Mixer", "Миксер с чашей смешивает то, что нельзя скрафтить руками.",
-      "A mixer over a basin mixes what you can't craft by hand.",
-      [item("create:mechanical_mixer"), item("create:basin")], [xp(80)], ["mild/press"]),
-    Q("mild/drill", 12, 6, "Автоматизация", "Automation", "Механическая дрель и пила рубят и копают сами.",
-      "A mechanical drill and saw dig and chop on their own.",
-      [item("create:mechanical_drill"), item("create:mechanical_saw")], [xp(100)], ["mild/press"]),
-    Q("mild/diamonds", 10, 0, "Алмазы", "Diamonds", "Алмазную кирку пока не скрафтить: её рецепт в Pale Store откроется в Незере. А вот алмазы уже пригодятся.",
-      "You can't craft a diamond pickaxe yet: Pale Store unlocks its recipe once you reach the Nether. The diamonds will still come in handy.",
-      [item("minecraft:diamond", 5)], [xp(120)], ["mild/armor"]),
-    Q("mild/obsidian", 12, 0, "Литой портал", "Cast Portal",
-      "Обсидиан без алмазной кирки не добыть, а её рецепт откроется только в Незере. Поэтому портал отливают на месте: выложи форму из камня, залей лаву ведром в каждую ячейку рамки и полей сверху водой. Лава станет обсидианом прямо в рамке. Ещё готовый обсидиан бывает в разрушенных порталах.",
-      "You can't mine obsidian without a diamond pickaxe, and its recipe only unlocks in the Nether. So cast the portal in place: build a stone mould, pour lava into each frame cell and pour water over it. The lava turns into obsidian right in the frame. Ruined portals also hold ready obsidian.",
-      [item("minecraft:lava_bucket"), item("minecraft:water_bucket")], [xp(150), give("minecraft:flint_and_steel")], ["mild/diamonds"],
-      icon="minecraft:obsidian", shape="hexagon", size=1.5),
-])
+    Q("mild/table", 1, 0, "Верстак", "Crafting Table", "Сделай верстак.", "Craft a crafting table.",
+      [item("minecraft:crafting_table")], [xp(50)], ["mild/welcome"]),
+    Q("mild/stone", 2, 0, "Каменный век", "Stone Age",
+      "Сделай каменную кирку. В награду откроется рецепт кровати: до этого его нет.",
+      "Make a stone pickaxe. The reward unlocks the bed recipe, which is locked until then.",
+      [item("minecraft:stone_pickaxe")], [unlock("bed")], ["mild/table"]),
+    Q("mild/bed", 3, 0, "Своя кровать", "A Bed of Your Own", "Сделай кровать любого цвета. Теперь ночь можно проспать.",
+      "Make a bed of any colour. Now you can sleep through the night.",
+      [adv("palestore:quest/has_bed")], [xp(75)], ["mild/stone"], icon="minecraft:red_bed"),
+    Q("mild/iron", 4, 0, "Железная кирка", "Iron Pickaxe", "Железная кирка добывает алмазы. Огнестойкость в награду пригодится у лавы.",
+      "An iron pickaxe can mine diamonds. The fire resistance reward helps around lava.",
+      [item("minecraft:iron_pickaxe")], [FIRE_RES], ["mild/bed"]),
+    Q("mild/diamonds", 5, 0, "Алмазы", "Diamonds",
+      "Добудь 5 алмазов. Алмазную кирку пока не скрафтить: её рецепт откроется в Незере.",
+      "Mine 5 diamonds. You can't craft a diamond pickaxe yet: its recipe unlocks in the Nether.",
+      [item("minecraft:diamond", 5)], [give("minecraft:book", 5), xp(100)], ["mild/iron"]),
+    Q("mild/nether", 6, 0, "В Незер", "Into the Nether",
+      "Обсидиан без алмазной кирки не добыть, поэтому портал отливают на месте: выложи форму, залей лаву в каждую ячейку рамки и полей водой. Ещё обсидиан бывает в разрушенных порталах. Войди в Незер: откроется рецепт алмазной кирки и глава «Незер».",
+      "Without a diamond pickaxe you can't mine obsidian, so cast the portal in place: build a mould, pour lava into each frame cell and pour water over it. Ruined portals also hold obsidian. Enter the Nether to unlock the diamond pickaxe recipe and the Nether chapter.",
+      [dim("minecraft:the_nether")], [unlock("diamond_pickaxe")], ["mild/diamonds"], icon="minecraft:obsidian"),
+    Q("mild/south", 7, 0, "Дорога на юг", "The Road South",
+      "Горячий остров лежит в 3500–4500 блоках к югу, в Незере это в 8 раз ближе. Иди на юг до места около x 0, z 500 (от −60 до 60 по x и от 440 до 560 по z). Портал, построенный там, выведет на горячий остров.",
+      "The hot island lies 3500 to 4500 blocks south; in the Nether that is 8 times closer. Head south to around x 0, z 500 (x −60 to 60, z 440 to 560). A portal built there leads to the hot island.",
+      [area("minecraft:the_nether", -60, 0, 440, 121, 256, 121)], [], ["mild/nether"],
+      icon="minecraft:netherrack", shape="hexagon", size=1.5),
+    # ---- ветка 2: ферма (вверх)
+    Q("mild/breed", 1.75, -1, "Пополнение", "New Arrivals", "Размножь любых животных.", "Breed any two animals.",
+      [adv("minecraft:husbandry/breed_an_animal")], [give("minecraft:stone_hoe")], ["mild/table"], icon="minecraft:wheat"),
+    Q("mild/plant", 2.75, -2, "Первый урожай", "First Crop", "Посади любую культуру.", "Plant any crop.",
+      [adv("minecraft:husbandry/plant_seed")], [xp(100)], ["mild/breed"], icon="minecraft:wheat_seeds"),
+    Q("mild/campfire", 3, -3.25, "Ужин у костра", "Campfire Dinner",
+      "Сложи костёр и пожарь на нём мясо. Дальше кухня: глава Farmer's Delight.",
+      "Build a campfire and cook some meat on it. Next comes the kitchen: the Farmer's Delight chapter.",
+      [item("minecraft:campfire"), adv("palestore:quest/has_cooked_meat")], [xp(50)], ["mild/plant"], icon="minecraft:campfire"),
+    # ---- ветка 3: пещеры (вниз)
+    Q("mild/coal", 2.5, 1.5, "Уголь", "Coal", "Добудь уголь.", "Mine some coal.",
+      [item("minecraft:coal")], [xp(50)], ["mild/stone"]),
+    Q("mild/torch", 3.25, 2.5, "Факелы", "Torches", "Сделай факелы. В награду откроется рецепт лестниц.",
+      "Make some torches. The reward unlocks the ladder recipe.",
+      [item("minecraft:torch")], [unlock("ladder"), xp(100)], ["mild/coal"]),
+    Q("mild/caves", 3.25, 3.75, "Под землёй", "Underground", "Спустись в любой пещерный биом.", "Go down into any cave biome.",
+      [biome("#c:is_underground")], [FIRE_RES], ["mild/torch"], icon="minecraft:pointed_dripstone"),
+    # ---- ветка 4: Cold Sweat (вверх)
+    Q("mild/huddle", 3, -1, "Поближе к огню", "Huddle Close",
+      "Когда вокруг слишком холодно (ночью или высоко в горах), согрейся у тёплого блока, например у костра.",
+      "When it gets too cold around you (at night or high in the mountains), warm up next to a warm block such as a campfire.",
+      [adv("cold_sweat:huddle_close")], [choice("iron_tool")], ["mild/bed"], icon="minecraft:campfire"),
+    Q("mild/lining", 4, -1.75, "Подкладка", "Lining Up", "Утепли любую часть брони на швейном столе.",
+      "Insulate any piece of armour on a sewing table.",
+      [adv("cold_sweat:insulate_armor")], [book("minecraft:unbreaking", 2)], ["mild/huddle"], icon="cold_sweat:sewing_table"),
+    Q("mild/cozy", 4.25, -3, "Уютно", "Getting Cozy", "Поставь дымоход на бойлер или ледник.",
+      "Put a smokestack on a boiler or an icebox.",
+      [adv("cold_sweat:use_smokestack")], [give("minecraft:white_wool", 15)], ["mild/lining"], icon="cold_sweat:smokestack"),
+    # ---- ветка 5: железо (вниз)
+    Q("mild/bucket", 4, 1, "Ведро", "Bucket", "Сделай ведро. В награду случайная книга «Озарение» I–III.",
+      "Make a bucket. The reward is a random Insight book, I to III.",
+      [item("minecraft:bucket")], [rand("insight_book")], ["mild/iron"]),
+    Q("mild/deflect", 4.5, 2, "Не сегодня", "Not Today", "Отрази стрелу щитом.", "Deflect an arrow with a shield.",
+      [adv("minecraft:story/deflect_arrow")], [rand("efficiency_book")], ["mild/bucket"], icon="minecraft:shield"),
+    Q("mild/legs", 5, 3.25, "Ноги в железе", "Iron Legs", "Сделай железные поножи и ботинки.", "Make iron leggings and boots.",
+      [item("minecraft:iron_leggings"), item("minecraft:iron_boots")], [rand("protection_book")], ["mild/deflect"],
+      icon="minecraft:iron_boots"),
+    Q("mild/ready", 4.25, 4, "Готов к жаре", "Ready for the Heat", "Пещеры пройдены, железо надето. Возьми огнестойкость подольше.",
+      "Caves explored, iron on. Take a longer fire resistance.",
+      [check()], [LONG_FIRE_RES], ["mild/caves", "mild/legs"], icon="minecraft:magma_cream"),
+    # ---- ветка 6: зачарования (вверх)
+    Q("mild/enchanting", 5.5, -1, "Стол зачарований", "Enchanting Table", "Сделай стол зачарований.", "Make an enchanting table.",
+      [item("minecraft:enchanting_table")], [give("minecraft:cooked_porkchop", 16), xp(150)], ["mild/diamonds"]),
+    Q("mild/bookshelves", 6.25, -2, "Полная мощность", "Full Power",
+      "Принеси 15 книжных полок (они не заберутся) и поставь их вокруг стола: так он даёт самые сильные зачарования.",
+      "Bring 15 bookshelves (they are not taken) and place them around the table: that gives the strongest enchantments.",
+      [item("minecraft:bookshelf", 15)], [book("minecraft:mending")], ["mild/enchanting"]),
+    Q("mild/enchanter", 6.5, -3.25, "Чародей", "Enchanter", "Зачаруй предметы на столе 30 раз. Дальше глава Death List.",
+      "Enchant items on the table 30 times. Next comes the Death List chapter.",
+      [stat("minecraft:enchant_item", 30)], [], ["mild/bookshelves"], icon="minecraft:experience_bottle"),
+], scale=1.5)
 
-# ================================================================ 2. Путь на юг
-NETHER_SOUTH = area("minecraft:the_nether", -100, 0, 430, 200, 128, 140)
-chapter("nether", "minecraft:netherrack", "Путь на юг", "The Way South",
-        "Через Незер: 4000 блоков там всего 500.",
-        "Through the Nether: 4000 blocks are only 500 there.", [
-    Q("nether/enter", 0, 0, "Глубже вниз", "Deeper Down", "Зажги литой портал и войди в Незер. Pale Store сразу откроет рецепт алмазной кирки.",
-      "Build a portal and step into the Nether. Pale Store unlocks the diamond pickaxe recipe right away.",
-      [dim("minecraft:the_nether")], [xp(150)], ["mild/obsidian"], icon="minecraft:obsidian", shape="hexagon", size=1.5),
-    Q("nether/pick", 2, -2, "Алмазная кирка", "Diamond Pickaxe", "Теперь её можно скрафтить.", "Now you can craft one.",
-      [item("minecraft:diamond_pickaxe")], [xp(80)], ["nether/enter"]),
-    Q("nether/quartz", 2, 2, "Кварц", "Quartz", "Нужен для механизмов Create.", "Create's machines need it.",
-      [item("minecraft:quartz", 32)], [xp(60)], ["nether/enter"]),
-    Q("nether/fortress", 4, 0, "Крепость", "Fortress", "Найди крепость Незера.", "Find a Nether fortress.",
-      [structure("minecraft:fortress")], [xp(100)], ["nether/enter"], icon="minecraft:nether_bricks"),
-    Q("nether/blaze", 6, 0, "Ифриты", "Blazes", "Убей ифритов и забери их стержни.", "Kill blazes and take their rods.",
-      [kill("minecraft:blaze", 8), item("minecraft:blaze_rod", 8)], [xp(150)], ["nether/fortress"], icon="minecraft:blaze_rod"),
-    Q("nether/hoglin", 4, 2, "Шкура хоглина", "Hoglin Hide", "Броня из шкуры хоглина защищает от жары. На юге она очень нужна.",
-      "Armour of hoglin hide protects you from heat. You will want it in the south.",
-      [item("cold_sweat:hoglin_hide", 6)], [xp(80)], ["nether/enter"]),
-    Q("nether/hoglin_armor", 6, 2, "Жаростойкий доспех", "Heatproof Armour", "Скрафти нагрудник из шкуры хоглина.", "Craft a hoglin hide chestplate.",
-      [item("cold_sweat:hoglin_chestplate")], [xp(100)], ["nether/hoglin"]),
-    Q("nether/bastion", 4, -2, "Бастион", "Bastion", "Опасно, но там есть золото и незерит.", "Dangerous, but there is gold and netherite.",
-      [structure("minecraft:bastion_remnant")], [xp(120)], ["nether/enter"], icon="minecraft:gilded_blackstone"),
-    Q("nether/debris", 6, -2, "Древние обломки", "Ancient Debris", "Глубоко в Незере.", "Deep in the Nether.",
-      [item("minecraft:ancient_debris", 4)], [xp(200)], ["nether/bastion"]),
-    Q("nether/south", 8, 0, "Портал на юг", "Portal South", "Пройди по Незеру примерно 500 блоков на юг (ось Z в плюс) и построй там портал. Он выведет на горячий остров.",
-      "Walk about 500 blocks south through the Nether (positive Z) and build a portal there. It leads to the hot island.",
-      [NETHER_SOUTH], [xp(200), give("minecraft:obsidian", 10)], ["nether/blaze"], icon="minecraft:compass", shape="hexagon", size=1.5),
-])
+
+# ================================================================ 2. Незер (3.0, черновик Claude для Max)
+# Открывается квестом 7 главы 1 («В Незер»): первый квест скрыт, пока тот не выполнен, остальные видны вместе с ним.
+SHOWN_AFTER_7 = {"hide_until_deps_complete": True}
+WITH_CHAPTER = {"hide_until_deps_visible": True}
+
+table("fire_protection_book", "Книга «Огнеупорность»", "Fire Protection Book",
+      [book("minecraft:fire_protection", n) for n in (1, 2, 3)])
+
+
+def NQ(*args, **kw):
+    kw.setdefault("extra", WITH_CHAPTER)
+    return Q(*args, **kw)
+
+
+chapter("nether", "minecraft:netherrack", "Незер", "The Nether",
+        "Огонь, крепости и короткая дорога на юг: блок здесь равен восьми наверху.",
+        "Fire, fortresses and the short way south: one block here is eight up top.", [
+    # ---- прямой путь
+    Q("nether/arrive", 0, 0, "Горячий приём", "A Warm Welcome",
+      "Ты в Незере. Здесь один блок равен восьми в обычном мире, поэтому до горячего острова отсюда всего около 500 блоков на юг. Сначала осмотрись: рядом крепости, бастионы и обломки, без которых дальше не обойтись.",
+      "You are in the Nether. One block here is eight in the Overworld, so the hot island is only about 500 blocks south. Look around first: fortresses, bastions and debris are close, and you will need them.",
+      [check()], [xp(50), give("minecraft:golden_carrot", 8)], ["mild/nether"], icon="minecraft:netherrack",
+      shape="hexagon", size=1.5, extra=SHOWN_AFTER_7),
+    NQ("nether/pick", 1, 0, "Алмазная кирка", "Diamond Pickaxe", "Рецепт открыт. Скрафти алмазную кирку: без неё не добыть обломки и обсидиан.",
+       "The recipe is open. Craft a diamond pickaxe: you need it for debris and obsidian.",
+       [item("minecraft:diamond_pickaxe")], [rand("efficiency_book")], ["nether/arrive"]),
+    NQ("nether/fortress", 2, 0, "Крепость", "Fortress", "Найди крепость Незера.", "Find a Nether fortress.",
+       [structure("minecraft:fortress")], [xp(100), give("minecraft:golden_apple")], ["nether/pick"], icon="minecraft:nether_bricks"),
+    NQ("nether/blaze", 3, 0, "Ифриты", "Blazes", "Убей 8 ифритов и собери 6 огненных стержней.", "Kill 8 blazes and collect 6 blaze rods.",
+       [kill("minecraft:blaze", 8), item("minecraft:blaze_rod", 6)], [xp(150)], ["nether/fortress"], icon="minecraft:blaze_rod"),
+    NQ("nether/brewing", 4, 0, "Зельеварка", "Brewing Stand", "Поставь варочную стойку. Адский нарост растёт в крепостях.",
+       "Make a brewing stand. Nether wart grows in fortresses.",
+       [item("minecraft:brewing_stand")], [give("minecraft:nether_wart", 8)], ["nether/blaze"]),
+    NQ("nether/potion", 5, 0, "Своя аптечка", "Home Brew", "Свари любое зелье.", "Brew any potion.",
+       [adv("minecraft:nether/brew_potion")], [xp(150), rand("fire_protection_book")], ["nether/brewing"], icon="minecraft:potion"),
+    NQ("nether/ready", 6, 0, "Готов к югу", "Ready for the South",
+       "Зелья, жаростойкая броня и дорога через Незер: можно идти на горячий остров.",
+       "Potions, heatproof armour and a road through the Nether: time to head for the hot island.",
+       [check()], [xp(300), give("minecraft:obsidian", 10)], ["nether/potion", "nether/hoglin_armor"],
+       icon="minecraft:compass", shape="hexagon", size=1.5),
+    # ---- слева от 1: пять биомов параллельно, все ведут к «Туристу»
+    NQ("nether/wastes", -1.5, -2, "Пустоши Незера", "Nether Wastes", "Обычный Незер: незерак и лава.", "The plain Nether: netherrack and lava.",
+       [biome("minecraft:nether_wastes")], [xp(50)], ["nether/arrive"], icon="minecraft:netherrack"),
+    NQ("nether/crimson", -1.5, -1, "Багровый лес", "Crimson Forest", "Здесь пасутся хоглины.", "Hoglins graze here.",
+       [biome("minecraft:crimson_forest")], [xp(50)], ["nether/arrive"], icon="minecraft:crimson_fungus"),
+    NQ("nether/warped", -1.5, 0, "Искажённый лес", "Warped Forest", "Здесь почти никто не нападает. Хорошее место для лагеря.",
+       "Hardly anything attacks you here. A good spot for a camp.",
+       [biome("minecraft:warped_forest")], [xp(50)], ["nether/arrive"], icon="minecraft:warped_fungus"),
+    NQ("nether/soul", -1.5, 1, "Долина душ", "Soul Sand Valley", "Синий огонь и песок душ.", "Blue fire and soul sand.",
+       [biome("minecraft:soul_sand_valley")], [xp(50)], ["nether/arrive"], icon="minecraft:soul_sand"),
+    NQ("nether/basalt", -1.5, 2, "Базальтовые дельты", "Basalt Deltas", "Самое неприятное место в Незере.", "The nastiest place in the Nether.",
+       [biome("minecraft:basalt_deltas")], [xp(50)], ["nether/arrive"], icon="minecraft:basalt"),
+    NQ("nether/tourist", -3, 0, "Турист", "Hot Tourist", "Ты побывал во всех пяти биомах Незера.", "You have been to all five Nether biomes.",
+       [check()], [xp(300), rand("protection_book")],
+       ["nether/wastes", "nether/crimson", "nether/warped", "nether/soul", "nether/basalt"],
+       icon="minecraft:map", shape="hexagon", size=1.5),
+    # ---- вверх от 3: бастион
+    NQ("nether/bastion", 2.25, -1.25, "Бастион", "Bastion", "Опасно, но там золото, шаблоны и обломки.", "Dangerous, but full of gold, templates and debris.",
+       [structure("minecraft:bastion_remnant")], [xp(100)], ["nether/fortress"], icon="minecraft:gilded_blackstone"),
+    NQ("nether/barter", 2.5, -2.25, "Блестяшка", "Oh Shiny", "Отвлеки пиглина золотом.", "Distract a piglin with gold.",
+       [adv("minecraft:nether/distract_piglin")], [give("minecraft:gold_ingot", 8)], ["nether/bastion"], icon="minecraft:gold_ingot"),
+    NQ("nether/template", 2.75, -3.25, "Шаблон улучшения", "Upgrade Template", "Шаблон незеритового улучшения лежит в сундуках бастиона.",
+       "The netherite upgrade template is in bastion chests.",
+       [item("minecraft:netherite_upgrade_smithing_template")], [xp(200)], ["nether/barter"]),
+    # ---- вверх от 4: иссушитель
+    NQ("nether/skulls", 3.75, -1.25, "Черепа", "Skulls", "Добудь 3 черепа скелетов-иссушителей.", "Collect 3 wither skeleton skulls.",
+       [item("minecraft:wither_skeleton_skull", 3)], [xp(200)], ["nether/blaze"]),
+    NQ("nether/wither", 4.25, -2.25, "Иссушитель", "The Wither", "Призови и победи Иссушителя. Подальше от дома.",
+       "Summon and defeat the Wither. Far from home.",
+       [kill("minecraft:wither")], [xp(1000), give("minecraft:golden_apple", 2)], ["nether/skulls"], icon="minecraft:nether_star"),
+    NQ("nether/beacon", 4.75, -3.25, "Маяк", "Beacon", "Звезда Незера и обсидиан.", "A nether star and obsidian.",
+       [item("minecraft:beacon")], [xp(300)], ["nether/wither"]),
+    # ---- вниз от 1: якорь возрождения (The Pale 1.11: заряженный якорь в Незере сохраняет вещи при смерти)
+    NQ("nether/anchor", 0, 1.5, "Якорь возрождения", "Respawn Anchor",
+       "Поставь якорь возрождения в Незере, заряди его до конца (4 светокамня) и нажми на него, чтобы он стал точкой возрождения. Пока он заряжен, при смерти ты сохраняешь инвентарь и опыт. Каждое возрождение тратит один заряд. Предметы в слоте элитр выпадают как обычно.",
+       "Place a respawn anchor in the Nether, charge it fully (4 glowstone) and use it to set your spawn. While it is charged you keep your inventory and experience when you die. Each respawn uses one charge. Items in the elytra slot drop as usual.",
+       [adv("minecraft:nether/charge_respawn_anchor")], [xp(150), give("minecraft:glowstone", 8)], ["nether/arrive"],
+       icon="minecraft:respawn_anchor"),
+    # ---- вниз от 2: незерит
+    NQ("nether/debris", 1.25, 1.25, "Древние обломки", "Ancient Debris", "Глубоко в Незере, ниже y 20. Нужна алмазная кирка.",
+       "Deep in the Nether, below y 20. Needs a diamond pickaxe.",
+       [item("minecraft:ancient_debris", 4)], [xp(150)], ["nether/pick"]),
+    NQ("nether/netherite", 1.75, 2.25, "Незерит", "Netherite", "Слиток из обломков и золота.", "An ingot from scrap and gold.",
+       [item("minecraft:netherite_ingot")], [xp(200)], ["nether/debris"]),
+    NQ("nether/netherite_pick", 2.25, 3.25, "Незеритовая кирка", "Netherite Pickaxe", "Улучши алмазную кирку на кузнечном столе.",
+       "Upgrade a diamond pickaxe at a smithing table.",
+       [item("minecraft:netherite_pickaxe")], [xp(300), book("minecraft:mending")], ["nether/netherite", "nether/template"]),
+    # ---- вниз от 5: жаростойкая броня (Cold Sweat)
+    NQ("nether/hoglin", 4, 1.25, "Шкура хоглина", "Hoglin Hide", "Хоглины пасутся в багровом лесу.", "Hoglins graze in the crimson forest.",
+       [item("cold_sweat:hoglin_hide", 6)], [xp(75)], ["nether/brewing"]),
+    NQ("nether/hoglin_armor", 4.75, 2.25, "Жаростойкий доспех", "Heatproof Armour",
+       "Нагрудник из шкуры хоглина держит жару. На горячем острове без него тяжело.",
+       "A hoglin hide chestplate keeps the heat out. The hot island is hard without one.",
+       [item("cold_sweat:hoglin_chestplate")], [xp(150)], ["nether/hoglin"]),
+    NQ("nether/lamp", 5.5, 3.25, "Лампа душ", "Soulspring Lamp", "Лампа на огне душ держит температуру вокруг тебя. Пригодится и на юге, и на севере.",
+       "A soul-fire lamp keeps the temperature around you steady. Useful both south and north.",
+       [item("cold_sweat:soulspring_lamp")], [xp(150)], ["nether/hoglin_armor"]),
+], scale=1.5)
+
 
 # ================================================================ 3. Горячий остров
 chapter("hot", "minecraft:sand", "Горячий остров", "The Hot Island",
@@ -364,62 +519,6 @@ def extend(key, quests):
     raise KeyError(key)
 
 
-# ---------------------------------------------------------------- Тихий остров: разведка (y -6 .. -10)
-extend("mild", [
-    Q("mild/corpse", 0, -2, "Последний приют", "Last Resting Place",
-      "Когда ты умираешь, вещи не рассыпаются по земле: они остаются в твоём теле (мод Corpse). Вернись к нему и открой. Не умирай в тумане Бледноты: тело останется в ядовитой воде, и достать его будет почти невозможно.",
-      "When you die, your things don't scatter: they stay with your body (the Corpse mod). Go back to it and open it. Don't die in the Pale's fog: the body stays in the poisoned water, and getting it back is close to impossible.",
-      [check()], [xp(20)], ["mild/welcome"], icon="minecraft:skeleton_skull"),
-    Q("mild/carry", 0, 2, "Переезд", "Moving House",
-      "Сядь (Shift) и нажми ПКМ пустыми руками по сундуку: Carry On позволит унести его вместе с содержимым. Так же можно носить животных. Боссов, жителей и машины носить нельзя.",
-      "Sneak and right-click a chest with empty hands: Carry On lets you pick it up with everything inside. Animals too. Bosses, villagers and machines can't be carried.",
-      [check()], [xp(20)], ["mild/welcome"], icon="minecraft:chest"),
-    Q("mild/forest", 2, -6, "Тёмный лес", "Dark Forest", "Найди тёмный лес. Там стоят особняки.", "Find a dark forest. That's where mansions stand.",
-      [biome("minecraft:dark_forest")], [xp(50)], ["mild/village"], icon="minecraft:dark_oak_sapling"),
-    Q("mild/taiga", 4, -6, "Прохладный север", "The Cool North", "Северная часть острова прохладнее: там тайга.", "The north of the island is cooler: there's taiga there.",
-      [biome("minecraft:taiga")], [xp(50)], ["mild/village"], icon="minecraft:spruce_sapling"),
-    Q("mild/swamp", 0, -6, "Болото", "Swamp", "Найди болото. Там растёт дикий рис и живут ведьмы.", "Find a swamp. Wild rice grows there, and witches live there.",
-      [biome("minecraft:swamp")], [xp(50)], ["mild/village"], icon="minecraft:lily_pad"),
-    Q("mild/mansion", 2, -8, "Особняк", "Woodland Mansion", "Найди лесной особняк. Внутри разбойники, будь готов.", "Find a woodland mansion. Illagers live inside, so come prepared.",
-      [structure("minecraft:mansion")], [xp(150)], ["mild/forest", "mild/armor"], icon="minecraft:dark_oak_log"),
-    Q("mild/totem", 2, -10, "Тотем бессмертия", "Totem of Undying", "Его роняет призыватель из особняка. Он спасает от смерти один раз.",
-      "An evoker from the mansion drops it. It saves you from death once.",
-      [kill("minecraft:evoker"), item("minecraft:totem_of_undying")], [xp(200)], ["mild/mansion"]),
-    Q("mild/outpost", 4, -8, "Аванпост", "Pillager Outpost", "Найди аванпост разбойников. Они стоят подальше от деревень.", "Find a pillager outpost. They keep their distance from villages.",
-      [structure("minecraft:pillager_outpost"), kill("minecraft:pillager", 5)], [xp(120)], ["mild/taiga", "mild/shield"], icon="minecraft:crossbow"),
-    Q("mild/raid", 4, -10, "Набег", "Raid", "Отбей набег на деревню.", "Fight off a raid on a village.",
-      [adv("minecraft:adventure/hero_of_the_village")], [xp(300), give("minecraft:emerald", 16)], ["mild/outpost"], icon="minecraft:white_banner"),
-    Q("mild/witch", 0, -8, "Хижина ведьмы", "Witch Hut", "Найди хижину ведьмы на болоте.", "Find a witch hut in the swamp.",
-      [structure("minecraft:swamp_hut")], [xp(100)], ["mild/swamp"], icon="minecraft:cauldron"),
-    Q("mild/trial", 6, -6, "Испытания", "Trial Chambers", "Найди испытательные палаты под землёй и добудь ключ испытаний.",
-      "Find the trial chambers underground and get a trial key.",
-      [structure("minecraft:trial_chambers"), item("minecraft:trial_key")], [xp(200)], ["mild/coast", "mild/armor"], icon="minecraft:trial_key"),
-    Q("mild/breeze", 6, -8, "Вихрь", "Breeze", "Победи вихря и забери его стержень.", "Defeat a breeze and take its rod.",
-      [kill("minecraft:breeze"), item("minecraft:breeze_rod", 2)], [xp(200)], ["mild/trial"], icon="minecraft:breeze_rod"),
-    Q("mild/mace", 6, -10, "Булава", "Mace", "Тяжёлое ядро из хранилища и стержень вихря.", "A heavy core from a vault and a breeze rod.",
-      [item("minecraft:mace")], [xp(300)], ["mild/breeze"]),
-    Q("mild/monument", 8, -6, "Подводная крепость", "Ocean Monument", "Найди подводную крепость у берега. Возьми зелья подводного дыхания.",
-      "Find an ocean monument off the shore. Bring water breathing potions.",
-      [structure("minecraft:monument"), item("minecraft:prismarine_shard", 16)], [xp(200)], ["mild/coast"], icon="minecraft:prismarine"),
-    Q("mild/elder", 8, -8, "Древний страж", "Elder Guardian", "Победи древнего стража.", "Defeat an elder guardian.",
-      [kill("minecraft:elder_guardian")], [xp(300), give("minecraft:sponge", 4)], ["mild/monument"], icon="minecraft:wet_sponge"),
-    Q("mild/ancient", 10, -6, "Древний город", "Ancient City", "Глубоко под островом. Не шуми: там ходит Хранитель.",
-      "Deep beneath the island. Keep quiet: the Warden walks there.",
-      [structure("minecraft:ancient_city"), item("minecraft:echo_shard", 4)], [xp(300)], ["mild/diamonds"], icon="minecraft:sculk_catalyst"),
-    Q("mild/swift", 10, -8, "Компас восстановления", "Recovery Compass",
-      "Он показывает, где ты умер в последний раз. С модом Corpse это дорога к твоим вещам. Осколки эха есть только в древних городах.",
-      "It points to where you last died. With the Corpse mod that's the way back to your things. Echo shards come only from ancient cities.",
-      [item("minecraft:recovery_compass")], [xp(200)], ["mild/ancient"]),
-    Q("mild/farm", 2, 2, "Ферма", "Farm", "Мотыга и пшеница. Еды на островах мало.", "A hoe and some wheat. Food is scarce on the islands.",
-      [item("minecraft:iron_hoe"), item("minecraft:wheat", 32)], [xp(40)], ["mild/table"], icon="minecraft:wheat"),
-    Q("mild/wool", 4, 2, "Шерсть", "Wool", "Шерсть пригодится для кровати, а позже для воздушного шара.", "Wool makes a bed, and later a balloon.",
-      [item("minecraft:white_wool", 16)], [xp(40)], ["mild/farm"]),
-    Q("mild/copper", 6, 2, "Медь", "Copper", "Медь нужна и для Create, и для бурдюка.", "Create needs copper, and so does a waterskin.",
-      [item("minecraft:copper_ingot", 32)], [xp(50)], ["mild/stone"]),
-    Q("mild/zinc", 4, 4, "Цинк", "Zinc", "Цинковая руда Create залегает неглубоко. Без неё не будет латуни.", "Create's zinc ore lies shallow. Without it there is no brass.",
-      [item("create:zinc_ingot", 16)], [xp(60)], ["mild/stone"]),
-])
-
 # ---------------------------------------------------------------- Кухня (Farmer's Delight)
 chapter("kitchen", "farmersdelight:cooking_pot", "Кухня", "The Kitchen",
         "Farmer's Delight: горячий суп греет на севере, мороженое охлаждает на юге.",
@@ -575,48 +674,6 @@ chapter("create", "create:cogwheel", "Механика", "Machinery",
       [item("create:potato_cannon")], [xp(100)], ["create/diving"]),
     Q("create/display", 12, 2, "Табло", "Display Board", "Табло и связь показывают, что творится на заводе.", "Display boards and links show what's going on in the factory.",
       [item("create:display_link"), item("create:display_board", 4)], [xp(100)], ["create/vault", "hot/brass"]),
-])
-
-# ---------------------------------------------------------------- Путь на юг: Незер и магистраль (y 4 .. 8)
-extend("nether", [
-    Q("nether/soul", 2, 4, "Долина душ", "Soul Sand Valley", "Синий огонь и песок душ.", "Blue fire and soul sand.",
-      [biome("minecraft:soul_sand_valley")], [xp(80)], ["nether/enter"], icon="minecraft:soul_sand"),
-    Q("nether/basalt", 4, 4, "Базальтовые дельты", "Basalt Deltas", "Самое неприятное место в Незере.", "The nastiest place in the Nether.",
-      [biome("minecraft:basalt_deltas")], [xp(80)], ["nether/enter"], icon="minecraft:basalt"),
-    Q("nether/warped", 0, 4, "Искажённый лес", "Warped Forest", "Здесь почти не нападают.", "Hardly anything attacks you here.",
-      [biome("minecraft:warped_forest")], [xp(80)], ["nether/enter"], icon="minecraft:warped_fungus"),
-    Q("nether/crimson", 0, -4, "Багровый лес", "Crimson Forest", "Хоглины пасутся в багровом лесу.", "Hoglins graze in the crimson forest.",
-      [biome("minecraft:crimson_forest")], [xp(80)], ["nether/enter"], icon="minecraft:crimson_fungus"),
-    Q("nether/wither_skull", 6, -4, "Черепа", "Skulls", "Черепа скелетов-иссушителей из крепости.", "Wither skeleton skulls from the fortress.",
-      [kill("minecraft:wither_skeleton", 10), item("minecraft:wither_skeleton_skull", 3)], [xp(250)], ["nether/fortress"], icon="minecraft:wither_skeleton_skull"),
-    Q("nether/wither", 8, -4, "Иссушитель", "The Wither", "Призови и победи Иссушителя. Подальше от дома.", "Summon and defeat the Wither. Far from home.",
-      [kill("minecraft:wither")], [xp(1000), give("minecraft:golden_apple", 2)], ["nether/wither_skull"], icon="minecraft:nether_star", shape="gear", size=1.75),
-    Q("nether/beacon", 10, -4, "Маяк", "Beacon", "Звезда Незера и обсидиан.", "A nether star and obsidian.",
-      [item("minecraft:beacon")], [xp(300)], ["nether/wither"]),
-    Q("nether/netherite", 8, -2, "Незерит", "Netherite", "Незеритовый слиток из обломков и золота.", "A netherite ingot from scrap and gold.",
-      [item("minecraft:netherite_ingot")], [xp(300)], ["nether/debris"]),
-    Q("nether/upgrade", 10, -2, "Улучшение", "Smithing Upgrade", "Шаблон улучшения лежит в бастионе.", "The upgrade template lies in a bastion.",
-      [item("minecraft:netherite_upgrade_smithing_template")], [xp(200)], ["nether/bastion"]),
-    # Южная магистраль: Create trains + Steam 'n' Rails
-    Q("nether/casing", 6, 6, "Ж/д корпус", "Train Casing", "Корпус поезда делают из прочного листа.", "Train casing is made from sturdy sheets.",
-      [item("create:railway_casing", 8)], [xp(150)], ["create/sturdy", "nether/south"]),
-    Q("nether/track", 8, 6, "Рельсы", "Tracks", "500 блоков пути по Незеру. Steam 'n' Rails добавляет рельсы из любого дерева, есть и из чернокамня.",
-      "500 blocks of track through the Nether. Steam 'n' Rails adds tracks of every wood, and blackstone ones too.",
-      [item("railways:track_blackstone", 128)], [xp(200)], ["nether/casing"], icon="railways:track_blackstone"),
-    Q("nether/station", 10, 6, "Станции", "Stations", "Станция у каждого портала.", "A station by each portal.",
-      [item("create:track_station", 2), item("create:track_signal", 4)], [xp(150)], ["nether/track"]),
-    Q("nether/train", 10, 8, "Поезд", "Train", "Собери поезд: тележка на рельсах, корпус, пульт.", "Assemble a train: a bogey on the tracks, casing, controls.",
-      [item("create:controls"), adv("create:train")], [xp(300)], ["nether/station"], icon="create:controls"),
-    Q("nether/semaphore", 8, 8, "Семафор", "Semaphore", "Семафор показывает, свободен ли путь.", "A semaphore shows whether the line is clear.",
-      [item("railways:semaphore", 2)], [xp(80)], ["nether/station"]),
-    Q("nether/handcar", 6, 8, "Дрезина", "Handcar", "Маленькая дрезина Steam 'n' Rails для проверки пути.", "Steam 'n' Rails' little handcar, for checking the line.",
-      [item("railways:handcar")], [xp(100)], ["nether/track"]),
-    Q("nether/schedule", 12, 8, "Расписание", "Schedule", "Дай поезду расписание, и он будет ездить сам.", "Give the train a schedule and it runs on its own.",
-      [item("create:schedule"), adv("create:conductor")], [xp(300)], ["nether/train"], icon="create:schedule"),
-    Q("nether/mainline", 12, 6, "Южная магистраль", "The Southern Mainline",
-      "Доберись поездом по Незеру до южного портала. Через Бледноту в обычном мире рельсы не помогут: в тумане яд, и пассажир не доедет.",
-      "Ride the train through the Nether to the southern portal. In the Overworld no track crosses the Pale for you: the fog is poison, and no passenger survives the trip.",
-      [adv("create:conductor"), NETHER_SOUTH], [xp(500)], ["nether/train"], icon="create:track_station", shape="hexagon", size=1.5),
 ])
 
 # ---------------------------------------------------------------- Горячий остров: разведка (y 6 .. 10, x < 0)
@@ -940,6 +997,7 @@ extend("enchant", [
 # Chapter order in the book: each island's chapter, then the side chapters that grow out of it.
 ORDER = ["mild", "kitchen", "archeology", "create", "nether", "hot", "industry", "end", "sky", "cold", "chaos", "enchant"]
 CHAPTERS.sort(key=lambda c: ORDER.index(c["key"]))
+CHAPTERS[:] = [c for c in CHAPTERS if c["key"] in BUILD]
 
 
 # ---------------------------------------------------------------- SNBT writer
@@ -948,7 +1006,9 @@ def fix_numbers(o, parent=None):
     if isinstance(o, dict):
         out = {}
         for k, v in o.items():
-            if isinstance(v, bool) or not isinstance(v, int):
+            if isinstance(v, (Int, Long)):
+                out[k] = v
+            elif isinstance(v, bool) or not isinstance(v, int):
                 out[k] = fix_numbers(v, k)
             elif k in ("count", "value") and parent == "task":
                 out[k] = Long(v)
@@ -962,13 +1022,6 @@ def fix_numbers(o, parent=None):
     return o
 
 
-class Int(int):
-    pass
-
-
-
-class Long(int):
-    pass
 
 
 def snbt2(v, ind=0):
@@ -1032,7 +1085,7 @@ def main():
             for n, r in enumerate(q.rewards):
                 r = dict(r, id=qid(f"{q.key}/reward{n}"))
                 rewards.append(fix_numbers(r, "reward"))
-            quest = {"id": id_, "x": float(q.x), "y": float(q.y), "tasks": tasks, "rewards": rewards}
+            quest = {"id": id_, "x": float(q.x) * c["scale"], "y": float(q.y) * c["scale"], "tasks": tasks, "rewards": rewards}
             if q.deps:
                 quest["dependencies"] = [qid(d) for d in q.deps]
             if q.icon:
@@ -1041,6 +1094,8 @@ def main():
                 quest["shape"] = q.shape
             if q.size:
                 quest["size"] = float(q.size)
+            if q.extra:
+                quest.update(q.extra)
             quests.append(quest)
             lang["ru_ru"][f"quest.{id_}.title"] = q.ru
             lang["en_us"][f"quest.{id_}.title"] = q.en
@@ -1062,13 +1117,24 @@ def main():
         }
         with open(os.path.join(chdir, c["key"] + ".snbt"), "w", encoding="utf-8") as f:
             f.write(snbt2(doc) + "\n")
+    tdir = os.path.join(ROOT, "reward_tables")
+    shutil.rmtree(tdir, ignore_errors=True)
+    os.makedirs(tdir)
+    for index, t in enumerate(TABLES):
+        tid = qid("table/" + t["key"])
+        lang["ru_ru"][f"reward_table.{tid}.title"] = t["ru"]
+        lang["en_us"][f"reward_table.{tid}.title"] = t["en"]
+        rewards = [fix_numbers(dict(r, id=qid(f"table/{t['key']}/reward{n}")), "reward") for n, r in enumerate(t["rewards"])]
+        doc = {"id": tid, "loot_size": Int(1), "order_index": Int(index), "rewards": rewards}
+        with open(os.path.join(tdir, t["key"] + ".snbt"), "w", encoding="utf-8") as f:
+            f.write(snbt2(doc) + "\n")
     with open(os.path.join(ROOT, "chapter_groups.snbt"), "w", encoding="utf-8") as f:
         f.write(snbt2({"chapter_groups": [{"id": group_id}]}) + "\n")
     os.makedirs(os.path.join(ROOT, "lang"), exist_ok=True)
     for code, entries in lang.items():
         with open(os.path.join(ROOT, "lang", code + ".snbt"), "w", encoding="utf-8") as f:
             f.write(snbt2(entries) + "\n")
-    print(f"{len(CHAPTERS)} chapters, {len(all_keys)} quests")
+    print(f"{len(CHAPTERS)} chapters, {len(all_keys)} quests, {len(TABLES)} reward tables")
 
 
 if __name__ == "__main__":

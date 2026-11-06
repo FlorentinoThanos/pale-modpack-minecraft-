@@ -18,5 +18,6 @@
   "thepale.configuration.fogFullVisibility": "Fog Visibility at Outer Radius",
   "message.thepale.portal_refused": "Something on the other side holds the portal shut.",
   "message.thepale.north_only": "Only the frozen island in the north answers this call.",
-  "thepale.configuration.frozenIslandOnlyMobs": "Frozen Island Only Mobs"
+  "thepale.configuration.frozenIslandOnlyMobs": "Frozen Island Only Mobs",
+  "message.thepale.anchor_kept": "The respawn anchor kept your things"
 }

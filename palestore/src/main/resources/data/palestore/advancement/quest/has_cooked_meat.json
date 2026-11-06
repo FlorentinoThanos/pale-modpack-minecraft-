@@ -1,0 +1,14 @@
+{
+  "criteria": {
+    "has_cooked_meat": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:foods/cooked_meat"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,659 +1,112 @@
 {
-	chapter.24C62B88537DAC31.chapter_subtitle: ["Through the Nether: 4000 blocks are only 500 there."]
-	chapter.24C62B88537DAC31.title: "The Way South"
-	chapter.38EE5D196554F12F.chapter_subtitle: ["The dragon guards the wings you need to reach the north."]
-	chapter.38EE5D196554F12F.title: "The End"
-	chapter.3EFF447036D93718.chapter_subtitle: ["Deserts to the east, jungle to the west. And the first spawn of chaos."]
-	chapter.3EFF447036D93718.title: "The Hot Island"
-	chapter.52326DE657CCE52E.chapter_subtitle: ["The beginning. It is safe here, as long as you stay away from the fog."]
+	chapter.24C62B88537DAC31.chapter_subtitle: ["Fire, fortresses and the short way south: one block here is eight up top."]
+	chapter.24C62B88537DAC31.title: "The Nether"
+	chapter.52326DE657CCE52E.chapter_subtitle: ["The main path: from your first crafting table to the crossing to the hot island."]
 	chapter.52326DE657CCE52E.title: "The Mild Island"
-	chapter.87E315186D30B614.chapter_subtitle: ["The spawn of chaos lives on the hot and cold islands. There is none on the starter island."]
-	chapter.87E315186D30B614.title: "Bestiary of Chaos"
-	chapter.A2F1E7462ABF2081.chapter_subtitle: ["The most dangerous island. Only on wings, and only for those who are ready."]
-	chapter.A2F1E7462ABF2081.title: "The Cold Island"
-	chapter.A920D939556DC7BD.chapter_subtitle: ["Farmer's Delight: hot soup keeps you warm in the north, ice cream keeps you cool in the south."]
-	chapter.A920D939556DC7BD.title: "The Kitchen"
-	chapter.AED18204A08D5527.chapter_subtitle: ["Under the sand and soil lie the remains of those who lived here before the Pale."]
-	chapter.AED18204A08D5527.title: "Archeology"
-	chapter.BC1E489A1ED8C2DB.chapter_subtitle: ["Create Aeronautics airships. Above the Pale the air thins: by height 300 no balloon or propeller can climb."]
-	chapter.BC1E489A1ED8C2DB.title: "The Sky"
-	chapter.C6121B1B8CF045BA.chapter_subtitle: ["Oil exists only on the hot island: in deserts, badlands and savannas. Power starts here."]
-	chapter.C6121B1B8CF045BA.title: "Oil and Power"
-	chapter.F9A621A1BF5E6BF3.chapter_subtitle: ["Pale Store: enchanting costs 125, 250 and 500 XP points. The anvil is free."]
-	chapter.F9A621A1BF5E6BF3.title: "Enchanting"
-	chapter.FE8FCA9C94726E5A.chapter_subtitle: ["Create: from a belt to a mechanical arm. Everything that turns."]
-	chapter.FE8FCA9C94726E5A.title: "Machinery"
-	chapter_group.EFA7D509EB9A847A.title: "The Pale"
-	quest.00969B7E7A07CF4F.quest_desc: ["Stronger when built from several."]
-	quest.00969B7E7A07CF4F.title: "Large Diesel Engine"
-	quest.01719B67D1524ABF.quest_desc: ["Faster and sturdier than the plain one."]
-	quest.01719B67D1524ABF.title: "Iron Brush"
-	quest.03D22BFB7454B85E.quest_desc: ["A chance of a crushing blow and of taking a head."]
-	quest.03D22BFB7454B85E.title: "Vorpal"
-	quest.0410BCFCA686EEC7.quest_desc: ["Fly about 4000 blocks north (negative Z) and land on the snowy plains."]
-	quest.0410BCFCA686EEC7.title: "Northern Shore"
-	quest.045A076D45D3D97B.quest_desc: ["Wool makes a bed, and later a balloon."]
-	quest.045A076D45D3D97B.title: "Wool"
-	quest.06303D3A946FF551.quest_desc: ["Turns and picks up Create's parts."]
-	quest.06303D3A946FF551.title: "Wrench"
-	quest.06E84370328D5709.quest_desc: ["Cook and eat every dish on Farmer's Delight's advancement list."]
-	quest.06E84370328D5709.title: "Master Chef"
-	quest.06F27455A8C1762B.quest_desc: ["A bucket and a waterskin. Down south, water saves you from the heat."]
-	quest.06F27455A8C1762B.title: "Water to Go"
-	quest.0725FBD8C4BB5DC8.quest_desc: ["8 bookshelves unlock the second option (250 points), 15 the third (500 points)."]
-	quest.0725FBD8C4BB5DC8.title: "Library"
-	quest.0749A1C45B0EA552.quest_desc: ["And back: rotation into electricity."]
-	quest.0749A1C45B0EA552.title: "Alternator"
-	quest.0769CB83115313F0.quest_desc: ["Obsidian to powder, powder to a sheet. Trains need it."]
-	quest.0769CB83115313F0.title: "Sturdy Sheet"
-	quest.07F4FAD00FE4552B.quest_desc: ["This elixir wakes Lord Pumpkinhead. It only works in the north."]
-	quest.07F4FAD00FE4552B.title: "Transmuting Elixir"
-	quest.08A8A131FFBDFBE1.quest_desc: ["A belt made of dried kelp carries items."]
-	quest.08A8A131FFBDFBE1.title: "Belt"
-	quest.08EFDAF4AFF27FBA.quest_desc: ["The headless rider, the Lord's younger brother."]
-	quest.08EFDAF4AFF27FBA.title: "Sir Pumpkinhead"
-	quest.09DFA446653ADFDB.quest_desc: ["You can see half the island from it."]
-	quest.09DFA446653ADFDB.title: "Observation Tower"
-	quest.09F337429BFEAAC2.quest_desc: ["New Age's magnets need magnetite."]
-	quest.09F337429BFEAAC2.title: "Magnetite"
-	quest.0D35E616BE5B4892.quest_desc: ["The zombie clowns' caravan in the savanna."]
-	quest.0D35E616BE5B4892.title: "Clown Caravan"
-	quest.0D395F6CC34368F9.quest_desc: ["Faster and stronger."]
-	quest.0D395F6CC34368F9.title: "Advanced Motor"
-	quest.0D58FFF06C46B766.quest_desc: ["Stylish."]
-	quest.0D58FFF06C46B766.title: "Aviator's Goggles"
-	quest.0D7160B3C6A9FBEB.quest_desc: ["The north of the island is cooler: there's taiga there."]
-	quest.0D7160B3C6A9FBEB.title: "The Cool North"
-	quest.0D95AD042A8F6753.quest_desc: ["Dangerous, but there is gold and netherite."]
+	chapter_group.6FA7D509EB9A847A.title: "The Pale"
+	quest.03FA7F1DAE6ECFF3.quest_desc: ["Brew any potion."]
+	quest.03FA7F1DAE6ECFF3.title: "Home Brew"
+	quest.06F27455A8C1762B.quest_desc: ["Make a bucket. The reward is a random Insight book, I to III."]
+	quest.06F27455A8C1762B.title: "Bucket"
+	quest.0BC8FFA36F43ED32.quest_desc: ["The netherite upgrade template is in bastion chests."]
+	quest.0BC8FFA36F43ED32.title: "Upgrade Template"
+	quest.0D317297C92105F5.quest_desc: ["Enchant items on the table 30 times. Next comes the Death List chapter."]
+	quest.0D317297C92105F5.title: "Enchanter"
+	quest.0D95AD042A8F6753.quest_desc: ["Dangerous, but full of gold, templates and debris."]
 	quest.0D95AD042A8F6753.title: "Bastion"
-	quest.0DB0D487322A1055.quest_desc: ["Find a jungle temple."]
-	quest.0DB0D487322A1055.title: "Jungle Temple"
-	quest.0E0D5DC6409042D9.quest_desc: ["Oil barrels hold plenty and ride on trains and ships."]
-	quest.0E0D5DC6409042D9.title: "Oil Barrels"
-	quest.0EAC18A57865D6D9.quest_desc: ["Defeat Krampus."]
-	quest.0EAC18A57865D6D9.title: "Krampus"
-	quest.0EAF82EF4005A48C.quest_desc: ["Ride the train through the Nether to the southern portal. In the Overworld no track crosses the Pale for you: the fog is poison, and no passenger survives the trip."]
-	quest.0EAF82EF4005A48C.title: "The Southern Mainline"
-	quest.0F55A4D4E51A5010.quest_desc: ["Find every fossil."]
-	quest.0F55A4D4E51A5010.title: "Palaeontologist"
-	quest.0F69B198F20785A0.quest_desc: ["You need it to make brass."]
-	quest.0F69B198F20785A0.title: "Blaze Burner"
-	quest.101F5B869F1FB6B7.quest_desc: ["Defeat the Dire Hound Leader."]
-	quest.101F5B869F1FB6B7.title: "Hound Leader"
-	quest.117325654E654D62.quest_desc: ["Kill blazes and take their rods."]
+	quest.117325654E654D62.quest_desc: ["Kill 8 blazes and collect 6 blaze rods."]
 	quest.117325654E654D62.title: "Blazes"
-	quest.11C14F27ECDF1677.quest_desc: ["Display boards and links show what's going on in the factory."]
-	quest.11C14F27ECDF1677.title: "Display Board"
-	quest.12DFBF3A38E8F8C8.quest_desc: ["Spirits take the most from a Spirit Divider."]
-	quest.12DFBF3A38E8F8C8.title: "Restless Spirits"
-	quest.12FA3EC976BE3DD8.quest_desc: ["Vegetable soup. Warm food in this pack warms your body for a minute (Cold Sweat)."]
-	quest.12FA3EC976BE3DD8.title: "Hot Soup"
-	quest.131B785C57D41901.quest_desc: ["Find an igloo."]
-	quest.131B785C57D41901.title: "Igloo"
-	quest.1328AAFF05BF887F.quest_desc: ["Bamboo grows in the jungle."]
-	quest.1328AAFF05BF887F.title: "Bamboo"
-	quest.14DDFEAA378A2E3A.quest_desc: ["Give the train a schedule and it runs on its own."]
-	quest.14DDFEAA378A2E3A.title: "Schedule"
-	quest.15DAC2DE5BA7190E.quest_desc: ["When you die, your things don't scatter: they stay with your body (the Corpse mod). Go back to it and open it. Don't die in the Pale's fog: the body stays in the poisoned water, and getting it back is close to impossible."]
-	quest.15DAC2DE5BA7190E.title: "Last Resting Place"
-	quest.18BAE9E1D07C3F7C.quest_desc: ["A stone pickaxe and a furnace."]
+	quest.11E96124CD295ED1.quest_desc: ["The nastiest place in the Nether."]
+	quest.11E96124CD295ED1.title: "Basalt Deltas"
+	quest.11EE6307F604292F.quest_desc: ["Without a diamond pickaxe you can't mine obsidian, so cast the portal in place: build a mould, pour lava into each frame cell and pour water over it. Ruined portals also hold obsidian. Enter the Nether to unlock the diamond pickaxe recipe and the Nether chapter."]
+	quest.11EE6307F604292F.title: "Into the Nether"
+	quest.142A7D5B0E76BB45.quest_desc: ["Breed any two animals."]
+	quest.142A7D5B0E76BB45.title: "New Arrivals"
+	quest.158DB0DBDAB97DEE.quest_desc: ["Insulate any piece of armour on a sewing table."]
+	quest.158DB0DBDAB97DEE.title: "Lining Up"
+	quest.18BAE9E1D07C3F7C.quest_desc: ["Make a stone pickaxe. The reward unlocks the bed recipe, which is locked until then."]
 	quest.18BAE9E1D07C3F7C.title: "Stone Age"
-	quest.194D3DA28B456106.quest_desc: ["A potato cannon on deck."]
-	quest.194D3DA28B456106.title: "Mounted Cannon"
-	quest.19648A5B291B91DD.quest_desc: ["Coils and brushes turn rotation into power."]
-	quest.19648A5B291B91DD.title: "New Age Generator"
-	quest.199A32EA805BCBC4.quest_desc: ["Tame a chameleon. It finds biomes for you."]
-	quest.199A32EA805BCBC4.title: "Pet Chameleon"
-	quest.19BFB3CE701A8231.quest_desc: ["Cold Sweat's boiler with a smokestack heats a house. Desert nights get cold."]
-	quest.19BFB3CE701A8231.title: "Smokestack"
-	quest.19F3064FF15A3876.quest_desc: ["A Terralith hut among the glaciers."]
-	quest.19F3064FF15A3876.title: "Glacial Hut"
-	quest.1ACB00F411AF529B.quest_desc: ["The warm, wet west of the island."]
-	quest.1ACB00F411AF529B.title: "Jungle"
-	quest.1C160C2289A70D2A.quest_desc: ["Sneak and right-click a chest with empty hands: Carry On lets you pick it up with everything inside. Animals too. Bosses, villagers and machines can't be carried."]
-	quest.1C160C2289A70D2A.title: "Moving House"
-	quest.1D4A0C4B85EEE138.quest_desc: ["Organic compost turns dirt into rich soil."]
-	quest.1D4A0C4B85EEE138.title: "Compost"
-	quest.1D5F79045F5A2E07.quest_desc: ["A hearth warms your whole home."]
-	quest.1D5F79045F5A2E07.title: "Hearth"
-	quest.1ED8F23282518DB7.quest_desc: ["Control rods and a fuel acceptor."]
-	quest.1ED8F23282518DB7.title: "Rods"
-	quest.1FF17CAE3B00FA82.quest_desc: ["Move cargo from one island to another by ship or train with nobody aboard: the fog kills people, not chests. Tick the quest off when the cargo arrives."]
-	quest.1FF17CAE3B00FA82.title: "Cargo Run"
-	quest.20868A679437C189.quest_desc: ["Separates materials."]
-	quest.20868A679437C189.title: "Centrifuge"
-	quest.208A23D769C58F86.quest_desc: ["500 blocks of track through the Nether. Steam 'n' Rails adds tracks of every wood, and blackstone ones too."]
-	quest.208A23D769C58F86.title: "Tracks"
-	quest.20CB63E08F1E0369.quest_desc: ["An evoker from the mansion drops it. It saves you from death once."]
-	quest.20CB63E08F1E0369.title: "Totem of Undying"
-	quest.223D579A7340DAB6.quest_desc: ["Oritech's energy storage."]
-	quest.223D579A7340DAB6.title: "Battery"
-	quest.2250439ED9817711.quest_desc: ["Items drop down a chute."]
-	quest.2250439ED9817711.title: "Chute"
-	quest.2253A3492757C92D.quest_desc: ["Blowing through water washes, through fire smokes, through lava smelts."]
-	quest.2253A3492757C92D.title: "Encased Fan"
-	quest.231B3FF73838F5B4.quest_desc: ["Keeps a ship level."]
-	quest.231B3FF73838F5B4.title: "Gyroscopic Propeller"
-	quest.23E18FD346E5EB6D.quest_desc: ["Cold food cools you down. A lifesaver in the south."]
-	quest.23E18FD346E5EB6D.title: "Melon Popsicle"
-	quest.245821AFD7698303.quest_desc: ["Terralith's dungeon in the ice."]
-	quest.245821AFD7698303.title: "Frosted Dungeon"
-	quest.24EC6E0898270BEB.quest_desc: ["His knife makes your head spin."]
-	quest.24EC6E0898270BEB.title: "Zombie Clown"
-	quest.2560ED259730DE07.quest_desc: ["An overcharged diamond and wire made from it."]
-	quest.2560ED259730DE07.title: "Overcharged Diamond"
-	quest.25A53111B7CABE72.quest_desc: ["Find a village in the south."]
-	quest.25A53111B7CABE72.title: "Desert Village"
-	quest.2911A7A19AAE3F00.quest_desc: ["More XP from mobs and blocks."]
-	quest.2911A7A19AAE3F00.title: "Insight"
-	quest.2931A0DEA9C7E111.quest_desc: ["Builds Oritech's complex parts."]
-	quest.2931A0DEA9C7E111.title: "Assembler"
-	quest.29DEE39DC40AF8FA.quest_desc: ["Defeat a breeze and take its rod."]
-	quest.29DEE39DC40AF8FA.title: "Breeze"
-	quest.2B03AC2016EFDA62.quest_desc: ["A heavy core from a vault and a breeze rod."]
-	quest.2B03AC2016EFDA62.title: "Mace"
-	quest.2B9728110E64F29A.quest_desc: ["Someone was buried here long ago."]
-	quest.2B9728110E64F29A.title: "Villager Grave"
-	quest.2BC86194802C313D.quest_desc: ["Put an artifact together from shards."]
-	quest.2BC86194802C313D.title: "Unidentified Artifact"
-	quest.2C37D36732A5C6B1.quest_desc: ["There's a way to make it shimmer. Find it yourself."]
-	quest.2C37D36732A5C6B1.title: "Pearlescent Levitite"
-	quest.2DC5EE261E60B32E.quest_desc: ["Oil, diesel, New Age and Oritech power: you run your own grid."]
-	quest.2DC5EE261E60B32E.title: "Electrifying the South"
-	quest.2ED21E7294C3E747.quest_desc: ["They show the speed and stress of your machines."]
-	quest.2ED21E7294C3E747.title: "Engineer's Goggles"
-	quest.30061128D7FADAE9.quest_desc: ["The item stays with you when you die. The most precious book; you have to earn it."]
-	quest.30061128D7FADAE9.title: "Soulbound"
-	quest.302FAE3B4175F575.quest_desc: ["Twelve eyes of ender. They lead to the stronghold."]
-	quest.302FAE3B4175F575.title: "Eye of Ender"
-	quest.307AC4D150AA61CC.quest_desc: ["A sacrifice heals you and gives Strength."]
-	quest.307AC4D150AA61CC.title: "Ritual Dagger"
-	quest.316BDBE7B30479D1.quest_desc: ["Armour of hoglin hide protects you from heat. You will want it in the south."]
+	quest.238CF919ACEEAA52.quest_desc: ["When it gets too cold around you (at night or high in the mountains), warm up next to a warm block such as a campfire."]
+	quest.238CF919ACEEAA52.title: "Huddle Close"
+	quest.253F64A34921796E.quest_desc: ["A nether star and obsidian."]
+	quest.253F64A34921796E.title: "Beacon"
+	quest.268E03D5637E21BD.quest_desc: ["The plain Nether: netherrack and lava."]
+	quest.268E03D5637E21BD.title: "Nether Wastes"
+	quest.27B4FD4982C710F5.quest_desc: ["Craft a crafting table."]
+	quest.27B4FD4982C710F5.title: "Crafting Table"
+	quest.295417956A1A5F30.quest_desc: ["Distract a piglin with gold."]
+	quest.295417956A1A5F30.title: "Oh Shiny"
+	quest.2B84337841810FE1.quest_desc: ["Put a smokestack on a boiler or an icebox."]
+	quest.2B84337841810FE1.title: "Getting Cozy"
+	quest.2D9C6B5CDD4A72BE.quest_desc: ["Summon and defeat the Wither. Far from home."]
+	quest.2D9C6B5CDD4A72BE.title: "The Wither"
+	quest.316BDBE7B30479D1.quest_desc: ["Hoglins graze in the crimson forest."]
 	quest.316BDBE7B30479D1.title: "Hoglin Hide"
-	quest.3186683A79A07234.quest_desc: ["Take the egg from the portal."]
-	quest.3186683A79A07234.title: "Dragon Egg"
-	quest.31AB0EE4C074E86D.quest_desc: ["The south's zombies don't burn in the sun."]
-	quest.31AB0EE4C074E86D.title: "Husks"
-	quest.32AEDB852A3794DC.quest_desc: ["Defeat an elder guardian."]
-	quest.32AEDB852A3794DC.title: "Elder Guardian"
-	quest.32B2FC7FC1FE0154.quest_desc: ["Sleep in a bed."]
-	quest.32B2FC7FC1FE0154.title: "Survive the Night"
-	quest.32F918D1F51D5B09.quest_desc: ["Tame a parrot with seeds."]
-	quest.32F918D1F51D5B09.title: "Parrot"
-	quest.37E632692EC464C9.quest_desc: ["A bearing, a crank and a head over the well."]
-	quest.37E632692EC464C9.title: "Pumpjack"
-	quest.38EB49361605C5E3.quest_desc: ["Ruins among the red cliffs."]
-	quest.38EB49361605C5E3.title: "Badlands Ruins"
-	quest.3A2B381694E7803D.quest_desc: ["A pair of wheels crushes ore with a bonus."]
-	quest.3A2B381694E7803D.title: "Crushing Wheels"
-	quest.3B51F18BE0C1DC07.quest_desc: ["The burner heats the air in the envelope."]
-	quest.3B51F18BE0C1DC07.title: "Hot Air Burner"
-	quest.3B7110855E76678A.quest_desc: ["Grinds grain into flour and ore into grit."]
-	quest.3B7110855E76678A.title: "Millstone"
-	quest.3C7B37315B41515F.quest_desc: ["Brew a potion of rampage."]
-	quest.3C7B37315B41515F.title: "Rampage"
-	quest.3D753A32456BDA7A.quest_desc: ["Ore cracks into Create's crushed ore."]
-	quest.3D753A32456BDA7A.title: "Smashing"
-	quest.3DB556DE613B82CC.quest_desc: ["Build a portal and step into the Nether. Pale Store unlocks the diamond pickaxe recipe right away."]
-	quest.3DB556DE613B82CC.title: "Deeper Down"
-	quest.3DF6E6E5D0A4B668.quest_desc: ["Double your ore."]
-	quest.3DF6E6E5D0A4B668.title: "Pulverizer and Furnace"
-	quest.3EA38D8286E0AE6D.quest_desc: ["Warmth you can carry around."]
-	quest.3EA38D8286E0AE6D.title: "Soulspring Lamp"
-	quest.3F2B1450BCEDB172.quest_desc: ["Dark towers stand only in the north."]
-	quest.3F2B1450BCEDB172.title: "Dark Tower"
-	quest.3FC09F55AE6D1C15.quest_desc: ["Find a woodland mansion. Illagers live inside, so come prepared."]
-	quest.3FC09F55AE6D1C15.title: "Woodland Mansion"
-	quest.403796E887FF3760.quest_desc: ["Its shell makes a mace and armour."]
-	quest.403796E887FF3760.title: "Thornshell Crab"
-	quest.40E96E0C16725E6F.quest_desc: ["Train casing is made from sturdy sheets."]
-	quest.40E96E0C16725E6F.title: "Train Casing"
-	quest.422E7DAB6ECB47AE.quest_desc: ["Deep beneath the island. Keep quiet: the Warden walks there."]
-	quest.422E7DAB6ECB47AE.title: "Ancient City"
-	quest.4241441FD3688E2A.quest_desc: ["A skillet fries right over the fire. It hits hard, too."]
-	quest.4241441FD3688E2A.title: "Skillet"
-	quest.4530B3D62C2A74A6.quest_desc: ["You know everything that crawls out of chaos."]
-	quest.4530B3D62C2A74A6.title: "Chaos Hunter"
-	quest.45FFCDBF36A6DFBD.quest_desc: ["The best knife there is."]
-	quest.45FFCDBF36A6DFBD.title: "Netherite Knife"
-	quest.460B7A96112A144C.quest_desc: ["End stone powder, zinc and water in a heated mixer."]
-	quest.460B7A96112A144C.title: "Levitite Blend"
-	quest.470CD1309BE79D82.quest_desc: ["End stone holds Oritech's platinum ore. It's the only place besides the north."]
-	quest.470CD1309BE79D82.title: "End Platinum"
-	quest.48184452CD411FD3.quest_desc: ["Defeat a Fallen Chaos Knight."]
-	quest.48184452CD411FD3.title: "Fallen Knight"
-	quest.488FD18B22E2650A.title: "Bone Imp"
-	quest.48D30221A261736D.title: "Barrel Zombie"
-	quest.4956927C60DB5470.quest_desc: ["Presses and mixers work over a depot too."]
-	quest.4956927C60DB5470.title: "Depot"
-	quest.4AF3B98939A68C16.quest_desc: ["A netherite ingot from scrap and gold."]
+	quest.32B2FC7FC1FE0154.quest_desc: ["Make a bed of any colour. Now you can sleep through the night."]
+	quest.32B2FC7FC1FE0154.title: "A Bed of Your Own"
+	quest.347ECC69BCE02B07.quest_desc: ["Make iron leggings and boots."]
+	quest.347ECC69BCE02B07.title: "Iron Legs"
+	quest.3739C0C06C989C7E.quest_desc: ["Make an enchanting table."]
+	quest.3739C0C06C989C7E.title: "Enchanting Table"
+	quest.3C8B601B55377999.quest_desc: ["Go down into any cave biome."]
+	quest.3C8B601B55377999.title: "Underground"
+	quest.3D852B29B66B7CE6.quest_desc: ["Collect 3 wither skeleton skulls."]
+	quest.3D852B29B66B7CE6.title: "Skulls"
+	quest.430EEFC8CC04719E.quest_desc: ["Mine 5 diamonds. You can't craft a diamond pickaxe yet: its recipe unlocks in the Nether."]
+	quest.430EEFC8CC04719E.title: "Diamonds"
+	quest.43D38460798BDC87.quest_desc: ["Plant any crop."]
+	quest.43D38460798BDC87.title: "First Crop"
+	quest.440A8F85CAA3A124.quest_desc: ["Make a brewing stand. Nether wart grows in fortresses."]
+	quest.440A8F85CAA3A124.title: "Brewing Stand"
+	quest.446F1EF791847FB7.quest_desc: ["Hardly anything attacks you here. A good spot for a camp."]
+	quest.446F1EF791847FB7.title: "Warped Forest"
+	quest.46CDA9D5A810A1B4.quest_desc: ["Build a campfire and cook some meat on it. Next comes the kitchen: the Farmer's Delight chapter."]
+	quest.46CDA9D5A810A1B4.title: "Campfire Dinner"
+	quest.47932ED33706A4C0.quest_desc: ["Hoglins graze here."]
+	quest.47932ED33706A4C0.title: "Crimson Forest"
+	quest.47F23E6BC846E84A.quest_desc: ["Deflect an arrow with a shield."]
+	quest.47F23E6BC846E84A.title: "Not Today"
+	quest.49315C954FA0B6F5.quest_desc: ["Potions, heatproof armour and a road through the Nether: time to head for the hot island."]
+	quest.49315C954FA0B6F5.title: "Ready for the South"
+	quest.4AD349C8E447E551.quest_desc: ["Blue fire and soul sand."]
+	quest.4AD349C8E447E551.title: "Soul Sand Valley"
+	quest.4AF3B98939A68C16.quest_desc: ["An ingot from scrap and gold."]
 	quest.4AF3B98939A68C16.title: "Netherite"
-	quest.4AF81EC30CC8CB4C.quest_desc: ["Moves items between machines."]
-	quest.4AF81EC30CC8CB4C.title: "Mechanical Arm"
-	quest.4C3B43921837B846.quest_desc: ["The fastest brush."]
-	quest.4C3B43921837B846.title: "Netherite Brush"
-	quest.4D2A2718A56AA656.quest_desc: ["Fur armour keeps you warm."]
-	quest.4D2A2718A56AA656.title: "Goat Fur"
-	quest.4D65D68F96EC4E41.quest_desc: ["Find a village."]
-	quest.4D65D68F96EC4E41.title: "Neighbours"
-	quest.4DE3B4D8BEDB744D.quest_desc: ["A brush sweeps suspicious sand and gravel."]
-	quest.4DE3B4D8BEDB744D.title: "Brush"
-	quest.4DE8002A1CA820C6.quest_desc: ["Turns a build into a flying body."]
-	quest.4DE8002A1CA820C6.title: "Physics Assembler"
-	quest.4ED7BFC0BBD81AF3.quest_desc: ["A docking connector couples two ships."]
-	quest.4ED7BFC0BBD81AF3.title: "Docking"
-	quest.4F3DD01B4E09985C.quest_desc: ["Eat a hot soup or stew in the north: warm food warms your body for a minute."]
-	quest.4F3DD01B4E09985C.title: "Hot Dinner"
-	quest.5030EEC3E619C095.quest_desc: ["Craft a hoglin hide chestplate."]
+	quest.4FDFE63DCAAA6E64.quest_desc: ["You have been to all five Nether biomes."]
+	quest.4FDFE63DCAAA6E64.title: "Hot Tourist"
+	quest.4FEBB1AD4B9148A2.quest_desc: ["Make some torches. The reward unlocks the ladder recipe."]
+	quest.4FEBB1AD4B9148A2.title: "Torches"
+	quest.5030EEC3E619C095.quest_desc: ["A hoglin hide chestplate keeps the heat out. The hot island is hard without one."]
 	quest.5030EEC3E619C095.title: "Heatproof Armour"
-	quest.504DC36A93504B96.quest_desc: ["A propeller bearing on a brass casing."]
-	quest.504DC36A93504B96.title: "Propeller"
-	quest.517FB6433E9F7852.quest_desc: ["Tunnels under the taiga or the jungle."]
-	quest.517FB6433E9F7852.title: "Catacombs"
-	quest.51B38A5ECBABCC27.quest_desc: ["The first option costs 125 XP points and needs no bookshelves."]
-	quest.51B38A5ECBABCC27.title: "Enchanting Table"
-	quest.543F9A4131886D34.quest_desc: ["The reactor casing is made on an assembly line."]
-	quest.543F9A4131886D34.title: "Reactor Casing"
-	quest.54C4910398E90581.quest_desc: ["Armour from a chameleon's molt adapts to heat and cold."]
-	quest.54C4910398E90581.title: "Chameleon"
-	quest.551B2870D03B979D.quest_desc: ["Cools your home when it's scorching outside."]
-	quest.551B2870D03B979D.title: "Icebox"
-	quest.5882B5D6552E7AB1.quest_desc: ["In this pack the anvil takes no XP and is never \"too expensive\"."]
-	quest.5882B5D6552E7AB1.title: "Anvil"
-	quest.5C108A9D1926801A.quest_desc: ["Now you can craft one."]
+	quest.52D4A2355D369CE6.quest_desc: ["Caves explored, iron on. Take a longer fire resistance."]
+	quest.52D4A2355D369CE6.title: "Ready for the Heat"
+	quest.5C108A9D1926801A.quest_desc: ["The recipe is open. Craft a diamond pickaxe: you need it for debris and obsidian."]
 	quest.5C108A9D1926801A.title: "Diamond Pickaxe"
-	quest.5C84789238F902A5.quest_desc: ["Walk about 500 blocks south through the Nether (positive Z) and build a portal there. It leads to the hot island."]
-	quest.5C84789238F902A5.title: "Portal South"
-	quest.5DB63DF388B56201.quest_desc: ["Lord Pumpkinhead's sword."]
-	quest.5DB63DF388B56201.title: "Soulbane"
-	quest.5DF86C2C9CDC9B68.quest_desc: ["A solar heating plate. There's plenty of sun in the south."]
-	quest.5DF86C2C9CDC9B68.title: "Southern Sun"
-	quest.5E872F3E60538106.quest_desc: ["Archeologists' bombs turn up in digs. Throw one."]
-	quest.5E872F3E60538106.title: "Bomb"
-	quest.5F45460CF8DB57E9.quest_desc: ["Fill an airtight envelope with hot air."]
-	quest.5F45460CF8DB57E9.title: "Head in the Clouds"
-	quest.60E9D60176116959.quest_desc: ["The base of everything in Create."]
-	quest.60E9D60176116959.title: "Andesite Alloy"
-	quest.613049AD6949A8E3.quest_desc: ["Copper and zinc in a heated basin."]
-	quest.613049AD6949A8E3.title: "Brass"
-	quest.6167BC54D7B958AC.quest_desc: ["It's a long flight. Bring plenty of rockets."]
-	quest.6167BC54D7B958AC.title: "Rockets"
-	quest.62F3540ABB01B79E.quest_desc: ["Oritech's exo armour from northern metals."]
-	quest.62F3540ABB01B79E.title: "Exo Armour"
-	quest.63B83E7FF2A56CF8.quest_desc: ["Find and smelt some iron."]
-	quest.63B83E7FF2A56CF8.title: "Iron"
-	quest.65767D70F184842D.quest_desc: ["Put a whole dish on the table: roast chicken, shepherd's pie or a glazed ham."]
-	quest.65767D70F184842D.title: "Feast"
-	quest.65FEB118B7BA1765.quest_desc: ["Sew heat protection into your armour at the sewing table."]
-	quest.65FEB118B7BA1765.title: "Insulation"
-	quest.6732D54B22BF2CF3.quest_desc: ["Find an End city past the outer islands."]
-	quest.6732D54B22BF2CF3.title: "End City"
-	quest.67433EA0672EC136.quest_desc: ["The north's skeletons shoot slowing arrows."]
-	quest.67433EA0672EC136.title: "Strays"
-	quest.6761B1DEDF496C79.quest_desc: ["A full set of iron armour."]
-	quest.6761B1DEDF496C79.title: "Iron Armour"
-	quest.6979AD411F5C780D.quest_desc: ["A chestplate of monster skin and dark metal."]
-	quest.6979AD411F5C780D.title: "Mantle of the Night"
-	quest.6A1F76BBF7EF695D.quest_desc: ["A small propeller for fine moves."]
-	quest.6A1F76BBF7EF695D.title: "Smart Propeller"
-	quest.6BB18A9229DC45A1.quest_desc: ["You crossed all three islands and beat everything that hid in the north."]
-	quest.6BB18A9229DC45A1.title: "Master of the Pale"
-	quest.6D38E250FBC69D36.quest_desc: ["Copper wire and connectors."]
-	quest.6D38E250FBC69D36.title: "Wires"
-	quest.6DEBB1F3E3BB250B.quest_desc: ["A station by each portal."]
-	quest.6DEBB1F3E3BB250B.title: "Stations"
-	quest.6EE5AAD137ED2402.quest_desc: ["Defeat the Mother Spider."]
-	quest.6EE5AAD137ED2402.title: "Mother Spider"
-	quest.6EFA5BF4CC56454A.quest_desc: ["Explodes twice."]
-	quest.6EFA5BF4CC56454A.title: "Phantom Creeper"
-	quest.70D959C60DCE3CA1.quest_desc: ["Pumpkinhead and his bruisers."]
-	quest.70D959C60DCE3CA1.title: "The Pumpkin Gang"
-	quest.70DEC128677ACF04.quest_desc: ["Create's machines need it."]
-	quest.70DEC128677ACF04.title: "Quartz"
-	quest.7124E0DD608F7300.quest_desc: ["Dry savanna between the desert and the jungle."]
-	quest.7124E0DD608F7300.title: "Savanna"
-	quest.72AFD2AB490C73FB.quest_desc: ["Assemble a train: a bogey on the tracks, casing, controls."]
-	quest.72AFD2AB490C73FB.title: "Train"
-	quest.73B6764D68F79C2D.quest_desc: ["Defeat the Missioner."]
-	quest.73B6764D68F79C2D.title: "Missioner"
-	quest.73FB8B12389506A9.quest_desc: ["The only way to the cold island. A portal from the Nether won't open there."]
-	quest.73FB8B12389506A9.title: "Elytra"
-	quest.75903FFDBAF9F5C8.quest_desc: ["Fill a bucket with diesel."]
-	quest.75903FFDBAF9F5C8.title: "Diesel"
-	quest.76D15F539177341F.quest_desc: ["It hunts in the dark."]
-	quest.76D15F539177341F.title: "Nightmare Stalker"
-	quest.7703C7EC764575C8.quest_desc: ["Useful against arrows and against what lives on the other islands."]
-	quest.7703C7EC764575C8.title: "Shield"
-	quest.78126D00318DA7F3.quest_desc: ["Red cliffs in the east."]
-	quest.78126D00318DA7F3.title: "Badlands"
-	quest.7A2A3B6158360931.quest_desc: ["Find trail ruins and dig up a sherd."]
-	quest.7A2A3B6158360931.title: "Trail Ruins"
-	quest.7A4739014C49CFD3.quest_desc: ["Cocoa beans grow on jungle trunks."]
-	quest.7A4739014C49CFD3.title: "Cocoa"
-	quest.7AB4822E28BE3D8A.quest_desc: ["Oritech has its own oil in springs: those are only in the south too."]
-	quest.7AB4822E28BE3D8A.title: "Oil Spring"
-	quest.7B988246F90F6F1C.quest_desc: ["The Missioner drops charms. Collect three different ones."]
-	quest.7B988246F90F6F1C.title: "Charms"
-	quest.7C20E04BF684FF68.quest_desc: ["Build a reactor with heat vents. Keep it far from home."]
-	quest.7C20E04BF684FF68.title: "Reactor"
-	quest.7C24CF8E8AEE2B20.title: "Decrepit Skeleton"
-	quest.7D512533CA7EC7A3.quest_desc: ["Put food on it, hit it with a knife, get slices."]
-	quest.7D512533CA7EC7A3.title: "Cutting Board"
-	quest.7D928C9992FECDFD.quest_desc: ["Create's zinc ore lies shallow. Without it there is no brass."]
-	quest.7D928C9992FECDFD.title: "Zinc"
-	quest.7E137323D2F00F6F.quest_desc: ["Nickel, platinum and uranium exist only on the cold island."]
-	quest.7E137323D2F00F6F.title: "Northern Ores"
-	quest.7EBD1CB374F2E544.quest_desc: ["Crushed ore plus washing gives more metal."]
-	quest.7EBD1CB374F2E544.title: "Crushed Ore"
-	quest.7FAA8C6F650E5E31.quest_desc: ["Find the ice spikes."]
-	quest.7FAA8C6F650E5E31.title: "Ice Spikes"
-	quest.8315F2415B866728.title: "Firelight"
-	quest.83294AA7A21B24F9.quest_desc: ["Krampus' horn and permafrost make a horn of snowstorms."]
-	quest.83294AA7A21B24F9.title: "Stormcaller's Horn"
-	quest.83C119B689CF5F32.quest_desc: ["Gather dark metal ingots and forge a chestplate."]
-	quest.83C119B689CF5F32.title: "Dark Metal"
-	quest.8448AC785A06ADA3.quest_desc: ["Nether quartz and redstone. Polish it and make an electron tube."]
-	quest.8448AC785A06ADA3.title: "Rose Quartz"
-	quest.84E8CC486B087199.quest_desc: ["You can't mine obsidian without a diamond pickaxe, and its recipe only unlocks in the Nether. So cast the portal in place: build a stone mould, pour lava into each frame cell and pour water over it. The lava turns into obsidian right in the frame. Ruined portals also hold ready obsidian."]
-	quest.84E8CC486B087199.title: "Cast Portal"
-	quest.8580B33A9D0FFD4D.quest_desc: ["Found while digging. Shards make up an artifact."]
-	quest.8580B33A9D0FFD4D.title: "Artifact Shards"
-	quest.884AB390024C4487.quest_desc: ["Fill a bucket with crude oil."]
-	quest.884AB390024C4487.title: "Crude Oil"
-	quest.88C63890BCA3FB67.quest_desc: ["Oritech's laser arm mines from afar."]
-	quest.88C63890BCA3FB67.title: "Laser Arm"
-	quest.88E43EDD19DAD254.quest_desc: ["Wither skeleton skulls from the fortress."]
-	quest.88E43EDD19DAD254.title: "Skulls"
-	quest.8B0F1DC398076B5B.quest_desc: ["Create New Age's thorium ore exists only on the cold island, next to Oritech's uranium."]
-	quest.8B0F1DC398076B5B.title: "Thorium"
-	quest.8C29D21D55168A37.quest_desc: ["Insulate a full set of armour at the sewing table."]
-	quest.8C29D21D55168A37.title: "Fully Insulated"
-	quest.8C9D2F40DB85901F.quest_desc: ["His hammer stuns."]
-	quest.8C9D2F40DB85901F.title: "Skeleton Thrasher"
-	quest.8E586753D20A5A43.quest_desc: ["Armour from crab shells."]
-	quest.8E586753D20A5A43.title: "Spiny Shell Armour"
-	quest.902FBF4C0345BAC6.quest_desc: ["Steam 'n' Rails' little handcar, for checking the line."]
-	quest.902FBF4C0345BAC6.title: "Handcar"
-	quest.90EADDECB31F69A8.quest_desc: ["Chorus fruit from the outer islands."]
-	quest.90EADDECB31F69A8.title: "Chorus"
-	quest.910FEA79D7E519D8.quest_desc: ["Killing a mob heals you."]
-	quest.910FEA79D7E519D8.title: "Leech"
-	quest.9168863FAED2584D.quest_desc: ["Sews insulation right into your armour, for heat or for cold."]
-	quest.9168863FAED2584D.title: "Sewing Table"
-	quest.91E96124CD295ED1.quest_desc: ["The nastiest place in the Nether."]
-	quest.91E96124CD295ED1.title: "Basalt Deltas"
-	quest.9249DF6F4BA122E6.quest_desc: ["A water wheel and some cogs give you your first rotation."]
-	quest.9249DF6F4BA122E6.title: "Water Power"
-	quest.92B0A497F3B3C723.quest_desc: ["Keeps a ship on course."]
-	quest.92B0A497F3B3C723.title: "Navigation Table"
-	quest.96662A2C539A4849.quest_desc: ["Find an ocean monument off the shore. Bring water breathing potions."]
-	quest.96662A2C539A4849.title: "Ocean Monument"
-	quest.96B8A826CE2236BB.quest_desc: ["Find a grassy burial mound."]
-	quest.96B8A826CE2236BB.title: "Burial Mound"
-	quest.9A14DAD479DC44C0.quest_desc: ["Small but annoying."]
-	quest.9A14DAD479DC44C0.title: "Flies and Gadflies"
-	quest.9AA6D5A556DD3D2D.quest_desc: ["Keep your distance: he throws bombs."]
-	quest.9AA6D5A556DD3D2D.title: "Skeleton Demoman"
-	quest.9ABF12682BDB7BDA.quest_desc: ["Cut tall grass with a knife."]
-	quest.9ABF12682BDB7BDA.title: "Straw"
-	quest.9BE59DC6B19706C5.quest_desc: ["A copper backtank and helmet hold your breath underwater."]
-	quest.9BE59DC6B19706C5.title: "Diving Gear"
-	quest.9D886E01C48B1318.quest_desc: ["The warmest drink there is. Take some north."]
-	quest.9D886E01C48B1318.title: "Hot Cocoa"
-	quest.9EA7A6A20FFADAD8.quest_desc: ["A box you carry around. The flight north gets easier."]
-	quest.9EA7A6A20FFADAD8.title: "Shulker Box"
-	quest.9EC8A39A8FFEF516.quest_desc: ["Faster still."]
-	quest.9EC8A39A8FFEF516.title: "Diamond Brush"
-	quest.9FBB5CFB93AA3119.quest_desc: ["Collect it in bottles."]
-	quest.9FBB5CFB93AA3119.title: "Dragon's Breath"
-	quest.A0A1040529E200F6.quest_desc: ["The archeologists' temple in the southern jungle."]
-	quest.A0A1040529E200F6.title: "Lost Temple"
-	quest.A0B1FA5A024DD50C.quest_desc: ["Create Additions turns electricity into rotation."]
-	quest.A0B1FA5A024DD50C.title: "Electric Motor"
-	quest.A0F83F209478D8DF.quest_desc: ["A steam engine on a fluid tank with a burner."]
-	quest.A0F83F209478D8DF.title: "Steam"
-	quest.A1E2F25A0165C779.quest_desc: ["Cold Sweat tracks your body temperature. A thermometer shows how warm it is around you."]
-	quest.A1E2F25A0165C779.title: "Thermometer"
-	quest.A2A6BF64C165711A.quest_desc: ["Better Combat changes how fights feel: weapons hit in combos, each with its own reach. The Dark Warblade is a two-handed claymore now, the Great Reaper Axe a two-handed axe, the Skullbreaker a two-handed hammer and the pitchfork a spear. Chaos staffs still work on right-click."]
-	quest.A2A6BF64C165711A.title: "New Combat"
-	quest.A2F60D1C29A9AEB9.quest_desc: ["Offroad adds wheels. A ship can drive on land as well."]
-	quest.A2F60D1C29A9AEB9.title: "Rover"
-	quest.A4C762C823CD57D6.quest_desc: ["Shoots food. Better than it sounds."]
-	quest.A4C762C823CD57D6.title: "Potato Cannon"
-	quest.A53F64A34921796E.quest_desc: ["A nether star and obsidian."]
-	quest.A53F64A34921796E.title: "Beacon"
-	quest.A5EF27E3BF9A238A.quest_desc: ["Walk to the grey shore. Go no further: the fog is poison."]
-	quest.A5EF27E3BF9A238A.title: "Edge of the World"
-	quest.A6B24DBE2B9ECE71.quest_desc: ["Diesel Generators' strongest engine."]
-	quest.A6B24DBE2B9ECE71.title: "Huge Diesel Engine"
-	quest.A6B3E224BE0B43A2.quest_desc: ["Cabbages grow by the shore, onions on the plains. Gather both."]
-	quest.A6B3E224BE0B43A2.title: "Wild Vegetables"
-	quest.A7B4FD4982C710F5.quest_desc: ["Craft a crafting table."]
-	quest.A7B4FD4982C710F5.title: "First Planks"
-	quest.A856DFEB22633543.quest_desc: ["And back: power into rotation."]
-	quest.A856DFEB22633543.title: "New Age Motor"
-	quest.A8D9ED4CB99978FF.quest_desc: ["Lifesteal and wither."]
-	quest.A8D9ED4CB99978FF.title: "Nightmare Scythe"
-	quest.AB65C5715EF15246.quest_desc: ["A hoe and some wheat. Food is scarce on the islands."]
-	quest.AB65C5715EF15246.title: "Farm"
-	quest.ABC6EC38598954EB.quest_desc: ["Careful, you'll want it for a reactor."]
-	quest.ABC6EC38598954EB.title: "Uranium"
-	quest.AC365A657D57407F.quest_desc: ["Drills ore nodes forever."]
-	quest.AC365A657D57407F.title: "Deep Drill"
-	quest.AD9C6B5CDD4A72BE.quest_desc: ["Summon and defeat the Wither. Far from home."]
-	quest.AD9C6B5CDD4A72BE.title: "The Wither"
-	quest.B0036867805EA6D5.quest_desc: ["Break a loot vase."]
-	quest.B0036867805EA6D5.title: "Vase"
-	quest.B1AFBE8CAAB3188F.quest_desc: ["A balloon's envelope is sewn from wool and sticks."]
-	quest.B1AFBE8CAAB3188F.title: "Envelope"
-	quest.B27FB98BDF2373BA.quest_desc: ["A mixer over a basin mixes what you can't craft by hand."]
-	quest.B27FB98BDF2373BA.title: "Mixer"
-	quest.B2F1403AB0B6753D.quest_desc: ["Mined blocks drop already smelted. Here's a book."]
-	quest.B2F1403AB0B6753D.title: "Smelting"
-	quest.B3ED485838982C35.quest_desc: ["Iron charged in the energiser."]
-	quest.B3ED485838982C35.title: "Overcharged Iron"
-	quest.B4121C8FCBEF4EC1.title: "Scarlet Persecutor"
-	quest.B467FCEF22AFFB9C.quest_desc: ["Huddle up to a friend or a pet to keep warm."]
-	quest.B467FCEF22AFFB9C.title: "Huddle Close"
-	quest.B4EDD3D4B260DC0A.quest_desc: ["An ancient enchantment for elytra. Earn it by flying north."]
-	quest.B4EDD3D4B260DC0A.title: "Soaring Winds"
-	quest.B69E05F385946290.quest_desc: ["A windmill bearing and sails turn without water."]
-	quest.B69E05F385946290.title: "Windmill"
-	quest.B8424CBA31AEF41A.quest_desc: ["Dig up any fossil."]
-	quest.B8424CBA31AEF41A.title: "Fossil"
-	quest.B941662BD692035B.quest_desc: ["Heat into rotation."]
-	quest.B941662BD692035B.title: "Stirling Engine"
-	quest.B9D24F2994467FEB.quest_desc: ["They hunt in packs."]
-	quest.B9D24F2994467FEB.title: "Dread Hounds"
-	quest.BB0147D256A72E76.quest_desc: ["A knife cuts grass into straw and meat into cuts. The kitchen starts here. AppleSkin shows how filling each dish is."]
-	quest.BB0147D256A72E76.title: "Knife"
-	quest.BB1137C51525EBB2.quest_desc: ["A full set of goat fur armour."]
-	quest.BB1137C51525EBB2.title: "Full Fur"
-	quest.BC624DE76152228A.quest_desc: ["Someone was digging here before you."]
-	quest.BC624DE76152228A.title: "Archeologists' Camp"
-	quest.BDC87E3032B044AB.quest_desc: ["Fuel made of thorium."]
-	quest.BDC87E3032B044AB.title: "Nuclear Fuel"
-	quest.BE7BA3D77DAA1ED3.quest_desc: ["A full set of dark metal. In this pack it gives Strength I."]
-	quest.BE7BA3D77DAA1ED3.title: "Chaos Knight"
-	quest.BE9A70573691E0A3.quest_desc: ["A pickaxe digs several blocks at once. Earn the book by digging deepslate."]
-	quest.BE9A70573691E0A3.title: "Tunneling"
-	quest.BF0DD4D605F5FA46.quest_desc: ["Heat the blend and it crystallises. Levitite holds a ship up, but can't lift it on its own."]
-	quest.BF0DD4D605F5FA46.title: "Levitite"
-	quest.BF3D3BFEDA85A930.quest_desc: ["The eldest of the bonescallers."]
-	quest.BF3D3BFEDA85A930.title: "Supreme Bonescaller"
-	quest.BF3D52997756353E.quest_desc: ["His axe splits shields too."]
-	quest.BF3D52997756353E.title: "Zombie Lumberjack"
-	quest.BF4BF63D52649624.quest_desc: ["Funnels take items from chests and put them on belts."]
-	quest.BF4BF63D52649624.title: "Funnels"
-	quest.BF93180CA875881A.quest_desc: ["Diesel gives rotation without water or wind."]
-	quest.BF93180CA875881A.title: "Diesel Engine"
-	quest.C03B1C7C6E38BC53.quest_desc: ["Dough, tomato sauce and minced beef."]
-	quest.C03B1C7C6E38BC53.title: "Pasta with Meatballs"
-	quest.C1A3A86D29FCD841.quest_desc: ["A semaphore shows whether the line is clear."]
-	quest.C1A3A86D29FCD841.title: "Semaphore"
-	quest.C30EEFC8CC04719E.quest_desc: ["You can't craft a diamond pickaxe yet: Pale Store unlocks its recipe once you reach the Nether. The diamonds will still come in handy."]
-	quest.C30EEFC8CC04719E.title: "Diamonds"
-	quest.C46F1EF791847FB7.quest_desc: ["Hardly anything attacks you here."]
-	quest.C46F1EF791847FB7.title: "Warped Forest"
-	quest.C48A5C767908D1E4.quest_desc: ["The fermenter makes fuel from plants. It's the backup plan without oil."]
-	quest.C48A5C767908D1E4.title: "Plant Oil"
-	quest.C7932ED33706A4C0.quest_desc: ["Hoglins graze in the crimson forest."]
-	quest.C7932ED33706A4C0.title: "Crimson Forest"
-	quest.C8D47269F11D1242.quest_desc: ["An old fort on a mound in the woods."]
-	quest.C8D47269F11D1242.title: "Motte"
-	quest.C8F69B71BADEC961.quest_desc: ["Crushing wheels turn end stone into powder. Levitite for airships is made from it."]
-	quest.C8F69B71BADEC961.title: "End Stone Powder"
-	quest.C988A9961035406B.quest_desc: ["Enter the End portal."]
-	quest.C988A9961035406B.title: "The End?"
-	quest.C98A2D2CD3B01050.quest_desc: ["Put the pot on the stove. Soups and stews cook in it."]
-	quest.C98A2D2CD3B01050.title: "Cooking Pot"
-	quest.C99AB36B29666371.quest_desc: ["Pour the elixir on an infernal pumpkin and defeat the Lord."]
-	quest.C99AB36B29666371.title: "Lord Pumpkinhead"
-	quest.C9A60CFC6CC71D67.quest_desc: ["Charges iron and gold with power."]
-	quest.C9A60CFC6CC71D67.title: "Energiser"
-	quest.C9CD56A57D4E55A4.quest_desc: ["Pours fluids into bottles and onto parts."]
-	quest.C9CD56A57D4E55A4.title: "Spout"
-	quest.CA556D7CD9BDBF91.quest_desc: ["Symmetric sails catch the wind."]
-	quest.CA556D7CD9BDBF91.title: "Sails"
-	quest.CAD349C8E447E551.quest_desc: ["Blue fire and soul sand."]
-	quest.CAD349C8E447E551.title: "Soul Sand Valley"
-	quest.CB03880F1C26F0ED.quest_desc: ["A mechanical press turns ingots into sheets."]
-	quest.CB03880F1C26F0ED.title: "Press"
-	quest.CB0F891B4036C99F.quest_desc: ["Two skulls, one spine."]
-	quest.CB0F891B4036C99F.title: "Siamese Skeletons"
-	quest.CC8251E4D1C6AA30.quest_desc: ["A controller on a column of fluid tanks splits oil into fractions."]
-	quest.CC8251E4D1C6AA30.title: "Distillation"
-	quest.CCBE9AD642E91296.quest_desc: ["Nasty things in the water."]
-	quest.CCBE9AD642E91296.title: "Carrion Fish"
-	quest.CDAA5FFB4B8FBD43.quest_desc: ["Lives by the water."]
-	quest.CDAA5FFB4B8FBD43.title: "Zombie Fisherman"
-	quest.CDF3B18A3D57CD81.quest_desc: ["Find a dark forest. That's where mansions stand."]
-	quest.CDF3B18A3D57CD81.title: "Dark Forest"
-	quest.CE4C20E946F41672.quest_desc: ["The heart of Create's advanced machines."]
-	quest.CE4C20E946F41672.title: "Precision Mechanism"
-	quest.CE4E427D54CEA209.quest_desc: ["What's left from distillation becomes asphalt. You run faster on it."]
-	quest.CE4E427D54CEA209.title: "Asphalt"
-	quest.CF2C221048E9A69F.quest_desc: ["Hits hard."]
-	quest.CF2C221048E9A69F.title: "Zombie Bruiser"
-	quest.D0B8518015D93474.quest_desc: ["Shulker shells for boxes."]
-	quest.D0B8518015D93474.title: "Shulkers"
-	quest.D2C48897B0391DA4.quest_desc: ["Permafrost shards. The Frostbitten Blade is forged from them."]
-	quest.D2C48897B0391DA4.title: "Permafrost"
-	quest.D4320B3D256A2A18.quest_desc: ["A jumping blow stuns."]
-	quest.D4320B3D256A2A18.title: "Skullbreaker Hammer"
-	quest.D58294EEFE87A521.quest_desc: ["Lifts cargo on a rope."]
-	quest.D58294EEFE87A521.title: "Rope Winch"
-	quest.D5876116D09A4A94.quest_desc: ["Elytra go into their own slot (Elytra Slot), so your chestplate stays on. Fly north in a fur-lined chestplate."]
-	quest.D5876116D09A4A94.title: "Wing Slot"
-	quest.D67EFDB2909E622E.quest_desc: ["Create needs copper, and so does a waterskin."]
-	quest.D67EFDB2909E622E.title: "Copper"
-	quest.D7663AC209CBDFA4.quest_desc: ["Every kill stokes your Rampage."]
-	quest.D7663AC209CBDFA4.title: "Great Reaper Axe"
-	quest.D88E282B1E8AB802.quest_desc: ["A pump and pipes move water, lava and anything that flows."]
-	quest.D88E282B1E8AB802.title: "Pump"
-	quest.D8A86AB5D40AE123.quest_desc: ["Your first Oritech generator."]
-	quest.D8A86AB5D40AE123.title: "Oritech"
-	quest.D98E9E19AB6E1041.quest_desc: ["Find a swamp. Wild rice grows there, and witches live there."]
-	quest.D98E9E19AB6E1041.title: "Swamp"
-	quest.D9E931CC418BB150.quest_desc: ["Wash gravel: it yields nuggets."]
-	quest.D9E931CC418BB150.title: "Washing"
-	quest.DBF65E1459529D27.title: "Decaying Zombie"
-	quest.DC7BBA04424DE05D.quest_desc: ["Oritech's big solar panel."]
-	quest.DC7BBA04424DE05D.title: "Solar Panel"
-	quest.DDBB3C9CFBE1A7F0.quest_desc: ["A mechanical hand that clicks for you."]
-	quest.DDBB3C9CFBE1A7F0.title: "Deployer"
-	quest.DE17EC8E24A4E902.quest_desc: ["Find a pillager outpost. They keep their distance from villages."]
-	quest.DE17EC8E24A4E902.title: "Pillager Outpost"
-	quest.DE1F5A5408C7DBDF.quest_desc: ["Crafts big recipes on its own."]
-	quest.DE1F5A5408C7DBDF.title: "Mechanical Crafter"
-	quest.DE60743011A9253E.quest_desc: ["The obelisk stands in the desert of the hot island."]
-	quest.DE60743011A9253E.title: "Desert Obelisk"
-	quest.DFC8884BF979CF66.quest_desc: ["A mechanical drill and saw dig and chop on their own."]
-	quest.DFC8884BF979CF66.title: "Automation"
-	quest.E14CFE4398E3FC6C.quest_desc: ["Defeat the Lifestealer."]
-	quest.E14CFE4398E3FC6C.title: "Lifestealer"
-	quest.E257C11FF030B148.quest_desc: ["Beef stew is more filling and warms you too."]
-	quest.E257C11FF030B148.title: "Stew"
-	quest.E2BF3F56EC398E2B.quest_desc: ["Climb above 500 blocks: no fog and no poison up there. Below lies a sea of clouds with the islands as holes in it."]
-	quest.E2BF3F56EC398E2B.title: "Above the Clouds"
-	quest.E30FD8AB50DCEDE6.quest_desc: ["Find the trial chambers underground and get a trial key."]
-	quest.E30FD8AB50DCEDE6.title: "Trial Chambers"
-	quest.E35516F1AD254645.quest_desc: ["Artifacts are identified on it."]
-	quest.E35516F1AD254645.title: "Archeology Table"
-	quest.E41005752AAF6989.quest_desc: ["Run a propeller on a ship."]
-	quest.E41005752AAF6989.title: "Thrust"
-	quest.E53992FFD62EEE01.quest_desc: ["All three strongholds are on the hot island, half way out from its centre."]
-	quest.E53992FFD62EEE01.title: "Stronghold"
-	quest.E541143ABF1D324D.quest_desc: ["Land ends about 1250 blocks from the centre. Beyond it lies a grey, poisonous sea behind a wall of fog. Two more islands wait somewhere past it."]
-	quest.E541143ABF1D324D.title: "Welcome to the Pale"
-	quest.E62C24D6541B96D3.quest_desc: ["A drill for an underground machine."]
-	quest.E62C24D6541B96D3.title: "Borehead"
-	quest.E6BB1CC21F626DDD.quest_desc: ["Straw is woven into canvas."]
-	quest.E6BB1CC21F626DDD.title: "Canvas"
-	quest.E6FBABA20A32879D.quest_desc: ["A well full of fire."]
-	quest.E6FBABA20A32879D.title: "Firewell"
-	quest.E8057D6B78C4CC00.quest_desc: ["The blow goes through armour. Earn the book by beating a ravager from a raid."]
-	quest.E8057D6B78C4CC00.title: "Penetrating Strike"
-	quest.E9AD1F3470900340.quest_desc: ["It shows height and air pressure. Pressure drops with height, and so does thrust."]
-	quest.E9AD1F3470900340.title: "Altitude Sensor"
-	quest.E9D79ACF1091D28A.quest_desc: ["Slay the Ender Dragon."]
-	quest.E9D79ACF1091D28A.title: "The Dragon"
-	quest.EADA0FE986A758A0.quest_desc: ["Enchant any item."]
-	quest.EADA0FE986A758A0.title: "First Enchantment"
-	quest.EB453C03F34C6392.quest_desc: ["Oritech's foundry makes steel."]
-	quest.EB453C03F34C6392.title: "Steel"
-	quest.EBBFE927BFD7CC3F.quest_desc: ["The scanner shows how much oil lies under a chunk. Search the desert, badlands and savanna: there is none on the other islands."]
-	quest.EBBFE927BFD7CC3F.title: "Prospecting"
-	quest.EC204740A618AA15.quest_desc: ["Take a ship as high as it goes. Around height 300 there's no air left, and the ship stops. Above 450, where the poison ends, nobody can stand on a deck: the Pale only lets go of those on wings."]
-	quest.EC204740A618AA15.title: "The Pale's Ceiling"
-	quest.EC7E43831A5017C0.quest_desc: ["A stressometer shows how much more load your network can take."]
-	quest.EC7E43831A5017C0.title: "Stress"
-	quest.ECA11DA32F4F7DDE.quest_desc: ["Find a Nether fortress."]
-	quest.ECA11DA32F4F7DDE.title: "Fortress"
-	quest.EDD0B934A341F1F9.quest_desc: ["Wild rice grows in swamps and jungles. Plant it in water."]
-	quest.EDD0B934A341F1F9.title: "Rice"
-	quest.EE36748374FCDE66.quest_desc: ["Wild tomatoes only grow where it's hot. That means the hot island."]
-	quest.EE36748374FCDE66.title: "Tomatoes"
-	quest.EE4CB3B7BB11E21C.quest_desc: ["Step out of the portal and find the desert. Drink water and watch your thermometer."]
-	quest.EE4CB3B7BB11E21C.title: "Southern Sands"
-	quest.EE686D1726C68213.quest_desc: ["A big store made of iron sheets."]
-	quest.EE686D1726C68213.title: "Item Vault"
-	quest.EF5337DC970DB68C.quest_desc: ["Fight off a raid on a village."]
-	quest.EF5337DC970DB68C.title: "Raid"
-	quest.F1B68E3780D7E7E9.quest_desc: ["Find a stone circle on the plains."]
-	quest.F1B68E3780D7E7E9.title: "Stone Circle"
-	quest.F1D741031868AB0C.quest_desc: ["Evil pumpkins grow here."]
-	quest.F1D741031868AB0C.title: "Cursed Farm"
-	quest.F24365EB011E31E6.quest_desc: ["Find a witch hut in the swamp."]
-	quest.F24365EB011E31E6.title: "Witch Hut"
-	quest.F2F4E7B325137CB1.quest_desc: ["A steering wheel and a throttle lever."]
-	quest.F2F4E7B325137CB1.title: "Steering"
-	quest.F2F9FEBA0B99A12B.quest_desc: ["Deep in the Nether."]
-	quest.F2F9FEBA0B99A12B.title: "Ancient Debris"
-	quest.F33D147DABDE9D02.quest_desc: ["A jetpack with elytra makes flying between islands easier."]
-	quest.F33D147DABDE9D02.title: "Jetpack"
-	quest.F3CB050C8F07B87F.quest_desc: ["The hounds' lair."]
-	quest.F3CB050C8F07B87F.title: "Mound of Hounds"
-	quest.F4270BCBAB292772.quest_desc: ["Dig up a cursed grave."]
-	quest.F4270BCBAB292772.title: "Graves"
-	quest.F519FB621D212C41.quest_desc: ["The upgrade template lies in a bastion."]
-	quest.F519FB621D212C41.title: "Smithing Upgrade"
-	quest.F697D66FB4E0E128.quest_desc: ["A stove heats whatever stands on it."]
-	quest.F697D66FB4E0E128.title: "Stove"
-	quest.F7BCEC682CE4FE4C.quest_desc: ["Another fraction."]
-	quest.F7BCEC682CE4FE4C.title: "Gasoline"
-	quest.F9BC6FA18749A3B5.quest_desc: ["For better wires and magnets."]
-	quest.F9BC6FA18749A3B5.title: "Overcharged Gold"
-	quest.FA2BCD9950313F2F.quest_desc: ["Find a desert pyramid. Mind the floor."]
-	quest.FA2BCD9950313F2F.title: "Pyramid"
-	quest.FB503FD5B2AE693A.quest_desc: ["There were none on the starter island. Here there are."]
-	quest.FB503FD5B2AE693A.title: "Spawn of Chaos"
-	quest.FBBFEBF366BDE7D3.quest_desc: ["Pipes for items and energy."]
-	quest.FBBFEBF366BDE7D3.title: "Oritech Pipes"
-	quest.FD7FFD8C48C4CE4C.quest_desc: ["Put an unidentified artifact on the archeology table. It turns into a book with one of three ancient enchantments: Soaring Winds, Penetrating Strike or Tunneling."]
-	quest.FD7FFD8C48C4CE4C.title: "Identify an Artifact"
-	quest.FE48AF787B5579EB.quest_desc: ["It points to where you last died. With the Corpse mod that's the way back to your things. Echo shards come only from ancient cities."]
-	quest.FE48AF787B5579EB.title: "Recovery Compass"
-	quest.FE9F3C3908AE7FEE.quest_desc: ["It eats diamond ore."]
-	quest.FE9F3C3908AE7FEE.title: "Diamond Termite"
+	quest.5F7D080C32D1BF06.quest_desc: ["Mine some coal."]
+	quest.5F7D080C32D1BF06.title: "Coal"
+	quest.60C79CE55B3A8D6D.quest_desc: ["Upgrade a diamond pickaxe at a smithing table."]
+	quest.60C79CE55B3A8D6D.title: "Netherite Pickaxe"
+	quest.63B83E7FF2A56CF8.quest_desc: ["An iron pickaxe can mine diamonds. The fire resistance reward helps around lava."]
+	quest.63B83E7FF2A56CF8.title: "Iron Pickaxe"
+	quest.6541143ABF1D324D.quest_desc: ["Land ends about 1250 blocks from here. Past it lies a grey, poisonous sea behind a wall of fog. Two more islands wait somewhere beyond it. Start small."]
+	quest.6541143ABF1D324D.title: "Grey Horizon"
+	quest.655E5A51D507619D.quest_desc: ["Bring 15 bookshelves (they are not taken) and place them around the table: that gives the strongest enchantments."]
+	quest.655E5A51D507619D.title: "Full Power"
+	quest.66E7BBE525F27832.quest_desc: ["You are in the Nether. One block here is eight in the Overworld, so the hot island is only about 500 blocks south. Look around first: fortresses, bastions and debris are close, and you will need them."]
+	quest.66E7BBE525F27832.title: "A Warm Welcome"
+	quest.6CA11DA32F4F7DDE.quest_desc: ["Find a Nether fortress."]
+	quest.6CA11DA32F4F7DDE.title: "Fortress"
+	quest.6DAD2F9960A4AC46.quest_desc: ["Place a respawn anchor in the Nether, charge it fully (4 glowstone) and use it to set your spawn. While it is charged you keep your inventory and experience when you die. Each respawn uses one charge. Items in the elytra slot drop as usual."]
+	quest.6DAD2F9960A4AC46.title: "Respawn Anchor"
+	quest.72F9FEBA0B99A12B.quest_desc: ["Deep in the Nether, below y 20. Needs a diamond pickaxe."]
+	quest.72F9FEBA0B99A12B.title: "Ancient Debris"
+	quest.799E7F1C5D6A46BF.quest_desc: ["The hot island lies 3500 to 4500 blocks south; in the Nether that is 8 times closer. Head south to around x 0, z 500 (x −60 to 60, z 440 to 560). A portal built there leads to the hot island."]
+	quest.799E7F1C5D6A46BF.title: "The Road South"
+	quest.7E599DE624740DA1.quest_desc: ["A soul-fire lamp keeps the temperature around you steady. Useful both south and north."]
+	quest.7E599DE624740DA1.title: "Soulspring Lamp"
+	reward_table.0E28176B09638154.title: "Iron Tool"
+	reward_table.23C91D56D4883B5C.title: "Efficiency Book"
+	reward_table.36E06677A3FA83E2.title: "Fire Protection Book"
+	reward_table.412962825CC1473A.title: "Insight Book"
+	reward_table.52C654FC8A195807.title: "Protection Book"
 }

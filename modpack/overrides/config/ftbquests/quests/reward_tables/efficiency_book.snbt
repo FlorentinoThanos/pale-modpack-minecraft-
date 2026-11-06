@@ -1,0 +1,52 @@
+{
+	id: "23C91D56D4883B5C"
+	loot_size: 1
+	order_index: 2
+	rewards: [
+		{
+			id: "6FDD761A32A1B42D"
+			item: {
+				components: {
+					"minecraft:stored_enchantments": {
+						levels: {
+							"minecraft:efficiency": 1
+						}
+					}
+				}
+				count: 1
+				id: "minecraft:enchanted_book"
+			}
+			type: "item"
+		}
+		{
+			id: "1A76B461B7FDD6F2"
+			item: {
+				components: {
+					"minecraft:stored_enchantments": {
+						levels: {
+							"minecraft:efficiency": 2
+						}
+					}
+				}
+				count: 1
+				id: "minecraft:enchanted_book"
+			}
+			type: "item"
+		}
+		{
+			id: "7A02DEC193C4C006"
+			item: {
+				components: {
+					"minecraft:stored_enchantments": {
+						levels: {
+							"minecraft:efficiency": 3
+						}
+					}
+				}
+				count: 1
+				id: "minecraft:enchanted_book"
+			}
+			type: "item"
+		}
+	]
+}

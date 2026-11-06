@@ -11,14 +11,15 @@ public final class ServerLogic {
     /** Sync immediately when the player earns an advancement required by an offer. */
     public static void onAdvancementEarned(AdvancementEvent.AdvancementEarnEvent event) {
         if (!(event.getEntity() instanceof ServerPlayer player)) return;
-        boolean unlockChanged = ShopOffers.ALL.stream()
-                .anyMatch(offer -> offer.requiredAdvancement().equals(event.getAdvancement().id()));
-        if (!unlockChanged) return;
+        var offer = ShopOffers.ALL.stream()
+                .filter(o -> o.requiredAdvancement().equals(event.getAdvancement().id()))
+                .findFirst().orElse(null);
+        if (offer == null) return;
 
         Network.syncTo(player);
         player.containerMenu.broadcastChanges();
         player.displayClientMessage(Component.translatable("palestore.message.unlocked",
-                Component.translatable("advancements.story.enter_the_nether.title")), true);
+                offer.icon().getDescription()), true);
     }
 
     public static void onLogin(PlayerEvent.PlayerLoggedInEvent event) {

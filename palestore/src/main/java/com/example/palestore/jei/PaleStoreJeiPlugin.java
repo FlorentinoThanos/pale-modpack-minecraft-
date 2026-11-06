@@ -72,7 +72,7 @@ public class PaleStoreJeiPlugin implements IModPlugin {
                     .createRecipeLookup(RecipeTypes.CRAFTING)
                     .includeHidden()
                     .get()
-                    .filter(holder -> holder.value().getResultItem(access).is(offer.result()))
+                    .filter(holder -> offer.matches().test(holder.value().getResultItem(access)))
                     .toList();
 
             if (ClientUnlocks.has(offer.id())) {

@@ -1,0 +1,14 @@
+{
+  "criteria": {
+    "has_bed": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#minecraft:beds"
+          }
+        ]
+      }
+    }
+  }
+}

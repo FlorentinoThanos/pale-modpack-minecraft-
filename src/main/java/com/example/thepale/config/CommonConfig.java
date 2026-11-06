@@ -40,6 +40,7 @@ public final class CommonConfig {
     private static final ModConfigSpec.ConfigValue<List<? extends String>> FROZEN_ISLAND_ONLY_MOBS;
     private static final ModConfigSpec.ConfigValue<List<? extends Number>> RAMPAGE_SPEED_BONUS;
     private static final ModConfigSpec.IntValue DARK_METAL_SET_STRENGTH;
+    private static final ModConfigSpec.BooleanValue ANCHOR_KEEPS_INVENTORY;
 
     static {
         ModConfigSpec.Builder builder = new ModConfigSpec.Builder();
@@ -241,6 +242,14 @@ public final class CommonConfig {
                 .defineInRange("darkMetalSetStrength", 1, 0, 5);
         builder.pop();
 
+        builder.push("respawn");
+        ANCHOR_KEEPS_INVENTORY = builder
+                .comment(
+                        "A player whose spawn point is a charged respawn anchor in the Nether keeps their inventory and",
+                        "experience on death. Curios slots (Elytra Slot) drop as usual.")
+                .define("anchorKeepsInventory", true);
+        builder.pop();
+
         SPEC = builder.build();
     }
 
@@ -271,7 +280,8 @@ public final class CommonConfig {
             List<String> notOnStarterIsland,
             List<String> frozenIslandOnlyMobs,
             List<Double> rampageSpeedBonus,
-            int darkMetalSetStrength) {}
+            int darkMetalSetStrength,
+            boolean anchorKeepsInventory) {}
 
     private static volatile Settings current = read(true);
 
@@ -326,7 +336,8 @@ public final class CommonConfig {
                 List.copyOf(defaults ? FROZEN_ISLAND_ONLY_MOBS.getDefault() : FROZEN_ISLAND_ONLY_MOBS.get()),
                 (defaults ? RAMPAGE_SPEED_BONUS.getDefault() : RAMPAGE_SPEED_BONUS.get()).stream()
                         .map(Number::doubleValue).toList(),
-                defaults ? DARK_METAL_SET_STRENGTH.getDefault() : DARK_METAL_SET_STRENGTH.get());
+                defaults ? DARK_METAL_SET_STRENGTH.getDefault() : DARK_METAL_SET_STRENGTH.get(),
+                defaults ? ANCHOR_KEEPS_INVENTORY.getDefault() : ANCHOR_KEEPS_INVENTORY.get());
     }
 
     private static double value(ModConfigSpec.DoubleValue value, boolean useDefault) {

@@ -40,6 +40,8 @@ public final class ThePale {
         modBus.addListener(ShapePayload::onRegisterPayloads);
         modBus.addListener(EffectTweaks::onCommonSetup);
         NeoForge.EVENT_BUS.addListener(EffectTweaks::onPlayerTick);
+        NeoForge.EVENT_BUS.addListener(net.neoforged.bus.api.EventPriority.LOWEST, AnchorKeepsInventory::onLivingDeath);
+        NeoForge.EVENT_BUS.addListener(AnchorKeepsInventory::onClone);
     }
 
     public static ResourceLocation id(String path) {
