@@ -30,6 +30,8 @@
 	quest.238CF919ACEEAA52.title: "Huddle Close"
 	quest.253F64A34921796E.quest_desc: ["A nether star and obsidian."]
 	quest.253F64A34921796E.title: "Beacon"
+	quest.268E03D5637E21BD.quest_desc: ["The plain Nether: netherrack and lava."]
+	quest.268E03D5637E21BD.title: "Nether Wastes"
 	quest.27B4FD4982C710F5.quest_desc: ["Craft a crafting table."]
 	quest.27B4FD4982C710F5.title: "Crafting Table"
 	quest.295417956A1A5F30.quest_desc: ["Distract a piglin with gold."]
@@ -70,7 +72,7 @@
 	quest.4AD349C8E447E551.title: "Soul Sand Valley"
 	quest.4AF3B98939A68C16.quest_desc: ["An ingot from scrap and gold."]
 	quest.4AF3B98939A68C16.title: "Netherite"
-	quest.4FDFE63DCAAA6E64.quest_desc: ["Visit every Nether biome."]
+	quest.4FDFE63DCAAA6E64.quest_desc: ["You have been to all five Nether biomes."]
 	quest.4FDFE63DCAAA6E64.title: "Hot Tourist"
 	quest.4FEBB1AD4B9148A2.quest_desc: ["Make some torches. The reward unlocks the ladder recipe."]
 	quest.4FEBB1AD4B9148A2.title: "Torches"
@@ -94,6 +96,8 @@
 	quest.66E7BBE525F27832.title: "A Warm Welcome"
 	quest.6CA11DA32F4F7DDE.quest_desc: ["Find a Nether fortress."]
 	quest.6CA11DA32F4F7DDE.title: "Fortress"
+	quest.6DAD2F9960A4AC46.quest_desc: ["Place a respawn anchor in the Nether, charge it fully (4 glowstone) and use it to set your spawn. While it is charged you keep your inventory and experience when you die. Each respawn uses one charge. Items in the elytra slot drop as usual."]
+	quest.6DAD2F9960A4AC46.title: "Respawn Anchor"
 	quest.72F9FEBA0B99A12B.quest_desc: ["Deep in the Nether, below y 20. Needs a diamond pickaxe."]
 	quest.72F9FEBA0B99A12B.title: "Ancient Debris"
 	quest.799E7F1C5D6A46BF.quest_desc: ["The hot island lies 3500 to 4500 blocks south; in the Nether that is 8 times closer. Head south to around x 0, z 500 (x −60 to 60, z 440 to 560). A portal built there leads to the hot island."]

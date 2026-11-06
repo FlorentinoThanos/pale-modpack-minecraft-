@@ -237,6 +237,31 @@
 			hide_until_deps_visible: true
 			icon: {
 				count: 1
+				id: "minecraft:netherrack"
+			}
+			id: "268E03D5637E21BD"
+			rewards: [
+				{
+					id: "32044FC7FDAFA8A2"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [
+				{
+					biome: "minecraft:nether_wastes"
+					id: "4E53855856126E66"
+					type: "biome"
+				}
+			]
+			x: -2.25d
+			y: -3.0d
+		}
+		{
+			dependencies: ["66E7BBE525F27832"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
 				id: "minecraft:crimson_fungus"
 			}
 			id: "47932ED33706A4C0"
@@ -254,11 +279,11 @@
 					type: "biome"
 				}
 			]
-			x: 0.375d
-			y: -1.875d
+			x: -2.25d
+			y: -1.5d
 		}
 		{
-			dependencies: ["47932ED33706A4C0"]
+			dependencies: ["66E7BBE525F27832"]
 			hide_until_deps_visible: true
 			icon: {
 				count: 1
@@ -279,11 +304,11 @@
 					type: "biome"
 				}
 			]
-			x: 0.75d
-			y: -3.375d
+			x: -2.25d
+			y: 0.0d
 		}
 		{
-			dependencies: ["446F1EF791847FB7"]
+			dependencies: ["66E7BBE525F27832"]
 			hide_until_deps_visible: true
 			icon: {
 				count: 1
@@ -304,11 +329,11 @@
 					type: "biome"
 				}
 			]
-			x: 1.125d
-			y: -4.875d
+			x: -2.25d
+			y: 1.5d
 		}
 		{
-			dependencies: ["4AD349C8E447E551"]
+			dependencies: ["66E7BBE525F27832"]
 			hide_until_deps_visible: true
 			icon: {
 				count: 1
@@ -329,11 +354,11 @@
 					type: "biome"
 				}
 			]
-			x: 1.5d
-			y: -6.375d
+			x: -2.25d
+			y: 3.0d
 		}
 		{
-			dependencies: ["11E96124CD295ED1"]
+			dependencies: ["268E03D5637E21BD", "47932ED33706A4C0", "446F1EF791847FB7", "4AD349C8E447E551", "11E96124CD295ED1"]
 			hide_until_deps_visible: true
 			icon: {
 				count: 1
@@ -352,16 +377,16 @@
 					type: "random"
 				}
 			]
+			shape: "hexagon"
+			size: 1.5d
 			tasks: [
 				{
-					advancement: "minecraft:nether/explore_nether"
-					criterion: ""
 					id: "35401373900D8CF4"
-					type: "advancement"
+					type: "checkmark"
 				}
 			]
-			x: 2.625d
-			y: -7.5d
+			x: -4.5d
+			y: 0.0d
 		}
 		{
 			dependencies: ["6CA11DA32F4F7DDE"]
@@ -525,6 +550,40 @@
 			]
 			x: 7.125d
 			y: -4.875d
+		}
+		{
+			dependencies: ["66E7BBE525F27832"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "minecraft:respawn_anchor"
+			}
+			id: "6DAD2F9960A4AC46"
+			rewards: [
+				{
+					id: "4E4084A20B1D0736"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "5E62F8075CF39FA1"
+					item: {
+						count: 8
+						id: "minecraft:glowstone"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					advancement: "minecraft:nether/charge_respawn_anchor"
+					criterion: ""
+					id: "7D0437E825827CDC"
+					type: "advancement"
+				}
+			]
+			x: 0.0d
+			y: 2.25d
 		}
 		{
 			dependencies: ["5C108A9D1926801A"]
