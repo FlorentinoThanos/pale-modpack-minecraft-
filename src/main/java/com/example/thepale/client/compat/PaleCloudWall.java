@@ -1,5 +1,6 @@
 package com.example.thepale.client.compat;
 
+import com.example.thepale.client.PaleShaderFog;
 import com.example.thepale.client.PaleWallRenderer;
 import com.example.thepale.config.ClientConfig;
 import com.example.thepale.worldgen.PaleShape;
@@ -386,6 +387,11 @@ final class PaleCloudWall {
         }
 
         void preRender(DhApiRenderParam param) {
+            if (PaleShaderFog.steam()) {
+                // With a shader pack the steam reaches the horizon itself (PaleSteam); these slabs would show as solid.
+                group.setActive(false);
+                return;
+            }
             Vec3 camera = Minecraft.getInstance().gameRenderer.getMainCamera().getPosition();
             // Horizontal distance from the camera to the nearest point of this section.
             double dx = Math.max(Math.max(minX - camera.x, camera.x - maxX), 0);

@@ -4,7 +4,7 @@ license = "All Rights Reserved"
 
 [[mods]]
 modId = "thepale"
-version = "1.11.0"
+version = "1.12.0"
 displayName = "The Pale"
 credits = "World shape based on Oceanus by Lizdtre (MIT License)"
 description = '''

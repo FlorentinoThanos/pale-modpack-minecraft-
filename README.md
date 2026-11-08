@@ -108,12 +108,17 @@ nothing gets generated.
   Skullbreaker Hammer as a hammer, the pitchfork as a spear and the Nightmare Scythe as a scythe
   (`data/born_in_chaos_v1/weapon_attributes/`). The pack's fallback config leaves Born in Chaos' staffs out.
 - **Sodium:** works; the fog wall, camera fog and ash render as usual.
-- **Shader packs (Iris, e.g. Complementary):** packs draw their own fog and ignore the game's, so with one on The
-  Pale lays its fog over the finished frame instead (before the HUD). In the open sea of the Pale the distance each
-  pixel sees is where its view ray meets the water, so near water stays clear and the sky, clouds and the island's
-  skyline disappear into the grey. The fog wall is drawn through the game's particle shader (packs can't run its own
-  shader), with a generated cloud texture, and pulled in to within the pack's fog so it shows from the island. Iris is
-  optional and only looked up by reflection; the client log says `Shader pack on` when the switch happens.
+- **Shader packs (Iris, e.g. Complementary):** packs draw their own fog and ignore the game's, and anything drawn
+  into the world for them comes out as hard sheets. So with a pack on, the Pale is drawn as steam, like the Basalt
+  Deltas' haze: once the level is drawn, every pixel's view ray is marched through the fog up to whatever the pixel
+  shows (`shaders/steam/steam.fsh`), and the result is laid over the pack's finished frame before the HUD. The density
+  at each point is what the camera fog would be there, so the steam thickens out into the Pale, its front billows and
+  drifts (slowly rising), the air clears from y 450 to 500 with a lumpy top that is the sea of clouds from above, and
+  the water in front of the bank reflects it. Near things (the hand, the ash, the island in front of the bank) stay
+  clear; at night the steam is moonlit grey rather than black. The layered wall, the sea-of-clouds sheets and the
+  Distant Horizons cloud slabs aren't drawn then. It is plain OpenGL that puts back every bit of state it touches;
+  if it can't run on a machine the log says so and the older look (fog over the frame, the wall as particles) is used.
+  Iris is optional and only looked up by reflection; the client log says `Shader pack on` when the switch happens.
 - **Water colour:** the water turns from blue to the Pale grey over the 250 blocks before the fog wall, in every
   biome, through a small client mixin on the water colour resolver (works with Sodium).
 
@@ -129,6 +134,8 @@ Optional. With Distant Horizons 3.x installed (tested with 3.3.3):
 
 - The fog wall also shows in DH's far terrain, drawn the way DH draws its clouds: stacked, softly shaded cloud slabs
   scattered over the band, thicker toward the outer radius. Near the camera it hands over to the normal fog wall.
+  With a shader pack the steam reaches the horizon itself instead, and reads DH's depth through Iris so far LOD land
+  in front of the bank isn't fogged.
 - Inside the Pale, DH's fog is pulled in to match the Pale fog, and once that fog is closer than the vanilla chunks
   DH stops drawing, so its far terrain never shows through.
 - DH's generic object rendering is off on macOS, so there the far cloud wall doesn't show.
