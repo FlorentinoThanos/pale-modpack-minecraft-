@@ -30,7 +30,8 @@ import org.slf4j.Logger;
 /**
  * Draws the Pale fog wall: {@link ClientConfig.Settings#layerCount()} concentric translucent cylinders, using the
  * {@code thepale:pale_wall} core shader, which ignores terrain fog and supplies the drifting noise. With a shader pack
- * on, the wall is drawn through the game's particle shader instead, which the pack knows how to draw.
+ * on, the steam ({@link PaleSteam}) is the wall; only if that can't be drawn is the wall drawn through the game's
+ * particle shader instead, which the pack knows how to draw.
  */
 public final class PaleWallRenderer {
     private static final Logger LOGGER = LogUtils.getLogger();
@@ -109,6 +110,9 @@ public final class PaleWallRenderer {
     public static void onRenderLevelStage(RenderLevelStageEvent event) {
         if (event.getStage() != RenderLevelStageEvent.Stage.AFTER_TRANSLUCENT_BLOCKS) {
             return;
+        }
+        if (PaleShaderFog.steam()) {
+            return; // with a shader pack the steam is the wall (PaleSteam)
         }
         ShaderInstance wallShader = shader;
         ClientConfig.Settings config = ClientConfig.get();

@@ -28,10 +28,13 @@ import org.slf4j.Logger;
 
 /**
  * The Pale fog for shader packs. Packs like Complementary draw their own fog and ignore the game's, so with one
- * active the Pale would be clear. This lays the fog over the finished frame instead, after the shader pack and before
- * the HUD. The Pale is open sea, so the distance each pixel sees is where its view ray meets the water: near water
- * stays clear, and everything at or above the horizon (sky, clouds, the island's skyline) is fully fogged. It fades
- * in over the same approach as the camera fog.
+ * active the Pale would be clear. The Pale is drawn as steam instead ({@link PaleSteam}): worked out once the level is
+ * drawn, and laid over the finished frame after the shader pack and before the HUD.
+ *
+ * <p>If the steam can't be drawn on this machine, a plain fog is laid over the frame instead (and the wall is drawn
+ * as particles): the Pale is open sea, so the distance each pixel sees is where its view ray meets the water; near
+ * water stays clear, and everything at or above the horizon is fully fogged. It fades in over the same approach as
+ * the camera fog.
  */
 public final class PaleShaderFog {
     private static final Logger LOGGER = LogUtils.getLogger();
@@ -67,6 +70,7 @@ public final class PaleShaderFog {
     private PaleShaderFog() {}
 
     public static void onRegisterShaders(RegisterShadersEvent event) {
+        PaleSteam.onResourcesReloaded();
         shader = null;
         try {
             event.registerShader(
@@ -85,6 +89,9 @@ public final class PaleShaderFog {
             viewRotation.set(event.getModelViewMatrix());
             projection.set(event.getProjectionMatrix());
             haveMatrices = true;
+        }
+        if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_LEVEL && steam()) {
+            PaleSteam.render(event, normalRed, normalGreen, normalBlue);
         }
     }
 
@@ -106,10 +113,23 @@ public final class PaleShaderFog {
         return FORCED || shaderPackInUse();
     }
 
+    /**
+     * Whether the Pale is drawn as steam ({@link PaleSteam}): a shader pack is on and the steam works on this machine.
+     * The steam is the whole Pale then: the wall, the sea of clouds and Distant Horizons' cloud wall aren't drawn.
+     */
+    public static boolean steam() {
+        return active() && PaleSteam.usable();
+    }
+
     public static void onRenderGui(RenderGuiEvent.Pre event) {
         boolean capturedThisFrame = haveMatrices;
         haveMatrices = false;
         if (!active()) {
+            PaleSteam.discardFrame();
+            return;
+        }
+        if (PaleSteam.usable()) {
+            PaleSteam.composite();
             return;
         }
         ShaderInstance fogShader = shader;
@@ -196,8 +216,9 @@ public final class PaleShaderFog {
             boolean inUse = (boolean) irisShaderPackInUse.invoke(irisInstance.invoke(null));
             if (inUse != lastShaderPackInUse) {
                 lastShaderPackInUse = inUse;
-                LOGGER.info("[thepale] Shader pack {}: the Pale fog is drawn {}", inUse ? "on" : "off",
-                        inUse ? "over the finished frame and the wall as particles" : "as the game's own fog");
+                LOGGER.info("[thepale] Shader pack {}: the Pale is drawn {}", inUse ? "on" : "off",
+                        inUse ? (PaleSteam.usable() ? "as steam over the finished frame" : "as plain fog over the finished frame and the wall as particles")
+                                : "with the game's own fog");
             }
             return inUse;
         } catch (ReflectiveOperationException | RuntimeException e) {

@@ -31,7 +31,7 @@ import org.joml.Vector3f;
  */
 public final class PaleFog {
     /** Blocks before innerRadius over which the fog and its colour ease in, so there's no line where the Pale starts. */
-    private static final double APPROACH = 120;
+    static final double APPROACH = 120;
     /** Blocks past innerRadius by which the fog and sky have turned fully grey. */
     private static final double GREY_BY = 90;
     /** Where the fog starts, as a fraction of where it ends: the Nether's thick-fog proportions. */

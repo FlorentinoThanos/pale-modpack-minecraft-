@@ -44,8 +44,8 @@ public final class PaleCloudSea {
     private PaleCloudSea() {}
 
     public static void onRenderLevelStage(RenderLevelStageEvent event) {
-        if (event.getStage() != RenderLevelStageEvent.Stage.AFTER_TRANSLUCENT_BLOCKS) {
-            return;
+        if (event.getStage() != RenderLevelStageEvent.Stage.AFTER_TRANSLUCENT_BLOCKS || PaleShaderFog.steam()) {
+            return; // with a shader pack the top of the steam is the sea of clouds (PaleSteam)
         }
         Minecraft mc = Minecraft.getInstance();
         ClientConfig.Settings config = ClientConfig.get();

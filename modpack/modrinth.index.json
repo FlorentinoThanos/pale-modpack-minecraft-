@@ -1,7 +1,7 @@
 {
   "game": "minecraft",
   "formatVersion": 1,
-  "versionId": "1.71",
+  "versionId": "1.76",
   "name": "ZOMBIEageISLAND",
   "summary": "",
   "files": [
@@ -177,8 +177,8 @@
         "sha512": "2dec87084dccf91a72a06235ecbfb3627f066699b5f70583f06077cba61433aedbfa6af28eb68bf1cdc726149cc3d9a587517cfab59e6a24e9d6a40b6874d655"
       },
       "env": {
-        "server": "required",
-        "client": "required"
+        "client": "required",
+        "server": "unsupported"
       },
       "downloads": [
         "https://cdn.modrinth.com/data/lLqFfGNs/versions/BnGklH5y/photon_v1.4.zip"
@@ -426,21 +426,6 @@
       "fileSize": 3465718
     },
     {
-      "path": "mods/Enhanced-Celestials-NeoForge-1.21.1-6.0.2.6.jar",
-      "hashes": {
-        "sha512": "5119e1a0026d705001e41abb7099fabe9379ad44ce624d3ec57b7cda01fc763c23dff0ebe058adedfd2de20d1a7d6245956574e4d9cfa7f199186115ca2d7811",
-        "sha1": "fa59a7bb69e3973980f525083897a2d5d74fea10"
-      },
-      "env": {
-        "client": "required",
-        "server": "required"
-      },
-      "downloads": [
-        "https://cdn.modrinth.com/data/2rL16t1O/versions/bPhEKzZO/Enhanced-Celestials-NeoForge-1.21.1-6.0.2.6.jar"
-      ],
-      "fileSize": 1538905
-    },
-    {
       "path": "mods/bettercombat-neoforge-2.4.0+1.21.1.jar",
       "hashes": {
         "sha1": "bacbc8c86671663e9998b141c5732250c1f4d4fb",
@@ -612,13 +597,58 @@
         "sha1": "838139b54cddb56b2e83cd260d8efd960ac536d6"
       },
       "env": {
-        "server": "required",
-        "client": "required"
+        "client": "required",
+        "server": "unsupported"
       },
       "downloads": [
         "https://cdn.modrinth.com/data/HVnmMxH1/versions/Bqen1mJX/ComplementaryReimagined_r5.9.3.zip"
       ],
       "fileSize": 553397
+    },
+    {
+      "path": "mods/Enhanced-Celestials-2-Core-NeoForge-1.21.1-2.0.3.4.jar",
+      "hashes": {
+        "sha1": "ef7dbf1d3ea2fa4fa6133c2360bba5a1b20e51b8",
+        "sha512": "5c075c16ca9390cd9c313e8086342e8a4fcf1a7f83d8fe96c8be5156eaf1ea59d60ffc005a70be44861dbfc5590d52382ce4a8491d9d758261d9339ac3ce5b13"
+      },
+      "env": {
+        "client": "required",
+        "server": "required"
+      },
+      "downloads": [
+        "https://cdn.modrinth.com/data/ugCWUHV9/versions/b5tyRnjL/Enhanced-Celestials-2-Core-NeoForge-1.21.1-2.0.3.4.jar"
+      ],
+      "fileSize": 406222
+    },
+    {
+      "path": "mods/Enhanced-Celestials-2-Default-Lunar-Events-NeoForge-1.21.1-2.0.1.4.jar",
+      "hashes": {
+        "sha1": "e765d769104829509d3d7a65566ab4b9199be3fe",
+        "sha512": "41d079b127da22340265b4f99469490cdb2f54f794510a954ad12d2bc3bb62cc3876e9f955ef8f1f47d1e569092615ea6d19e3caad7f272d89c2e9f363ae7fe3"
+      },
+      "env": {
+        "client": "required",
+        "server": "required"
+      },
+      "downloads": [
+        "https://cdn.modrinth.com/data/19P0GlZk/versions/oqNjcnKK/Enhanced-Celestials-2-Default-Lunar-Events-NeoForge-1.21.1-2.0.1.4.jar"
+      ],
+      "fileSize": 1512623
+    },
+    {
+      "path": "mods/Enhanced-Celestials-2-Shaders-NeoForge-1.21.1-2.0.0.4.jar",
+      "hashes": {
+        "sha1": "ac202dce1b68b5ff5f0c155236a5f19b28ca998c",
+        "sha512": "e541a4b2bc1c8feb8cf248663c69dfc383cbc3f544e7c041e01b89aef73d568becc81c7dbad3f7e700d1d5ea438c4a4766f54669d95ef1d8cdd99c4e68cc4110"
+      },
+      "env": {
+        "client": "required",
+        "server": "unsupported"
+      },
+      "downloads": [
+        "https://cdn.modrinth.com/data/6cEnKtmZ/versions/YySsQkKF/Enhanced-Celestials-2-Shaders-NeoForge-1.21.1-2.0.0.4.jar"
+      ],
+      "fileSize": 117329
     }
   ],
   "dependencies": {
