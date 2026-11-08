@@ -117,7 +117,8 @@ nothing gets generated.
   the water in front of the bank reflects it. Near things (the hand, the ash, the island in front of the bank) stay
   clear; at night the steam is moonlit grey rather than black. The layered wall, the sea-of-clouds sheets and the
   Distant Horizons cloud slabs aren't drawn then. It is plain OpenGL that puts back every bit of state it touches;
-  if it can't run on a machine the log says so and the older look (fog over the frame, the wall as particles) is used.
+  if it can't run on a machine, the player is told once in chat, the log says why, and the older look (fog over the
+  frame, the wall as particles) is used.
   Iris is optional and only looked up by reflection; the client log says `Shader pack on` when the switch happens.
 - **Water colour:** the water turns from blue to the Pale grey over the 250 blocks before the fog wall, in every
   biome, through a small client mixin on the water colour resolver (works with Sodium).

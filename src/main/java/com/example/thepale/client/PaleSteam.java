@@ -11,9 +11,12 @@ import java.io.Reader;
 import java.lang.reflect.Method;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
+import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.material.FogType;
@@ -88,6 +91,8 @@ public final class PaleSteam {
     private static int height;
     /** The shaders didn't compile or something else went wrong: the old way is used instead. */
     private static boolean failed;
+    /** Whether the player has been told that the steam couldn't start. */
+    private static boolean toldPlayer;
     /** Whether {@link #steamTexture} holds this frame's steam. */
     private static boolean rendered;
     private static boolean loggedFirst;
@@ -123,7 +128,21 @@ public final class PaleSteam {
     static void onResourcesReloaded() {
         deletePrograms();
         failed = false;
+        toldPlayer = false;
         loggedFirst = false;
+    }
+
+    /**
+     * Gives up on the steam until the resources are reloaded (the reason is logged), and tells the player once in
+     * chat, so the old wall isn't taken for the steam.
+     */
+    private static void giveUp() {
+        failed = true;
+        LocalPlayer player = Minecraft.getInstance().player;
+        if (!toldPlayer && player != null) {
+            toldPlayer = true;
+            player.displayClientMessage(Component.translatable("message.thepale.steam_failed").withStyle(ChatFormatting.GRAY), false);
+        }
     }
 
     /**
@@ -144,8 +163,8 @@ public final class PaleSteam {
         try {
             draw(event, mc, config, camera, normalRed, normalGreen, normalBlue);
         } catch (RuntimeException | IOException e) {
-            failed = true;
             LOGGER.error("[thepale] Could not draw the Pale steam; falling back to the plain fog over shader packs", e);
+            giveUp();
         }
     }
 
@@ -353,7 +372,7 @@ public final class PaleSteam {
     }
 
     /**
-     * 256 x 256 of smooth value noise for {@code noise3} in steam.fsh: red is the noise, green the same noise 37 and 17
+     * 256 x 256 of smooth value noise for {@code valueNoise} in steam.fsh: red is the noise, green the same noise 37 and 17
      * texels on, which is where the next slice up starts, so one filtered lookup gives two slices to blend.
      */
     private static int makeNoiseTexture() {
@@ -403,7 +422,7 @@ public final class PaleSteam {
         int steam = link("steam", vertex, source("steam.fsh"));
         int composite = link("composite", vertex, source("composite.fsh"));
         if (steam == 0 || composite == 0) {
-            failed = true;
+            giveUp();
             if (steam != 0) {
                 GL20.glDeleteProgram(steam);
             }

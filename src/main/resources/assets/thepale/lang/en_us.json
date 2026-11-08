@@ -19,5 +19,6 @@
   "message.thepale.portal_refused": "Something on the other side holds the portal shut.",
   "message.thepale.north_only": "Only the frozen island in the north answers this call.",
   "thepale.configuration.frozenIslandOnlyMobs": "Frozen Island Only Mobs",
-  "message.thepale.anchor_kept": "The respawn anchor kept your things"
+  "message.thepale.anchor_kept": "The respawn anchor kept your things",
+  "message.thepale.steam_failed": "[The Pale] The steam couldn't start with this shader pack, so the old fog wall is drawn. The game log (logs/latest.log) says why."
 }

@@ -46,8 +46,11 @@ float smooth01(float t) {
     return t * t * (3.0 - 2.0 * t);
 }
 
-/** Smooth 3D value noise from one lookup: two slices of 2D noise, one above the other, blended. */
-float noise3(vec3 p) {
+/**
+ * Smooth 3D value noise from one lookup: two slices of 2D noise, one above the other, blended. (Not called noise3:
+ * that is a built-in GLSL function, and most drivers refuse a float overload of it.)
+ */
+float valueNoise(vec3 p) {
     vec3 cell = floor(p);
     vec3 f = fract(p);
     f = f * f * (3.0 - 2.0 * f);
@@ -58,8 +61,8 @@ float noise3(vec3 p) {
 
 /** {@return 0 to 1}: how thick the steam is puffed up here (camera-relative position). */
 float puffs(vec3 p) {
-    float broad = noise3((BroadOffset + p) * (1.0 / BROAD_CELL));
-    float fine = noise3((FineOffset + p) * (1.0 / FINE_CELL));
+    float broad = valueNoise((BroadOffset + p) * (1.0 / BROAD_CELL));
+    float fine = valueNoise((FineOffset + p) * (1.0 / FINE_CELL));
     // Value noise mostly stays near 0.5; stretch it so the puffs read.
     return smooth01((broad * 0.7 + fine * 0.3 - 0.28) / 0.44);
 }
@@ -92,31 +95,31 @@ float densityAt(float past, float y, float puff) {
 }
 
 /** The steam's colour: brighter toward the top of the bank where the sun gets in, the thick puffs a little shaded. */
-vec3 colorAt(float y, float puff, float distance) {
+vec3 colorAt(float y, float puff, float far) {
     float lift = smooth01((y - 200.0) / 290.0);
     vec3 color = FogColor * (mix(1.0, 1.25, lift) * mix(1.04, 0.93, puff));
     // Far off it takes on a little of the sky.
-    color = mix(color, FarColor, 0.3 * smooth01((distance - 400.0) / 2500.0));
+    color = mix(color, FarColor, 0.3 * smooth01((far - 400.0) / 2500.0));
     return min(color, vec3(1.0));
 }
 
 /** {@return how far along its view ray this pixel shows something solid (or water), or a long way for the sky} */
 float sceneDistance() {
-    float distance = 1.0e7;
+    float along = 1.0e7;
     float depth = texelFetch(SceneDepth, ivec2(gl_FragCoord.xy), 0).r;
     if (depth < 1.0) {
         vec4 p = InvViewProj * vec4(ndc, depth * 2.0 - 1.0, 1.0);
-        distance = length(p.xyz / p.w);
+        along = length(p.xyz / p.w);
     }
     if (UseDh != 0) {
         vec2 size = vec2(textureSize(DhDepth, 0));
         float dhDepth = texelFetch(DhDepth, ivec2(gl_FragCoord.xy * size / ScreenSize), 0).r;
         if (dhDepth < 1.0) {
             vec4 p = InvDhViewProj * vec4(ndc, dhDepth * 2.0 - 1.0, 1.0);
-            distance = min(distance, length(p.xyz / p.w));
+            along = min(along, length(p.xyz / p.w));
         }
     }
-    return distance;
+    return along;
 }
 
 /** A fixed, even scatter of 0 to 1 per pixel, so the steps start staggered instead of in bands. */
