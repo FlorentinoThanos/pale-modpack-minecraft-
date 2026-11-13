@@ -1,0 +1,388 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "end"
+	group: "6FA7D509EB9A847A"
+	icon: {
+		count: 1
+		id: "minecraft:end_stone"
+	}
+	id: "38EE5D196554F12F"
+	images: [ ]
+	order_index: 3
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: ["653992FFD62EEE01"]
+			hide_until_deps_complete: true
+			icon: {
+				count: 1
+				id: "minecraft:end_portal_frame"
+			}
+			id: "4988A9961035406B"
+			rewards: [
+				{
+					id: "37E92E7A42D15B57"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "176B6E942510CE32"
+					item: {
+						count: 2
+						id: "minecraft:golden_apple"
+					}
+					type: "item"
+				}
+			]
+			shape: "hexagon"
+			size: 1.5d
+			tasks: [
+				{
+					dimension: "minecraft:the_end"
+					id: "3FC5FDCB8FDF466D"
+					type: "dimension"
+				}
+			]
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["4988A9961035406B"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "minecraft:dragon_head"
+			}
+			id: "69D79ACF1091D28A"
+			rewards: [
+				{
+					id: "2360D6F07789FD90"
+					type: "xp"
+					xp: 1000
+				}
+				{
+					id: "56CD682C94D639A6"
+					table_id: 6516980551055470626L
+					type: "random"
+				}
+				{
+					id: "6ACD61EF589AA246"
+					table_id: 5964548200124209159L
+					type: "random"
+				}
+			]
+			shape: "gear"
+			size: 2.0d
+			tasks: [
+				{
+					entity: "minecraft:ender_dragon"
+					id: "4FADB73F72A87DBC"
+					type: "kill"
+					value: 1L
+				}
+			]
+			x: 2.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["69D79ACF1091D28A"]
+			hide_until_deps_visible: true
+			id: "3186683A79A07234"
+			rewards: [
+				{
+					id: "580FF327744A0628"
+					type: "xp"
+					xp: 300
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "3E1A3F16410F6645"
+					item: {
+						count: 1
+						id: "minecraft:dragon_egg"
+					}
+					type: "item"
+				}
+			]
+			x: 0.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["69D79ACF1091D28A"]
+			hide_until_deps_visible: true
+			id: "1FBB5CFB93AA3119"
+			rewards: [
+				{
+					id: "371905FB38B4399E"
+					type: "xp"
+					xp: 100
+				}
+			]
+			tasks: [
+				{
+					count: 4L
+					id: "74BD6B1E099F9E2D"
+					item: {
+						count: 1
+						id: "minecraft:dragon_breath"
+					}
+					type: "item"
+				}
+			]
+			x: 2.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["4988A9961035406B", "3A2B381694E7803D"]
+			hide_until_deps_visible: true
+			id: "48F69B71BADEC961"
+			rewards: [
+				{
+					id: "02ADF4D6E30A57E9"
+					type: "xp"
+					xp: 150
+				}
+			]
+			tasks: [
+				{
+					count: 32L
+					id: "28F3DE0C6A7C47E9"
+					item: {
+						count: 1
+						id: "aeronautics:end_stone_powder"
+					}
+					type: "item"
+				}
+			]
+			x: 2.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["69D79ACF1091D28A"]
+			hide_until_deps_visible: true
+			id: "10EADDECB31F69A8"
+			rewards: [
+				{
+					id: "6E75F586118D4040"
+					type: "xp"
+					xp: 100
+				}
+			]
+			tasks: [
+				{
+					count: 16L
+					id: "5040D4A63AAF1F26"
+					item: {
+						count: 1
+						id: "minecraft:chorus_fruit"
+					}
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["69D79ACF1091D28A"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "minecraft:purpur_block"
+			}
+			id: "6732D54B22BF2CF3"
+			rewards: [
+				{
+					id: "1B6B034F796C04AE"
+					type: "xp"
+					xp: 300
+				}
+			]
+			tasks: [
+				{
+					id: "0AAD3638EFFEDE9A"
+					structure: "minecraft:end_city"
+					type: "structure"
+				}
+			]
+			x: 4.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["6732D54B22BF2CF3"]
+			hide_until_deps_visible: true
+			id: "50B8518015D93474"
+			rewards: [
+				{
+					id: "17441FFDF29F440A"
+					type: "xp"
+					xp: 200
+				}
+			]
+			tasks: [
+				{
+					count: 4L
+					id: "01D09D00BF22DCD6"
+					item: {
+						count: 1
+						id: "minecraft:shulker_shell"
+					}
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["69D79ACF1091D28A"]
+			hide_until_deps_visible: true
+			id: "470CD1309BE79D82"
+			rewards: [
+				{
+					id: "525E2A154E7E65AE"
+					type: "xp"
+					xp: 200
+				}
+			]
+			tasks: [
+				{
+					count: 4L
+					id: "6DE091CA36B3D5C1"
+					item: {
+						count: 1
+						id: "oritech:raw_platinum"
+					}
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["50B8518015D93474"]
+			hide_until_deps_visible: true
+			id: "1EA7A6A20FFADAD8"
+			rewards: [
+				{
+					id: "231DF435EC0F4CA1"
+					type: "xp"
+					xp: 150
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "1D3E1662549D1EBD"
+					item: {
+						count: 1
+						id: "minecraft:shulker_box"
+					}
+					type: "item"
+				}
+			]
+			x: 6.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["6732D54B22BF2CF3"]
+			hide_until_deps_visible: true
+			id: "73FB8B12389506A9"
+			rewards: [
+				{
+					id: "675BB140B51FE115"
+					type: "xp"
+					xp: 500
+				}
+				{
+					id: "3998E1C48B573721"
+					item: {
+						components: {
+							"minecraft:stored_enchantments": {
+								levels: {
+									"minecraft:unbreaking": 3
+								}
+							}
+						}
+						count: 1
+						id: "minecraft:enchanted_book"
+					}
+					type: "item"
+				}
+			]
+			shape: "hexagon"
+			size: 1.5d
+			tasks: [
+				{
+					count: 1L
+					id: "595564D2422464A6"
+					item: {
+						count: 1
+						id: "minecraft:elytra"
+					}
+					type: "item"
+				}
+			]
+			x: 6.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["73FB8B12389506A9"]
+			hide_until_deps_visible: true
+			id: "6167BC54D7B958AC"
+			rewards: [
+				{
+					id: "47B9191BC5AFCEFE"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "49398BD3555E3BFC"
+					item: {
+						count: 32
+						id: "minecraft:firework_rocket"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					count: 64L
+					id: "476CEC07501AE30F"
+					item: {
+						count: 1
+						id: "minecraft:firework_rocket"
+					}
+					type: "item"
+				}
+			]
+			x: 6.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["73FB8B12389506A9"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "minecraft:elytra"
+			}
+			id: "55876116D09A4A94"
+			rewards: [
+				{
+					id: "11D3F4519996944D"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [
+				{
+					id: "5DC53196F094C03B"
+					type: "checkmark"
+				}
+			]
+			x: 8.0d
+			y: 0.0d
+		}
+	]
+}

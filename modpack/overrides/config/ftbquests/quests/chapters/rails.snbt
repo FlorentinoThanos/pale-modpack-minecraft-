@@ -1,0 +1,296 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "rails"
+	group: "307C6B906CED1091"
+	icon: {
+		count: 1
+		id: "create:track_station"
+	}
+	id: "3CB18D585B48DDF5"
+	images: [ ]
+	order_index: 12
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: ["0769CB83115313F0", "799E7F1C5D6A46BF"]
+			hide_until_deps_complete: true
+			id: "076EADF2C150DE8E"
+			rewards: [
+				{
+					id: "77D8EE6AC30EC561"
+					type: "xp"
+					xp: 150
+				}
+			]
+			shape: "hexagon"
+			size: 1.5d
+			tasks: [
+				{
+					count: 8L
+					id: "36843027A74A7CB6"
+					item: {
+						count: 1
+						id: "create:railway_casing"
+					}
+					type: "item"
+				}
+			]
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["076EADF2C150DE8E"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "railways:track_blackstone"
+			}
+			id: "55DF5029BDD9D4A4"
+			rewards: [
+				{
+					id: "1596E0AA45711D3E"
+					type: "xp"
+					xp: 200
+				}
+			]
+			tasks: [
+				{
+					count: 128L
+					id: "2F827759A5B0A945"
+					item: {
+						count: 1
+						id: "railways:track_blackstone"
+					}
+					type: "item"
+				}
+			]
+			x: 2.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["55DF5029BDD9D4A4"]
+			hide_until_deps_visible: true
+			id: "36513951AC94599C"
+			rewards: [
+				{
+					id: "3A24C25A89939E50"
+					type: "xp"
+					xp: 100
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "62778876A60C18F7"
+					item: {
+						count: 1
+						id: "railways:handcar"
+					}
+					type: "item"
+				}
+			]
+			x: 2.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["55DF5029BDD9D4A4"]
+			hide_until_deps_visible: true
+			id: "6603C07C2CAABA6D"
+			rewards: [
+				{
+					id: "073341C18A7F8590"
+					type: "xp"
+					xp: 150
+				}
+			]
+			tasks: [
+				{
+					count: 2L
+					id: "2CFE409AE6AAAF0B"
+					item: {
+						count: 1
+						id: "create:track_station"
+					}
+					type: "item"
+				}
+				{
+					count: 4L
+					id: "42C5A40EE797704F"
+					item: {
+						count: 1
+						id: "create:track_signal"
+					}
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["6603C07C2CAABA6D"]
+			hide_until_deps_visible: true
+			id: "5AA9D3A0BBDF9E40"
+			rewards: [
+				{
+					id: "2C73CE9B59BA8167"
+					type: "xp"
+					xp: 80
+				}
+			]
+			tasks: [
+				{
+					count: 2L
+					id: "4AB945C4EC405818"
+					item: {
+						count: 1
+						id: "railways:semaphore"
+					}
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["6603C07C2CAABA6D"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "create:controls"
+			}
+			id: "17921BECA908D62B"
+			rewards: [
+				{
+					id: "36EA344EC55D7967"
+					type: "xp"
+					xp: 300
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "191DD28BC9915A62"
+					item: {
+						count: 1
+						id: "create:controls"
+					}
+					type: "item"
+				}
+				{
+					advancement: "create:train"
+					criterion: ""
+					id: "26AA5E671C710516"
+					type: "advancement"
+				}
+			]
+			x: 6.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["17921BECA908D62B"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "create:schedule"
+			}
+			id: "52EDA5B89A3F0F77"
+			rewards: [
+				{
+					id: "004B05814CE2AA49"
+					type: "xp"
+					xp: 300
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "779BDD7620C877F5"
+					item: {
+						count: 1
+						id: "create:schedule"
+					}
+					type: "item"
+				}
+				{
+					advancement: "create:conductor"
+					criterion: ""
+					id: "17E407079C5CB40A"
+					type: "advancement"
+				}
+			]
+			x: 8.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["17921BECA908D62B"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "minecraft:obsidian"
+			}
+			id: "1A7336D8DA874A8A"
+			rewards: [
+				{
+					id: "70037967AFBF02E3"
+					type: "xp"
+					xp: 300
+				}
+			]
+			tasks: [
+				{
+					advancement: "create:train_portal"
+					criterion: ""
+					id: "23A4768FAE8F753B"
+					type: "advancement"
+				}
+			]
+			x: 8.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["52EDA5B89A3F0F77"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "create:track_station"
+			}
+			id: "0646530161F06C69"
+			rewards: [
+				{
+					id: "21A2DE26E4E0D617"
+					type: "xp"
+					xp: 500
+				}
+				{
+					id: "0F1723E215675F67"
+					item: {
+						count: 32
+						id: "minecraft:golden_carrot"
+					}
+					type: "item"
+				}
+			]
+			shape: "gear"
+			size: 1.75d
+			tasks: [
+				{
+					advancement: "create:train"
+					criterion: ""
+					id: "678ABCBA6786ECF6"
+					type: "advancement"
+				}
+				{
+					dimension: "minecraft:the_nether"
+					id: "352BC90E93BA703C"
+					ignore_dimension: false
+					position: [I; -60, 0, 440]
+					size: [I; 121, 256, 121]
+					type: "location"
+				}
+			]
+			x: 10.0d
+			y: 0.0d
+		}
+	]
+}

@@ -1,0 +1,1042 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "cold"
+	group: "6FA7D509EB9A847A"
+	icon: {
+		count: 1
+		id: "minecraft:snow_block"
+	}
+	id: "22F1E7462ABF2081"
+	images: [ ]
+	order_index: 4
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: ["73FB8B12389506A9"]
+			hide_until_deps_complete: true
+			icon: {
+				count: 1
+				id: "minecraft:feather"
+			}
+			id: "62BF3F56EC398E2B"
+			rewards: [
+				{
+					id: "3435810F24C0DC24"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "5EDBD9CDABF041DD"
+					item: {
+						count: 32
+						id: "minecraft:firework_rocket"
+					}
+					type: "item"
+				}
+			]
+			shape: "hexagon"
+			size: 1.5d
+			tasks: [
+				{
+					dimension: "minecraft:overworld"
+					id: "31B5928B517C456A"
+					ignore_dimension: false
+					position: [I; -30000000, 500, -30000000]
+					size: [I; 60000000, 1500, 60000000]
+					type: "location"
+				}
+			]
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["62BF3F56EC398E2B"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "minecraft:snowball"
+			}
+			id: "0410BCFCA686EEC7"
+			rewards: [
+				{
+					id: "703C25331B85BF48"
+					type: "xp"
+					xp: 500
+				}
+				{
+					id: "4BB403A9B27FF6E1"
+					item: {
+						components: {
+							"minecraft:stored_enchantments": {
+								levels: {
+									"betterarcheology:soaring_winds": 1
+								}
+							}
+						}
+						count: 1
+						id: "minecraft:enchanted_book"
+					}
+					type: "item"
+				}
+			]
+			shape: "hexagon"
+			size: 1.5d
+			tasks: [
+				{
+					biome: "#c:is_snowy"
+					id: "27B586620F9414FE"
+					type: "biome"
+				}
+			]
+			x: 2.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["0410BCFCA686EEC7"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "minecraft:packed_ice"
+			}
+			id: "7FAA8C6F650E5E31"
+			rewards: [
+				{
+					id: "44DE6991DCB3DD6D"
+					type: "xp"
+					xp: 200
+				}
+			]
+			tasks: [
+				{
+					biome: "minecraft:ice_spikes"
+					id: "3120C3E6A2DF0E23"
+					type: "biome"
+				}
+			]
+			x: 2.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["0410BCFCA686EEC7"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "minecraft:snow_block"
+			}
+			id: "131B785C57D41901"
+			rewards: [
+				{
+					id: "194A2CEF8B920E98"
+					type: "xp"
+					xp: 150
+				}
+			]
+			tasks: [
+				{
+					id: "5A152C6561D8D0D9"
+					structure: "minecraft:igloo"
+					type: "structure"
+				}
+			]
+			x: 0.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["131B785C57D41901"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "minecraft:blue_ice"
+			}
+			id: "245821AFD7698303"
+			rewards: [
+				{
+					id: "2753FE90C0F30BEC"
+					type: "xp"
+					xp: 250
+				}
+			]
+			tasks: [
+				{
+					id: "124529D92B0983D2"
+					structure: "terralith:underground/frosted_dungeon"
+					type: "structure"
+				}
+			]
+			x: 0.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["7FAA8C6F650E5E31"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "minecraft:packed_ice"
+			}
+			id: "19F3064FF15A3876"
+			rewards: [
+				{
+					id: "26628601893092E5"
+					type: "xp"
+					xp: 200
+				}
+			]
+			tasks: [
+				{
+					id: "3D13D9BB626A69BD"
+					structure: "terralith:glacial_hut"
+					type: "structure"
+				}
+			]
+			x: 2.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["0410BCFCA686EEC7"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "minecraft:tipped_arrow"
+			}
+			id: "67433EA0672EC136"
+			rewards: [
+				{
+					id: "3F2EF396A91B0116"
+					type: "xp"
+					xp: 150
+				}
+			]
+			tasks: [
+				{
+					entity: "minecraft:stray"
+					id: "464F8AD9F3B5FDB7"
+					type: "kill"
+					value: 10L
+				}
+			]
+			x: 0.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["0410BCFCA686EEC7"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "cold_sweat:goat_fur_chestplate"
+			}
+			id: "4D2A2718A56AA656"
+			rewards: [
+				{
+					id: "503785D7ACFE608A"
+					type: "xp"
+					xp: 200
+				}
+			]
+			tasks: [
+				{
+					count: 6L
+					id: "0AA31D23F9CE619C"
+					item: {
+						count: 1
+						id: "cold_sweat:goat_fur"
+					}
+					type: "item"
+				}
+				{
+					count: 1L
+					id: "4508356DD9225D6C"
+					item: {
+						count: 1
+						id: "cold_sweat:goat_fur_chestplate"
+					}
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["4D2A2718A56AA656"]
+			hide_until_deps_visible: true
+			id: "1D5F79045F5A2E07"
+			rewards: [
+				{
+					id: "081D5F37BC1224BC"
+					type: "xp"
+					xp: 250
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "73EFEFF6D2FA41B7"
+					item: {
+						count: 1
+						id: "cold_sweat:hearth"
+					}
+					type: "item"
+				}
+			]
+			x: 6.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["0410BCFCA686EEC7", "12FA3EC976BE3DD8"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "farmersdelight:beef_stew"
+			}
+			id: "4F3DD01B4E09985C"
+			rewards: [
+				{
+					id: "6F4529B2EC5AC563"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "5539B6AC98C289EB"
+					item: {
+						count: 4
+						id: "farmersdelight:hot_cocoa"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					advancement: "farmersdelight:main/eat_nourishing_food"
+					criterion: ""
+					id: "4E8EEF6EDD3EE398"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["4D2A2718A56AA656"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "cold_sweat:goat_fur_helmet"
+			}
+			id: "3B1137C51525EBB2"
+			rewards: [
+				{
+					id: "7265BCB3E369B75B"
+					type: "xp"
+					xp: 250
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "5F6F8A3B442693E7"
+					item: {
+						count: 1
+						id: "cold_sweat:goat_fur_helmet"
+					}
+					type: "item"
+				}
+				{
+					count: 1L
+					id: "2B2AC4AA91AC5586"
+					item: {
+						count: 1
+						id: "cold_sweat:goat_fur_chestplate"
+					}
+					type: "item"
+				}
+				{
+					count: 1L
+					id: "497418FB5324B994"
+					item: {
+						count: 1
+						id: "cold_sweat:goat_fur_leggings"
+					}
+					type: "item"
+				}
+				{
+					count: 1L
+					id: "3DD01324E9941BD5"
+					item: {
+						count: 1
+						id: "cold_sweat:goat_fur_boots"
+					}
+					type: "item"
+				}
+			]
+			x: 6.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["3B1137C51525EBB2"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "cold_sweat:sewing_table"
+			}
+			id: "0C29D21D55168A37"
+			rewards: [
+				{
+					id: "3220BF9B95F8700D"
+					type: "xp"
+					xp: 300
+				}
+			]
+			tasks: [
+				{
+					advancement: "cold_sweat:full_insulation"
+					criterion: ""
+					id: "11EC85573D518863"
+					type: "advancement"
+				}
+			]
+			x: 8.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["0410BCFCA686EEC7"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "oritech:raw_nickel"
+			}
+			id: "7E137323D2F00F6F"
+			rewards: [
+				{
+					id: "4EEFA1FB48483E02"
+					type: "xp"
+					xp: 300
+				}
+			]
+			tasks: [
+				{
+					count: 16L
+					id: "2FF4685E779D9840"
+					item: {
+						count: 1
+						id: "oritech:raw_nickel"
+					}
+					type: "item"
+				}
+				{
+					count: 8L
+					id: "0D52D1A18916F875"
+					item: {
+						count: 1
+						id: "oritech:raw_platinum"
+					}
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["7E137323D2F00F6F"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "create_new_age:thorium_ore"
+			}
+			id: "0B0F1DC398076B5B"
+			rewards: [
+				{
+					id: "4127F7766D3AE1CD"
+					type: "xp"
+					xp: 300
+				}
+			]
+			tasks: [
+				{
+					count: 8L
+					id: "4030CDA906ECC68B"
+					item: {
+						count: 1
+						id: "create_new_age:thorium"
+					}
+					type: "item"
+				}
+			]
+			x: 6.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["0B0F1DC398076B5B", "33ED485838982C35"]
+			hide_until_deps_visible: true
+			id: "543F9A4131886D34"
+			rewards: [
+				{
+					id: "3443F73C94E5E541"
+					type: "xp"
+					xp: 400
+				}
+			]
+			tasks: [
+				{
+					count: 8L
+					id: "5334F666167D5A64"
+					item: {
+						count: 1
+						id: "create_new_age:reactor_casing"
+					}
+					type: "item"
+				}
+				{
+					count: 4L
+					id: "4C1610CEFFE43372"
+					item: {
+						count: 1
+						id: "create_new_age:reactor_glass"
+					}
+					type: "item"
+				}
+			]
+			x: 8.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["543F9A4131886D34"]
+			hide_until_deps_visible: true
+			id: "1ED8F23282518DB7"
+			rewards: [
+				{
+					id: "2365D59D935FAA50"
+					type: "xp"
+					xp: 400
+				}
+			]
+			tasks: [
+				{
+					count: 4L
+					id: "58B9D0C79001EA7E"
+					item: {
+						count: 1
+						id: "create_new_age:reactor_rod"
+					}
+					type: "item"
+				}
+				{
+					count: 1L
+					id: "4271628014881151"
+					item: {
+						count: 1
+						id: "create_new_age:reactor_fuel_acceptor"
+					}
+					type: "item"
+				}
+			]
+			x: 10.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["1ED8F23282518DB7"]
+			hide_until_deps_visible: true
+			id: "3DC87E3032B044AB"
+			rewards: [
+				{
+					id: "16BBC45296489C58"
+					type: "xp"
+					xp: 500
+				}
+			]
+			tasks: [
+				{
+					count: 4L
+					id: "14D92B41268DB640"
+					item: {
+						count: 1
+						id: "create_new_age:nuclear_fuel"
+					}
+					type: "item"
+				}
+			]
+			x: 10.0d
+			y: -6.0d
+		}
+		{
+			dependencies: ["3DC87E3032B044AB"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "create_new_age:reactor_rod"
+			}
+			id: "7C20E04BF684FF68"
+			rewards: [
+				{
+					id: "0F6C11F19C0DEC57"
+					type: "xp"
+					xp: 800
+				}
+			]
+			shape: "hexagon"
+			size: 1.5d
+			tasks: [
+				{
+					count: 4L
+					id: "459A4BF6AF96B9EB"
+					item: {
+						count: 1
+						id: "create_new_age:reactor_heat_vent"
+					}
+					type: "item"
+				}
+			]
+			x: 12.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["0410BCFCA686EEC7"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "born_in_chaos_v1:black_argillite_brick"
+			}
+			id: "3F2B1450BCEDB172"
+			rewards: [
+				{
+					id: "10B426F315205326"
+					type: "xp"
+					xp: 300
+				}
+			]
+			tasks: [
+				{
+					id: "73F6F9D64F013E35"
+					structure: "born_in_chaos_v1:dark_tower_taiga"
+					type: "structure"
+				}
+			]
+			x: 10.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["3F2B1450BCEDB172"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "born_in_chaos_v1:fangofthe_hound_leader"
+			}
+			id: "101F5B869F1FB6B7"
+			rewards: [
+				{
+					id: "5F6E75220DE49389"
+					type: "xp"
+					xp: 500
+				}
+			]
+			tasks: [
+				{
+					entity: "born_in_chaos_v1:dire_hound_leader"
+					id: "1BEADD6345F53C33"
+					type: "kill"
+					value: 1L
+				}
+			]
+			x: 12.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["3F2B1450BCEDB172"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "born_in_chaos_v1:spider_mandible"
+			}
+			id: "6EE5AAD137ED2402"
+			rewards: [
+				{
+					id: "118E1F5B16092886"
+					type: "xp"
+					xp: 500
+				}
+			]
+			tasks: [
+				{
+					entity: "born_in_chaos_v1:mother_spider"
+					id: "0B2FCD37B101F768"
+					type: "kill"
+					value: 1L
+				}
+			]
+			x: 12.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["3F2B1450BCEDB172"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "born_in_chaos_v1:missionary_hat_helmet"
+			}
+			id: "73B6764D68F79C2D"
+			rewards: [
+				{
+					id: "0D515C73E7234D57"
+					type: "xp"
+					xp: 500
+				}
+			]
+			tasks: [
+				{
+					entity: "born_in_chaos_v1:missioner"
+					id: "5FA8D9762BBA1E29"
+					type: "kill"
+					value: 1L
+				}
+			]
+			x: 12.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["73B6764D68F79C2D"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "born_in_chaos_v1:charmof_power"
+			}
+			id: "7B988246F90F6F1C"
+			rewards: [
+				{
+					id: "35ACE6741921AA5E"
+					type: "xp"
+					xp: 400
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "59CF7435FE913B8D"
+					item: {
+						count: 1
+						id: "born_in_chaos_v1:charmof_power"
+					}
+					type: "item"
+				}
+				{
+					count: 1L
+					id: "4D2DFE23BBD6C37C"
+					item: {
+						count: 1
+						id: "born_in_chaos_v1:charmof_resistance"
+					}
+					type: "item"
+				}
+				{
+					count: 1L
+					id: "36BAE5289AF5B38D"
+					item: {
+						count: 1
+						id: "born_in_chaos_v1:charmof_endurance"
+					}
+					type: "item"
+				}
+			]
+			x: 12.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["101F5B869F1FB6B7"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "born_in_chaos_v1:nightmare_claw"
+			}
+			id: "76D15F539177341F"
+			rewards: [
+				{
+					id: "2EAB37B7F700E42D"
+					type: "xp"
+					xp: 750
+				}
+				{
+					id: "4FC6C0D3B22684C6"
+					item: {
+						count: 2
+						id: "minecraft:golden_apple"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					entity: "born_in_chaos_v1:nightmare_stalker"
+					id: "4E4A3C9D6220976C"
+					type: "kill"
+					value: 1L
+				}
+			]
+			x: 14.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["6EE5AAD137ED2402"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "born_in_chaos_v1:lifestealer_bone"
+			}
+			id: "614CFE4398E3FC6C"
+			rewards: [
+				{
+					id: "5E8CD2C7C38B57ED"
+					type: "xp"
+					xp: 750
+				}
+				{
+					id: "26FF4A733D0A3C29"
+					item: {
+						count: 2
+						id: "minecraft:golden_apple"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					entity: "born_in_chaos_v1:lifestealer"
+					id: "5A5425A643A1DC28"
+					type: "kill"
+					value: 1L
+				}
+			]
+			x: 14.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["73B6764D68F79C2D"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "born_in_chaos_v1:krampus_horn"
+			}
+			id: "0EAC18A57865D6D9"
+			rewards: [
+				{
+					id: "3B642042A337277B"
+					type: "xp"
+					xp: 750
+				}
+				{
+					id: "71ED5CC15EC407D6"
+					item: {
+						count: 2
+						id: "minecraft:golden_apple"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					entity: "born_in_chaos_v1:krampus"
+					id: "184BF4081818B584"
+					type: "kill"
+					value: 1L
+				}
+			]
+			x: 14.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["0EAC18A57865D6D9"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "born_in_chaos_v1:frostbitten_blade"
+			}
+			id: "52C48897B0391DA4"
+			rewards: [
+				{
+					id: "13F5663332B8B0A8"
+					type: "xp"
+					xp: 300
+				}
+			]
+			tasks: [
+				{
+					count: 8L
+					id: "04984EF22ED094CF"
+					item: {
+						count: 1
+						id: "born_in_chaos_v1:permafrost_shard"
+					}
+					type: "item"
+				}
+				{
+					count: 1L
+					id: "302CBB0BCEC6C197"
+					item: {
+						count: 1
+						id: "born_in_chaos_v1:frostbitten_blade"
+					}
+					type: "item"
+				}
+			]
+			x: 16.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["52C48897B0391DA4"]
+			hide_until_deps_visible: true
+			id: "03294AA7A21B24F9"
+			rewards: [
+				{
+					id: "5DDC3380F8557633"
+					type: "xp"
+					xp: 300
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "47CDB031DAB3C8DB"
+					item: {
+						count: 1
+						id: "born_in_chaos_v1:stormcallers_horn"
+					}
+					type: "item"
+				}
+			]
+			x: 16.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["0EAC18A57865D6D9"]
+			hide_until_deps_visible: true
+			id: "07F4FAD00FE4552B"
+			rewards: [
+				{
+					id: "5E0E4C19C968C9B2"
+					type: "xp"
+					xp: 300
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "45E3D5911938198C"
+					item: {
+						count: 1
+						id: "born_in_chaos_v1:transmuting_elixir"
+					}
+					type: "item"
+				}
+				{
+					count: 1L
+					id: "03E18BAD560D872F"
+					item: {
+						count: 1
+						id: "born_in_chaos_v1:infernal_evil_pumpkin"
+					}
+					type: "item"
+				}
+			]
+			x: 14.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["07F4FAD00FE4552B"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "born_in_chaos_v1:lord_pumpkinheads_hat_helmet"
+			}
+			id: "499AB36B29666371"
+			rewards: [
+				{
+					id: "6763ABDA1779015C"
+					type: "xp"
+					xp: 1000
+				}
+				{
+					id: "4FAA0B9F7899081F"
+					item: {
+						count: 1
+						id: "minecraft:enchanted_golden_apple"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					entity: "born_in_chaos_v1:lord_pumpkinhead"
+					id: "5E32A24BC0D72842"
+					type: "kill"
+					value: 1L
+				}
+			]
+			x: 16.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["499AB36B29666371"]
+			hide_until_deps_visible: true
+			id: "5DB63DF388B56201"
+			rewards: [
+				{
+					id: "036E6BD9EE276D42"
+					type: "xp"
+					xp: 500
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "65972B7C9B424376"
+					item: {
+						count: 1
+						id: "born_in_chaos_v1:soulbane"
+					}
+					type: "item"
+				}
+			]
+			x: 18.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["76D15F539177341F", "614CFE4398E3FC6C", "499AB36B29666371"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "minecraft:nether_star"
+			}
+			id: "6BB18A9229DC45A1"
+			rewards: [
+				{
+					id: "63BCCEB754AFB34F"
+					type: "xp"
+					xp: 3000
+				}
+				{
+					id: "21CBECF7BB013AD2"
+					item: {
+						count: 1
+						id: "minecraft:nether_star"
+					}
+					type: "item"
+				}
+				{
+					id: "4B42A02EBAE0A70C"
+					item: {
+						count: 2
+						id: "minecraft:netherite_ingot"
+					}
+					type: "item"
+				}
+			]
+			shape: "gear"
+			size: 2.5d
+			tasks: [
+				{
+					id: "3F0BBE590D3A19BE"
+					type: "checkmark"
+				}
+			]
+			x: 18.0d
+			y: 0.0d
+		}
+	]
+}

@@ -1,0 +1,675 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "industry"
+	group: "307C6B906CED1091"
+	icon: {
+		count: 1
+		id: "createdieselgenerators:diesel_engine"
+	}
+	id: "46121B1B8CF045BA"
+	images: [ ]
+	order_index: 13
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: ["6E4CB3B7BB11E21C", "0486650A8916E524"]
+			hide_until_deps_complete: true
+			id: "6BBFE927BFD7CC3F"
+			rewards: [
+				{
+					id: "4F6F68232E1E796D"
+					type: "xp"
+					xp: 100
+				}
+			]
+			shape: "hexagon"
+			size: 1.5d
+			tasks: [
+				{
+					count: 1L
+					id: "467EB9AF73D75E4E"
+					item: {
+						count: 1
+						id: "createdieselgenerators:oil_scanner"
+					}
+					type: "item"
+				}
+			]
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["6BBFE927BFD7CC3F"]
+			hide_until_deps_visible: true
+			id: "37E632692EC464C9"
+			rewards: [
+				{
+					id: "35C59707DD53BFE1"
+					type: "xp"
+					xp: 200
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "4047C588FEFB1110"
+					item: {
+						count: 1
+						id: "createdieselgenerators:pumpjack_bearing"
+					}
+					type: "item"
+				}
+				{
+					count: 1L
+					id: "3522BB3CBB548D5F"
+					item: {
+						count: 1
+						id: "createdieselgenerators:pumpjack_crank"
+					}
+					type: "item"
+				}
+				{
+					count: 1L
+					id: "62CC69C38B61AD23"
+					item: {
+						count: 1
+						id: "createdieselgenerators:pumpjack_head"
+					}
+					type: "item"
+				}
+			]
+			x: 2.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["37E632692EC464C9"]
+			hide_until_deps_visible: true
+			id: "084AB390024C4487"
+			rewards: [
+				{
+					id: "322A01AC5655154D"
+					type: "xp"
+					xp: 150
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "1F31DC7B68827A88"
+					item: {
+						count: 1
+						id: "createdieselgenerators:crude_oil_bucket"
+					}
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["084AB390024C4487"]
+			hide_until_deps_visible: true
+			id: "0E0D5DC6409042D9"
+			rewards: [
+				{
+					id: "3E332A4CE7E5DB39"
+					type: "xp"
+					xp: 80
+				}
+			]
+			tasks: [
+				{
+					count: 4L
+					id: "513EECEC505ADD96"
+					item: {
+						count: 1
+						id: "createdieselgenerators:oil_barrel"
+					}
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["084AB390024C4487", "0F69B198F20785A0"]
+			hide_until_deps_visible: true
+			id: "4C8251E4D1C6AA30"
+			rewards: [
+				{
+					id: "053CACD2A4881592"
+					type: "xp"
+					xp: 250
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "5233680D598BA8D0"
+					item: {
+						count: 1
+						id: "createdieselgenerators:distillation_controller"
+					}
+					type: "item"
+				}
+				{
+					count: 4L
+					id: "4A744D4EF5F75BBC"
+					item: {
+						count: 1
+						id: "create:fluid_tank"
+					}
+					type: "item"
+				}
+			]
+			x: 6.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["4C8251E4D1C6AA30"]
+			hide_until_deps_visible: true
+			id: "75903FFDBAF9F5C8"
+			rewards: [
+				{
+					id: "3CA78DE8F6E791C2"
+					type: "xp"
+					xp: 150
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "3D776FC6CDEC1379"
+					item: {
+						count: 1
+						id: "createdieselgenerators:diesel_bucket"
+					}
+					type: "item"
+				}
+			]
+			x: 8.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["4C8251E4D1C6AA30"]
+			hide_until_deps_visible: true
+			id: "77BCEC682CE4FE4C"
+			rewards: [
+				{
+					id: "474A730DEC6C16F0"
+					type: "xp"
+					xp: 150
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "425FED0FAEC73E6D"
+					item: {
+						count: 1
+						id: "createdieselgenerators:gasoline_bucket"
+					}
+					type: "item"
+				}
+			]
+			x: 8.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["75903FFDBAF9F5C8"]
+			hide_until_deps_visible: true
+			id: "3F93180CA875881A"
+			rewards: [
+				{
+					id: "44F6BD903F23D94D"
+					type: "xp"
+					xp: 200
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "3A92F8DF15C7BD18"
+					item: {
+						count: 1
+						id: "createdieselgenerators:diesel_engine"
+					}
+					type: "item"
+				}
+			]
+			x: 10.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["3F93180CA875881A"]
+			hide_until_deps_visible: true
+			id: "00969B7E7A07CF4F"
+			rewards: [
+				{
+					id: "4668549719A0FA26"
+					type: "xp"
+					xp: 300
+				}
+			]
+			tasks: [
+				{
+					count: 2L
+					id: "1CB52ABB443E1B72"
+					item: {
+						count: 1
+						id: "createdieselgenerators:large_diesel_engine"
+					}
+					type: "item"
+				}
+			]
+			x: 12.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["00969B7E7A07CF4F"]
+			hide_until_deps_visible: true
+			id: "26B24DBE2B9ECE71"
+			rewards: [
+				{
+					id: "6352FF86B56D922A"
+					type: "xp"
+					xp: 500
+				}
+			]
+			shape: "hexagon"
+			size: 1.25d
+			tasks: [
+				{
+					count: 1L
+					id: "1CE65B566EEEBCDF"
+					item: {
+						count: 1
+						id: "createdieselgenerators:huge_diesel_engine"
+					}
+					type: "item"
+				}
+			]
+			x: 14.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["4C8251E4D1C6AA30"]
+			hide_until_deps_visible: true
+			id: "4E4E427D54CEA209"
+			rewards: [
+				{
+					id: "76BAAA7F05B96181"
+					type: "xp"
+					xp: 100
+				}
+			]
+			tasks: [
+				{
+					count: 32L
+					id: "1D48E7EB273290D8"
+					item: {
+						count: 1
+						id: "createdieselgenerators:asphalt_block"
+					}
+					type: "item"
+				}
+			]
+			x: 10.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["6BBFE927BFD7CC3F"]
+			hide_until_deps_visible: true
+			id: "448A5C767908D1E4"
+			rewards: [
+				{
+					id: "09CD4008545CE904"
+					type: "xp"
+					xp: 150
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "5AE312D0DD22CA9D"
+					item: {
+						count: 1
+						id: "createdieselgenerators:bulk_fermenter"
+					}
+					type: "item"
+				}
+			]
+			x: 2.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["6E4CB3B7BB11E21C"]
+			hide_until_deps_complete: true
+			id: "09F337429BFEAAC2"
+			rewards: [
+				{
+					id: "5D5158DC28ABA7AF"
+					type: "xp"
+					xp: 80
+				}
+			]
+			tasks: [
+				{
+					count: 8L
+					id: "7986D74927A16A72"
+					item: {
+						count: 1
+						id: "create_new_age:magnetite_block"
+					}
+					type: "item"
+				}
+			]
+			x: 0.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["09F337429BFEAAC2", "613049AD6949A8E3"]
+			hide_until_deps_visible: true
+			id: "49A60CFC6CC71D67"
+			rewards: [
+				{
+					id: "7E2CF995BE07D112"
+					type: "xp"
+					xp: 150
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "5DF3952AEBD8381A"
+					item: {
+						count: 1
+						id: "create_new_age:basic_energiser"
+					}
+					type: "item"
+				}
+			]
+			x: 2.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["49A60CFC6CC71D67"]
+			hide_until_deps_visible: true
+			id: "33ED485838982C35"
+			rewards: [
+				{
+					id: "54F669BAC895D3B8"
+					type: "xp"
+					xp: 150
+				}
+			]
+			tasks: [
+				{
+					count: 8L
+					id: "75FCBFC4F9B4A166"
+					item: {
+						count: 1
+						id: "create_new_age:overcharged_iron"
+					}
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["49A60CFC6CC71D67"]
+			hide_until_deps_visible: true
+			id: "6D38E250FBC69D36"
+			rewards: [
+				{
+					id: "52387A2F22AFBEC2"
+					type: "xp"
+					xp: 100
+				}
+			]
+			tasks: [
+				{
+					count: 32L
+					id: "016CA8BB3EA0B422"
+					item: {
+						count: 1
+						id: "create_new_age:copper_wire"
+					}
+					type: "item"
+				}
+				{
+					count: 4L
+					id: "3556409D69C74E19"
+					item: {
+						count: 1
+						id: "create_new_age:electrical_connector"
+					}
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["33ED485838982C35"]
+			hide_until_deps_visible: true
+			id: "19648A5B291B91DD"
+			rewards: [
+				{
+					id: "784CA3CBAE82C6D8"
+					type: "xp"
+					xp: 200
+				}
+			]
+			tasks: [
+				{
+					count: 4L
+					id: "4D558C273B14A7C1"
+					item: {
+						count: 1
+						id: "create_new_age:generator_coil"
+					}
+					type: "item"
+				}
+				{
+					count: 1L
+					id: "14E03C2C4A1DB3E1"
+					item: {
+						count: 1
+						id: "create_new_age:carbon_brushes"
+					}
+					type: "item"
+				}
+			]
+			x: 6.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["19648A5B291B91DD"]
+			hide_until_deps_visible: true
+			id: "2856DFEB22633543"
+			rewards: [
+				{
+					id: "2B6A4F7D2017879C"
+					type: "xp"
+					xp: 150
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "709EF0F12E1C6F20"
+					item: {
+						count: 1
+						id: "create_new_age:basic_motor"
+					}
+					type: "item"
+				}
+			]
+			x: 8.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["2856DFEB22633543"]
+			hide_until_deps_visible: true
+			id: "0D395F6CC34368F9"
+			rewards: [
+				{
+					id: "356520F1DEDA2D55"
+					type: "xp"
+					xp: 250
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "75F9FEB1A5823174"
+					item: {
+						count: 1
+						id: "create_new_age:advanced_motor"
+					}
+					type: "item"
+				}
+			]
+			x: 10.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["33ED485838982C35"]
+			hide_until_deps_visible: true
+			id: "5DF86C2C9CDC9B68"
+			rewards: [
+				{
+					id: "63AF9B89FB65DA40"
+					type: "xp"
+					xp: 150
+				}
+			]
+			tasks: [
+				{
+					count: 4L
+					id: "7207F1046AC06B16"
+					item: {
+						count: 1
+						id: "create_new_age:basic_solar_heating_plate"
+					}
+					type: "item"
+				}
+			]
+			x: 6.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["5DF86C2C9CDC9B68"]
+			hide_until_deps_visible: true
+			id: "3941662BD692035B"
+			rewards: [
+				{
+					id: "3F2D202BF8DB6441"
+					type: "xp"
+					xp: 150
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "6C745B505F6DD29F"
+					item: {
+						count: 1
+						id: "create_new_age:stirling_engine"
+					}
+					type: "item"
+				}
+			]
+			x: 8.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["33ED485838982C35"]
+			hide_until_deps_visible: true
+			id: "79BC6FA18749A3B5"
+			rewards: [
+				{
+					id: "476F0E0E176CC86F"
+					type: "xp"
+					xp: 200
+				}
+			]
+			tasks: [
+				{
+					count: 8L
+					id: "6B52EAE3ED66A934"
+					item: {
+						count: 1
+						id: "create_new_age:overcharged_gold"
+					}
+					type: "item"
+				}
+			]
+			x: 6.0d
+			y: 8.0d
+		}
+		{
+			dependencies: ["79BC6FA18749A3B5"]
+			hide_until_deps_visible: true
+			id: "2560ED259730DE07"
+			rewards: [
+				{
+					id: "74312ECC670FADB6"
+					type: "xp"
+					xp: 300
+				}
+			]
+			tasks: [
+				{
+					count: 2L
+					id: "774C8F1F24B10A71"
+					item: {
+						count: 1
+						id: "create_new_age:overcharged_diamond"
+					}
+					type: "item"
+				}
+				{
+					count: 4L
+					id: "656E12D047DC46D8"
+					item: {
+						count: 1
+						id: "create_new_age:overcharged_diamond_wire"
+					}
+					type: "item"
+				}
+			]
+			x: 8.0d
+			y: 8.0d
+		}
+		{
+			dependencies: ["26B24DBE2B9ECE71", "0D395F6CC34368F9", "2560ED259730DE07"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "minecraft:redstone_block"
+			}
+			id: "2DC5EE261E60B32E"
+			rewards: [
+				{
+					id: "4DC65450325BAFD2"
+					type: "xp"
+					xp: 1000
+				}
+			]
+			shape: "gear"
+			size: 2.0d
+			tasks: [
+				{
+					id: "7CC5E4ACB08DCF78"
+					type: "checkmark"
+				}
+			]
+			x: 16.0d
+			y: 0.0d
+		}
+	]
+}

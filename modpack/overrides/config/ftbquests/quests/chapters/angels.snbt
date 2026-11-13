@@ -1,0 +1,217 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "angels"
+	group: "307C6B906CED1091"
+	icon: {
+		count: 1
+		id: "angelcompanions:shield_amulet"
+	}
+	id: "2F261106BE3CE85D"
+	images: [ ]
+	order_index: 15
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: ["32B2FC7FC1FE0154"]
+			hide_until_deps_complete: true
+			icon: {
+				count: 1
+				id: "minecraft:amethyst_shard"
+			}
+			id: "7C80E07D1FEFD966"
+			rewards: [
+				{
+					id: "2D90C3BDBB7AECA6"
+					type: "xp"
+					xp: 150
+				}
+			]
+			shape: "hexagon"
+			size: 1.5d
+			tasks: [
+				{
+					advancement: "minecraft:husbandry/allay_deliver_item_to_player"
+					criterion: ""
+					id: "09B91C5F27DD143C"
+					type: "advancement"
+				}
+			]
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["7C80E07D1FEFD966"]
+			hide_until_deps_visible: true
+			id: "6B8706B49E27FEEF"
+			rewards: [
+				{
+					id: "210929991ABAB5FE"
+					type: "xp"
+					xp: 300
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "464CD1988FCDAB26"
+					item: {
+						count: 1
+						id: "angelcompanions:shield_amulet"
+					}
+					type: "item"
+				}
+			]
+			x: 2.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["7C80E07D1FEFD966", "2D9C6B5CDD4A72BE"]
+			hide_until_deps_visible: true
+			id: "1C39D63EA45D9B00"
+			rewards: [
+				{
+					id: "17CB74C4019F0118"
+					type: "xp"
+					xp: 500
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "545BDD0FDC38AF60"
+					item: {
+						count: 1
+						id: "angelcompanions:angel_vessel"
+					}
+					type: "item"
+				}
+			]
+			x: 2.0d
+			y: 1.0d
+		}
+		{
+			dependencies: ["7C80E07D1FEFD966", "2D9C6B5CDD4A72BE"]
+			hide_until_deps_visible: true
+			id: "033DAECDB8EDA485"
+			rewards: [
+				{
+					id: "6A6A26AD00F61F6F"
+					type: "xp"
+					xp: 200
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "55BAFEBCDE5101AC"
+					item: {
+						count: 1
+						id: "minecraft:beacon"
+					}
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["6B8706B49E27FEEF", "033DAECDB8EDA485"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "minecraft:lava_bucket"
+			}
+			id: "605394987530A0D3"
+			rewards: [
+				{
+					id: "5DBC33B59E82E369"
+					type: "xp"
+					xp: 300
+				}
+			]
+			tasks: [
+				{
+					id: "4261242771390FAD"
+					type: "checkmark"
+				}
+			]
+			x: 6.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["1C39D63EA45D9B00", "033DAECDB8EDA485"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "minecraft:firework_rocket"
+			}
+			id: "677A51A20857BF86"
+			rewards: [
+				{
+					id: "6D50EE51BDDA23B1"
+					type: "xp"
+					xp: 300
+				}
+			]
+			tasks: [
+				{
+					id: "438C84594663BC6D"
+					type: "checkmark"
+				}
+			]
+			x: 6.0d
+			y: 1.0d
+		}
+		{
+			dependencies: ["32B2FC7FC1FE0154"]
+			hide_until_deps_complete: true
+			icon: {
+				count: 1
+				id: "relics:reflective_necklace"
+			}
+			id: "205E6085380C2758"
+			rewards: [
+				{
+					id: "265076FC0F16AD17"
+					type: "xp"
+					xp: 150
+				}
+			]
+			shape: "hexagon"
+			size: 1.5d
+			tasks: [
+				{
+					id: "0D64FB347BBC9263"
+					type: "checkmark"
+				}
+			]
+			x: 0.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["205E6085380C2758"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "minecraft:experience_bottle"
+			}
+			id: "320232208FCD1954"
+			rewards: [
+				{
+					id: "138D3173AA507954"
+					type: "xp"
+					xp: 150
+				}
+			]
+			tasks: [
+				{
+					id: "20D861A3EEA9F84F"
+					type: "checkmark"
+				}
+			]
+			x: 2.0d
+			y: 4.0d
+		}
+	]
+}

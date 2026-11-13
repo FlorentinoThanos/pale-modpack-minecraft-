@@ -1,0 +1,296 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "guide"
+	group: "307C6B906CED1091"
+	icon: {
+		count: 1
+		id: "minecraft:book"
+	}
+	id: "3474A9E97CA5B570"
+	images: [ ]
+	order_index: 6
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: ["6541143ABF1D324D"]
+			hide_until_deps_complete: true
+			icon: {
+				count: 1
+				id: "minecraft:writable_book"
+			}
+			id: "29D18589090D5704"
+			rewards: [
+				{
+					id: "5C19D5274E1F6AC6"
+					type: "xp"
+					xp: 20
+				}
+			]
+			shape: "hexagon"
+			size: 1.5d
+			tasks: [
+				{
+					id: "21E3D2743CBCC461"
+					type: "checkmark"
+				}
+			]
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["29D18589090D5704"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "minecraft:crafting_table"
+			}
+			id: "55D4D3D02F97AA25"
+			rewards: [
+				{
+					id: "1C8F1B49DB3698D8"
+					type: "xp"
+					xp: 20
+				}
+			]
+			tasks: [
+				{
+					id: "54D2EE3538150478"
+					type: "checkmark"
+				}
+			]
+			x: 2.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["29D18589090D5704"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "minecraft:skeleton_skull"
+			}
+			id: "3166092B1DBFD076"
+			rewards: [
+				{
+					id: "7C16D0B19D971FCA"
+					type: "xp"
+					xp: 20
+				}
+			]
+			tasks: [
+				{
+					id: "6954E1EED36F2D86"
+					type: "checkmark"
+				}
+			]
+			x: 2.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["29D18589090D5704"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "minecraft:chest"
+			}
+			id: "790C09D2C9FEC09D"
+			rewards: [
+				{
+					id: "4C7EE58A19D64F5B"
+					type: "xp"
+					xp: 20
+				}
+			]
+			tasks: [
+				{
+					id: "6E388873DE08F790"
+					type: "checkmark"
+				}
+			]
+			x: 2.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["29D18589090D5704"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "minecraft:iron_sword"
+			}
+			id: "071CA0CD6B15C063"
+			rewards: [
+				{
+					id: "34D7E2993E1E7FC5"
+					type: "xp"
+					xp: 20
+				}
+			]
+			tasks: [
+				{
+					id: "0D040DC0DEA18278"
+					type: "checkmark"
+				}
+			]
+			x: 4.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["29D18589090D5704"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "minecraft:apple"
+			}
+			id: "57A1A48BA09D73DC"
+			rewards: [
+				{
+					id: "63FE217F1F692882"
+					type: "xp"
+					xp: 20
+				}
+			]
+			tasks: [
+				{
+					id: "645BAB98A0BD2C43"
+					type: "checkmark"
+				}
+			]
+			x: 4.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["29D18589090D5704"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "cold_sweat:thermometer"
+			}
+			id: "29165060F4EDE7BD"
+			rewards: [
+				{
+					id: "51397C7A1D0F40C0"
+					type: "xp"
+					xp: 60
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "11D5A7089C85B39F"
+					item: {
+						count: 1
+						id: "cold_sweat:thermometer"
+					}
+					type: "item"
+				}
+				{
+					count: 1L
+					id: "58A8A9B7B73AA697"
+					item: {
+						count: 1
+						id: "cold_sweat:waterskin"
+					}
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["29D18589090D5704"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "minecraft:clock"
+			}
+			id: "1DAC89F66ADAA9C9"
+			rewards: [
+				{
+					id: "6B02454DC52D55C3"
+					type: "xp"
+					xp: 20
+				}
+			]
+			tasks: [
+				{
+					id: "789A7B4505789243"
+					type: "checkmark"
+				}
+			]
+			x: 6.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["29D18589090D5704"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "minecraft:filled_map"
+			}
+			id: "2A8D9AB80135141A"
+			rewards: [
+				{
+					id: "0F0FF474F5CA8FD0"
+					type: "xp"
+					xp: 20
+				}
+			]
+			tasks: [
+				{
+					id: "10932C6505BC57BA"
+					type: "checkmark"
+				}
+			]
+			x: 6.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["29D18589090D5704"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "minecraft:gold_nugget"
+			}
+			id: "6D95516F6EF1521C"
+			rewards: [
+				{
+					id: "6CC405EF32DAEFF7"
+					type: "xp"
+					xp: 20
+				}
+			]
+			tasks: [
+				{
+					id: "2A0DEEC0DB19DE06"
+					type: "checkmark"
+				}
+			]
+			x: 6.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["29D18589090D5704"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "minecraft:spyglass"
+			}
+			id: "0C4B684807213C25"
+			rewards: [
+				{
+					id: "32612B32A69D27EB"
+					type: "xp"
+					xp: 20
+				}
+			]
+			tasks: [
+				{
+					id: "1BC490A353D451BA"
+					type: "checkmark"
+				}
+			]
+			x: 8.0d
+			y: 0.0d
+		}
+	]
+}

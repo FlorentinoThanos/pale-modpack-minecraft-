@@ -1,0 +1,523 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "explore"
+	group: "307C6B906CED1091"
+	icon: {
+		count: 1
+		id: "minecraft:filled_map"
+	}
+	id: "30AC85DB139601AB"
+	images: [ ]
+	order_index: 7
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: ["32B2FC7FC1FE0154"]
+			hide_until_deps_complete: true
+			icon: {
+				count: 1
+				id: "minecraft:bell"
+			}
+			id: "14CF9D977A68CD54"
+			rewards: [
+				{
+					id: "18C9FD71D8AFD969"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "1E6CEBB8AA44D2AB"
+					item: {
+						count: 4
+						id: "minecraft:emerald"
+					}
+					type: "item"
+				}
+			]
+			shape: "hexagon"
+			size: 1.5d
+			tasks: [
+				{
+					id: "6BCCABD7374847A1"
+					structure: "#minecraft:village"
+					type: "structure"
+				}
+			]
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["14CF9D977A68CD54"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "minecraft:gray_dye"
+			}
+			id: "4A58EF06E076AC82"
+			rewards: [
+				{
+					id: "25B59E2DB922759D"
+					type: "xp"
+					xp: 80
+				}
+			]
+			tasks: [
+				{
+					biome: "thepale:the_pale"
+					id: "55DBAA598C1BEBEE"
+					type: "biome"
+				}
+			]
+			x: 0.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["14CF9D977A68CD54"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "minecraft:lily_pad"
+			}
+			id: "673D685E0A156DFF"
+			rewards: [
+				{
+					id: "5C4752EE1D3FE880"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [
+				{
+					biome: "minecraft:swamp"
+					id: "19B555AD4241432B"
+					type: "biome"
+				}
+			]
+			x: 2.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["673D685E0A156DFF"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "minecraft:cauldron"
+			}
+			id: "6E6D548EDA475B8D"
+			rewards: [
+				{
+					id: "146D9AC9CC59C707"
+					type: "xp"
+					xp: 100
+				}
+			]
+			tasks: [
+				{
+					id: "59308B018B8E3FDA"
+					structure: "minecraft:swamp_hut"
+					type: "structure"
+				}
+			]
+			x: 4.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["14CF9D977A68CD54"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "minecraft:dark_oak_sapling"
+			}
+			id: "14642FFB536316A1"
+			rewards: [
+				{
+					id: "63A74521D5ABC4A3"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [
+				{
+					biome: "minecraft:dark_forest"
+					id: "02CA02668B597686"
+					type: "biome"
+				}
+			]
+			x: 2.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["14642FFB536316A1", "347ECC69BCE02B07"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "minecraft:dark_oak_log"
+			}
+			id: "0EA0FC2580A8E65D"
+			rewards: [
+				{
+					id: "01CE95B5BE9B9036"
+					type: "xp"
+					xp: 150
+				}
+			]
+			tasks: [
+				{
+					id: "012DD827ADC59CD9"
+					structure: "minecraft:mansion"
+					type: "structure"
+				}
+			]
+			x: 4.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["0EA0FC2580A8E65D"]
+			hide_until_deps_visible: true
+			id: "0646515EE987BBFA"
+			rewards: [
+				{
+					id: "2D0E4B32C10FEAE4"
+					type: "xp"
+					xp: 200
+				}
+			]
+			tasks: [
+				{
+					entity: "minecraft:evoker"
+					id: "64885F9CB1859849"
+					type: "kill"
+					value: 1L
+				}
+				{
+					count: 1L
+					id: "14198005CC25B587"
+					item: {
+						count: 1
+						id: "minecraft:totem_of_undying"
+					}
+					type: "item"
+				}
+			]
+			x: 6.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["14CF9D977A68CD54", "47F23E6BC846E84A"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "minecraft:crossbow"
+			}
+			id: "5B71CDC2F2AAF30C"
+			rewards: [
+				{
+					id: "0FB5187972D43278"
+					type: "xp"
+					xp: 120
+				}
+			]
+			tasks: [
+				{
+					id: "586E76779D7A28F3"
+					structure: "minecraft:pillager_outpost"
+					type: "structure"
+				}
+				{
+					entity: "minecraft:pillager"
+					id: "6DC3193185FAFBA3"
+					type: "kill"
+					value: 5L
+				}
+			]
+			x: 2.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["5B71CDC2F2AAF30C"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "minecraft:white_banner"
+			}
+			id: "2CF755892C080806"
+			rewards: [
+				{
+					id: "463854B28171E97C"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "5F28851ADB3EC014"
+					item: {
+						count: 16
+						id: "minecraft:emerald"
+					}
+					type: "item"
+				}
+				{
+					id: "1EBFA2BC19EF6678"
+					item: {
+						components: {
+							"minecraft:stored_enchantments": {
+								levels: {
+									"betterarcheology:penetrating_strike": 1
+								}
+							}
+						}
+						count: 1
+						id: "minecraft:enchanted_book"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					advancement: "minecraft:adventure/hero_of_the_village"
+					criterion: ""
+					id: "31BCDCB1750D54C4"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["4A58EF06E076AC82"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "minecraft:prismarine"
+			}
+			id: "5C312FD6A139D129"
+			rewards: [
+				{
+					id: "2783DD05C95A8BE8"
+					type: "xp"
+					xp: 200
+				}
+			]
+			tasks: [
+				{
+					id: "57D3B72278AFF9B2"
+					structure: "minecraft:monument"
+					type: "structure"
+				}
+				{
+					count: 16L
+					id: "55BFEC1C6277D4AC"
+					item: {
+						count: 1
+						id: "minecraft:prismarine_shard"
+					}
+					type: "item"
+				}
+			]
+			x: 2.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["5C312FD6A139D129"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "minecraft:wet_sponge"
+			}
+			id: "638535B94E3F540A"
+			rewards: [
+				{
+					id: "176F78068D81D0A8"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "1260BE9A58E811B7"
+					item: {
+						count: 4
+						id: "minecraft:sponge"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					entity: "minecraft:elder_guardian"
+					id: "23625C1B2FBDA80C"
+					type: "kill"
+					value: 1L
+				}
+			]
+			x: 4.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["14CF9D977A68CD54", "347ECC69BCE02B07"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "minecraft:trial_key"
+			}
+			id: "3D45ADEF2443829A"
+			rewards: [
+				{
+					id: "2773D79AAF593B1D"
+					type: "xp"
+					xp: 200
+				}
+			]
+			tasks: [
+				{
+					id: "7223E1865E700AF6"
+					structure: "minecraft:trial_chambers"
+					type: "structure"
+				}
+				{
+					count: 1L
+					id: "3737239A3E413BB5"
+					item: {
+						count: 1
+						id: "minecraft:trial_key"
+					}
+					type: "item"
+				}
+			]
+			x: 2.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["3D45ADEF2443829A"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "minecraft:breeze_rod"
+			}
+			id: "2CB7DF60415C15C6"
+			rewards: [
+				{
+					id: "105BE3484FCEB689"
+					type: "xp"
+					xp: 200
+				}
+			]
+			tasks: [
+				{
+					entity: "minecraft:breeze"
+					id: "1B9FF206F6CC2AB6"
+					type: "kill"
+					value: 1L
+				}
+				{
+					count: 2L
+					id: "59733B29B9BC0AB4"
+					item: {
+						count: 1
+						id: "minecraft:breeze_rod"
+					}
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["2CB7DF60415C15C6"]
+			hide_until_deps_visible: true
+			id: "792CDBE113F961A3"
+			rewards: [
+				{
+					id: "73C413CE2D3CC18B"
+					type: "xp"
+					xp: 300
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "6451BBF1B232ED4E"
+					item: {
+						count: 1
+						id: "minecraft:mace"
+					}
+					type: "item"
+				}
+			]
+			x: 6.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["14CF9D977A68CD54", "430EEFC8CC04719E"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "minecraft:sculk_catalyst"
+			}
+			id: "6E971D363EF56B43"
+			rewards: [
+				{
+					id: "68EB06FDB69D241A"
+					type: "xp"
+					xp: 300
+				}
+			]
+			tasks: [
+				{
+					id: "69841C290D7DA6F9"
+					structure: "minecraft:ancient_city"
+					type: "structure"
+				}
+				{
+					count: 4L
+					id: "63FC22F840E85EA7"
+					item: {
+						count: 1
+						id: "minecraft:echo_shard"
+					}
+					type: "item"
+				}
+			]
+			x: 2.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["6E971D363EF56B43"]
+			hide_until_deps_visible: true
+			id: "4A8BED839AFA199D"
+			rewards: [
+				{
+					id: "6551FC3B5B93C6E0"
+					type: "xp"
+					xp: 200
+				}
+				{
+					id: "33B042CDF95B5774"
+					item: {
+						components: {
+							"minecraft:stored_enchantments": {
+								levels: {
+									"betterarcheology:tunneling": 1
+								}
+							}
+						}
+						count: 1
+						id: "minecraft:enchanted_book"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "3D73243D8306890D"
+					item: {
+						count: 1
+						id: "minecraft:recovery_compass"
+					}
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: -4.0d
+		}
+	]
+}

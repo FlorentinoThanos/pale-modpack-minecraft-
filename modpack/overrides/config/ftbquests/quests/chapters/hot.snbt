@@ -1,0 +1,898 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "hot"
+	group: "6FA7D509EB9A847A"
+	icon: {
+		count: 1
+		id: "minecraft:sand"
+	}
+	id: "3EFF447036D93718"
+	images: [ ]
+	order_index: 2
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: ["799E7F1C5D6A46BF"]
+			hide_until_deps_complete: true
+			icon: {
+				count: 1
+				id: "minecraft:sand"
+			}
+			id: "6E4CB3B7BB11E21C"
+			rewards: [
+				{
+					id: "3E5A8F225AB551E2"
+					type: "xp"
+					xp: 200
+				}
+				{
+					id: "61B809F459EACC9D"
+					item: {
+						count: 1
+						id: "cold_sweat:waterskin"
+					}
+					type: "item"
+				}
+			]
+			shape: "hexagon"
+			size: 1.5d
+			tasks: [
+				{
+					biome: "minecraft:desert"
+					id: "23D18F367D8E964F"
+					type: "biome"
+				}
+			]
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["6E4CB3B7BB11E21C"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "minecraft:jungle_sapling"
+			}
+			id: "1ACB00F411AF529B"
+			rewards: [
+				{
+					id: "3D7C781F4D282ED1"
+					type: "xp"
+					xp: 100
+				}
+			]
+			tasks: [
+				{
+					biome: "#minecraft:is_jungle"
+					id: "359329D281698686"
+					type: "biome"
+				}
+			]
+			x: -2.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["6E4CB3B7BB11E21C"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "minecraft:red_sand"
+			}
+			id: "78126D00318DA7F3"
+			rewards: [
+				{
+					id: "40BB11EED36C35C2"
+					type: "xp"
+					xp: 100
+				}
+			]
+			tasks: [
+				{
+					biome: "#minecraft:is_badlands"
+					id: "1E58811FE5D62965"
+					type: "biome"
+				}
+			]
+			x: -2.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["78126D00318DA7F3"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "minecraft:chiseled_sandstone"
+			}
+			id: "7A2BCD9950313F2F"
+			rewards: [
+				{
+					id: "3494E794E86120F9"
+					type: "xp"
+					xp: 120
+				}
+				{
+					id: "3548155727E7377A"
+					item: {
+						count: 4
+						id: "minecraft:tnt"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					id: "7F7466599D47D5EA"
+					structure: "minecraft:desert_pyramid"
+					type: "structure"
+				}
+			]
+			x: -4.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["1ACB00F411AF529B"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "minecraft:mossy_cobblestone"
+			}
+			id: "0DB0D487322A1055"
+			rewards: [
+				{
+					id: "25959C58F6C22C70"
+					type: "xp"
+					xp: 120
+				}
+			]
+			tasks: [
+				{
+					id: "7F2E21D58AC2A09C"
+					structure: "minecraft:jungle_pyramid"
+					type: "structure"
+				}
+			]
+			x: -4.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["6E4CB3B7BB11E21C"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "minecraft:acacia_sapling"
+			}
+			id: "7124E0DD608F7300"
+			rewards: [
+				{
+					id: "789D19D6C905A2B5"
+					type: "xp"
+					xp: 80
+				}
+			]
+			tasks: [
+				{
+					biome: "#c:is_savanna"
+					id: "6A4809E3C2917558"
+					type: "biome"
+				}
+			]
+			x: -2.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["6E4CB3B7BB11E21C"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "minecraft:cut_sandstone"
+			}
+			id: "25A53111B7CABE72"
+			rewards: [
+				{
+					id: "202F3E004690F703"
+					type: "xp"
+					xp: 100
+				}
+				{
+					id: "2CF6D9164F0B6881"
+					item: {
+						count: 4
+						id: "minecraft:emerald"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					id: "67BAAEC8D2205FF8"
+					structure: "minecraft:village_desert"
+					type: "structure"
+				}
+			]
+			x: -4.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["0DB0D487322A1055"]
+			hide_until_deps_visible: true
+			id: "1328AAFF05BF887F"
+			rewards: [
+				{
+					id: "19643C046E05E7C7"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [
+				{
+					count: 32L
+					id: "00C5A81386B93B9B"
+					item: {
+						count: 1
+						id: "minecraft:bamboo"
+					}
+					type: "item"
+				}
+			]
+			x: -6.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["1ACB00F411AF529B"]
+			hide_until_deps_visible: true
+			id: "7A4739014C49CFD3"
+			rewards: [
+				{
+					id: "7A1F663474FC15A1"
+					type: "xp"
+					xp: 60
+				}
+			]
+			tasks: [
+				{
+					count: 16L
+					id: "14456564A40C547C"
+					item: {
+						count: 1
+						id: "minecraft:cocoa_beans"
+					}
+					type: "item"
+				}
+			]
+			x: -6.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["25A53111B7CABE72"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "minecraft:rotten_flesh"
+			}
+			id: "31AB0EE4C074E86D"
+			rewards: [
+				{
+					id: "4F70CFDC3DDC53A4"
+					type: "xp"
+					xp: 100
+				}
+			]
+			tasks: [
+				{
+					entity: "minecraft:husk"
+					id: "1250F4F63BA519D0"
+					type: "kill"
+					value: 10L
+				}
+			]
+			x: -4.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["6E4CB3B7BB11E21C"]
+			hide_until_deps_visible: true
+			id: "551B2870D03B979D"
+			rewards: [
+				{
+					id: "02691A1CB2BCD468"
+					type: "xp"
+					xp: 100
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "55B9B11C3E8ED5AC"
+					item: {
+						count: 1
+						id: "cold_sweat:icebox"
+					}
+					type: "item"
+				}
+			]
+			x: 2.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["551B2870D03B979D"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "cold_sweat:chameleon_chestplate"
+			}
+			id: "54C4910398E90581"
+			rewards: [
+				{
+					id: "1A97E1CB3D4B4A92"
+					type: "xp"
+					xp: 150
+				}
+			]
+			tasks: [
+				{
+					count: 4L
+					id: "2156A23A0DD11B00"
+					item: {
+						count: 1
+						id: "cold_sweat:chameleon_molt"
+					}
+					type: "item"
+				}
+				{
+					count: 1L
+					id: "6A9A0FBB4AD8E36F"
+					item: {
+						count: 1
+						id: "cold_sweat:chameleon_chestplate"
+					}
+					type: "item"
+				}
+			]
+			x: 2.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["551B2870D03B979D"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "cold_sweat:boiler"
+			}
+			id: "19BFB3CE701A8231"
+			rewards: [
+				{
+					id: "223C753CF844CCB4"
+					type: "xp"
+					xp: 100
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "5003E9AFF6096672"
+					item: {
+						count: 1
+						id: "cold_sweat:boiler"
+					}
+					type: "item"
+				}
+				{
+					count: 1L
+					id: "3EDA99099A595AC1"
+					item: {
+						count: 1
+						id: "cold_sweat:smokestack"
+					}
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["54C4910398E90581"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "cold_sweat:chameleon_molt"
+			}
+			id: "199A32EA805BCBC4"
+			rewards: [
+				{
+					id: "445D0C7E259CAF66"
+					type: "xp"
+					xp: 150
+				}
+			]
+			tasks: [
+				{
+					advancement: "cold_sweat:tame_chameleon"
+					criterion: ""
+					id: "7756A9F38E079C10"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["6E4CB3B7BB11E21C"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "born_in_chaos_v1:dark_metal_nugget"
+			}
+			id: "7B503FD5B2AE693A"
+			rewards: [
+				{
+					id: "3D3CCC505EFDF410"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "530B6FD219B97D06"
+					table_id: 6516980551055470626L
+					type: "random"
+				}
+			]
+			tasks: [
+				{
+					entity: "born_in_chaos_v1:door_knight"
+					id: "607A131620D9A85A"
+					type: "kill"
+					value: 3L
+				}
+				{
+					entity: "born_in_chaos_v1:bonescaller"
+					id: "1699462E117EE403"
+					type: "kill"
+					value: 2L
+				}
+			]
+			x: 2.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["7B503FD5B2AE693A"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "born_in_chaos_v1:dark_metal_ingot"
+			}
+			id: "03C119B689CF5F32"
+			rewards: [
+				{
+					id: "2D1B534971C54F4B"
+					type: "xp"
+					xp: 200
+				}
+			]
+			tasks: [
+				{
+					count: 8L
+					id: "7792970000C0F2B1"
+					item: {
+						count: 1
+						id: "born_in_chaos_v1:dark_metal_ingot"
+					}
+					type: "item"
+				}
+				{
+					count: 1L
+					id: "3D59C4DBE60032AE"
+					item: {
+						count: 1
+						id: "born_in_chaos_v1:dark_metal_armor_chestplate"
+					}
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["7B503FD5B2AE693A"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "born_in_chaos_v1:darkwarblade"
+			}
+			id: "48184452CD411FD3"
+			rewards: [
+				{
+					id: "3E75D767E5C65C4A"
+					type: "xp"
+					xp: 250
+				}
+				{
+					id: "3ED81AF6340A2E10"
+					item: {
+						count: 2
+						id: "minecraft:golden_apple"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					entity: "born_in_chaos_v1:fallen_chaos_knight"
+					id: "0120BFD450F9A753"
+					type: "kill"
+					value: 1L
+				}
+			]
+			x: 4.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["7B503FD5B2AE693A", "7124E0DD608F7300"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "born_in_chaos_v1:intoxicating_dagger"
+			}
+			id: "0D35E616BE5B4892"
+			rewards: [
+				{
+					id: "1CB7E8E8C59A98FF"
+					type: "xp"
+					xp: 200
+				}
+			]
+			tasks: [
+				{
+					id: "79C750E09C4800DF"
+					structure: "born_in_chaos_v1:clown_caravan_savanna"
+					type: "structure"
+				}
+			]
+			x: 0.0d
+			y: -6.0d
+		}
+		{
+			dependencies: ["7B503FD5B2AE693A"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "born_in_chaos_v1:fire_dust"
+			}
+			id: "66FBABA20A32879D"
+			rewards: [
+				{
+					id: "0F3B2305B7E1CAF0"
+					type: "xp"
+					xp: 200
+				}
+			]
+			tasks: [
+				{
+					id: "0EC6F8C62C150645"
+					structure: "born_in_chaos_v1:firewell"
+					type: "structure"
+				}
+			]
+			x: 2.0d
+			y: -6.0d
+		}
+		{
+			dependencies: ["7B503FD5B2AE693A"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "born_in_chaos_v1:evil_carved_pumpkin"
+			}
+			id: "71D741031868AB0C"
+			rewards: [
+				{
+					id: "7A1657D7D512B85E"
+					type: "xp"
+					xp: 200
+				}
+			]
+			tasks: [
+				{
+					id: "0FC28AD08189C15D"
+					structure: "born_in_chaos_v1:farm"
+					type: "structure"
+				}
+			]
+			x: 4.0d
+			y: -6.0d
+		}
+		{
+			dependencies: ["7B503FD5B2AE693A"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "born_in_chaos_v1:gravestone_icon"
+			}
+			id: "74270BCBAB292772"
+			rewards: [
+				{
+					id: "7D87D506F051AEF8"
+					type: "xp"
+					xp: 200
+				}
+			]
+			tasks: [
+				{
+					advancement: "born_in_chaos_v1:grave_ravager"
+					criterion: ""
+					id: "24E1EA3B9C05A19C"
+					type: "advancement"
+				}
+			]
+			x: 6.0d
+			y: -6.0d
+		}
+		{
+			dependencies: ["7B503FD5B2AE693A"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "born_in_chaos_v1:black_argillite"
+			}
+			id: "09DFA446653ADFDB"
+			rewards: [
+				{
+					id: "66617EF5B6AD9785"
+					type: "xp"
+					xp: 200
+				}
+			]
+			tasks: [
+				{
+					id: "4D6D8F3505BB490F"
+					structure: "born_in_chaos_v1:observation_tower_plains"
+					type: "structure"
+				}
+			]
+			x: 8.0d
+			y: -6.0d
+		}
+		{
+			dependencies: ["6E4CB3B7BB11E21C", "117325654E654D62"]
+			hide_until_deps_visible: true
+			id: "0F69B198F20785A0"
+			rewards: [
+				{
+					id: "2A3BEC71D2C55746"
+					type: "xp"
+					xp: 100
+				}
+				{
+					id: "69857CDD87CAC93B"
+					item: {
+						components: {
+							"minecraft:stored_enchantments": {
+								levels: {
+									"paleenchants:smelting": 1
+								}
+							}
+						}
+						count: 1
+						id: "minecraft:enchanted_book"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "319B48C54430D9AF"
+					item: {
+						count: 1
+						id: "create:blaze_burner"
+					}
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["0F69B198F20785A0"]
+			hide_until_deps_visible: true
+			id: "613049AD6949A8E3"
+			rewards: [
+				{
+					id: "0A05235E84C6F8A7"
+					type: "xp"
+					xp: 150
+				}
+			]
+			tasks: [
+				{
+					count: 16L
+					id: "5DD0999FCD1BB851"
+					item: {
+						count: 1
+						id: "create:brass_ingot"
+					}
+					type: "item"
+				}
+			]
+			x: 6.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["613049AD6949A8E3"]
+			hide_until_deps_visible: true
+			id: "4E4C20E946F41672"
+			rewards: [
+				{
+					id: "7C3C7AFFD60D2498"
+					type: "xp"
+					xp: 200
+				}
+			]
+			tasks: [
+				{
+					count: 2L
+					id: "2F01E696842FE4D4"
+					item: {
+						count: 1
+						id: "create:precision_mechanism"
+					}
+					type: "item"
+				}
+			]
+			x: 8.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["4E4C20E946F41672"]
+			hide_until_deps_visible: true
+			id: "20F83F209478D8DF"
+			rewards: [
+				{
+					id: "76398DAD3FFA1BAF"
+					type: "xp"
+					xp: 250
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "1CD3CCF79FEC9159"
+					item: {
+						count: 1
+						id: "create:steam_engine"
+					}
+					type: "item"
+				}
+				{
+					count: 4L
+					id: "3F83DBDE3BE76FC1"
+					item: {
+						count: 1
+						id: "create:fluid_tank"
+					}
+					type: "item"
+				}
+			]
+			x: 10.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["20F83F209478D8DF"]
+			hide_until_deps_visible: true
+			id: "20B1FA5A024DD50C"
+			rewards: [
+				{
+					id: "4C5960EF5A6F2F9C"
+					type: "xp"
+					xp: 150
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "2165D3F002B71F45"
+					item: {
+						count: 1
+						id: "createaddition:electric_motor"
+					}
+					type: "item"
+				}
+			]
+			x: 10.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["20B1FA5A024DD50C"]
+			hide_until_deps_visible: true
+			id: "0749A1C45B0EA552"
+			rewards: [
+				{
+					id: "2D659A014A441ED1"
+					type: "xp"
+					xp: 200
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "7429498C4BC99092"
+					item: {
+						count: 1
+						id: "createaddition:alternator"
+					}
+					type: "item"
+				}
+				{
+					count: 1L
+					id: "03375586C53E952E"
+					item: {
+						count: 1
+						id: "createaddition:modular_accumulator"
+					}
+					type: "item"
+				}
+			]
+			x: 12.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["6E4CB3B7BB11E21C", "117325654E654D62"]
+			hide_until_deps_visible: true
+			id: "302FAE3B4175F575"
+			rewards: [
+				{
+					id: "0CD5576EB2A9F309"
+					type: "xp"
+					xp: 200
+				}
+			]
+			tasks: [
+				{
+					count: 12L
+					id: "64A10E0FBD73ACD3"
+					item: {
+						count: 1
+						id: "minecraft:ender_eye"
+					}
+					type: "item"
+				}
+			]
+			x: 6.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["302FAE3B4175F575"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "minecraft:end_portal_frame"
+			}
+			id: "653992FFD62EEE01"
+			rewards: [
+				{
+					id: "0A877B9AE47BBDAB"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "33744E6EAADBF540"
+					item: {
+						count: 4
+						id: "minecraft:ender_pearl"
+					}
+					type: "item"
+				}
+			]
+			shape: "hexagon"
+			size: 1.5d
+			tasks: [
+				{
+					id: "208B7DEFCEEBA7DE"
+					structure: "minecraft:stronghold"
+					type: "structure"
+				}
+			]
+			x: 8.0d
+			y: 4.0d
+		}
+	]
+}

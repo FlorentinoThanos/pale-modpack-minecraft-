@@ -9,11 +9,11 @@
 	}
 	id: "7B6726D6472E01D6"
 	images: [ ]
-	order_index: 2
+	order_index: 5
 	quest_links: [ ]
 	quests: [
 		{
-			dependencies: ["49315C954FA0B6F5"]
+			dependencies: ["6BB18A9229DC45A1"]
 			hide_until_deps_complete: true
 			icon: {
 				count: 1
