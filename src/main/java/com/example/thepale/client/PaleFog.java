@@ -118,6 +118,8 @@ public final class PaleFog {
             blue = Mth.lerp(vision, blue, blue * boost);
         }
         litColor.set(red, green, blue);
+        // The invasion darkens the Pale toward purple.
+        com.example.thepale.finale.client.FinaleClient.tint(litColor, partialTick);
     }
 
     static boolean blinded(Camera camera) {

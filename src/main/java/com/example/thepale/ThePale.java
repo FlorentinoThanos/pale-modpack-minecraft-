@@ -1,6 +1,9 @@
 package com.example.thepale;
 
 import com.example.thepale.config.CommonConfig;
+import com.example.thepale.finale.FinaleSounds;
+import com.example.thepale.finale.FinaleView;
+import com.example.thepale.finale.Invasion;
 import com.example.thepale.survey.IslandSurvey;
 import com.example.thepale.worldgen.SeedSearch;
 import com.example.thepale.worldgen.ShapePayload;
@@ -42,6 +45,13 @@ public final class ThePale {
         NeoForge.EVENT_BUS.addListener(EffectTweaks::onPlayerTick);
         NeoForge.EVENT_BUS.addListener(net.neoforged.bus.api.EventPriority.LOWEST, AnchorKeepsInventory::onLivingDeath);
         NeoForge.EVENT_BUS.addListener(AnchorKeepsInventory::onClone);
+
+        // The finale: the invasion, the boss and the cleansing of the Pale.
+        FinaleSounds.register(modBus);
+        modBus.addListener(FinaleView::onRegisterPayloads);
+        NeoForge.EVENT_BUS.addListener(Invasion::onServerTick);
+        NeoForge.EVENT_BUS.addListener(Invasion::onPlayerLoggedIn);
+        NeoForge.EVENT_BUS.addListener(Invasion::onRegisterCommands);
     }
 
     public static ResourceLocation id(String path) {

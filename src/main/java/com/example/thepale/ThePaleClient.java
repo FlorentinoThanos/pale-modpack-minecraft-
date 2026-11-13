@@ -7,6 +7,8 @@ import com.example.thepale.client.PaleShaderFog;
 import com.example.thepale.client.PaleWallRenderer;
 import com.example.thepale.client.compat.PaleDistantHorizons;
 import com.example.thepale.config.ClientConfig;
+import com.example.thepale.finale.FinaleView;
+import com.example.thepale.finale.client.FinaleClient;
 import com.example.thepale.worldgen.PaleShape;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.EventPriority;
@@ -44,7 +46,14 @@ public final class ThePaleClient {
         NeoForge.EVENT_BUS.addListener(PaleShaderFog::onRenderGui);
         NeoForge.EVENT_BUS.addListener(EventPriority.LOWEST, PaleShaderFog::onComputeFov);
         // A server without The Pale sends no outline; don't carry the last world's over.
-        NeoForge.EVENT_BUS.addListener((ClientPlayerNetworkEvent.LoggingOut event) -> PaleShape.setClient(PaleShape.circle()));
+        NeoForge.EVENT_BUS.addListener((ClientPlayerNetworkEvent.LoggingOut event) -> {
+            PaleShape.setClient(PaleShape.circle());
+            FinaleView.reset();
+        });
+        // The invasion: registered after the Pale's own handlers, so it darkens their colours and draws over the wall.
+        NeoForge.EVENT_BUS.addListener(FinaleClient::onClientTick);
+        NeoForge.EVENT_BUS.addListener(FinaleClient::onComputeFogColor);
+        NeoForge.EVENT_BUS.addListener(FinaleClient::onRenderLevelStage);
 
         // Optional: the DH classes are only loaded when DH is there.
         if (ModList.get().isLoaded("distanthorizons")) {

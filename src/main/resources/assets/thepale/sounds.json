@@ -1,7 +1,198 @@
 {
   "ambient.hum": {
     "sounds": [
-      { "name": "minecraft:ambient/nether/basalt_deltas/ambience", "stream": true, "volume": 0.35, "pitch": 0.7 }
+      {
+        "name": "minecraft:ambient/nether/basalt_deltas/ambience",
+        "stream": true,
+        "volume": 0.35,
+        "pitch": 0.7
+      }
+    ]
+  },
+  "finale.awaken": {
+    "sounds": [
+      {
+        "name": "minecraft:entity.warden.emerge",
+        "volume": 1.0,
+        "pitch": 0.5,
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.thepale.finale.awaken"
+  },
+  "finale.horizon": {
+    "sounds": [
+      {
+        "name": "minecraft:entity.warden.roar",
+        "volume": 0.8,
+        "pitch": 0.5,
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.thepale.finale.horizon"
+  },
+  "finale.arrive": {
+    "sounds": [
+      {
+        "name": "minecraft:entity.ender_dragon.growl",
+        "volume": 1.0,
+        "pitch": 0.5,
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.thepale.finale.arrive"
+  },
+  "finale.cleanse": {
+    "sounds": [
+      {
+        "name": "minecraft:block.beacon.activate",
+        "volume": 1.0,
+        "pitch": 0.6,
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.thepale.finale.cleanse"
+  },
+  "boss.ambient": {
+    "sounds": [
+      {
+        "name": "minecraft:entity.warden.ambient",
+        "volume": 1.0,
+        "pitch": 0.5,
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.thepale.boss.ambient"
+  },
+  "boss.hurt": {
+    "sounds": [
+      {
+        "name": "minecraft:entity.warden.hurt",
+        "volume": 1.0,
+        "pitch": 0.6,
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.thepale.boss.hurt"
+  },
+  "boss.armored": {
+    "sounds": [
+      {
+        "name": "minecraft:entity.shulker.hurt_closed",
+        "volume": 1.0,
+        "pitch": 0.5,
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.thepale.boss.armored"
+  },
+  "boss.death": {
+    "sounds": [
+      {
+        "name": "minecraft:entity.warden.death",
+        "volume": 1.0,
+        "pitch": 0.5,
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.thepale.boss.death"
+  },
+  "boss.windup": {
+    "sounds": [
+      {
+        "name": "minecraft:entity.warden.attack_impact",
+        "volume": 0.7,
+        "pitch": 0.5,
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.thepale.boss.windup"
+  },
+  "boss.slam": {
+    "sounds": [
+      {
+        "name": "minecraft:entity.generic.explode",
+        "volume": 1.0,
+        "pitch": 0.6,
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.thepale.boss.slam"
+  },
+  "boss.sever": {
+    "sounds": [
+      {
+        "name": "minecraft:entity.ravager.stunned",
+        "volume": 1.0,
+        "pitch": 0.6,
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.thepale.boss.sever"
+  },
+  "boss.scream": {
+    "sounds": [
+      {
+        "name": "minecraft:entity.warden.sonic_boom",
+        "volume": 1.0,
+        "pitch": 0.6,
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.thepale.boss.scream"
+  },
+  "boss.summon": {
+    "sounds": [
+      {
+        "name": "minecraft:entity.evoker.prepare_summon",
+        "volume": 1.0,
+        "pitch": 0.6,
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.thepale.boss.summon"
+  },
+  "boss.grab": {
+    "sounds": [
+      {
+        "name": "minecraft:entity.ravager.attack",
+        "volume": 1.0,
+        "pitch": 0.6,
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.thepale.boss.grab"
+  },
+  "boss.eye_open": {
+    "sounds": [
+      {
+        "name": "minecraft:block.sculk_shrieker.shriek",
+        "volume": 1.0,
+        "pitch": 0.6,
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.thepale.boss.eye_open"
+  },
+  "boss.fall": {
+    "sounds": [
+      {
+        "name": "minecraft:entity.wither.break_block",
+        "volume": 1.0,
+        "pitch": 0.5,
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.thepale.boss.fall"
+  },
+  "boss.music": {
+    "sounds": [
+      {
+        "name": "minecraft:music.dragon",
+        "type": "event",
+        "stream": true,
+        "pitch": 0.8
+      }
     ]
   }
 }

@@ -42,6 +42,47 @@ public final class CommonConfig {
     private static final ModConfigSpec.IntValue DARK_METAL_SET_STRENGTH;
     private static final ModConfigSpec.BooleanValue ANCHOR_KEEPS_INVENTORY;
 
+    // [finale]
+    private static final ModConfigSpec.DoubleValue APPROACH_DAYS;
+    private static final ModConfigSpec.DoubleValue APPROACH_START_DISTANCE;
+    private static final ModConfigSpec.DoubleValue SILHOUETTE_FROM_DAY;
+    private static final ModConfigSpec.DoubleValue SPAWN_RANGE;
+    private static final ModConfigSpec.DoubleValue ARENA_RADIUS;
+    private static final ModConfigSpec.DoubleValue BOSS_LEASH;
+    private static final ModConfigSpec.DoubleValue RETREAT_MINUTES;
+    private static final ModConfigSpec.BooleanValue ANNOUNCE_COORDINATES;
+    private static final ModConfigSpec.IntValue BLOCK_BREAK_RADIUS;
+    private static final ModConfigSpec.DoubleValue BODY_HEALTH;
+    private static final ModConfigSpec.DoubleValue TENTACLE_HEALTH;
+    private static final ModConfigSpec.DoubleValue FACE_HEALTH;
+    private static final ModConfigSpec.DoubleValue HAND_HEALTH;
+    private static final ModConfigSpec.DoubleValue EXTRA_PLAYER_HEALTH;
+    private static final ModConfigSpec.DoubleValue ARMORED_DAMAGE_FACTOR;
+    private static final ModConfigSpec.DoubleValue CLOSED_EYE_DAMAGE_FACTOR;
+    private static final ModConfigSpec.DoubleValue EYE_DAMAGE_FACTOR;
+    private static final ModConfigSpec.DoubleValue SEVER_DAMAGE_FRACTION;
+    private static final ModConfigSpec.IntValue PHASE2_TENTACLES_LEFT;
+    private static final ModConfigSpec.DoubleValue FALL_HEALTH_FRACTION;
+    private static final ModConfigSpec.DoubleValue SLAM_DAMAGE;
+    private static final ModConfigSpec.IntValue SLAM_WINDUP_TICKS;
+    private static final ModConfigSpec.DoubleValue SLAM_RADIUS;
+    private static final ModConfigSpec.IntValue SLAM_INTERVAL_TICKS;
+    private static final ModConfigSpec.DoubleValue SCREAM_INTERVAL_SECONDS;
+    private static final ModConfigSpec.ConfigValue<List<? extends String>> SUMMON_MOBS;
+    private static final ModConfigSpec.IntValue SUMMON_COUNT;
+    private static final ModConfigSpec.IntValue MAX_SUMMONS;
+    private static final ModConfigSpec.DoubleValue POISON_CLOUD_SECONDS;
+    private static final ModConfigSpec.DoubleValue GRAB_DAMAGE;
+    private static final ModConfigSpec.DoubleValue EYE_OPEN_SECONDS;
+    private static final ModConfigSpec.DoubleValue EYE_CLOSED_SECONDS;
+    private static final ModConfigSpec.DoubleValue CRAWL_DAMAGE;
+    private static final ModConfigSpec.IntValue BOSS_EXPERIENCE;
+    private static final ModConfigSpec.DoubleValue FADE_SECONDS;
+    private static final ModConfigSpec.DoubleValue PRESERVE_MARGIN;
+    private static final ModConfigSpec.DoubleValue TRANSITION_WIDTH;
+    private static final ModConfigSpec.IntValue CHUNKS_PER_TICK;
+    private static final ModConfigSpec.BooleanValue OPEN_COLD_ISLAND_PORTALS;
+
     static {
         ModConfigSpec.Builder builder = new ModConfigSpec.Builder();
 
@@ -250,7 +291,196 @@ public final class CommonConfig {
                 .define("anchorKeepsInventory", true);
         builder.pop();
 
+        builder.comment(
+                "The finale: the invasion (/thepale invasion start, called by the quest), the boss and the cleansing of the Pale.",
+                "The state of the finale itself is saved with the world (data/thepale_finale.dat), not here.").push("finale");
+        APPROACH_DAYS = builder
+                .comment(
+                        "How many game days the boss takes to reach the shore once the invasion has started. Counted in game",
+                        "time, so sleeping or /time add brings it closer. It comes ashore on the first night after that.")
+                .defineInRange("approachDays", 3.0, 0.01, 100.0);
+        APPROACH_START_DISTANCE = builder
+                .comment("How far out in the Pale the boss starts, in blocks from the shore it is heading for.")
+                .defineInRange("approachStartDistance", 1800.0, 200.0, 10000.0);
+        SILHOUETTE_FROM_DAY = builder
+                .comment("After this many days of the approach its silhouette shows on the horizon (before that only the sky darkens).")
+                .defineInRange("silhouetteFromDay", 1.0, 0.0, 100.0);
+        SPAWN_RANGE = builder
+                .comment(
+                        "Once it has arrived it waits off the shore; it comes ashore at night when a player is within this",
+                        "many blocks of the landing point.")
+                .defineInRange("spawnRange", 96.0, 16.0, 512.0);
+        ARENA_RADIUS = builder
+                .comment("Players within this many blocks of the landing point are in the fight: they see the boss bar and are counted for its health.")
+                .defineInRange("arenaRadius", 64.0, 16.0, 256.0);
+        BOSS_LEASH = builder
+                .comment("How far the boss moves from the landing point. It never goes inland past this, so a base away from the shore is safe.")
+                .defineInRange("bossLeash", 14.0, 0.0, 64.0);
+        RETREAT_MINUTES = builder
+                .comment(
+                        "With no living player in the arena for this many minutes the boss goes back into the sea and returns the",
+                        "next night at full health. The finale can't be lost.")
+                .defineInRange("retreatMinutes", 3.0, 0.1, 60.0);
+        ANNOUNCE_COORDINATES = builder
+                .comment("Tell everybody the coordinates of the landing point when the boss arrives.")
+                .define("announceCoordinates", true);
+        BLOCK_BREAK_RADIUS = builder
+                .comment("Blocks around a tentacle's strike that are broken (0 = the boss breaks nothing; also needs the mobGriefing game rule).")
+                .defineInRange("blockBreakRadius", 0, 0, 4);
+
+        builder.comment("The Patchwork Abomination. Numbers are for a player in full netherite or Born in Chaos gear with Better Combat.").push("boss");
+        BODY_HEALTH = builder
+                .comment("Health of the body: the boss bar. The boss dies when it runs out.")
+                .defineInRange("bodyHealth", 600.0, 1.0, 100000.0);
+        TENTACLE_HEALTH = builder
+                .comment("Health of each of the six tentacles. At 0 the tentacle is severed.")
+                .defineInRange("tentacleHealth", 50.0, 1.0, 100000.0);
+        FACE_HEALTH = builder
+                .comment("Health of the stone face on its tentacle.")
+                .defineInRange("faceHealth", 100.0, 1.0, 100000.0);
+        HAND_HEALTH = builder
+                .comment("Health of the clawed hand on its tentacle.")
+                .defineInRange("handHealth", 100.0, 1.0, 100000.0);
+        EXTRA_PLAYER_HEALTH = builder
+                .comment("Every player in the arena after the first adds this share to all of the boss's health (0.5 = +50% each).")
+                .defineInRange("extraPlayerHealth", 0.5, 0.0, 10.0);
+        ARMORED_DAMAGE_FACTOR = builder
+                .comment("Phases 1 and 2: share of a hit on the body that gets through while it still has tentacles.")
+                .defineInRange("armoredDamageFactor", 0.2, 0.0, 1.0);
+        CLOSED_EYE_DAMAGE_FACTOR = builder
+                .comment("Phase 3: share of a hit on the body that gets through while the main eye is shut.")
+                .defineInRange("closedEyeDamageFactor", 0.1, 0.0, 1.0);
+        EYE_DAMAGE_FACTOR = builder
+                .comment("Phase 3: a hit on the open main eye is multiplied by this.")
+                .defineInRange("eyeDamageFactor", 1.5, 0.0, 10.0);
+        SEVER_DAMAGE_FRACTION = builder
+                .comment("Severing a tentacle, the face or the hand takes this share of the body's full health off the boss bar.")
+                .defineInRange("severDamageFraction", 0.05, 0.0, 0.12);
+        PHASE2_TENTACLES_LEFT = builder
+                .comment("Phase 2 (the face and the hand come down and fight) starts when this many tentacles are left.")
+                .defineInRange("phase2TentaclesLeft", 3, 0, 5);
+        FALL_HEALTH_FRACTION = builder
+                .comment("Phase 4 (the body falls and crawls, and takes full damage) starts at this share of its health.")
+                .defineInRange("fallHealthFraction", 0.25, 0.01, 0.6);
+        SLAM_DAMAGE = builder
+                .comment("Damage of a tentacle's strike, before armour.")
+                .defineInRange("slamDamage", 26.0, 0.0, 1000.0);
+        SLAM_WINDUP_TICKS = builder
+                .comment("Ticks the warning ring of particles shows on the ground before a tentacle strikes (20 = one second).")
+                .defineInRange("slamWindupTicks", 24, 5, 200);
+        SLAM_RADIUS = builder
+                .comment("Radius of a tentacle's strike, in blocks.")
+                .defineInRange("slamRadius", 3.0, 0.5, 16.0);
+        SLAM_INTERVAL_TICKS = builder
+                .comment("Ticks between strikes with all six tentacles alive. Fewer tentacles strike a little more often.")
+                .defineInRange("slamIntervalTicks", 50, 10, 1200);
+        SCREAM_INTERVAL_SECONDS = builder
+                .comment("Seconds between the face's spells (scream, summon, poison cloud, in turn).")
+                .defineInRange("screamIntervalSeconds", 9.0, 2.0, 600.0);
+        SUMMON_MOBS = builder
+                .comment(
+                        "Mobs the face summons, one entity id per line, picked at random. Ids of mods that aren't installed are",
+                        "skipped; if none is left, zombies come.")
+                .defineListAllowEmpty("summonMobs", List.of(
+                        "born_in_chaos_v1:decaying_zombie",
+                        "born_in_chaos_v1:decrepit_skeleton",
+                        "born_in_chaos_v1:restless_spirit",
+                        "born_in_chaos_v1:dread_hound"), () -> "", value -> value instanceof String);
+        SUMMON_COUNT = builder
+                .comment("How many mobs one summon brings.")
+                .defineInRange("summonCount", 3, 0, 32);
+        MAX_SUMMONS = builder
+                .comment("No more summons while this many summoned mobs are still alive.")
+                .defineInRange("maxSummons", 9, 0, 128);
+        POISON_CLOUD_SECONDS = builder
+                .comment("How long a poison cloud stays (it gives the Pale's Wither and Hunger to players inside).")
+                .defineInRange("poisonCloudSeconds", 8.0, 1.0, 120.0);
+        GRAB_DAMAGE = builder
+                .comment("Damage a second while the hand holds a player. Hitting the hand makes it let go.")
+                .defineInRange("grabDamage", 5.0, 0.0, 1000.0);
+        EYE_OPEN_SECONDS = builder
+                .comment("Phase 3: how long the main eye stays open.")
+                .defineInRange("eyeOpenSeconds", 8.0, 1.0, 120.0);
+        EYE_CLOSED_SECONDS = builder
+                .comment("Phase 3: how long the main eye stays shut in between.")
+                .defineInRange("eyeClosedSeconds", 6.0, 1.0, 120.0);
+        CRAWL_DAMAGE = builder
+                .comment("Phase 4: damage of touching the crawling body, and of its shockwaves.")
+                .defineInRange("crawlDamage", 16.0, 0.0, 1000.0);
+        BOSS_EXPERIENCE = builder
+                .comment("Experience the boss drops.")
+                .defineInRange("experience", 2500, 0, 1000000);
+        builder.pop();
+
+        builder.comment("The cleansing of the Pale, started by using the Heart of the Pale the boss drops.").push("cleansing");
+        FADE_SECONDS = builder
+                .comment("How long the fog wall, the fog, the grey water and the sea of clouds take to fade for players.")
+                .defineInRange("fadeSeconds", 60.0, 1.0, 600.0);
+        PRESERVE_MARGIN = builder
+                .comment(
+                        "New chunks keep generating as open sea up to this many blocks past the farthest chunk that existed when",
+                        "the Pale was cleansed, so old and new chunks never meet at a seam.")
+                .defineInRange("preserveMargin", 200.0, 64.0, 5000.0);
+        TRANSITION_WIDTH = builder
+                .comment("Past that margin the sea turns into the seed's normal terrain over this many blocks: new lands across the sea.")
+                .defineInRange("transitionWidth", 400.0, 64.0, 5000.0);
+        CHUNKS_PER_TICK = builder
+                .comment("How many loaded chunks a tick have their Pale biome turned into ocean after the cleansing.")
+                .defineInRange("chunksPerTick", 4, 1, 64);
+        OPEN_COLD_ISLAND_PORTALS = builder
+                .comment("After the cleansing, Nether portals may open on the frozen island like anywhere else.")
+                .define("openColdIslandPortals", true);
+        builder.pop();
+        builder.pop();
+
         SPEC = builder.build();
+    }
+
+    /** The [finale] section; see the comments in the config file. */
+    public record Finale(
+            double approachDays,
+            double approachStartDistance,
+            double silhouetteFromDay,
+            double spawnRange,
+            double arenaRadius,
+            double bossLeash,
+            double retreatMinutes,
+            boolean announceCoordinates,
+            int blockBreakRadius,
+            double bodyHealth,
+            double tentacleHealth,
+            double faceHealth,
+            double handHealth,
+            double extraPlayerHealth,
+            double armoredDamageFactor,
+            double closedEyeDamageFactor,
+            double eyeDamageFactor,
+            double severDamageFraction,
+            int phase2TentaclesLeft,
+            double fallHealthFraction,
+            double slamDamage,
+            int slamWindupTicks,
+            double slamRadius,
+            int slamIntervalTicks,
+            double screamIntervalSeconds,
+            List<String> summonMobs,
+            int summonCount,
+            int maxSummons,
+            double poisonCloudSeconds,
+            double grabDamage,
+            double eyeOpenSeconds,
+            double eyeClosedSeconds,
+            double crawlDamage,
+            int experience,
+            double fadeSeconds,
+            double preserveMargin,
+            double transitionWidth,
+            int chunksPerTick,
+            boolean openColdIslandPortals) {
+        /** Ticks of game time the approach takes. */
+        public long approachTicks() {
+            return Math.max(1L, Math.round(approachDays * 24000.0));
+        }
     }
 
     public record Settings(
@@ -281,7 +511,8 @@ public final class CommonConfig {
             List<String> frozenIslandOnlyMobs,
             List<Double> rampageSpeedBonus,
             int darkMetalSetStrength,
-            boolean anchorKeepsInventory) {}
+            boolean anchorKeepsInventory,
+            Finale finale) {}
 
     private static volatile Settings current = read(true);
 
@@ -337,7 +568,59 @@ public final class CommonConfig {
                 (defaults ? RAMPAGE_SPEED_BONUS.getDefault() : RAMPAGE_SPEED_BONUS.get()).stream()
                         .map(Number::doubleValue).toList(),
                 defaults ? DARK_METAL_SET_STRENGTH.getDefault() : DARK_METAL_SET_STRENGTH.get(),
-                defaults ? ANCHOR_KEEPS_INVENTORY.getDefault() : ANCHOR_KEEPS_INVENTORY.get());
+                defaults ? ANCHOR_KEEPS_INVENTORY.getDefault() : ANCHOR_KEEPS_INVENTORY.get(),
+                readFinale(defaults));
+    }
+
+    private static Finale readFinale(boolean d) {
+        return new Finale(
+                value(APPROACH_DAYS, d),
+                value(APPROACH_START_DISTANCE, d),
+                value(SILHOUETTE_FROM_DAY, d),
+                value(SPAWN_RANGE, d),
+                value(ARENA_RADIUS, d),
+                value(BOSS_LEASH, d),
+                value(RETREAT_MINUTES, d),
+                value(ANNOUNCE_COORDINATES, d),
+                value(BLOCK_BREAK_RADIUS, d),
+                value(BODY_HEALTH, d),
+                value(TENTACLE_HEALTH, d),
+                value(FACE_HEALTH, d),
+                value(HAND_HEALTH, d),
+                value(EXTRA_PLAYER_HEALTH, d),
+                value(ARMORED_DAMAGE_FACTOR, d),
+                value(CLOSED_EYE_DAMAGE_FACTOR, d),
+                value(EYE_DAMAGE_FACTOR, d),
+                value(SEVER_DAMAGE_FRACTION, d),
+                value(PHASE2_TENTACLES_LEFT, d),
+                value(FALL_HEALTH_FRACTION, d),
+                value(SLAM_DAMAGE, d),
+                value(SLAM_WINDUP_TICKS, d),
+                value(SLAM_RADIUS, d),
+                value(SLAM_INTERVAL_TICKS, d),
+                value(SCREAM_INTERVAL_SECONDS, d),
+                List.copyOf(d ? SUMMON_MOBS.getDefault() : SUMMON_MOBS.get()),
+                value(SUMMON_COUNT, d),
+                value(MAX_SUMMONS, d),
+                value(POISON_CLOUD_SECONDS, d),
+                value(GRAB_DAMAGE, d),
+                value(EYE_OPEN_SECONDS, d),
+                value(EYE_CLOSED_SECONDS, d),
+                value(CRAWL_DAMAGE, d),
+                value(BOSS_EXPERIENCE, d),
+                value(FADE_SECONDS, d),
+                value(PRESERVE_MARGIN, d),
+                value(TRANSITION_WIDTH, d),
+                value(CHUNKS_PER_TICK, d),
+                value(OPEN_COLD_ISLAND_PORTALS, d));
+    }
+
+    private static int value(ModConfigSpec.IntValue value, boolean useDefault) {
+        return useDefault ? value.getDefault() : value.get();
+    }
+
+    private static boolean value(ModConfigSpec.BooleanValue value, boolean useDefault) {
+        return useDefault ? value.getDefault() : value.get();
     }
 
     private static double value(ModConfigSpec.DoubleValue value, boolean useDefault) {
