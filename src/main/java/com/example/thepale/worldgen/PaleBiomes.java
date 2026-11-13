@@ -25,7 +25,7 @@ public final class PaleBiomes {
     private PaleBiomes() {}
 
     public static boolean isInPale(int blockX, int blockZ) {
-        return PaleShape.server().effectiveRadius(blockX, blockZ) >= CommonConfig.get().paleBiomeRadius();
+        return !PaleCleanse.cleansed() && PaleShape.server().effectiveRadius(blockX, blockZ) >= CommonConfig.get().paleBiomeRadius();
     }
 
     /**
@@ -57,6 +57,7 @@ public final class PaleBiomes {
                 LOGGER.info("[thepale] The Pale biome has no mob spawns");
             }
             PaleShape.onServerAboutToStart(server);
+            PaleCleanse.onServerAboutToStart(server);
             IslandFeatures.onServerAboutToStart(server);
             IslandStructures.onServerAboutToStart(server);
             VillageClearance.reset();

@@ -1,5 +1,7 @@
 package com.example.thepale.mixin;
 
+import com.example.thepale.config.CommonConfig;
+import com.example.thepale.worldgen.PaleCleanse;
 import com.example.thepale.worldgen.PaleShape;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -31,6 +33,9 @@ public abstract class NetherPortalBlockMixin {
             CallbackInfoReturnable<DimensionTransition> cir) {
         if (destination.dimension() != Level.OVERWORLD) {
             return;
+        }
+        if (PaleCleanse.cleansed() && CommonConfig.get().finale().openColdIslandPortals()) {
+            return; // the finale opens the frozen island to the Nether
         }
         PaleShape shape = PaleShape.server();
         if (shape.islands().size() > 1 && shape.nearest(target.getX(), target.getZ()).kind() == PaleShape.Kind.COLD) {

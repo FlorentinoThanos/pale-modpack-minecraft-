@@ -67,7 +67,8 @@ public final class ClientConfig {
         }
 
         public boolean appliesTo(Level level) {
-            return dimensions.contains(level.dimension().location());
+            // Nothing of the Pale is drawn once it has been cleansed and has faded (the finale).
+            return dimensions.contains(level.dimension().location()) && com.example.thepale.finale.FinaleView.paleStrength() > 0f;
         }
     }
 

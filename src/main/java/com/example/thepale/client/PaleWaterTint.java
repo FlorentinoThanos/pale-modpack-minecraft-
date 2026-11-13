@@ -44,7 +44,7 @@ public final class PaleWaterTint {
         }
         int from = biome == paleBiome(level) ? OCEAN_WATER : color;
         float t = (float) Mth.clamp((radius - start) / BLEND, 0, 1);
-        t = t * t * (3f - 2f * t);
+        t = t * t * (3f - 2f * t) * com.example.thepale.finale.FinaleView.paleStrength();
         return FastColor.ARGB32.lerp(t, from, PALE_WATER) & 0xFFFFFF;
     }
 

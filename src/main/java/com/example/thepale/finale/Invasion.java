@@ -342,6 +342,11 @@ public final class Invasion {
                         .then(Commands.literal("skip").executes(context -> reply(context.getSource(), () -> skip(context.getSource().getServer()))))
                         .then(Commands.literal("cancel").executes(context -> reply(context.getSource(), () -> cancel(context.getSource().getServer())))))
                 // For trying the fight: the boss right here, outside any invasion. Killing it changes nothing in the world.
+                .then(Commands.literal("cleanse")
+                        .executes(context -> reply(context.getSource(), () -> Cleansing.cleanse(context.getSource().getServer())))
+                        .then(Commands.literal("status").executes(context -> reply(context.getSource(), () -> Cleansing.status(context.getSource().getServer()))))
+                        // For testing: see Cleansing#undo for what does not come back.
+                        .then(Commands.literal("undo").executes(context -> reply(context.getSource(), () -> Cleansing.undo(context.getSource().getServer())))))
                 .then(Commands.literal("boss").then(Commands.literal("spawn").executes(context -> reply(context.getSource(), () -> spawnHere(context.getSource()))))));
     }
 

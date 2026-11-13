@@ -176,6 +176,15 @@ public final class PaleDistantHorizons {
             wallSettings = config;
             wallShape = PaleShape.client();
         }
+        if (com.example.thepale.finale.FinaleView.paleStrength() <= 0f) {
+            // The Pale has been cleansed (the finale): the wall comes down.
+            if (wall != null && wallRegister != null) {
+                wall.detach(wallRegister);
+                wall = null;
+                wallRegister = null;
+            }
+            return;
+        }
         if (wall != null || level == null || !config.dimensions().contains(ResourceLocation.tryParse(level.getDimensionName()))) {
             return;
         }

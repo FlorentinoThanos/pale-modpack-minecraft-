@@ -56,6 +56,9 @@ public final class FinaleClient {
     private static double shownX;
     private static double shownZ;
     private static boolean placed;
+    /** The step of the fade the water was last coloured for (see {@link #recolourWater}); -1 before the first tick in a world. */
+    private static int waterStep = -1;
+    private static final int WATER_STEPS = 12;
 
     private FinaleClient() {}
 
@@ -66,8 +69,10 @@ public final class FinaleClient {
             dread = 0;
             lastDread = 0;
             placed = false;
+            waterStep = -1;
             return;
         }
+        recolourWater(mc);
         FinalePayload view = FinaleView.last();
         dread += (targetDread(view) - dread) * 0.02f;
         if (!placed) {
@@ -89,6 +94,28 @@ public final class FinaleClient {
             default -> 0f;
         };
         return target * FinaleView.paleStrength();
+    }
+
+    /**
+     * The grey of the water is baked into the chunks as they are built, so while the Pale fades after the cleansing
+     * the water around the camera is rebuilt a step at a time (only the layers the sea surface is in).
+     */
+    private static void recolourWater(Minecraft mc) {
+        int step = Math.round(FinaleView.paleStrength() * WATER_STEPS);
+        if (step == waterStep) {
+            return;
+        }
+        boolean first = waterStep < 0;
+        waterStep = step;
+        if (first || mc.gameRenderer == null) {
+            return; // just joined: the chunks are built with the right colour anyway
+        }
+        mc.level.clearTintCaches();
+        Vec3 camera = mc.gameRenderer.getMainCamera().getPosition();
+        int reach = mc.options.getEffectiveRenderDistance() * 16;
+        mc.levelRenderer.setBlocksDirty(
+                Mth.floor(camera.x) - reach, 32, Mth.floor(camera.z) - reach,
+                Mth.floor(camera.x) + reach, 79, Mth.floor(camera.z) + reach);
     }
 
     /** {@return how dark the invasion makes things this frame, 0 to 1; 0 outside the Pale's dimensions} */

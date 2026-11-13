@@ -2,6 +2,7 @@ package com.example.thepale;
 
 import com.example.thepale.config.CommonConfig;
 import com.example.thepale.worldgen.PaleAltitude;
+import com.example.thepale.worldgen.PaleCleanse;
 import com.example.thepale.worldgen.PaleShape;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -28,7 +29,8 @@ public final class PalePoison {
                 || player.tickCount % INTERVAL_TICKS != 0
                 || player.isCreative()
                 || player.isSpectator()
-                || level.dimension() != Level.OVERWORLD) {
+                || level.dimension() != Level.OVERWORLD
+                || PaleCleanse.cleansed()) {
             return;
         }
         CommonConfig.Settings config = CommonConfig.get();

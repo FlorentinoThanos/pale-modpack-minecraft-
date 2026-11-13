@@ -49,8 +49,10 @@ public final class IslandFeatures {
         if (home.isEmpty()) {
             return true;
         }
-        // Decoration runs once per chunk from its corner; judge by the chunk's middle.
-        return shape.nearest(origin.getX() + 8, origin.getZ() + 8).kind() == home.get();
+        // Decoration runs once per chunk from its corner; judge by the chunk's middle. The new lands of the finale
+        // belong to no island: everything generates there.
+        return PaleCleanse.inNewLands(origin.getX() + 8, origin.getZ() + 8)
+                || shape.nearest(origin.getX() + 8, origin.getZ() + 8).kind() == home.get();
     }
 
     private static Optional<PaleShape.Kind> home(PlacedFeature feature, Registry<PlacedFeature> registry) {

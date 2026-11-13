@@ -3,6 +3,7 @@ package com.example.thepale.mixin;
 import com.example.thepale.worldgen.MildBiomes;
 import com.example.thepale.worldgen.PaleBiomeSource;
 import com.example.thepale.worldgen.PaleBiomes;
+import com.example.thepale.worldgen.PaleCleanse;
 import com.example.thepale.worldgen.PaleClimate;
 import com.example.thepale.worldgen.PaleShape;
 import com.google.common.collect.ImmutableSet;
@@ -84,8 +85,13 @@ public abstract class MultiNoiseBiomeSourceMixin implements PaleBiomeSource {
         if (PaleBiomes.isInPale(blockX, blockZ)) {
             cir.setReturnValue(pale);
         } else {
-            Climate.TargetPoint target = PaleClimate.shift(sampler.sample(x, y, z), blockX, blockZ);
-            if (PaleShape.server().nearest(blockX, blockZ).kind() == PaleShape.Kind.MILD) {
+            // After the finale, the islands' climates fade out toward the new lands, which have the seed's own.
+            double newLand = PaleCleanse.newLand(blockX, blockZ);
+            Climate.TargetPoint target = sampler.sample(x, y, z);
+            if (newLand < 1) {
+                target = PaleClimate.shift(target, blockX, blockZ, 1 - newLand);
+            }
+            if (newLand <= 0 && PaleShape.server().nearest(blockX, blockZ).kind() == PaleShape.Kind.MILD) {
                 cir.setReturnValue(thepale$mildParameters().findValue(target));
             } else {
                 cir.setReturnValue(getNoiseBiome(target));

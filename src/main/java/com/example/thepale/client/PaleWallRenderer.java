@@ -183,7 +183,7 @@ public final class PaleWallRenderer {
                 // Snap to a fixed angular grid so the facets don't slide around as the camera moves.
                 int first = Mth.floor((camAngle - halfArc) / step);
                 int last = Math.min(Mth.ceil((camAngle + halfArc) / step), first + segmentsAround);
-                float alpha = Mth.lerp(layers == 1 ? 1f : (float) layer / (layers - 1), INNER_ALPHA, OUTER_ALPHA);
+                float alpha = Mth.lerp(layers == 1 ? 1f : (float) layer / (layers - 1), INNER_ALPHA, OUTER_ALPHA) * com.example.thepale.finale.FinaleView.paleStrength();
 
                 // UV carries (height fraction, layer index) for the shader rather than texture coordinates.
                 double r0 = island.distanceAt(radius, first * step, shape.landEnd());
@@ -252,7 +252,7 @@ public final class PaleWallRenderer {
                 double step = 2 * Math.PI / segmentsAround;
                 int first = Mth.floor((camAngle - halfArc) / step);
                 int last = Math.min(Mth.ceil((camAngle + halfArc) / step), first + segmentsAround);
-                float layerAlpha = Math.min(1f, DENSITY_BOOST * Mth.lerp(layers == 1 ? 1f : (float) layer / (layers - 1), INNER_ALPHA, OUTER_ALPHA));
+                float layerAlpha = Math.min(1f, DENSITY_BOOST * Mth.lerp(layers == 1 ? 1f : (float) layer / (layers - 1), INNER_ALPHA, OUTER_ALPHA)) * com.example.thepale.finale.FinaleView.paleStrength();
                 // A whole number of texture repeats around the circle, so the clouds line up where the angle wraps.
                 double tilesAround = Math.max(1, Math.round(2 * Math.PI * radius / CLOUD_TILE));
                 // Each layer drifts its own way, so the layers slide past each other like the shader's do.

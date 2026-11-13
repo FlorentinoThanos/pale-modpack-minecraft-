@@ -2,6 +2,7 @@ package com.example.thepale;
 
 import com.example.thepale.config.CommonConfig;
 import com.example.thepale.worldgen.IslandFeatures;
+import com.example.thepale.worldgen.PaleCleanse;
 import com.example.thepale.worldgen.PaleShape;
 import com.mojang.logging.LogUtils;
 import java.util.ArrayList;
@@ -147,7 +148,7 @@ public final class IslandMobs {
         if (!hostile || level.dimension() != Level.OVERWORLD || !threeIslands(level) || !STARTER.matches(type)) {
             return false;
         }
-        return shape(level).nearest(x, z).kind() == PaleShape.Kind.MILD;
+        return shape(level).nearest(x, z).kind() == PaleShape.Kind.MILD && !newLands(level, x, z);
     }
 
     /** {@return whether the frozenIslandOnlyMobs rule is on for this type in this world} */
@@ -160,9 +161,20 @@ public final class IslandMobs {
         if (level.dimension() != Level.OVERWORLD) {
             return false;
         }
+        if (newLands(level, x, z)) {
+            return true;
+        }
         PaleShape shape = shape(level);
         return shape.nearest(x, z).kind() == PaleShape.Kind.COLD
                 && shape.effectiveRadius(x, z) < CommonConfig.get().paleBiomeRadius();
+    }
+
+    /**
+     * The new lands that generate past the old sea once the Pale is cleansed (the finale) belong to no island: none of
+     * the islands' rules hold there. Server side only; a client never decides spawns.
+     */
+    private static boolean newLands(Level level, double x, double z) {
+        return !level.isClientSide() && PaleCleanse.inNewLands(x, z);
     }
 
     /**

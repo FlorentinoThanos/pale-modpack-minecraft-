@@ -180,7 +180,8 @@ public final class PaleFog {
         double radius = PaleShape.client().effectiveRadius(pos.x, pos.z);
         // High above the Pale the fog clears: as if back at the start of the approach, by the time the air is clean.
         double clear = config.innerRadius() - APPROACH;
-        return radius > clear ? clear + (radius - clear) * PaleAltitude.strength(pos.y) : radius;
+        // After the finale the fog thins the same way everywhere, until the Pale is gone.
+        return radius > clear ? clear + (radius - clear) * PaleAltitude.strength(pos.y) * com.example.thepale.finale.FinaleView.paleStrength() : radius;
     }
 
     /** Whether the Pale fog has started at this camera radius (it starts {@link #APPROACH} blocks before innerRadius). */

@@ -55,7 +55,7 @@ public final class PaleCloudSea {
         Vec3 camera = event.getCamera().getPosition();
         // Inside or under the deck in the Pale, the fog is the deck: hide it as the fog takes over.
         double cameraRadius = PaleFog.cameraRadius(event.getCamera());
-        float visible = 1f - (PaleFog.inFog(cameraRadius) ? PaleFog.paleness(cameraRadius) : 0f);
+        float visible = (1f - (PaleFog.inFog(cameraRadius) ? PaleFog.paleness(cameraRadius) : 0f)) * com.example.thepale.finale.FinaleView.paleStrength();
         if (visible <= 0.01f) {
             return;
         }

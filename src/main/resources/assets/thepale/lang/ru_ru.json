@@ -41,12 +41,18 @@
   "item.thepale.heart_of_the_pale.tooltip": "Зажми использование в обычном мире, чтобы очистить Бледноту.",
   "item.thepale.heart_of_the_pale.warning": "Пути назад не будет.",
   "item.thepale.patchwork_abomination_spawn_egg": "Яйцо призыва The Patchwork Abomination",
-  "message.thepale.finale.heart_silent": "Сердце молчит.",
+  "message.thepale.finale.heart_silent": "Здесь сердце молчит. Оно отзывается только в Верхнем мире.",
   "commands.thepale.boss.spawned": "The Patchwork Abomination здесь. Это не вторжение: его смерть ничего не меняет в мире.",
   "advancements.thepale.finale.root.title": "Бледнота шевелится",
   "advancements.thepale.finale.root.description": "Что-то проснулось в Бледноте и идёт к твоему берегу",
   "advancements.thepale.finale.abomination_slain.title": "Распороть по швам",
   "advancements.thepale.finale.abomination_slain.description": "Будь рядом, когда умрёт The Patchwork Abomination",
   "advancements.thepale.finale.cleansed.title": "Чистая вода",
-  "advancements.thepale.finale.cleansed.description": "Очисти Бледноту её собственным сердцем"
+  "advancements.thepale.finale.cleansed.description": "Очисти Бледноту её собственным сердцем",
+  "message.thepale.finale.heart_spent": "Бледнота уже очищена.",
+  "message.thepale.finale.cleansed": "Сердце остановилось. Яд ушёл, туман рассеивается, а за морем открылись новые земли.",
+  "commands.thepale.cleanse.done": "Бледнота очищена. Открытое море до %s блоков от берегов, обычные земли сида начинаются с %s.",
+  "commands.thepale.cleanse.already": "Бледнота уже очищена.",
+  "commands.thepale.cleanse.not_cleansed": "Бледнота не очищена.",
+  "commands.thepale.cleanse.undone": "Бледнота возвращена (для проверки). Уже заменённые биомы и уже созданный рельеф остаются как есть."
 }

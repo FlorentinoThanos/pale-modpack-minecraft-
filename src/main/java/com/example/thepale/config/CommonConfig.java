@@ -81,6 +81,7 @@ public final class CommonConfig {
     private static final ModConfigSpec.DoubleValue PRESERVE_MARGIN;
     private static final ModConfigSpec.DoubleValue TRANSITION_WIDTH;
     private static final ModConfigSpec.IntValue CHUNKS_PER_TICK;
+    private static final ModConfigSpec.DoubleValue MAX_SEA_DISTANCE;
     private static final ModConfigSpec.BooleanValue OPEN_COLD_ISLAND_PORTALS;
 
     static {
@@ -424,6 +425,12 @@ public final class CommonConfig {
         TRANSITION_WIDTH = builder
                 .comment("Past that margin the sea turns into the seed's normal terrain over this many blocks: new lands across the sea.")
                 .defineInRange("transitionWidth", 400.0, 64.0, 5000.0);
+        MAX_SEA_DISTANCE = builder
+                .comment(
+                        "The most blocks past the coasts the preserved sea may reach, 0 for no limit. Only for worlds where somebody",
+                        "once generated chunks very far out: without a limit the new lands would start past those. Chunks that",
+                        "exist beyond the limit keep their old sea and may meet new terrain at a visible seam.")
+                .defineInRange("maxSeaDistance", 0.0, 0.0, 1000000.0);
         CHUNKS_PER_TICK = builder
                 .comment("How many loaded chunks a tick have their Pale biome turned into ocean after the cleansing.")
                 .defineInRange("chunksPerTick", 4, 1, 64);
@@ -475,6 +482,7 @@ public final class CommonConfig {
             double fadeSeconds,
             double preserveMargin,
             double transitionWidth,
+            double maxSeaDistance,
             int chunksPerTick,
             boolean openColdIslandPortals) {
         /** Ticks of game time the approach takes. */
@@ -611,6 +619,7 @@ public final class CommonConfig {
                 value(FADE_SECONDS, d),
                 value(PRESERVE_MARGIN, d),
                 value(TRANSITION_WIDTH, d),
+                value(MAX_SEA_DISTANCE, d),
                 value(CHUNKS_PER_TICK, d),
                 value(OPEN_COLD_ISLAND_PORTALS, d));
     }

@@ -221,7 +221,7 @@ public final class PaleSteam {
             GL20.glUniform4f(uRadii, (float) PaleFog.APPROACH, (float) (config.innerRadius() - fogStart),
                     (float) Math.max(1, config.outerRadius() - config.innerRadius()), EDGE);
             GL20.glUniform4f(uVisibility, mc.options.getEffectiveRenderDistance() * 16f,
-                    (float) config.fogEntryVisibility(), (float) config.fogFullVisibility(), DENSITY);
+                    (float) config.fogEntryVisibility(), (float) config.fogFullVisibility(), DENSITY * com.example.thepale.finale.FinaleView.paleStrength());
             GL20.glUniform3f(uHeights, SEA_SURFACE_Y, (float) PaleAltitude.CLEARS_FROM, (float) PaleAltitude.CLEAR_AT);
             // The Pale grey as the camera fog has it, but never darker than moonlit mist: shader packs light the
             // night, and the steam would stand against it as a black wall.

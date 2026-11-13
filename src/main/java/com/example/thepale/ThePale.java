@@ -1,6 +1,7 @@
 package com.example.thepale;
 
 import com.example.thepale.config.CommonConfig;
+import com.example.thepale.finale.Cleansing;
 import com.example.thepale.finale.FinaleRegistry;
 import com.example.thepale.finale.FinaleSounds;
 import com.example.thepale.finale.boss.SlamPayload;
@@ -56,6 +57,9 @@ public final class ThePale {
         NeoForge.EVENT_BUS.addListener(Invasion::onServerTick);
         NeoForge.EVENT_BUS.addListener(Invasion::onPlayerLoggedIn);
         NeoForge.EVENT_BUS.addListener(Invasion::onRegisterCommands);
+        NeoForge.EVENT_BUS.addListener(Cleansing::onChunkLoad);
+        NeoForge.EVENT_BUS.addListener(Cleansing::onServerTick);
+        NeoForge.EVENT_BUS.addListener(Cleansing::onServerStarted);
     }
 
     public static ResourceLocation id(String path) {

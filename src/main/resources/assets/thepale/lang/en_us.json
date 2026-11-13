@@ -58,12 +58,18 @@
   "item.thepale.heart_of_the_pale.tooltip": "Hold use in the Overworld to cleanse the Pale.",
   "item.thepale.heart_of_the_pale.warning": "There is no way back.",
   "item.thepale.patchwork_abomination_spawn_egg": "The Patchwork Abomination Spawn Egg",
-  "message.thepale.finale.heart_silent": "The heart is silent.",
+  "message.thepale.finale.heart_silent": "The heart is silent here. It answers only in the Overworld.",
   "commands.thepale.boss.spawned": "The Patchwork Abomination is here. It is not part of the invasion: killing it changes nothing in the world.",
   "advancements.thepale.finale.root.title": "The Pale Stirs",
   "advancements.thepale.finale.root.description": "Something has woken in the Pale and is coming for your shore",
   "advancements.thepale.finale.abomination_slain.title": "Unstitched",
   "advancements.thepale.finale.abomination_slain.description": "Be there when The Patchwork Abomination dies",
   "advancements.thepale.finale.cleansed.title": "Clear Water",
-  "advancements.thepale.finale.cleansed.description": "Cleanse the Pale with its own heart"
+  "advancements.thepale.finale.cleansed.description": "Cleanse the Pale with its own heart",
+  "message.thepale.finale.heart_spent": "The Pale is already cleansed.",
+  "message.thepale.finale.cleansed": "The heart stops. The poison is gone, the fog is lifting, and beyond the sea there are new lands.",
+  "commands.thepale.cleanse.done": "The Pale is cleansed. Open sea to %s blocks past the coasts, the seed's own lands from %s.",
+  "commands.thepale.cleanse.already": "The Pale is already cleansed.",
+  "commands.thepale.cleanse.not_cleansed": "The Pale is not cleansed.",
+  "commands.thepale.cleanse.undone": "The Pale is back (for testing). Biomes already turned into ocean and terrain already generated stay as they are."
 }

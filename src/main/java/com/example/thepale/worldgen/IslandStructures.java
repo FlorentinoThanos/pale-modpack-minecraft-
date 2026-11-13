@@ -40,7 +40,9 @@ public final class IslandStructures {
         if (shape == null || shape.islands().size() < 2 || !frozenOnly(structure, registries.registryOrThrow(Registries.STRUCTURE))) {
             return true;
         }
-        return shape.nearest(chunk.getMiddleBlockX(), chunk.getMiddleBlockZ()).kind() == PaleShape.Kind.COLD;
+        // The new lands of the finale belong to no island: everything generates there.
+        return PaleCleanse.inNewLands(chunk.getMiddleBlockX(), chunk.getMiddleBlockZ())
+                || shape.nearest(chunk.getMiddleBlockX(), chunk.getMiddleBlockZ()).kind() == PaleShape.Kind.COLD;
     }
 
     private static boolean frozenOnly(Structure structure, Registry<Structure> registry) {

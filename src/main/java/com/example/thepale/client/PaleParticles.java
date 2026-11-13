@@ -39,7 +39,7 @@ public final class PaleParticles {
         PaleShape shape = PaleShape.client();
         double depth = (shape.effectiveRadius(x, z) - config.innerRadius()) / Math.max(config.outerRadius() - config.innerRadius(), 1.0);
         // High above the Pale the air is clear.
-        depth = Math.min(depth, 1.0) * PaleAltitude.strength(y);
+        depth = Math.min(depth, 1.0) * PaleAltitude.strength(y) * com.example.thepale.finale.FinaleView.paleStrength();
         if (depth <= 0) {
             return;
         }

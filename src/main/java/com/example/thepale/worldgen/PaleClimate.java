@@ -46,9 +46,14 @@ public final class PaleClimate {
 
     /** {@return the climate at this block column, pulled toward its zone on the island} */
     public static Climate.TargetPoint shift(Climate.TargetPoint point, int blockX, int blockZ) {
+        return shift(point, blockX, blockZ, 1);
+    }
+
+    /** The same, with the pull scaled by {@code amount} (0 to 1): the zones fade out toward the new lands of the finale. */
+    public static Climate.TargetPoint shift(Climate.TargetPoint point, int blockX, int blockZ, double amount) {
         CommonConfig.Settings config = CommonConfig.get();
-        double temperatureZones = config.temperatureZones();
-        double humidityZones = config.humidityZones();
+        double temperatureZones = config.temperatureZones() * amount;
+        double humidityZones = config.humidityZones() * amount;
         if (temperatureZones == 0 && humidityZones == 0) {
             return point;
         }
@@ -72,7 +77,7 @@ public final class PaleClimate {
         // The hot island keeps to its climate: pulled harder, with less of the seed's own variety, so no corner of it
         // falls into a cooler band (taiga on the hot island, say).
         boolean themed = island.kind() == PaleShape.Kind.HOT;
-        double temperatureStrength = themed ? Math.max(Math.abs(temperatureZones), THEMED_PULL) : Math.abs(temperatureZones);
+        double temperatureStrength = themed ? Math.max(Math.abs(temperatureZones), THEMED_PULL * amount) : Math.abs(temperatureZones);
         targetTemperature += (themed ? THEMED_WOBBLE : BORDER_WOBBLE) * Climate.unquantizeCoord(point.weirdness());
         double targetHumidity = -east * SIDE_HUMIDITY + BORDER_WOBBLE * Climate.unquantizeCoord(point.erosion());
         return new Climate.TargetPoint(

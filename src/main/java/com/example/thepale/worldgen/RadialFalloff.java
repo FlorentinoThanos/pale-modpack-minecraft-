@@ -23,7 +23,8 @@ public record RadialFalloff(DensityFunction argument) implements DensityFunction
 
     @Override
     public double compute(FunctionContext context) {
-        double value = argument.compute(context);
+        double seedValue = argument.compute(context);
+        double value = seedValue;
         CommonConfig.Settings config = CommonConfig.get();
         double x = context.blockX();
         double z = context.blockZ();
@@ -40,7 +41,10 @@ public record RadialFalloff(DensityFunction argument) implements DensityFunction
         // Smoothstep rather than Oceanus' straight line, so the terrain has no crease where the band starts and ends.
         double falloff = 1.0 - (1.0 - config.oceanVariability()) * t * t * (3.0 - 2.0 * t);
         double target = config.oceanContinentalness();
-        return target + falloff * (value - target);
+        double result = target + falloff * (value - target);
+        // After the finale the seed's own continents come back beyond the explored sea (PaleCleanse).
+        double newLand = PaleCleanse.newLand(radius);
+        return newLand <= 0 ? result : Mth.lerp(newLand, result, seedValue);
     }
 
     /** A max without a crease where the two cross: within about {@code width} of each other it rounds off. */
