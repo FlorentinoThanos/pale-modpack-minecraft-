@@ -137,3 +137,172 @@
 	# Default: 1
 	# Range: 0 ~ 5
 	darkMetalSetStrength = 1
+
+[finale]
+	#How many game days the boss takes to reach the shore once the invasion has started. Counted in game
+	#time, so sleeping or /time add brings it closer. It comes ashore on the first night after that.
+	# Default: 3.0
+	# Range: 0.01 ~ 100.0
+	approachDays = 3.0
+	#How far out in the Pale the boss starts, in blocks from the shore it is heading for.
+	# Default: 1800.0
+	# Range: 200.0 ~ 10000.0
+	approachStartDistance = 1800.0
+	#After this many days of the approach its silhouette shows on the horizon (before that only the sky darkens).
+	# Default: 1.0
+	# Range: 0.0 ~ 100.0
+	silhouetteFromDay = 1.0
+	#Once it has arrived it waits off the shore; it comes ashore at night when a player is within this
+	#many blocks of the landing point.
+	# Default: 96.0
+	# Range: 16.0 ~ 512.0
+	spawnRange = 96.0
+	#Players within this many blocks of the landing point are in the fight: they see the boss bar and are counted for its health.
+	# Default: 64.0
+	# Range: 16.0 ~ 256.0
+	arenaRadius = 64.0
+	#How far the boss moves from the landing point. It never goes inland past this, so a base away from the shore is safe.
+	# Default: 14.0
+	# Range: 0.0 ~ 64.0
+	bossLeash = 14.0
+	#With no living player in the arena for this many minutes the boss goes back into the sea and returns the
+	#next night at full health. The finale can't be lost.
+	# Default: 3.0
+	# Range: 0.1 ~ 60.0
+	retreatMinutes = 3.0
+	#Tell everybody the coordinates of the landing point when the boss arrives.
+	announceCoordinates = true
+	#Blocks around a tentacle's strike that are broken (0 = the boss breaks nothing; also needs the mobGriefing game rule).
+	# Default: 0
+	# Range: 0 ~ 4
+	blockBreakRadius = 0
+
+	#The Patchwork Abomination. Numbers are for a player in full netherite or Born in Chaos gear with Better Combat.
+	[finale.boss]
+		#Health of the body: the boss bar. The boss dies when it runs out.
+		# Default: 600.0
+		# Range: 1.0 ~ 100000.0
+		bodyHealth = 600.0
+		#Health of each of the six tentacles. At 0 the tentacle is severed.
+		# Default: 50.0
+		# Range: 1.0 ~ 100000.0
+		tentacleHealth = 50.0
+		#Health of the stone face on its tentacle.
+		# Default: 100.0
+		# Range: 1.0 ~ 100000.0
+		faceHealth = 100.0
+		#Health of the clawed hand on its tentacle.
+		# Default: 100.0
+		# Range: 1.0 ~ 100000.0
+		handHealth = 100.0
+		#Every player in the arena after the first adds this share to all of the boss's health (0.5 = +50% each).
+		# Default: 0.5
+		# Range: 0.0 ~ 10.0
+		extraPlayerHealth = 0.5
+		#Phases 1 and 2: share of a hit on the body that gets through while it still has tentacles.
+		# Default: 0.2
+		# Range: 0.0 ~ 1.0
+		armoredDamageFactor = 0.2
+		#Phase 3: share of a hit on the body that gets through while the main eye is shut.
+		# Default: 0.1
+		# Range: 0.0 ~ 1.0
+		closedEyeDamageFactor = 0.1
+		#Phase 3: a hit on the open main eye is multiplied by this.
+		# Default: 1.5
+		# Range: 0.0 ~ 10.0
+		eyeDamageFactor = 1.5
+		#Severing a tentacle, the face or the hand takes this share of the body's full health off the boss bar.
+		# Default: 0.05
+		# Range: 0.0 ~ 0.12
+		severDamageFraction = 0.05
+		#Phase 2 (the face and the hand come down and fight) starts when this many tentacles are left.
+		# Default: 3
+		# Range: 0 ~ 5
+		phase2TentaclesLeft = 3
+		#Phase 4 (the body falls and crawls, and takes full damage) starts at this share of its health.
+		# Default: 0.25
+		# Range: 0.01 ~ 0.6
+		fallHealthFraction = 0.25
+		#Damage of a tentacle's strike, before armour.
+		# Default: 26.0
+		# Range: 0.0 ~ 1000.0
+		slamDamage = 26.0
+		#Ticks the warning ring of particles shows on the ground before a tentacle strikes (20 = one second).
+		# Default: 24
+		# Range: 5 ~ 200
+		slamWindupTicks = 24
+		#Radius of a tentacle's strike, in blocks.
+		# Default: 3.0
+		# Range: 0.5 ~ 16.0
+		slamRadius = 3.0
+		#Ticks between strikes with all six tentacles alive. Fewer tentacles strike a little more often.
+		# Default: 50
+		# Range: 10 ~ 1200
+		slamIntervalTicks = 50
+		#Seconds between the face's spells (scream, summon, poison cloud, in turn).
+		# Default: 9.0
+		# Range: 2.0 ~ 600.0
+		screamIntervalSeconds = 9.0
+		#Mobs the face summons, one entity id per line, picked at random. Ids of mods that aren't installed are
+		#skipped; if none is left, zombies come.
+		summonMobs = ["born_in_chaos_v1:decaying_zombie", "born_in_chaos_v1:decrepit_skeleton", "born_in_chaos_v1:restless_spirit", "born_in_chaos_v1:dread_hound"]
+		#How many mobs one summon brings.
+		# Default: 3
+		# Range: 0 ~ 32
+		summonCount = 3
+		#No more summons while this many summoned mobs are still alive.
+		# Default: 9
+		# Range: 0 ~ 128
+		maxSummons = 9
+		#How long a poison cloud stays (it gives the Pale's Wither and Hunger to players inside).
+		# Default: 8.0
+		# Range: 1.0 ~ 120.0
+		poisonCloudSeconds = 8.0
+		#Damage a second while the hand holds a player. Hitting the hand makes it let go.
+		# Default: 5.0
+		# Range: 0.0 ~ 1000.0
+		grabDamage = 5.0
+		#Phase 3: how long the main eye stays open.
+		# Default: 8.0
+		# Range: 1.0 ~ 120.0
+		eyeOpenSeconds = 8.0
+		#Phase 3: how long the main eye stays shut in between.
+		# Default: 6.0
+		# Range: 1.0 ~ 120.0
+		eyeClosedSeconds = 6.0
+		#Phase 4: damage of touching the crawling body, and of its shockwaves.
+		# Default: 16.0
+		# Range: 0.0 ~ 1000.0
+		crawlDamage = 16.0
+		#Experience the boss drops.
+		# Default: 2500
+		# Range: 0 ~ 1000000
+		experience = 2500
+
+	#The cleansing of the Pale, started by using the Heart of the Pale the boss drops.
+	[finale.cleansing]
+		#How long the fog wall, the fog, the grey water and the sea of clouds take to fade for players.
+		# Default: 60.0
+		# Range: 1.0 ~ 600.0
+		fadeSeconds = 60.0
+		#New chunks keep generating as open sea up to this many blocks past the farthest chunk that existed when
+		#the Pale was cleansed, so old and new chunks never meet at a seam.
+		# Default: 200.0
+		# Range: 64.0 ~ 5000.0
+		preserveMargin = 200.0
+		#Past that margin the sea turns into the seed's normal terrain over this many blocks: new lands across the sea.
+		# Default: 400.0
+		# Range: 64.0 ~ 5000.0
+		transitionWidth = 400.0
+		#How many loaded chunks a tick have their Pale biome turned into ocean after the cleansing.
+		# Default: 4
+		# Range: 1 ~ 64
+		chunksPerTick = 4
+		#After the cleansing, Nether portals may open on the frozen island like anywhere else.
+		openColdIslandPortals = true
+		#The most blocks past the coasts the preserved sea may reach, 0 for no limit. Only for worlds where somebody
+		#once generated chunks very far out: without a limit the new lands would start past those. Chunks that
+		#exist beyond the limit keep their old sea and may meet new terrain at a visible seam.
+		# Default: 0.0
+		# Range: 0.0 ~ 1000000.0
+		maxSeaDistance = 0.0

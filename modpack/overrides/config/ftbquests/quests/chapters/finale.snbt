@@ -1,0 +1,162 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "finale"
+	group: "6FA7D509EB9A847A"
+	icon: {
+		count: 1
+		id: "thepale:heart_of_the_pale"
+	}
+	id: "7B6726D6472E01D6"
+	images: [ ]
+	order_index: 2
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: ["49315C954FA0B6F5"]
+			hide_until_deps_complete: true
+			icon: {
+				count: 1
+				id: "minecraft:sculk_shrieker"
+			}
+			id: "0388B9AB157B8169"
+			rewards: [
+				{
+					command: "/thepale invasion start"
+					elevate_perms: true
+					id: "6BFB0B4EE48BCE48"
+					permission_level: 2
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "hexagon"
+			size: 2.0d
+			tasks: [
+				{
+					id: "1F93CA688858C95F"
+					type: "checkmark"
+				}
+			]
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["0388B9AB157B8169"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "minecraft:spyglass"
+			}
+			id: "23E7486175360186"
+			rewards: [
+				{
+					id: "6BDDC12EE57FE9A4"
+					item: {
+						count: 8
+						id: "minecraft:golden_apple"
+					}
+					type: "item"
+				}
+				{
+					id: "304D28FB596C01C5"
+					item: {
+						count: 1
+						id: "minecraft:totem_of_undying"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					advancement: "thepale:finale/root"
+					criterion: ""
+					id: "7548F9AB769766D9"
+					type: "advancement"
+				}
+			]
+			x: 2.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["23E7486175360186"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "thepale:patchwork_abomination_spawn_egg"
+			}
+			id: "6F36D9DB36D90C0D"
+			rewards: [
+				{
+					id: "08FC43DC7C8B83AA"
+					type: "xp"
+					xp: 2000
+				}
+				{
+					id: "149E5D464EF667A1"
+					item: {
+						count: 4
+						id: "minecraft:netherite_ingot"
+					}
+					type: "item"
+				}
+			]
+			shape: "hexagon"
+			size: 1.5d
+			tasks: [
+				{
+					advancement: "thepale:finale/abomination_slain"
+					criterion: ""
+					id: "28DE898D7B262FFC"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["6F36D9DB36D90C0D"]
+			hide_until_deps_visible: true
+			icon: {
+				count: 1
+				id: "thepale:heart_of_the_pale"
+			}
+			id: "5665ADEFB6FFF58A"
+			rewards: [
+				{
+					id: "33C0B8A7849F944C"
+					type: "xp"
+					xp: 3000
+				}
+				{
+					id: "239F0050E5B28C69"
+					item: {
+						count: 1
+						id: "minecraft:elytra"
+					}
+					type: "item"
+				}
+				{
+					id: "60E29592EBAA5386"
+					item: {
+						count: 64
+						id: "minecraft:firework_rocket"
+					}
+					type: "item"
+				}
+			]
+			shape: "hexagon"
+			size: 2.0d
+			tasks: [
+				{
+					advancement: "thepale:finale/cleansed"
+					criterion: ""
+					id: "3A10388BC2CB74FF"
+					type: "advancement"
+				}
+			]
+			x: 6.0d
+			y: 0.0d
+		}
+	]
+}

@@ -127,7 +127,7 @@ TABLES = []
 
 # Chapters written into the quest book. 3.0 is being rewritten with Max chapter by chapter; the 2.0 chapters below
 # stay in this file as material but are not written until they are redone.
-BUILD = ["mild", "nether"]
+BUILD = ["mild", "nether", "finale"]
 
 
 def table(key, ru, en, rewards):
@@ -994,8 +994,51 @@ extend("enchant", [
 ])
 
 
+# ================================================================ Финал: вторжение, босс, очищение (The Pale 1.13.0)
+# Пока в книге только главы 1 и 2, поэтому «Призвать Бледноту» открывается после «Готов к югу». Когда появятся
+# следующие главы, зависимость нужно перевесить на последний квест сюжета (холодный остров).
+def command(cmd):
+    return {"type": "command", "command": cmd, "elevate_perms": True, "permission_level": 2, "silent": True}
+
+
+chapter("finale", "thepale:heart_of_the_pale", "Бледнота", "The Pale",
+        "То, что живёт в тумане, можно позвать. Обратно оно не уйдёт.",
+        "What lives in the fog can be called. It will not go back.", [
+    Q("finale/summon", 0, 0, "Призвать Бледноту", "Summon the Pale",
+      "Пути назад не будет. Отметь квест и забери награду: она начинает вторжение. Через три игровых дня чудовище "
+      "из тумана выйдет ночью на берег того острова, где больше всего игроков. Небо потемнеет в первый же день, "
+      "на второй его силуэт встанет на горизонте. Готовьте незеритовую броню, зелья и еду на всю команду.",
+      "There is no way back. Tick the quest and claim the reward: it starts the invasion. In three game days the "
+      "thing from the fog comes ashore at night on the island with the most players. The sky darkens on the first "
+      "day, and on the second its silhouette stands on the horizon. Bring netherite armour, potions and food for "
+      "the whole team.",
+      [check()], [command("/thepale invasion start")], ["nether/ready"], icon="minecraft:sculk_shrieker",
+      shape="hexagon", size=2.0, extra=SHOWN_AFTER_7),
+    NQ("finale/coming", 2, 0, "Оно идёт", "It Is Coming",
+       "Вторжение началось. Узнать, сколько осталось, можно по небу: чем темнее, тем ближе. Если все погибнут или "
+       "уйдут, чудовище вернётся в море и выйдет снова следующей ночью.",
+       "The invasion has begun. The sky tells you how long is left: the darker, the closer. If everybody dies or "
+       "leaves, the thing goes back into the sea and returns the next night.",
+       [adv("thepale:finale/root")], [give("minecraft:golden_apple", 8), give("minecraft:totem_of_undying")],
+       ["finale/summon"], icon="minecraft:spyglass"),
+    NQ("finale/slain", 4, 0, "Лоскутное чудовище", "The Patchwork Abomination",
+       "Убей босса. Сначала руби щупальца: пока они целы, тело почти не получает урона. Потом лицо и рука, потом "
+       "главный глаз, пока он открыт. Достижение получают все, кто был рядом.",
+       "Kill the boss. Cut the tentacles first: while they hold, the body takes next to no damage. Then the face "
+       "and the hand, then the main eye while it is open. Everybody near gets the advancement.",
+       [adv("thepale:finale/abomination_slain")], [xp(2000), give("minecraft:netherite_ingot", 4)],
+       ["finale/coming"], icon="thepale:patchwork_abomination_spawn_egg", shape="hexagon", size=1.5),
+    NQ("finale/cleansed", 6, 0, "Чистая вода", "Clear Water",
+       "С босса падает Сердце Бледноты. Зажми использование в обычном мире, и Бледнота уйдёт навсегда: яд исчезнет, "
+       "туман рассеется, а за морем появятся новые земли.",
+       "The boss drops the Heart of the Pale. Hold use in the Overworld and the Pale is gone for good: the poison "
+       "stops, the fog lifts, and new lands appear beyond the sea.",
+       [adv("thepale:finale/cleansed")], [xp(3000), give("minecraft:elytra"), give("minecraft:firework_rocket", 64)],
+       ["finale/slain"], icon="thepale:heart_of_the_pale", shape="hexagon", size=2.0),
+])
+
 # Chapter order in the book: each island's chapter, then the side chapters that grow out of it.
-ORDER = ["mild", "kitchen", "archeology", "create", "nether", "hot", "industry", "end", "sky", "cold", "chaos", "enchant"]
+ORDER = ["mild", "kitchen", "archeology", "create", "nether", "hot", "industry", "end", "sky", "cold", "chaos", "enchant", "finale"]
 CHAPTERS.sort(key=lambda c: ORDER.index(c["key"]))
 CHAPTERS[:] = [c for c in CHAPTERS if c["key"] in BUILD]
 

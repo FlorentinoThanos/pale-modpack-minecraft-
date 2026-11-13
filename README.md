@@ -5,6 +5,7 @@ Pale, behind a drifting wall of fog.
 
 - Common config: `config/thepale-common.toml` (world shape, Pale biome radius, poison).
 - Client config: `config/thepale-client.toml` (fog wall and camera fog).
+- The finale (the invasion, the boss, the cleansing of the Pale): see [The finale](#the-finale).
 
 ## Three islands
 
@@ -142,6 +143,125 @@ Optional. With Distant Horizons 3.x installed (tested with 3.3.3):
 - DH's generic object rendering is off on macOS, so there the far cloud wall doesn't show.
 
 The DH jar in `libs/` is only compiled against; it is not bundled.
+
+## The finale
+
+The end of the pack, from 1.13.0: the players call the thing that lives in the fog, kill it, and cleanse the Pale.
+Everything is in `[finale]` of `config/thepale-common.toml`; the state of a world is saved in
+`data/thepale_finale.dat` of the Overworld. Requires GeckoLib 4.9 or newer.
+
+### 1. The invasion
+
+`/thepale invasion start` (permission level 2; the quest "Summon the Pale" runs it as a command reward) starts it.
+There is no way to lose it and, short of `cancel`, no way back.
+
+| When | What happens |
+|---|---|
+| Day 1 | A message and a sound for everybody; the sky and the fog darken toward purple, more every day. |
+| From day 2 (`silhouetteFromDay`) | A silhouette stands on the horizon, drawn by the client from a position the server sends: no entity exists yet. |
+| End of day 3 (`approachDays`) | It waits off the shore of the island with the most players, at the point of the coast nearest to them, until it is night and a player is within `spawnRange`. Then the boss comes ashore. |
+
+Time is counted in game days, so sleeping and `/time add` move it along. While nobody is on any island it waits. The
+boss stays within `bossLeash` blocks of its landing point and breaks no blocks (`blockBreakRadius` is reserved, 0 =
+nothing). If the arena (`arenaRadius`) stays empty for `retreatMinutes`, it goes back into the sea, heals, and returns
+the next night.
+
+| Command | |
+|---|---|
+| `/thepale invasion start` | Starts the invasion. |
+| `/thepale invasion status` | Phase, progress, where the boss is, whether the Pale is cleansed. |
+| `/thepale invasion skip` | Jumps to the next stage (for testing): approach, waiting, ashore. |
+| `/thepale invasion cancel` | Calls it off and removes the boss. |
+| `/thepale boss spawn` | The boss right here, outside any invasion: for trying the fight. It still drops the heart. |
+| `/thepale cleanse` | Cleanses the Pale without the heart. `status` shows the radii, `undo` brings the fog and poison back for testing (biomes already turned and terrain already generated stay). |
+
+### 2. The Patchwork Abomination
+
+`thepale:patchwork_abomination`: a stitched ball hovering over the ground on six tentacles, with a stone face and a
+clawed hand on two more. Every limb, the body and the main eye are their own hitboxes (`PartEntity`); limbs have their
+own health and are cut off for good. Only damage dealt by players counts. The boss bar shows within the arena.
+
+| Phase | The boss | To get on |
+|---|---|---|
+| 1. Tentacles | Body takes `armoredDamageFactor` (x0.2) and can't drop below the next phase's threshold. Tentacles slam down: a ring of particles marks the spot `slamWindupTicks` before (`slamDamage`, `slamRadius`). Each tentacle cut lowers the body. | Cut tentacles until `phase2TentaclesLeft` are left. |
+| 2. Face and hand | The face comes down and casts in turn: a scream (slowness and blindness), a summon (`summonMobs`, zombies if none of them exists), a poison cloud. The hand grabs a player, drags and throws them; hitting the hand lets go. | Destroy the face, the hand and the last tentacles. |
+| 3. Seams | The seam parts and the main eye opens for `eyeOpenSeconds`, shut for `eyeClosedSeconds`. Open eye: x`eyeDamageFactor`; shut: x`closedEyeDamageFactor`. Shockwaves along the ground while it is shut. | Bring the body down to `fallHealthFraction`. |
+| 4. Fall | It falls and crawls after players; touching it and its shockwaves hurt (`crawlDamage`). Full damage anywhere. | Kill it. |
+
+Health (`bodyHealth` 600, `tentacleHealth` 50, `faceHealth` and `handHealth` 100) is meant for a full netherite or
+Born in Chaos set with Better Combat; each player in the arena beyond the first adds `extraPlayerHealth` (50%).
+It drops the Heart of the Pale (never despawns, can't be destroyed), loot
+(`data/thepale/loot_table/entities/patchwork_abomination.json`) and `experience`, and everybody near gets the
+advancement `thepale:finale/abomination_slain`.
+
+Sounds are the mod's own events (`assets/thepale/sounds.json`, `thepale:finale.*` and `thepale:boss.*`), for now
+pointing at vanilla sounds with a changed pitch: a resource pack or new .ogg files replace them without code changes.
+
+### 3. The cleansing
+
+Using the Heart of the Pale (hold for three seconds, in the Overworld) cleanses the Pale. It is the heart and not the
+boss's death that does it, because it changes the world for good: everybody can be there for it, and a boss summoned
+to try the fight changes nothing by dying.
+
+- The poison stops. Clients fade the fog wall, the fog, the ash, the grey water, the sea of clouds and the Distant
+  Horizons fog over `fadeSeconds`.
+- Chunks that exist keep their terrain. Their `thepale:the_pale` biome becomes the ocean biome the seed has there, as
+  each chunk loads and `chunksPerTick` loaded chunks a tick, and is sent to the players again.
+- New chunks: up to `preserveMargin` blocks past the farthest chunk that existed (read from the region files), open
+  sea exactly as before, so old and new chunks never meet at a seam. Over the next `transitionWidth` blocks the pull
+  toward the ocean eases off, and beyond that the world is the seed's own: continents across the sea. The islands'
+  climates fade out over the same band.
+- No restart is needed: world generation reads the state live. One restart afterwards is still a good idea, because
+  `/locate`, explorer maps and eyes of ender may have cached answers for far-away chunks from before.
+
+What stays and what goes after the cleansing:
+
+| Rule | After the cleansing |
+|---|---|
+| Poison, fog wall, Pale biome | Gone everywhere. |
+| No new Nether portals on the frozen island | Lifted (`openColdIslandPortals`, on by default). |
+| `notOnStarterIsland` mobs | Kept on the starter island; not applied in the new lands. |
+| `frozenIslandOnlyMobs`, island-only ores and structures | Kept on the three islands; in the new lands everything generates and spawns as the seed and the mods have it. |
+| Strongholds | Stay on the hot island. |
+| Pinned structures | Unchanged: pins are only ever placed on the islands. |
+| `maxStructureSpacing` | Still applies to the whole Overworld, so rare structures are a little denser in the new lands than in vanilla. |
+
+Known limits: Distant Horizons keeps the LODs it already drew of the old sea until a player goes there; with a shader
+pack the steam fades by density (not tried with a shader pack in testing); if somebody once generated chunks very far
+out, the new lands start past those unless `maxSeaDistance` is set.
+
+### Replacing the boss model
+
+The model in the jar is a draft, generated by `tools/gen_boss_model.py` (geometry, animations and textures). An
+artist's model replaces these files, with no code changes as long as the bone and animation names are kept:
+
+- `assets/thepale/geo/entity/patchwork_abomination.geo.json`
+- `assets/thepale/animations/entity/patchwork_abomination.animation.json`
+- `assets/thepale/textures/entity/patchwork_abomination.png` and `patchwork_abomination_glowmask.png` (the parts
+  that glow in the dark: the slits and the eyes)
+
+Bones. The origin is the lowest point of the body, the front (the main eye) is toward -Z (north in Blockbench),
+1 block = 16 units:
+
+| Bone | What the code does with it |
+|---|---|
+| `body` | Nothing: a ball about 4.5 blocks in radius, animated by `idle`, `crawl`, `death`. Parent of the next five. |
+| `slits` | The small glowing eye slits. |
+| `eye_main`, `eyelid_upper`, `eyelid_lower` | The main eye, animated by `eye_open` / `eye_shut`. |
+| `seam_left`, `seam_right` | The seam over the eye, animated by `seam_open` / `seam_shut`. |
+| `tentacle1_seg1` ... `tentacle6_seg8` | One bone per segment, **not parented to each other**. Each is modelled hanging straight down from its pivot, 2 blocks (32 units) long. Every frame the code puts each pivot on the limb's curve and turns the bone along it, and hides the limb when it is cut off. |
+| `face_seg1..8`, `hand_seg1..8` | The same for the two limbs that carry the face and the hand. |
+| `face`, `face_jaw` | The stone face, its pivot where the last segment ends, facing -Z. `face_jaw` is its child, moved by `face_scream`. |
+| `hand`, `hand_finger1..5` | The hand, modelled hanging down from its pivot like a segment; the fingers are its children, moved by `hand_open` / `hand_grab`. |
+
+Bones the model doesn't have are skipped, and extra bones are fine as children of these. Where the limbs are attached
+and how long they are (8 segments of 2 blocks) is in `finale/boss/Limbs.java`, shared by the hitboxes and the model:
+change both together.
+
+Animations, by these exact names. Looping: `idle`, `crawl` (phase 4), `face_idle`.
+Played once and held on the last frame: `death` (5 s, the entity is removed after it), `seam_shut`, `seam_open`,
+`eye_shut`, `eye_open`, `face_scream` (once per scream), `hand_open`, `hand_grab`. They must not key the segment
+bones, `face` or `hand` themselves: the code owns those.
 
 ## Credits
 

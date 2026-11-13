@@ -3,7 +3,11 @@
 	chapter.24C62B88537DAC31.title: "The Nether"
 	chapter.52326DE657CCE52E.chapter_subtitle: ["The main path: from your first crafting table to the crossing to the hot island."]
 	chapter.52326DE657CCE52E.title: "The Mild Island"
+	chapter.7B6726D6472E01D6.chapter_subtitle: ["What lives in the fog can be called. It will not go back."]
+	chapter.7B6726D6472E01D6.title: "The Pale"
 	chapter_group.6FA7D509EB9A847A.title: "The Pale"
+	quest.0388B9AB157B8169.quest_desc: ["There is no way back. Tick the quest and claim the reward: it starts the invasion. In three game days the thing from the fog comes ashore at night on the island with the most players. The sky darkens on the first day, and on the second its silhouette stands on the horizon. Bring netherite armour, potions and food for the whole team."]
+	quest.0388B9AB157B8169.title: "Summon the Pale"
 	quest.03FA7F1DAE6ECFF3.quest_desc: ["Brew any potion."]
 	quest.03FA7F1DAE6ECFF3.title: "Home Brew"
 	quest.06F27455A8C1762B.quest_desc: ["Make a bucket. The reward is a random Insight book, I to III."]
@@ -28,6 +32,8 @@
 	quest.18BAE9E1D07C3F7C.title: "Stone Age"
 	quest.238CF919ACEEAA52.quest_desc: ["When it gets too cold around you (at night or high in the mountains), warm up next to a warm block such as a campfire."]
 	quest.238CF919ACEEAA52.title: "Huddle Close"
+	quest.23E7486175360186.quest_desc: ["The invasion has begun. The sky tells you how long is left: the darker, the closer. If everybody dies or leaves, the thing goes back into the sea and returns the next night."]
+	quest.23E7486175360186.title: "It Is Coming"
 	quest.253F64A34921796E.quest_desc: ["A nether star and obsidian."]
 	quest.253F64A34921796E.title: "Beacon"
 	quest.268E03D5637E21BD.quest_desc: ["The plain Nether: netherrack and lava."]
@@ -80,6 +86,8 @@
 	quest.5030EEC3E619C095.title: "Heatproof Armour"
 	quest.52D4A2355D369CE6.quest_desc: ["Caves explored, iron on. Take a longer fire resistance."]
 	quest.52D4A2355D369CE6.title: "Ready for the Heat"
+	quest.5665ADEFB6FFF58A.quest_desc: ["The boss drops the Heart of the Pale. Hold use in the Overworld and the Pale is gone for good: the poison stops, the fog lifts, and new lands appear beyond the sea."]
+	quest.5665ADEFB6FFF58A.title: "Clear Water"
 	quest.5C108A9D1926801A.quest_desc: ["The recipe is open. Craft a diamond pickaxe: you need it for debris and obsidian."]
 	quest.5C108A9D1926801A.title: "Diamond Pickaxe"
 	quest.5F7D080C32D1BF06.quest_desc: ["Mine some coal."]
@@ -98,6 +106,8 @@
 	quest.6CA11DA32F4F7DDE.title: "Fortress"
 	quest.6DAD2F9960A4AC46.quest_desc: ["Place a respawn anchor in the Nether, charge it fully (4 glowstone) and use it to set your spawn. While it is charged you keep your inventory and experience when you die. Each respawn uses one charge. Items in the elytra slot drop as usual."]
 	quest.6DAD2F9960A4AC46.title: "Respawn Anchor"
+	quest.6F36D9DB36D90C0D.quest_desc: ["Kill the boss. Cut the tentacles first: while they hold, the body takes next to no damage. Then the face and the hand, then the main eye while it is open. Everybody near gets the advancement."]
+	quest.6F36D9DB36D90C0D.title: "The Patchwork Abomination"
 	quest.72F9FEBA0B99A12B.quest_desc: ["Deep in the Nether, below y 20. Needs a diamond pickaxe."]
 	quest.72F9FEBA0B99A12B.title: "Ancient Debris"
 	quest.799E7F1C5D6A46BF.quest_desc: ["The hot island lies 3500 to 4500 blocks south; in the Nether that is 8 times closer. Head south to around x 0, z 500 (x −60 to 60, z 440 to 560). A portal built there leads to the hot island."]
