@@ -34,7 +34,19 @@ neoForge {
     }
 }
 
+repositories {
+    // GeckoLib (the boss's model and animations).
+    maven {
+        name = 'GeckoLib'
+        url = 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
+        content { includeGroup 'software.bernie.geckolib' }
+    }
+}
+
 dependencies {
+    // Required at run time: the modpack carries GeckoLib.
+    implementation "software.bernie.geckolib:geckolib-neoforge-${minecraft_version}:${geckolib_version}"
+
     // Optional: only compiled against. The Distant Horizons support switches itself on when DH is installed.
     compileOnly files('libs/DistantHorizons-3.3.3-1.21.1-fabric-neoforge.jar')
 }

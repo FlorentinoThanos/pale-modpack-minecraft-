@@ -29,6 +29,14 @@ versionRange = "[1.21.1,1.22)"
 ordering = "NONE"
 side = "BOTH"
 
+# The boss of the finale is a GeckoLib model.
+[[dependencies.thepale]]
+modId = "geckolib"
+type = "required"
+versionRange = "[4.9,)"
+ordering = "AFTER"
+side = "BOTH"
+
 # Not needed, but if Terralith is there our continents override has to load after it.
 [[dependencies.thepale]]
 modId = "terralith"

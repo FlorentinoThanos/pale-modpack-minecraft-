@@ -1,0 +1,23 @@
+{
+  "display": {
+    "icon": {
+      "id": "thepale:heart_of_the_pale"
+    },
+    "title": {
+      "translate": "advancements.thepale.finale.cleansed.title"
+    },
+    "description": {
+      "translate": "advancements.thepale.finale.cleansed.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "granted": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "parent": "thepale:finale/abomination_slain"
+}

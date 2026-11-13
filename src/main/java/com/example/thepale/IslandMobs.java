@@ -73,6 +73,11 @@ public final class IslandMobs {
 
     private IslandMobs() {}
 
+    /** Lets this entity into the level whatever the island rules say (the boss's summons), as a spawn egg would. */
+    public static void allow(Entity entity) {
+        REQUESTED.add(entity);
+    }
+
     /** Natural spawning: the mobs are simply not on the list where they're kept out. */
     public static void onPotentialSpawns(LevelEvent.PotentialSpawns event) {
         if (!(event.getLevel() instanceof Level level) || level.isClientSide()) {

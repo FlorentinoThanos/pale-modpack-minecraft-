@@ -1,7 +1,9 @@
 package com.example.thepale;
 
 import com.example.thepale.config.CommonConfig;
+import com.example.thepale.finale.FinaleRegistry;
 import com.example.thepale.finale.FinaleSounds;
+import com.example.thepale.finale.boss.SlamPayload;
 import com.example.thepale.finale.FinaleView;
 import com.example.thepale.finale.Invasion;
 import com.example.thepale.survey.IslandSurvey;
@@ -48,7 +50,9 @@ public final class ThePale {
 
         // The finale: the invasion, the boss and the cleansing of the Pale.
         FinaleSounds.register(modBus);
+        FinaleRegistry.register(modBus);
         modBus.addListener(FinaleView::onRegisterPayloads);
+        modBus.addListener(SlamPayload::onRegisterPayloads);
         NeoForge.EVENT_BUS.addListener(Invasion::onServerTick);
         NeoForge.EVENT_BUS.addListener(Invasion::onPlayerLoggedIn);
         NeoForge.EVENT_BUS.addListener(Invasion::onRegisterCommands);

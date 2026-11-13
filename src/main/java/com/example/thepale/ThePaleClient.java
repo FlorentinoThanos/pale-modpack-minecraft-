@@ -8,7 +8,11 @@ import com.example.thepale.client.PaleWallRenderer;
 import com.example.thepale.client.compat.PaleDistantHorizons;
 import com.example.thepale.config.ClientConfig;
 import com.example.thepale.finale.FinaleView;
+import com.example.thepale.finale.FinaleRegistry;
+import com.example.thepale.finale.client.AbominationRenderer;
+import com.example.thepale.finale.client.BossMusic;
 import com.example.thepale.finale.client.FinaleClient;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import com.example.thepale.worldgen.PaleShape;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.EventPriority;
@@ -54,6 +58,9 @@ public final class ThePaleClient {
         NeoForge.EVENT_BUS.addListener(FinaleClient::onClientTick);
         NeoForge.EVENT_BUS.addListener(FinaleClient::onComputeFogColor);
         NeoForge.EVENT_BUS.addListener(FinaleClient::onRenderLevelStage);
+        NeoForge.EVENT_BUS.addListener(BossMusic::onClientTick);
+        modBus.addListener((EntityRenderersEvent.RegisterRenderers event) ->
+                event.registerEntityRenderer(FinaleRegistry.PATCHWORK_ABOMINATION.get(), AbominationRenderer::new));
 
         // Optional: the DH classes are only loaded when DH is there.
         if (ModList.get().isLoaded("distanthorizons")) {

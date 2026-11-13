@@ -1,6 +1,7 @@
 package com.example.thepale.finale;
 
 import com.example.thepale.config.CommonConfig;
+import com.example.thepale.finale.boss.PatchworkAbomination;
 import com.example.thepale.worldgen.PaleShape;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.logging.LogUtils;
@@ -21,6 +22,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
@@ -126,6 +128,14 @@ public final class Invasion {
     public static void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
         if (event.getEntity() instanceof ServerPlayer player) {
             FinalePayload.sendTo(player);
+            FinaleState state = FinaleState.get(player.server);
+            // Somebody who wasn't online when it happened.
+            if (state.phase != FinaleState.Phase.NONE || state.cleansed) {
+                FinaleAdvancements.grant(player, FinaleAdvancements.ROOT);
+            }
+            if (state.cleansed) {
+                FinaleAdvancements.grant(player, FinaleAdvancements.CLEANSED);
+            }
         }
     }
 
@@ -153,11 +163,37 @@ public final class Invasion {
         return false;
     }
 
-    // ----- The boss itself (Part 2 fills these in) -----
+    // ----- The boss itself -----
 
     /** Puts the boss on the shore. {@return false if it could not be done now} */
     private static boolean comeAshore(ServerLevel level, FinaleState state) {
-        return false;
+        int x = Mth.floor(state.landX);
+        int z = Mth.floor(state.landZ);
+        if (!level.isLoaded(new BlockPos(x, level.getSeaLevel(), z))) {
+            return false;
+        }
+        PatchworkAbomination boss = FinaleRegistry.PATCHWORK_ABOMINATION.get().create(level);
+        if (boss == null) {
+            return false;
+        }
+        Vec3 home = new Vec3(state.landX, level.getHeight(Heightmap.Types.MOTION_BLOCKING, x, z), state.landZ);
+        // It rises out of the sea just off the landing point and comes in.
+        double dx = state.offshoreX - state.landX;
+        double dz = state.offshoreZ - state.landZ;
+        double length = Math.max(Math.sqrt(dx * dx + dz * dz), 1);
+        double leash = CommonConfig.get().finale().bossLeash();
+        double fromX = state.landX + dx / length * leash;
+        double fromZ = state.landZ + dz / length * leash;
+        float yaw = (float) (Mth.atan2(-dz, -dx) * Mth.RAD_TO_DEG) - 90f;
+        boss.moveTo(fromX, level.getHeight(Heightmap.Types.MOTION_BLOCKING, Mth.floor(fromX), Mth.floor(fromZ)) - 6, fromZ, yaw, 0);
+        boss.setHome(home, true);
+        if (!level.addFreshEntity(boss)) {
+            return false;
+        }
+        state.boss = boss.getUUID();
+        broadcast(level.getServer(), "message.thepale.finale.ashore", FinaleSounds.ARRIVE, 1.2f, state, CommonConfig.get().finale());
+        LOGGER.info("[thepale] The boss has come ashore at ({}, {})", x, z);
+        return true;
     }
 
     private static boolean bossPresent(ServerLevel level, FinaleState state) {
@@ -231,6 +267,9 @@ public final class Invasion {
         pickTarget(level, state, config);
         state.setDirty();
         announce(server, state, STAGE_AWAKEN, config);
+        for (ServerPlayer player : server.getPlayerList().getPlayers()) {
+            FinaleAdvancements.grant(player, FinaleAdvancements.ROOT);
+        }
         FinalePayload.sendToAll(server);
         LOGGER.info("[thepale] The invasion has started: landing at ({}, {}), {} game days", Math.round(state.landX), Math.round(state.landZ), config.approachDays());
         return Component.translatable("commands.thepale.invasion.started", Math.round(state.landX), Math.round(state.landZ));
@@ -301,7 +340,22 @@ public final class Invasion {
                         .then(Commands.literal("start").executes(context -> reply(context.getSource(), () -> start(context.getSource().getServer()))))
                         .then(Commands.literal("status").executes(context -> reply(context.getSource(), () -> status(context.getSource().getServer()))))
                         .then(Commands.literal("skip").executes(context -> reply(context.getSource(), () -> skip(context.getSource().getServer()))))
-                        .then(Commands.literal("cancel").executes(context -> reply(context.getSource(), () -> cancel(context.getSource().getServer()))))));
+                        .then(Commands.literal("cancel").executes(context -> reply(context.getSource(), () -> cancel(context.getSource().getServer())))))
+                // For trying the fight: the boss right here, outside any invasion. Killing it changes nothing in the world.
+                .then(Commands.literal("boss").then(Commands.literal("spawn").executes(context -> reply(context.getSource(), () -> spawnHere(context.getSource()))))));
+    }
+
+    private static Component spawnHere(CommandSourceStack source) {
+        ServerLevel level = source.getLevel();
+        PatchworkAbomination boss = FinaleRegistry.PATCHWORK_ABOMINATION.get().create(level);
+        if (boss == null) {
+            return Component.literal("Could not create the boss");
+        }
+        Vec3 at = source.getPosition();
+        boss.moveTo(at.x, at.y + 6, at.z, source.getRotation().y, 0);
+        boss.setHome(at, false);
+        level.addFreshEntity(boss);
+        return Component.translatable("commands.thepale.boss.spawned");
     }
 
     static int reply(CommandSourceStack source, Supplier<Component> action) {
