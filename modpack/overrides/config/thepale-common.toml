@@ -60,6 +60,22 @@
 	# Default: 1000.0
 	# Range: 1.0 ~ 3.0E7
 	climateRadius = 1000.0
+	#The starter island's cool north: from this far north of the centre (as a share of the way to the island's
+	#climate edge, 0.8 of its radius) the climate gets cooler, and besides the temperate biomes the cool ones
+	#that never snow may come up there too (Terralith's Yosemite, Yellowstone, caldera, lavender forest, shield,
+	#moonlight grove, lush valley, birch taiga, windswept hills and the like). Snowy, icy and frozen biomes never
+	#do. 1 turns the cool north off. Three-island worlds only; only affects newly generated chunks.
+	# Default: 0.35
+	# Range: 0.0 ~ 1.0
+	coolNorthStart = 0.35
+	#How much colder the cool north gets at its far end, in climate temperature units (vanilla's temperate band
+	#is 0.35 wide). It grows evenly from 0 where the cool north starts.
+	# Default: 0.4
+	# Range: 0.0 ~ 1.0
+	coolNorthChill = 0.4
+	#Cool biomes kept out of the cool north anyway, because they look wintry though they aren't tagged snowy.
+	#One biome id per line.
+	coolNorthExcluded = ["terralith:skylands_winter", "terralith:alpine_highlands"]
 
 [structures]
 	#Overworld structures normally spaced wider than this many chunks apart (woodland mansions: 80, Born in Chaos:
@@ -104,6 +120,19 @@
 	# Default: 10
 	# Range: 0 ~ 64
 	villageClearance = 10
+
+[biomes]
+	#Biomes every new world gets on a given island, at least one patch each. For each line the mod looks over
+	#the island for the spot whose terrain suits the biome best (cliffs for cliff biomes, flat inland ground for
+	#flat ones, peaks for peak biomes) and makes a patch of it there. Seas, rivers, beaches and the caves under the
+	#patch keep their own biomes. Format: island:biome, island being mild (the starter island), hot or cold.
+	#Islands the world doesn't have are skipped. Saved with the world (thepale-biome-pins.json): existing worlds
+	#are never touched, and deleting the file un-pins them for chunks generated from then on.
+	pinnedBiomes = ["mild:terralith:yosemite_cliffs", "mild:terralith:yellowstone", "mild:terralith:blooming_valley", "mild:terralith:caldera", "mild:terralith:valley_clearing", "cold:terralith:glacial_chasm", "cold:terralith:emerald_peaks", "cold:terralith:snowy_shield"]
+	#Rough radius in blocks of each pinned biome patch (its edge is wavy, from 75% to 125% of this).
+	# Default: 96
+	# Range: 16 ~ 512
+	pinnedBiomeRadius = 96
 
 [ores]
 	#Placed features (ores and the like) that generate only on the frozen northern island when the world has

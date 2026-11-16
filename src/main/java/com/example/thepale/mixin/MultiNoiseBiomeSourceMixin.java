@@ -1,5 +1,6 @@
 package com.example.thepale.mixin;
 
+import com.example.thepale.worldgen.BiomePins;
 import com.example.thepale.worldgen.MildBiomes;
 import com.example.thepale.worldgen.PaleBiomeSource;
 import com.example.thepale.worldgen.PaleBiomes;
@@ -41,6 +42,11 @@ public abstract class MultiNoiseBiomeSourceMixin implements PaleBiomeSource {
     @Nullable
     private volatile Climate.ParameterList<Holder<Biome>> thepale$mildParameters;
 
+    /** The same for the mild island's cool north ({@link MildBiomes#cool}). */
+    @Unique
+    @Nullable
+    private volatile Climate.ParameterList<Holder<Biome>> thepale$coolParameters;
+
     @Unique
     @Nullable
     private volatile Set<Holder<Biome>> thepale$possibleWithPale;
@@ -50,6 +56,7 @@ public abstract class MultiNoiseBiomeSourceMixin implements PaleBiomeSource {
         thepale$paleBiome = biome;
         thepale$possibleWithPale = null;
         thepale$mildParameters = null;
+        thepale$coolParameters = null;
     }
 
     @Override
@@ -69,6 +76,11 @@ public abstract class MultiNoiseBiomeSourceMixin implements PaleBiomeSource {
         return cached != null ? cached : possible;
     }
 
+    @Override
+    public Climate.ParameterList<Holder<Biome>> thepale$parameters() {
+        return parameters();
+    }
+
     @Inject(
             method = "getNoiseBiome(IIILnet/minecraft/world/level/biome/Climate$Sampler;)Lnet/minecraft/core/Holder;",
             at = @At("HEAD"),
@@ -85,12 +97,26 @@ public abstract class MultiNoiseBiomeSourceMixin implements PaleBiomeSource {
             cir.setReturnValue(pale);
         } else {
             Climate.TargetPoint target = PaleClimate.shift(sampler.sample(x, y, z), blockX, blockZ);
+            Holder<Biome> biome;
             if (PaleShape.server().nearest(blockX, blockZ).kind() == PaleShape.Kind.MILD) {
-                cir.setReturnValue(thepale$mildParameters().findValue(target));
+                biome = PaleClimate.mildCoolness(blockX, blockZ) > 0
+                        ? thepale$coolParameters().findValue(target)
+                        : thepale$mildParameters().findValue(target);
             } else {
-                cir.setReturnValue(getNoiseBiome(target));
+                biome = getNoiseBiome(target);
             }
+            cir.setReturnValue(BiomePins.apply(biome, blockX, blockZ, target));
         }
+    }
+
+    @Unique
+    private Climate.ParameterList<Holder<Biome>> thepale$coolParameters() {
+        Climate.ParameterList<Holder<Biome>> cool = thepale$coolParameters;
+        if (cool == null) {
+            cool = MildBiomes.cool(parameters(), com.example.thepale.config.CommonConfig.get().coolNorthExcluded());
+            thepale$coolParameters = cool;
+        }
+        return cool;
     }
 
     @Unique

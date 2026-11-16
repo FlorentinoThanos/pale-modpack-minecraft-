@@ -14,4 +14,7 @@ public interface PaleBiomeSource {
 
     /** {@code possible} plus the Pale biome, cached (possible is itself cached by BiomeSource). */
     Set<Holder<Biome>> thepale$withPale(Set<Holder<Biome>> possible);
+
+    /** The climate table the source picks from, as the world's datapacks made it (for {@link BiomePins}). */
+    net.minecraft.world.level.biome.Climate.ParameterList<Holder<Biome>> thepale$parameters();
 }

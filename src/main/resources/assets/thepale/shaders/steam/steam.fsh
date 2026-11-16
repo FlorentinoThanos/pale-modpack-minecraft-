@@ -178,8 +178,11 @@ void main() {
     float scene = sceneDistance();
     float end = min(scene, MAX_DISTANCE);
     float sea = CameraY > Heights.x && dir.y < -1.0e-4 ? (CameraY - Heights.x) / -dir.y : MAX_DISTANCE * 2.0;
-    // The ray ends on the sea: the water itself, or open sea past the chunks that are drawn.
-    bool water = sea < MAX_DISTANCE && scene > sea - max(1.0, 0.3 / -dir.y);
+    // The ray ends on the sea: the water itself (the scene ends right at the sea's surface), or open sea past the
+    // chunks that are drawn (no scene at all). Ground seen further along than the surface is dry land below sea level,
+    // like a cave mouth, a ravine or a pit, and must not reflect the steam.
+    float surfaceSlack = max(1.0, 0.3 / -dir.y) + 0.004 * sea;
+    bool water = sea < MAX_DISTANCE && scene > sea - surfaceSlack && (scene < sea + surfaceSlack || scene > 1.0e6);
     end = min(end, sea);
     float start = 0.0;
     if (CameraY > Heights.z) {

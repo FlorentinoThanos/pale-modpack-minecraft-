@@ -23,6 +23,9 @@ public final class CommonConfig {
     private static final ModConfigSpec.DoubleValue TEMPERATURE_ZONES;
     private static final ModConfigSpec.DoubleValue HUMIDITY_ZONES;
     private static final ModConfigSpec.DoubleValue CLIMATE_RADIUS;
+    private static final ModConfigSpec.DoubleValue COOL_NORTH_START;
+    private static final ModConfigSpec.DoubleValue COOL_NORTH_CHILL;
+    private static final ModConfigSpec.ConfigValue<List<? extends String>> COOL_NORTH_EXCLUDED;
     private static final ModConfigSpec.IntValue MAX_STRUCTURE_SPACING;
     private static final ModConfigSpec.BooleanValue SEARCH_SEED;
     private static final ModConfigSpec.ConfigValue<List<? extends String>> REQUIRED_STRUCTURES;
@@ -32,6 +35,8 @@ public final class CommonConfig {
     private static final ModConfigSpec.ConfigValue<List<? extends String>> KEEP_AWAY_FROM_VILLAGES;
     private static final ModConfigSpec.ConfigValue<List<? extends String>> VILLAGE_STRUCTURE_SETS;
     private static final ModConfigSpec.IntValue VILLAGE_CLEARANCE;
+    private static final ModConfigSpec.ConfigValue<List<? extends String>> PINNED_BIOMES;
+    private static final ModConfigSpec.IntValue PINNED_BIOME_RADIUS;
     private static final ModConfigSpec.DoubleValue POISON_START;
     private static final ModConfigSpec.DoubleValue POISON_FULL;
     private static final ModConfigSpec.ConfigValue<List<? extends String>> FROZEN_ISLAND_ONLY_FEATURES;
@@ -96,6 +101,24 @@ public final class CommonConfig {
                         "Distance from (0, 0) at which the zones are at their extremes. Between there and the centre they change",
                         "evenly. Only affects newly generated chunks; already generated ones keep their biomes.")
                 .defineInRange("climateRadius", 1000.0, 1.0, 30_000_000.0);
+        COOL_NORTH_START = builder
+                .comment(
+                        "The starter island's cool north: from this far north of the centre (as a share of the way to the island's",
+                        "climate edge, 0.8 of its radius) the climate gets cooler, and besides the temperate biomes the cool ones",
+                        "that never snow may come up there too (Terralith's Yosemite, Yellowstone, caldera, lavender forest, shield,",
+                        "moonlight grove, lush valley, birch taiga, windswept hills and the like). Snowy, icy and frozen biomes never",
+                        "do. 1 turns the cool north off. Three-island worlds only; only affects newly generated chunks.")
+                .defineInRange("coolNorthStart", 0.35, 0.0, 1.0);
+        COOL_NORTH_CHILL = builder
+                .comment(
+                        "How much colder the cool north gets at its far end, in climate temperature units (vanilla's temperate band",
+                        "is 0.35 wide). It grows evenly from 0 where the cool north starts.")
+                .defineInRange("coolNorthChill", 0.4, 0.0, 1.0);
+        COOL_NORTH_EXCLUDED = builder
+                .comment(
+                        "Cool biomes kept out of the cool north anyway, because they look wintry though they aren't tagged snowy.",
+                        "One biome id per line.")
+                .defineListAllowEmpty("coolNorthExcluded", List.of("terralith:skylands_winter", "terralith:alpine_highlands"), () -> "", value -> value instanceof String);
         builder.pop();
 
         builder.push("structures");
@@ -171,6 +194,29 @@ public final class CommonConfig {
                         "How many chunks keepAwayFromVillages structures stay from the spot a village tries (in a square, as",
                         "vanilla's own 10 chunks between outposts and villages). 0 turns this off.")
                 .defineInRange("villageClearance", 10, 0, 64);
+        builder.pop();
+
+        builder.push("biomes");
+        PINNED_BIOMES = builder
+                .comment(
+                        "Biomes every new world gets on a given island, at least one patch each. For each line the mod looks over",
+                        "the island for the spot whose terrain suits the biome best (cliffs for cliff biomes, flat inland ground for",
+                        "flat ones, peaks for peak biomes) and makes a patch of it there. Seas, rivers, beaches and the caves under the",
+                        "patch keep their own biomes. Format: island:biome, island being mild (the starter island), hot or cold.",
+                        "Islands the world doesn't have are skipped. Saved with the world (thepale-biome-pins.json): existing worlds",
+                        "are never touched, and deleting the file un-pins them for chunks generated from then on.")
+                .defineListAllowEmpty("pinnedBiomes", List.of(
+                        "mild:terralith:yosemite_cliffs",
+                        "mild:terralith:yellowstone",
+                        "mild:terralith:blooming_valley",
+                        "mild:terralith:caldera",
+                        "mild:terralith:valley_clearing",
+                        "cold:terralith:glacial_chasm",
+                        "cold:terralith:emerald_peaks",
+                        "cold:terralith:snowy_shield"), () -> "", value -> value instanceof String);
+        PINNED_BIOME_RADIUS = builder
+                .comment("Rough radius in blocks of each pinned biome patch (its edge is wavy, from 75% to 125% of this).")
+                .defineInRange("pinnedBiomeRadius", 96, 16, 512);
         builder.pop();
 
         builder.push("poison");
@@ -264,6 +310,9 @@ public final class CommonConfig {
             double temperatureZones,
             double humidityZones,
             double climateRadius,
+            double coolNorthStart,
+            double coolNorthChill,
+            List<String> coolNorthExcluded,
             int maxStructureSpacing,
             boolean searchSeed,
             List<String> requiredStructures,
@@ -273,6 +322,8 @@ public final class CommonConfig {
             List<String> keepAwayFromVillages,
             List<String> villageStructureSets,
             int villageClearance,
+            List<String> pinnedBiomes,
+            int pinnedBiomeRadius,
             double poisonStart,
             double poisonFull,
             List<String> frozenIslandOnlyFeatures,
@@ -319,6 +370,9 @@ public final class CommonConfig {
                 value(TEMPERATURE_ZONES, defaults),
                 value(HUMIDITY_ZONES, defaults),
                 value(CLIMATE_RADIUS, defaults),
+                value(COOL_NORTH_START, defaults),
+                value(COOL_NORTH_CHILL, defaults),
+                List.copyOf(defaults ? COOL_NORTH_EXCLUDED.getDefault() : COOL_NORTH_EXCLUDED.get()),
                 defaults ? MAX_STRUCTURE_SPACING.getDefault() : MAX_STRUCTURE_SPACING.get(),
                 defaults ? SEARCH_SEED.getDefault() : SEARCH_SEED.get(),
                 List.copyOf(defaults ? REQUIRED_STRUCTURES.getDefault() : REQUIRED_STRUCTURES.get()),
@@ -328,6 +382,8 @@ public final class CommonConfig {
                 List.copyOf(defaults ? KEEP_AWAY_FROM_VILLAGES.getDefault() : KEEP_AWAY_FROM_VILLAGES.get()),
                 List.copyOf(defaults ? VILLAGE_STRUCTURE_SETS.getDefault() : VILLAGE_STRUCTURE_SETS.get()),
                 defaults ? VILLAGE_CLEARANCE.getDefault() : VILLAGE_CLEARANCE.get(),
+                List.copyOf(defaults ? PINNED_BIOMES.getDefault() : PINNED_BIOMES.get()),
+                defaults ? PINNED_BIOME_RADIUS.getDefault() : PINNED_BIOME_RADIUS.get(),
                 poisonStart,
                 Math.max(value(POISON_FULL, defaults), poisonStart + 1.0),
                 List.copyOf(defaults ? FROZEN_ISLAND_ONLY_FEATURES.getDefault() : FROZEN_ISLAND_ONLY_FEATURES.get()),

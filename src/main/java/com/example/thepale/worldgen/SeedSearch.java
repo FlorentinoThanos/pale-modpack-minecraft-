@@ -77,9 +77,11 @@ public final class SeedSearch {
     public static void onServerAboutToStart(MinecraftServer server, LevelStem overworld) {
         message = List.of();
         StructurePins.set(List.of());
+        BiomePins.clear();
         WorldData data = server.getWorldData();
         if (data.overworldData().isInitialized()) {
             StructurePins.load(server); // an existing world: keep its pins, never change anything
+            BiomePins.load(server);
             return;
         }
         if (!(overworld.generator() instanceof NoiseBasedChunkGenerator generator)) {
@@ -87,6 +89,9 @@ public final class SeedSearch {
         }
         List<Requirement> requirements = requirements(server.registryAccess().registryOrThrow(Registries.STRUCTURE));
         if (requirements.isEmpty()) {
+            long seed = data.worldGenOptions().seed();
+            PaleShape.useSeed(seed);
+            BiomePins.create(server, generator, seed);
             return;
         }
         CommonConfig.Settings config = CommonConfig.get();
@@ -103,6 +108,10 @@ public final class SeedSearch {
         if (chosen != seed) {
             ((PrimaryLevelDataAccessor) data).thepale$setWorldOptions(data.worldGenOptions().withSeed(OptionalLong.of(chosen)));
         }
+
+        // Pinned biomes first, so the structure checks and pins below see the world as it will generate.
+        PaleShape.useSeed(chosen);
+        BiomePins.create(server, generator, chosen);
 
         // Whatever didn't come up on its own: move a try of its structure set to somewhere on the island it fits.
         List<String> missing = missing(server, overworld, generator, chosen, requirements, false);

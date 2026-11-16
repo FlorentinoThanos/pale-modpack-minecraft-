@@ -70,6 +70,59 @@ public final class MildBiomes {
         return temperature >= MIN_TEMPERATURE && temperature <= MAX_TEMPERATURE;
     }
 
+    /** Vanilla's cold band, the one below temperate: taiga, and Terralith's cool biomes. */
+    private static final long COOL_MIN = Climate.quantizeCoord(-0.45F);
+    /** The cool north takes biomes down to here: windswept hills (0.2) yes, snowy taiga and groves (below 0.15) no. */
+    private static final float COOL_MIN_TEMPERATURE = 0.2F;
+    private static final List<TagKey<Biome>> NOT_COOL = List.of(
+            terralith("reference/temperature/frozen_all"),
+            terralith("reference/temperature/lukewarm"),
+            terralith("reference/temperature/warm"));
+
+    /**
+     * {@return whether the starter island's cool north may have this biome}: the mild ones, and the cool ones that never
+     * snow (Terralith tags those "cold": Yosemite, Yellowstone, shield, moonlight grove...), unless the config leaves
+     * them out.
+     */
+    public static boolean isCool(Holder<Biome> holder, List<String> excluded) {
+        if (holder.is(Tags.Biomes.IS_SNOWY) || holder.is(Tags.Biomes.IS_ICY)
+                || holder.is(Tags.Biomes.IS_DESERT) || holder.is(Tags.Biomes.IS_BADLANDS)
+                || holder.is(Tags.Biomes.IS_SAVANNA)) {
+            return false;
+        }
+        for (TagKey<Biome> tag : NOT_COOL) {
+            if (holder.is(tag)) {
+                return false;
+            }
+        }
+        if (holder.unwrapKey().map(key -> excluded.contains(key.location().toString())).orElse(false)) {
+            return false;
+        }
+        Biome.ClimateSettings climate = holder.value().getModifiedClimateSettings();
+        if (climate.temperatureModifier() == Biome.TemperatureModifier.FROZEN) {
+            return false;
+        }
+        float temperature = climate.temperature();
+        return temperature >= COOL_MIN_TEMPERATURE && temperature <= MAX_TEMPERATURE;
+    }
+
+    /** {@return the entries of {@code all} for the cool north: placed in the cold or temperate band, with a cool biome} */
+    public static Climate.ParameterList<Holder<Biome>> cool(Climate.ParameterList<Holder<Biome>> all, List<String> excluded) {
+        List<Pair<Climate.ParameterPoint, Holder<Biome>>> kept = new ArrayList<>();
+        for (Pair<Climate.ParameterPoint, Holder<Biome>> entry : all.values()) {
+            Climate.Parameter temperature = entry.getFirst().temperature();
+            boolean cool = temperature.min() < TEMPERATE_MAX && temperature.max() > COOL_MIN;
+            if (cool && isCool(entry.getSecond(), excluded)) {
+                kept.add(entry);
+            }
+        }
+        if (kept.isEmpty()) {
+            return filter(all);
+        }
+        LOGGER.info("[thepale] The starter island's cool north picks from {} climate entries", kept.size());
+        return new Climate.ParameterList<>(kept);
+    }
+
     /** {@return the entries of {@code all} with a mild biome, or {@code all} itself if none is} */
     public static Climate.ParameterList<Holder<Biome>> filter(Climate.ParameterList<Holder<Biome>> all) {
         List<Pair<Climate.ParameterPoint, Holder<Biome>>> kept = new ArrayList<>();

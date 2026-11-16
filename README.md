@@ -41,6 +41,18 @@ From high up the ground is hidden by the game's own distance fog beyond your ren
 blocks, up and down too), so an island shows up as a hole in the clouds but its land only once you come down to about
 y 300. With Distant Horizons the sea of clouds and the islands reach the horizon.
 
+## Biomes on the islands
+
+- **Cool north of the starter island** (`coolNorthStart`, `coolNorthChill`, `coolNorthExcluded` in `[climate]`): from
+  about a third of the way north of the centre the starter island gets cooler, and besides the temperate biomes the
+  cool ones that never snow can come up there (Terralith's Yosemite, Yellowstone, caldera, lavender forest, shield,
+  moonlight grove, lush valley, birch taiga, windswept hills). Snowy, icy and frozen biomes never do.
+- **Pinned biomes** (`pinnedBiomes`, `pinnedBiomeRadius` in `[biomes]`): every new world gets a patch (about 96 blocks
+  in radius, wavy edge) of each listed biome on its island, on the spot whose terrain suits it best. Only the biome
+  changes, not the terrain; seas, rivers, beaches and caves inside a patch keep theirs. Saved with the world
+  (`thepale-biome-pins.json`); existing worlds get none. By default: Yosemite cliffs, Yellowstone, blooming valley,
+  caldera and valley clearing on the starter island; glacial chasm, emerald peaks and snowy shield on the cold one.
+
 ## Structures on the island
 
 On an island this small, many structures would never show up. Three things help, all in `[structures]` of the common

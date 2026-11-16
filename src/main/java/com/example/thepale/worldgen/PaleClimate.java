@@ -63,7 +63,8 @@ public final class PaleClimate {
                 yield warmth < 0 ? -warmth * NORTH_TEMPERATURE : warmth * SOUTH_TEMPERATURE;
             }
             // Temperate, a touch cooler to the north and warmer to the south.
-            case MILD -> MILD_TEMPERATURE + 0.15 * south;
+            // Cooler still in its north, from coolNorthStart on (see MildBiomes#cool).
+            case MILD -> MILD_TEMPERATURE + 0.15 * south - config.coolNorthChill() * coolness(south, config);
             // Warm and wet to the west (jungle), hot and dry to the east (desert, badlands); never temperate.
             case HOT -> HOT_TEMPERATURE + HOT_EAST_HEAT * east;
             // Frozen; its southern shore only just.
@@ -82,6 +83,32 @@ public final class PaleClimate {
                 point.erosion(),
                 point.depth(),
                 point.weirdness());
+    }
+
+    /**
+     * {@return how far into the starter island's cool north this column is, 0 (not in it) to 1 (its far end)}: 0
+     * anywhere but on the mild island.
+     */
+    public static double mildCoolness(int blockX, int blockZ) {
+        CommonConfig.Settings config = CommonConfig.get();
+        if (config.temperatureZones() == 0) {
+            return 0;
+        }
+        PaleShape.Island island = PaleShape.server().nearest(blockX, blockZ);
+        if (island.kind() != PaleShape.Kind.MILD) {
+            return 0;
+        }
+        double south = Mth.clamp((blockZ - island.centerZ()) / (island.radius() * ISLAND_CLIMATE_SPAN), -1.0, 1.0)
+                * Math.signum(config.temperatureZones());
+        return coolness(south, config);
+    }
+
+    private static double coolness(double south, CommonConfig.Settings config) {
+        double start = config.coolNorthStart();
+        if (start >= 1) {
+            return 0;
+        }
+        return Mth.clamp((-south - start) / (1 - start), 0.0, 1.0);
     }
 
     private static long pull(long quantized, double target, double strength) {
