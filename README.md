@@ -43,10 +43,10 @@ y 300. With Distant Horizons the sea of clouds and the islands reach the horizon
 
 ## Biomes on the islands
 
-- **Cool north of the starter island** (`coolNorthStart`, `coolNorthChill`, `coolNorthExcluded` in `[climate]`): from
-  about a third of the way north of the centre the starter island gets cooler, and besides the temperate biomes the
+- **Cool north of the starter island** (`coolNorthStart`, `coolNorthChill`, `coolNorthExcluded` in `[climate]`): in
+  its far north (from 60% of the way to the climate edge) the starter island gets a little cooler, and besides the temperate biomes the
   cool ones that never snow can come up there (Terralith's Yosemite, Yellowstone, caldera, lavender forest, shield,
-  moonlight grove, lush valley, birch taiga, windswept hills). Snowy, icy and frozen biomes never do.
+  moonlight grove, lush valley, birch taiga). Snowy, icy and frozen biomes never do, nor bare rocky hills (windswept).
 - **Pinned biomes** (`pinnedBiomes`, `pinnedBiomeRadius` in `[biomes]`): every new world gets a patch (about 96 blocks
   in radius, wavy edge) of each listed biome on its island, on the spot whose terrain suits it best. Only the biome
   changes, not the terrain; seas, rivers, beaches and caves inside a patch keep theirs. Saved with the world

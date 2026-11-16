@@ -108,17 +108,17 @@ public final class CommonConfig {
                         "that never snow may come up there too (Terralith's Yosemite, Yellowstone, caldera, lavender forest, shield,",
                         "moonlight grove, lush valley, birch taiga, windswept hills and the like). Snowy, icy and frozen biomes never",
                         "do. 1 turns the cool north off. Three-island worlds only; only affects newly generated chunks.")
-                .defineInRange("coolNorthStart", 0.35, 0.0, 1.0);
+                .defineInRange("coolNorthStart", 0.6, 0.0, 1.0);
         COOL_NORTH_CHILL = builder
                 .comment(
                         "How much colder the cool north gets at its far end, in climate temperature units (vanilla's temperate band",
                         "is 0.35 wide). It grows evenly from 0 where the cool north starts.")
-                .defineInRange("coolNorthChill", 0.4, 0.0, 1.0);
+                .defineInRange("coolNorthChill", 0.25, 0.0, 1.0);
         COOL_NORTH_EXCLUDED = builder
                 .comment(
-                        "Cool biomes kept out of the cool north anyway, because they look wintry though they aren't tagged snowy.",
+                        "Cool biomes kept out of the cool north anyway: wintry-looking ones not tagged snowy, and bare rocky hills.",
                         "One biome id per line.")
-                .defineListAllowEmpty("coolNorthExcluded", List.of("terralith:skylands_winter", "terralith:alpine_highlands"), () -> "", value -> value instanceof String);
+                .defineListAllowEmpty("coolNorthExcluded", List.of("terralith:skylands_winter", "terralith:alpine_highlands", "terralith:forested_highlands", "minecraft:windswept_hills", "minecraft:windswept_gravelly_hills", "minecraft:windswept_forest", "terralith:windswept_spires", "terralith:white_cliffs"), () -> "", value -> value instanceof String);
         builder.pop();
 
         builder.push("structures");

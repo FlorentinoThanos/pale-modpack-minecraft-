@@ -65,17 +65,17 @@
 	#that never snow may come up there too (Terralith's Yosemite, Yellowstone, caldera, lavender forest, shield,
 	#moonlight grove, lush valley, birch taiga, windswept hills and the like). Snowy, icy and frozen biomes never
 	#do. 1 turns the cool north off. Three-island worlds only; only affects newly generated chunks.
-	# Default: 0.35
+	# Default: 0.6
 	# Range: 0.0 ~ 1.0
-	coolNorthStart = 0.35
+	coolNorthStart = 0.6
 	#How much colder the cool north gets at its far end, in climate temperature units (vanilla's temperate band
 	#is 0.35 wide). It grows evenly from 0 where the cool north starts.
-	# Default: 0.4
+	# Default: 0.25
 	# Range: 0.0 ~ 1.0
-	coolNorthChill = 0.4
-	#Cool biomes kept out of the cool north anyway, because they look wintry though they aren't tagged snowy.
+	coolNorthChill = 0.25
+	#Cool biomes kept out of the cool north anyway: wintry-looking ones not tagged snowy, and bare rocky hills.
 	#One biome id per line.
-	coolNorthExcluded = ["terralith:skylands_winter", "terralith:alpine_highlands"]
+	coolNorthExcluded = ["terralith:skylands_winter", "terralith:alpine_highlands", "terralith:forested_highlands", "minecraft:windswept_hills", "minecraft:windswept_gravelly_hills", "minecraft:windswept_forest", "terralith:windswept_spires", "terralith:white_cliffs"]
 
 [structures]
 	#Overworld structures normally spaced wider than this many chunks apart (woodland mansions: 80, Born in Chaos:
