@@ -4,7 +4,7 @@ license = "All Rights Reserved"
 
 [[mods]]
 modId = "thepale"
-version = "1.12.5"
+version = "1.14.0"
 displayName = "The Pale"
 credits = "World shape based on Oceanus by Lizdtre (MIT License)"
 description = '''
@@ -27,6 +27,14 @@ modId = "minecraft"
 type = "required"
 versionRange = "[1.21.1,1.22)"
 ordering = "NONE"
+side = "BOTH"
+
+# The Frost Colossus is a GeckoLib model.
+[[dependencies.thepale]]
+modId = "geckolib"
+type = "required"
+versionRange = "[4.9,)"
+ordering = "AFTER"
 side = "BOTH"
 
 # Not needed, but if Terralith is there our continents override has to load after it.
