@@ -47,11 +47,13 @@ y 300. With Distant Horizons the sea of clouds and the islands reach the horizon
   its far north (from 60% of the way to the climate edge) the starter island gets a little cooler, and besides the temperate biomes the
   cool ones that never snow can come up there (Terralith's Yosemite, Yellowstone, caldera, lavender forest, shield,
   moonlight grove, lush valley, birch taiga). Snowy, icy and frozen biomes never do, nor bare rocky hills (windswept).
-- **Pinned biomes** (`pinnedBiomes`, `pinnedBiomeRadius` in `[biomes]`): every new world gets a patch (about 96 blocks
-  in radius, wavy edge) of each listed biome on its island, on the spot whose terrain suits it best. Only the biome
+- **Pinned biomes** (`pinnedBiomes`, `pinnedOnMild/Hot/Cold`, `pinnedBiomeRadius` in `[biomes]`): every new world
+  draws a few biomes of each island's list at random (3 on the starter island, 2 on the cold one) and gets a patch
+  (about 96 blocks in radius, wavy edge) of each on its island, on the spot whose terrain suits it best. Only the biome
   changes, not the terrain; seas, rivers, beaches and caves inside a patch keep theirs. Saved with the world
-  (`thepale-biome-pins.json`); existing worlds get none. By default: Yosemite cliffs, Yellowstone, blooming valley,
-  caldera and valley clearing on the starter island; glacial chasm, emerald peaks and snowy shield on the cold one.
+  (`thepale-biome-pins.json`); existing worlds get none. Starter island list: Yosemite cliffs, Yellowstone, blooming valley,
+  caldera, valley clearing, lavender forest, moonlight grove; cold island: glacial chasm, emerald peaks, snowy shield,
+  ice marsh, frozen cliffs.
 
 ## Structures on the island
 

@@ -156,7 +156,7 @@ public final class BiomePins {
         List<String> skipped = new ArrayList<>();
         java.util.Map<PaleShape.Kind, List<Candidate>> candidatesByIsland = new java.util.EnumMap<>(PaleShape.Kind.class);
         int index = 0;
-        for (String line : config.pinnedBiomes()) {
+        for (String line : draw(config, seed)) {
             index++;
             int colon = line.indexOf(':');
             if (colon <= 0) {
@@ -244,6 +244,29 @@ public final class BiomePins {
             }
         }
         return list;
+    }
+
+    /** {@return a few lines of pinnedBiomes for each island, drawn at random by the seed} */
+    private static List<String> draw(CommonConfig.Settings config, long seed) {
+        java.util.Map<String, List<String>> byIsland = new java.util.LinkedHashMap<>();
+        for (String line : config.pinnedBiomes()) {
+            int colon = line.indexOf(':');
+            String island = colon > 0 ? line.substring(0, colon).trim().toLowerCase(Locale.ROOT) : "";
+            byIsland.computeIfAbsent(island, k -> new ArrayList<>()).add(line);
+        }
+        List<String> drawn = new ArrayList<>();
+        byIsland.forEach((island, lines) -> {
+            int count = switch (island) {
+                case "mild", "starter" -> config.pinnedOnMild();
+                case "hot", "south" -> config.pinnedOnHot();
+                case "cold", "north", "frozen" -> config.pinnedOnCold();
+                default -> lines.size(); // reported as a bad line below
+            };
+            List<String> shuffled = new ArrayList<>(lines);
+            java.util.Collections.shuffle(shuffled, new Random(seed ^ island.hashCode() * 0x9E3779B97F4A7C15L));
+            drawn.addAll(shuffled.subList(0, Math.min(count, shuffled.size())));
+        });
+        return drawn;
     }
 
     @Nullable

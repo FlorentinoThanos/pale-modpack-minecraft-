@@ -37,6 +37,9 @@ public final class CommonConfig {
     private static final ModConfigSpec.IntValue VILLAGE_CLEARANCE;
     private static final ModConfigSpec.ConfigValue<List<? extends String>> PINNED_BIOMES;
     private static final ModConfigSpec.IntValue PINNED_BIOME_RADIUS;
+    private static final ModConfigSpec.IntValue PINNED_ON_MILD;
+    private static final ModConfigSpec.IntValue PINNED_ON_HOT;
+    private static final ModConfigSpec.IntValue PINNED_ON_COLD;
     private static final ModConfigSpec.DoubleValue POISON_START;
     private static final ModConfigSpec.DoubleValue POISON_FULL;
     private static final ModConfigSpec.ConfigValue<List<? extends String>> FROZEN_ISLAND_ONLY_FEATURES;
@@ -199,21 +202,35 @@ public final class CommonConfig {
         builder.push("biomes");
         PINNED_BIOMES = builder
                 .comment(
-                        "Biomes every new world gets on a given island, at least one patch each. For each line the mod looks over",
-                        "the island for the spot whose terrain suits the biome best (cliffs for cliff biomes, flat inland ground for",
-                        "flat ones, peaks for peak biomes) and makes a patch of it there. Seas, rivers, beaches and the caves under the",
-                        "patch keep their own biomes. Format: island:biome, island being mild (the starter island), hot or cold.",
-                        "Islands the world doesn't have are skipped. Saved with the world (thepale-biome-pins.json): existing worlds",
-                        "are never touched, and deleting the file un-pins them for chunks generated from then on.")
+                        "Rare biomes a new world may get as a patch on a given island. Each world draws a few of each island's lines",
+                        "at random (pinnedOnMild, pinnedOnHot, pinnedOnCold), so every world has a different mix. For each one drawn",
+                        "the mod looks over the island for the spot whose terrain suits the biome best (cliffs for cliff biomes, flat",
+                        "inland ground for flat ones, peaks for peak biomes) and makes a patch of it there. Seas, rivers, beaches and",
+                        "the caves under the patch keep their own biomes. Format: island:biome, island being mild (the starter",
+                        "island), hot or cold. Saved with the world (thepale-biome-pins.json): existing worlds are never touched, and",
+                        "deleting the file un-pins them for chunks generated from then on.")
                 .defineListAllowEmpty("pinnedBiomes", List.of(
                         "mild:terralith:yosemite_cliffs",
                         "mild:terralith:yellowstone",
                         "mild:terralith:blooming_valley",
                         "mild:terralith:caldera",
                         "mild:terralith:valley_clearing",
+                        "mild:terralith:lavender_forest",
+                        "mild:terralith:moonlight_grove",
                         "cold:terralith:glacial_chasm",
                         "cold:terralith:emerald_peaks",
-                        "cold:terralith:snowy_shield"), () -> "", value -> value instanceof String);
+                        "cold:terralith:snowy_shield",
+                        "cold:terralith:ice_marsh",
+                        "cold:terralith:frozen_cliffs"), () -> "", value -> value instanceof String);
+        PINNED_ON_MILD = builder
+                .comment("How many of the mild lines of pinnedBiomes each new world draws (all of them if there are fewer).")
+                .defineInRange("pinnedOnMild", 3, 0, 64);
+        PINNED_ON_HOT = builder
+                .comment("The same for the hot island.")
+                .defineInRange("pinnedOnHot", 2, 0, 64);
+        PINNED_ON_COLD = builder
+                .comment("The same for the cold island.")
+                .defineInRange("pinnedOnCold", 2, 0, 64);
         PINNED_BIOME_RADIUS = builder
                 .comment("Rough radius in blocks of each pinned biome patch (its edge is wavy, from 75% to 125% of this).")
                 .defineInRange("pinnedBiomeRadius", 96, 16, 512);
@@ -324,6 +341,9 @@ public final class CommonConfig {
             int villageClearance,
             List<String> pinnedBiomes,
             int pinnedBiomeRadius,
+            int pinnedOnMild,
+            int pinnedOnHot,
+            int pinnedOnCold,
             double poisonStart,
             double poisonFull,
             List<String> frozenIslandOnlyFeatures,
@@ -384,6 +404,9 @@ public final class CommonConfig {
                 defaults ? VILLAGE_CLEARANCE.getDefault() : VILLAGE_CLEARANCE.get(),
                 List.copyOf(defaults ? PINNED_BIOMES.getDefault() : PINNED_BIOMES.get()),
                 defaults ? PINNED_BIOME_RADIUS.getDefault() : PINNED_BIOME_RADIUS.get(),
+                defaults ? PINNED_ON_MILD.getDefault() : PINNED_ON_MILD.get(),
+                defaults ? PINNED_ON_HOT.getDefault() : PINNED_ON_HOT.get(),
+                defaults ? PINNED_ON_COLD.getDefault() : PINNED_ON_COLD.get(),
                 poisonStart,
                 Math.max(value(POISON_FULL, defaults), poisonStart + 1.0),
                 List.copyOf(defaults ? FROZEN_ISLAND_ONLY_FEATURES.getDefault() : FROZEN_ISLAND_ONLY_FEATURES.get()),
