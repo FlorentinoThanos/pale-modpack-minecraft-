@@ -44,5 +44,14 @@
   "subtitles.thepale.colossus.step": "Frost Colossus steps",
   "subtitles.thepale.colossus.sigh": "Frost Colossus sighs",
   "subtitles.thepale.colossus.shake_off": "Frost Colossus shakes off snow",
-  "message.thepale.colossus.waking": "The Frost Colossus is waking up"
+  "message.thepale.colossus.waking": "The Frost Colossus is waking up",
+  "commands.thepale.colossus.where.last": "The Frost Colossus isn't near any player. It was last at %s %s %s, %s blocks from you.",
+  "commands.thepale.colossus.where.last_asleep": "The Frost Colossus isn't near any player. It was last asleep at %s %s %s, %s blocks from you.",
+  "commands.thepale.colossus.where.gone": "The Frost Colossus is gone. It will be back on the cold island in about %s min.",
+  "advancements.thepale.colossus.seen.title": "Giant of the North",
+  "advancements.thepale.colossus.seen.description": "See the Frost Colossus",
+  "advancements.thepale.colossus.ride.title": "On the Giant's Shoulders",
+  "advancements.thepale.colossus.ride.description": "Ride on the Frost Colossus's shoulder",
+  "advancements.thepale.colossus.excursion.title": "Sightseeing",
+  "advancements.thepale.colossus.excursion.description": "Ride the Frost Colossus for 500 blocks"
 }

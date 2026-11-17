@@ -626,6 +626,14 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
         pace += (Mth.clamp(moved / Math.max(fullSpeed, 1.0E-4), 0, 1) - pace) * 0.2;
         if (!level().isClientSide && isAlive()) {
             standOnFeet();
+            if (moved > 0) {
+                for (int seat = 0; seat < 2; seat++) {
+                    ServerPlayer rider = rider(seat);
+                    if (rider != null) {
+                        ColossusAdvancements.rode(rider, moved);
+                    }
+                }
+            }
         }
         setYBodyRot(getYRot());
         setYHeadRot(getYRot());
@@ -768,6 +776,9 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
         }
         if (tickCount % 4 == 0) {
             watch(level);
+        }
+        if (tickCount % 20 == 7) {
+            beSeen(level);
         }
         if (entityData.get(DATA_YAW) != getYRot()) {
             entityData.set(DATA_YAW, getYRot());
@@ -986,6 +997,25 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
         }
         double change = (gait.support() - getY()) * 0.12;
         setPos(getX(), getY() + Mth.clamp(change, -0.25, 0.25), getZ());
+    }
+
+    /** Whoever has it in sight (near enough, nothing in between) has seen the giant of the north. */
+    private void beSeen(ServerLevel level) {
+        Vec3 chest = toWorld(tickPose.part[ColossusPose.CHEST], 1f);
+        Vec3 head = toWorld(tickPose.part[ColossusPose.HEAD], 1f);
+        for (ServerPlayer player : level.players()) {
+            if (player.isSpectator() || player.distanceToSqr(chest) > 96 * 96 || ColossusAdvancements.has(player, ColossusAdvancements.SEEN)) {
+                continue;
+            }
+            Vec3 eyes = player.getEyePosition();
+            for (Vec3 point : new Vec3[] {head, chest}) {
+                if (level.clip(new net.minecraft.world.level.ClipContext(eyes, point, net.minecraft.world.level.ClipContext.Block.VISUAL,
+                        net.minecraft.world.level.ClipContext.Fluid.NONE, player)).getType() == net.minecraft.world.phys.HitResult.Type.MISS) {
+                    ColossusAdvancements.award(player, ColossusAdvancements.SEEN);
+                    break;
+                }
+            }
+        }
     }
 
     // ----- The head (server) -----
@@ -1323,6 +1353,7 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
                     setHandPhase(HandPhase.RETURN);
                     tell(player, CommonConfig.get().colossus().riderSteering() ? "riding" : "riding_plain",
                             Component.keybind("key.sneak"), Component.keybind("key.jump"));
+                    ColossusAdvancements.award(player, ColossusAdvancements.RIDE);
                 }
             }
             case FETCH -> {

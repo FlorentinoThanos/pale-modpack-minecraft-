@@ -1,0 +1,23 @@
+{
+  "parent": "thepale:colossus/ride",
+  "display": {
+    "icon": {
+      "id": "minecraft:map"
+    },
+    "title": {
+      "translate": "advancements.thepale.colossus.excursion.title"
+    },
+    "description": {
+      "translate": "advancements.thepale.colossus.excursion.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "done": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

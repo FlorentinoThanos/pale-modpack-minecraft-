@@ -1,6 +1,7 @@
 package com.example.thepale;
 
 import com.example.thepale.colossus.ColossusCommands;
+import com.example.thepale.colossus.ColossusKeeper;
 import com.example.thepale.colossus.ColossusRegistry;
 import com.example.thepale.colossus.ColossusRiding;
 import com.example.thepale.config.CommonConfig;
@@ -46,6 +47,9 @@ public final class ThePale {
         NeoForge.EVENT_BUS.addListener(ColossusRiding::onPlayerTick);
         NeoForge.EVENT_BUS.addListener(net.neoforged.bus.api.EventPriority.HIGHEST, ColossusRiding::onDeath);
         NeoForge.EVENT_BUS.addListener(ColossusRiding::onLoggedOut);
+        NeoForge.EVENT_BUS.addListener(ColossusKeeper::onJoin);
+        NeoForge.EVENT_BUS.addListener(ColossusKeeper::onLeave);
+        NeoForge.EVENT_BUS.addListener(ColossusKeeper::onLevelTick);
         NeoForge.EVENT_BUS.addListener(SeedSearch::onPlayerLoggedIn);
         NeoForge.EVENT_BUS.addListener(ShapePayload::onPlayerLoggedIn);
         modBus.addListener(ShapePayload::onRegisterPayloads);

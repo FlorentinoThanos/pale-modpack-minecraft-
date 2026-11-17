@@ -38,8 +38,10 @@ public final class ColossusCommands {
                 .then(Commands.literal("summon").requires(source -> source.hasPermission(2)).executes(ColossusCommands::summon))
                 .then(Commands.literal("home").requires(source -> source.hasPermission(2)).executes(ColossusCommands::home))
                 .then(Commands.literal("status").requires(source -> source.hasPermission(2)).executes(context -> {
-                    List<FrostColossus> found = loaded(context.getSource().getServer().overworld());
+                    ServerLevel overworld = context.getSource().getServer().overworld();
+                    List<FrostColossus> found = loaded(overworld);
                     found.forEach(colossus -> context.getSource().sendSuccess(() -> Component.literal(colossus.status()), false));
+                    context.getSource().sendSuccess(() -> Component.literal(ColossusKeeper.get(overworld).status(overworld)), false);
                     return found.size();
                 }))
                 .then(Commands.literal("sleep").requires(source -> source.hasPermission(2)).executes(context -> rest(context, true)))
@@ -61,8 +63,23 @@ public final class ColossusCommands {
         CommandSourceStack source = context.getSource();
         List<FrostColossus> found = loaded(source.getServer().overworld());
         if (found.isEmpty()) {
-            double[] heart = ColossusRange.heart();
-            source.sendSuccess(() -> Component.translatable("commands.thepale.colossus.where.none", Mth.floor(heart[0]), Mth.floor(heart[1])), false);
+            ServerLevel overworld = source.getServer().overworld();
+            ColossusKeeper keeper = ColossusKeeper.get(overworld);
+            long back = keeper.comesBackIn(overworld);
+            Vec3 last = keeper.last();
+            if (back >= 0) {
+                // Gone: back on the cold island after a while.
+                long minutes = Math.max(1, (back + 1199) / 1200);
+                source.sendSuccess(() -> Component.translatable("commands.thepale.colossus.where.gone", minutes), false);
+            } else if (last != null) {
+                Vec3 from = source.getPosition();
+                int distance = (int) Math.sqrt(Mth.square(from.x - last.x) + Mth.square(from.z - last.z));
+                source.sendSuccess(() -> Component.translatable(keeper.asleep() ? "commands.thepale.colossus.where.last_asleep" : "commands.thepale.colossus.where.last",
+                        Mth.floor(last.x), Mth.floor(last.y), Mth.floor(last.z), distance), false);
+            } else {
+                double[] heart = ColossusRange.heart();
+                source.sendSuccess(() -> Component.translatable("commands.thepale.colossus.where.none", Mth.floor(heart[0]), Mth.floor(heart[1])), false);
+            }
             return 0;
         }
         for (FrostColossus colossus : found) {
@@ -86,7 +103,7 @@ public final class ColossusCommands {
             source.sendFailure(Component.translatable("commands.thepale.colossus.disabled"));
             return 0;
         }
-        // There is only ever one.
+        // There is only ever one: this one takes the place of any other (one that isn't loaded is turned away when it is).
         loaded(overworld).forEach(old -> {
             old.ejectPassengers();
             old.discard();

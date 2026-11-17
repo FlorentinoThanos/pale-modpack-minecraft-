@@ -27,5 +27,14 @@
   "subtitles.thepale.colossus.step": "Шаги Ледяного Колосса",
   "subtitles.thepale.colossus.sigh": "Ледяной Колосс вздыхает",
   "subtitles.thepale.colossus.shake_off": "Ледяной Колосс стряхивает снег",
-  "message.thepale.colossus.waking": "Ледяной Колосс просыпается"
+  "message.thepale.colossus.waking": "Ледяной Колосс просыпается",
+  "commands.thepale.colossus.where.last": "Ледяного Колосса нет рядом ни с одним игроком. В последний раз он был на %s %s %s, в %s блоках от тебя.",
+  "commands.thepale.colossus.where.last_asleep": "Ледяного Колосса нет рядом ни с одним игроком. В последний раз он спал на %s %s %s, в %s блоках от тебя.",
+  "commands.thepale.colossus.where.gone": "Ледяного Колосса сейчас нет. Он вернётся на холодный остров примерно через %s мин.",
+  "advancements.thepale.colossus.seen.title": "Великан севера",
+  "advancements.thepale.colossus.seen.description": "Увидеть Ледяного Колосса",
+  "advancements.thepale.colossus.ride.title": "На плечах гиганта",
+  "advancements.thepale.colossus.ride.description": "Прокатиться на плече Ледяного Колосса",
+  "advancements.thepale.colossus.excursion.title": "Экскурсия",
+  "advancements.thepale.colossus.excursion.description": "Проехать на Ледяном Колоссе 500 блоков"
 }
