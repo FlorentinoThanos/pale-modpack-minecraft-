@@ -56,10 +56,11 @@
   "commands.thepale.colossus.where.next": "The Frost Colossus is not in the world now. It comes by somebody in about %s min.",
   "commands.thepale.colossus.event": "The Frost Colossus is on its way past %s.",
   "commands.thepale.colossus.no_place": "No place for the Frost Colossus turned up: it needs dry, loaded land 50 to 110 blocks from the player, off the coast.",
-  "message.thepale.colossus.event.start": "The ground shakes! The Frost Colossus is walking past %1$s (near %2$s, %3$s). Frozen chests of loot ride on its shoulders and back: climb up before it is gone.",
+  "message.thepale.colossus.event.start": "The ground shakes! The Frost Colossus is walking past %1$s (near %2$s, %3$s). Diamond crystals grow on its shoulders and back: climb up with a pickaxe before it is gone.",
   "message.thepale.colossus.event.end": "The Frost Colossus has walked on, over the horizon.",
-  "message.thepale.colossus.cache": "Right-click: open the chest",
-  "message.thepale.colossus.cache_taken": "You took the colossus's cargo",
-  "advancements.thepale.colossus.cache.title": "The Giant's Cargo",
-  "advancements.thepale.colossus.cache.description": "Take a chest off the Frost Colossus's shoulder or back"
+  "message.thepale.colossus.crystals": "Hit with the pickaxe: mine the diamonds",
+  "message.thepale.colossus.crystals_need_pickaxe": "These crystals need an iron pickaxe or better",
+  "message.thepale.colossus.crystals_mined": "The crystals broke off: the diamonds are yours",
+  "advancements.thepale.colossus.diamonds.title": "The Giant's Diamonds",
+  "advancements.thepale.colossus.diamonds.description": "Mine the diamond crystals off the Frost Colossus with a pickaxe"
 }

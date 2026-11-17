@@ -6,7 +6,7 @@ import net.minecraft.server.level.ServerPlayer;
 
 /**
  * The colossus's advancements (data/thepale/advancement/colossus/): each has one criterion that only this code
- * grants, when the player sees it, rides it, has ridden it far, and takes a cache off it.
+ * grants, when the player sees it, rides it, has ridden it far, and mines its crystals.
  */
 public final class ColossusAdvancements {
     /** «Giant of the North»: seeing it. */
@@ -16,8 +16,8 @@ public final class ColossusAdvancements {
     /** «Sightseeing»: riding it {@value #EXCURSION_BLOCKS} blocks. */
     public static final String EXCURSION = "colossus/excursion";
     public static final double EXCURSION_BLOCKS = 500;
-    /** «The Giant's Cargo»: taking a cache off it. */
-    public static final String CACHE = "colossus/cache";
+    /** «The Giant's Diamonds»: mining the crystals off it. */
+    public static final String DIAMONDS = "colossus/diamonds";
     /** How far a player has ridden it, kept with the player. */
     private static final String RIDDEN = "thepale.colossusRidden";
 

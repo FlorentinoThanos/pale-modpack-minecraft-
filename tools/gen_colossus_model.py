@@ -51,11 +51,9 @@ SNOW_SIDE = (192, 128, 64, 5)
 ICICLE = (192, 144, 8, 32)
 EYE = (200, 144, 16, 4)
 SOCKET = (216, 144, 32, 8)
-# The caches it carries on a walk: chests of dark wood bound with iron, a gold latch that glints.
-CHEST_SIDE = (0, 192, 32, 16)
-CHEST_TOP = (32, 192, 32, 16)
-LATCH = (64, 192, 4, 4)
-CRUST = (72, 192, 32, 16)
+# The diamond crystals that grow on its shoulders and back (they glow).
+CRYSTAL = (0, 192, 16, 64)
+CRYSTAL_TOP = (16, 192, 16, 16)
 
 rng = random.Random(30)
 
@@ -118,24 +116,15 @@ def icicle(x, top, z, length, thick=4):
             cube(x - thick / 4, top - length, z - thick / 4, thick / 2, length - upper, thick / 2, side=ICICLE, up=ICE, down=ICE)]
 
 
-def fixed(x0, y0, z0, w, h, d, side, up, down=None, inflate=0):
-    """A box whose faces are cut from the top left of their regions, with no randomness."""
+def crystal(x, y, z, w, h, lean_back, lean_out):
+    """A diamond crystal standing on (x, y, z), leaning back and outward (away from the middle) by these degrees."""
     def at(region, fw, fh):
         return {"uv": [region[0], region[1]], "uv_size": [min(fw, region[2]), min(fh, region[3])]}
-    faces = {"north": at(side, w, h), "south": at(side, w, h), "east": at(side, d, h), "west": at(side, d, h),
-             "up": at(up, w, d), "down": at(down or up, w, d)}
-    out = {"origin": [x0, y0, z0], "size": [w, h, d], "uv": faces}
-    if inflate:
-        out["inflate"] = inflate
-    return out
-
-
-def chest(x0, y0, z0, w, h, d):
-    """A chest, frozen over: the box, its lid's rim, the latch on the front, a crust of ice over one corner."""
-    return [fixed(x0, y0, z0, w, h, d, CHEST_SIDE, CHEST_TOP),
-            fixed(x0 - 0.5, y0 + h - 4, z0 - 0.5, w + 1, 1, d + 1, DARK, DARK),
-            fixed(x0 + w / 2 - 1, y0 + h - 6, z0 - 1, 2, 3, 1, LATCH, LATCH),
-            fixed(x0 - 1, y0 - 1, z0 + d / 2, w / 2 + 1, h / 2 + 2, d / 2 + 1, CRUST, CRUST)]
+    faces = {"north": at(CRYSTAL, w, h), "south": at(CRYSTAL, w, h), "east": at(CRYSTAL, w, h), "west": at(CRYSTAL, w, h),
+             "up": at(CRYSTAL_TOP, w, w), "down": at(CRYSTAL_TOP, w, w)}
+    out = 1 if x >= 0 else -1
+    return {"origin": [x - w / 2, y, z - w / 2], "size": [w, h, w], "pivot": [x, y, z],
+            "rotation": [-lean_back, 0, -out * lean_out], "uv": faces}
 
 
 def bone(name, parent, pivot, cubes=()):
@@ -241,12 +230,16 @@ def geometry():
         ], left))
         bones.append(side_bones("snow_foot", s + "_leg", (21, 14, -4), snow(4, 14, -25, 34, 42, thick=3), left))
 
-    # The caches it carries on a walk (shown while they hold something). Drawn last and cut from fixed places in the
-    # texture, so nothing above changes when they do.
-    for name, (x0, y0, z0, w, h, d) in (("cache_left", (39, 199, 2, 14, 10, 12)),
-                                        ("cache_right", (-53, 201, 2, 14, 10, 12)),
-                                        ("cache_back", (-6, 219, 2, 12, 11, 12))):
-        bones.append(bone(name, "torso", (x0 + w / 2, y0, z0 + d / 2), chest(x0, y0, z0, w, h, d)))
+    # The diamond crystals it carries on a walk (shrinking as they are mined). Drawn last and cut from fixed places
+    # in the texture, so nothing above changes when they do. Each: base x, y, z, width, height, lean back, lean out.
+    left = [(52, 196, 8, 10, 56, 14, 22), (43, 196, 14, 8, 40, 26, 4), (57, 196, -1, 7, 30, -4, 38),
+            (47, 196, 3, 6, 24, 10, 10), (56, 196, 17, 8, 36, 34, 26), (40, 196, 7, 5, 20, 6, -12)]
+    back = [(-1, 216, 6, 9, 44, 18, -4), (-11, 216, 4, 7, 30, 10, -26), (3, 222, 21, 8, 32, 32, 6),
+            (11, 216, 3, 7, 26, 6, 24)]
+    bones.append(bone("crystals_left", "torso", (52, 197, 6), [crystal(*c) for c in left]))
+    bones.append(bone("crystals_right", "torso", (-52, 199, 6),
+                      [crystal(-x, y + 2, z, w, h, back_lean, -out) for x, y, z, w, h, back_lean, out in left]))
+    bones.append(bone("crystals_back", "torso", (0, 217, 8), [crystal(*c) for c in back]))
 
     return {
         "format_version": "1.12.0",
@@ -388,6 +381,61 @@ def shade(colour, factor, add=0):
     return tuple(clamp(c * factor + add) for c in colour[:3]) + (colour[3] if len(colour) > 3 else 255,)
 
 
+def rough_stone(img, region, base, frost=0.0, plain=False):
+    """Rough stone in chunks about a block across (8 pixels, some twice that), each its own shade and mottled, with a
+    soft light edge on top and a soft shadow underneath: like the reference, a giant heaped up out of boulders."""
+    u0, v0, w, h = region
+    cell = 8
+    cols, rows = w // cell, h // cell
+    taken = [[False] * cols for _ in range(rows)]
+    rime = [[rng.random() for _ in range(w // 2 + 1)] for _ in range(h // 2 + 1)]
+    # Mottling: a coarse random field, smoothed, so the grain comes in patches rather than per pixel.
+    coarse = [[rng.uniform(-1, 1) for _ in range(w // 3 + 2)] for _ in range(h // 3 + 2)]
+
+    def mottle(x, y):
+        fx, fy = x / 3, y / 3
+        ix, iy = int(fx), int(fy)
+        tx, ty = fx - ix, fy - iy
+        a = coarse[iy][ix] * (1 - tx) + coarse[iy][ix + 1] * tx
+        b = coarse[iy + 1][ix] * (1 - tx) + coarse[iy + 1][ix + 1] * tx
+        return a * (1 - ty) + b * ty
+    for row in range(rows):
+        for col in range(cols):
+            if taken[row][col]:
+                continue
+            bw = min(rng.choice((1, 1, 2)), cols - col)
+            bh = min(rng.choice((1, 1, 1, 2)), rows - row)
+            if bw == 2 and taken[row][col + 1]:
+                bw = 1
+            for r in range(bh):
+                for c in range(bw):
+                    taken[row + r][col + c] = True
+            tone = rng.uniform(0.84, 1.12) if not plain else rng.uniform(0.9, 1.07)
+            warm = rng.uniform(-7, 7)
+            x0, y0, pw, ph = col * cell, row * cell, bw * cell, bh * cell
+            for y in range(ph):
+                for x in range(pw):
+                    px, py = x0 + x, y0 + y
+                    factor = tone * (1 + 0.07 * mottle(px, py)) * rng.uniform(0.97, 1.03)
+                    if y == ph - 1:
+                        factor *= 0.8                       # the shadow under a chunk
+                    elif x == pw - 1:
+                        factor *= 0.88
+                    elif y == 0:
+                        factor *= 1.1                       # the lit top
+                    elif x == 0:
+                        factor *= 1.04
+                    if rng.random() < 0.03:
+                        factor *= rng.choice((0.85, 1.1))
+                    colour = [base[0] * factor + warm, base[1] * factor, base[2] * factor - warm]
+                    if frost:
+                        amount = frost * max(0.0, 1 - py / (h * 0.75))
+                        patch = rime[(py // 2) % len(rime)][(px // 2) % len(rime[0])]
+                        k = max(0.0, min(1.0, (amount * 1.5 + patch - 1.0) * 2.2))
+                        colour = [colour[0] + (226 - colour[0]) * k, colour[1] + (234 - colour[1]) * k, colour[2] + (246 - colour[2]) * k]
+                    img.putpixel((u0 + px, v0 + py), (clamp(colour[0]), clamp(colour[1]), clamp(colour[2]), 255))
+
+
 def bricks(img, region, base, frost=0.0, plain=False):
     """Courses of stone brick, each brick its own shade, with mortar, chipped corners and the odd crack."""
     u0, v0, w, h = region
@@ -439,11 +487,11 @@ def fill(img, region, colour_at):
 def textures():
     img = Image.new("RGBA", (TEX, TEX), (0, 0, 0, 0))
     glow = Image.new("RGBA", (TEX, TEX), (0, 0, 0, 0))
-    stone = (112, 100, 94)
-    bricks(img, STONE, stone)
-    bricks(img, STONE_TOP, (104, 94, 90), plain=True)
-    bricks(img, FROST, stone, frost=0.85)
-    bricks(img, DARK, (64, 58, 60), plain=True)
+    stone = (138, 122, 108)
+    rough_stone(img, STONE, stone)
+    rough_stone(img, STONE_TOP, (128, 116, 104), plain=True)
+    rough_stone(img, FROST, stone, frost=0.85)
+    rough_stone(img, DARK, (84, 74, 68), plain=True)
 
     # Snow: white, with soft blue hollows.
     hollows = [(rng.randrange(64), rng.randrange(64), rng.uniform(4, 10)) for _ in range(9)]
@@ -488,36 +536,27 @@ def textures():
     fill(glow, EYE, eye_at)
     fill(img, SOCKET, lambda x, y, w, h: (22 + rng.randrange(6), 22 + rng.randrange(6), 30 + rng.randrange(8), 255))
 
-    # The chests: their own random numbers, so the rest of the texture stays as it was.
+    # The crystals: their own random numbers, so the rest of the texture stays as it is. Deep blue at the root, bright
+    # cyan toward the tip, a lit facet down one side and a dark one down the other. They are in the glow mask too.
     crng = random.Random(77)
 
-    def plank_at(x, y, w, h):
-        if y in (0, h - 1) or x in (0, w - 1) or y == 5:
-            return (62, 64, 72, 255)                                   # iron bands and the lid's seam
-        if x % 8 == 0:
-            return (58, 36, 22, 255)
-        k = crng.uniform(-0.08, 0.08) + (0.06 if (y // 3) % 2 else 0)
-        return (clamp(112 * (1 + k)), clamp(74 * (1 + k)), clamp(44 * (1 + k)), 255)
-    fill(img, CHEST_SIDE, plank_at)
-
-    def lid_at(x, y, w, h):
-        if x in (0, w - 1) or y in (0, h - 1):
-            return (62, 64, 72, 255)
-        if y % 5 == 0:
-            return (58, 36, 22, 255)
-        k = crng.uniform(-0.08, 0.08)
-        return (clamp(124 * (1 + k)), clamp(84 * (1 + k)), clamp(50 * (1 + k)), 255)
-    fill(img, CHEST_TOP, lid_at)
-
-    def latch_at(x, y, w, h):
-        return (255, 226, 96, 255) if (x + y) % 3 else (255, 248, 190, 255)
-    fill(img, LATCH, latch_at)
-    fill(glow, LATCH, lambda x, y, w, h: (255, 226, 96, 150))
-
-    def crust_at(x, y, w, h):
-        k = crng.uniform(0, 0.25) + (0.3 if (x + 2 * y) % 11 == 0 else 0)
-        return (clamp(170 + 70 * k), clamp(214 + 40 * k), 250, clamp(150 + 80 * k))
-    fill(img, CRUST, crust_at)
+    def crystal_at(x, y, w, h):
+        t = 1 - y / (h - 1)
+        k = crng.uniform(-0.04, 0.04)
+        if x in (1, 2):
+            k += 0.22
+        elif x >= w - 3:
+            k -= 0.18
+        if crng.random() < 0.02:
+            k += 0.4
+        return (clamp(18 + 110 * t + 120 * k), clamp(130 + 110 * t + 90 * k), clamp(160 + 90 * t + 40 * k), 255)
+    for region in (CRYSTAL, CRYSTAL_TOP):
+        fill(img, region, crystal_at if region is CRYSTAL else lambda x, y, w, h: (clamp(150 + crng.uniform(-20, 20)), 245, 250, 255))
+        u0, v0, w, h = region
+        for y in range(h):
+            for x in range(w):
+                r, g, b, a = img.getpixel((u0 + x, v0 + y))
+                glow.putpixel((u0 + x, v0 + y), (r, g, b, 200))
 
     out = os.path.join(ASSETS, "textures", "entity")
     os.makedirs(out, exist_ok=True)

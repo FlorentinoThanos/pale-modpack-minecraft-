@@ -3,13 +3,17 @@ package com.example.thepale.colossus.client;
 import com.example.thepale.colossus.ColossusPart;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.EntityHitResult;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 
-/** The line over the hotbar that says the colossus can be climbed (or a cache on it opened), while the crosshair is on it. */
+/** The line over the hotbar that says the colossus can be climbed (or its crystals mined), while the crosshair is on it. */
 public final class ColossusHints {
     private static final Component CLIMB = Component.translatable("message.thepale.colossus.climb");
-    private static final Component CACHE = Component.translatable("message.thepale.colossus.cache");
+    private static final Component MINE = Component.translatable("message.thepale.colossus.crystals");
+    private static final Component NEED_PICKAXE = Component.translatable("message.thepale.colossus.crystals_need_pickaxe");
     private static boolean shown;
     /** After a click the colossus answers in the same line; the hint keeps out of its way for a while. */
     private static int quiet;
@@ -25,17 +29,16 @@ public final class ColossusHints {
         if (quiet > 0) {
             quiet--;
         }
-        boolean onCache = minecraft.screen == null
-                && minecraft.hitResult instanceof EntityHitResult cacheHit
-                && cacheHit.getEntity() instanceof ColossusPart cachePart
-                && cachePart.isCache()
+        boolean onCrystals = minecraft.screen == null
+                && minecraft.hitResult instanceof EntityHitResult crystalHit
+                && crystalHit.getEntity() instanceof ColossusPart crystalPart
+                && crystalPart.isCrystals()
                 && !minecraft.player.isSpectator();
-        if (onCache && quiet == 0) {
-            minecraft.gui.setOverlayMessage(CACHE, false);
+        if (onCrystals) {
+            ItemStack tool = minecraft.player.getMainHandItem();
+            boolean pickaxe = tool.is(ItemTags.PICKAXES) && tool.isCorrectToolForDrops(Blocks.DIAMOND_ORE.defaultBlockState());
+            minecraft.gui.setOverlayMessage(pickaxe ? MINE : NEED_PICKAXE, false);
             shown = true;
-            if (minecraft.options.keyUse.isDown()) {
-                quiet = 40;
-            }
             return;
         }
         boolean aimed = minecraft.screen == null

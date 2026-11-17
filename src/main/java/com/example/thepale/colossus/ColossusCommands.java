@@ -140,7 +140,7 @@ public final class ColossusCommands {
             // Not its own country: it stays around where it was put.
             colossus.setAnchor(BlockPos.containing(at));
         }
-        colossus.fillCaches();
+        colossus.growCrystals();
         overworld.addFreshEntity(colossus);
         source.sendSuccess(() -> Component.translatable("commands.thepale.colossus.summoned"), true);
         return 1;

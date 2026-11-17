@@ -26,7 +26,7 @@ import org.jetbrains.annotations.Nullable;
  * The Frost Colossus's walks, and keeping it one of a kind.
  *
  * <p>Every {@code eventMinMinutes} to {@code eventMaxMinutes} of play it appears some 100 blocks from a random player
- * in the Overworld, walks straight past them with its caches, and is taken away once nobody is near it. Everybody in
+ * in the Overworld, walks straight past them with its diamond crystals, and is taken away once nobody is near it. Everybody in
  * the Overworld is told in chat when it comes and when it goes. The Overworld remembers which colossus is the world's
  * and where it was last; another one that turns up is sent away (the newest one put down by hand wins).
  *

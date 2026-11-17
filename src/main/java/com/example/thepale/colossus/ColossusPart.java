@@ -2,6 +2,7 @@ package com.example.thepale.colossus;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
@@ -58,12 +59,24 @@ public final class ColossusPart extends PartEntity<FrostColossus> {
 
     @Override
     public boolean canBeCollidedWith() {
-        return getParent().isAlive() && !isCache();
+        return getParent().isAlive() && !isCrystals();
     }
 
-    /** {@return whether this is one of the caches it carries on a walk} */
-    public boolean isCache() {
-        return index >= ColossusPose.LEFT_CACHE;
+    /** {@return whether this is one of the clusters of diamond crystals it carries on a walk} */
+    public boolean isCrystals() {
+        return index >= ColossusPose.LEFT_CRYSTALS;
+    }
+
+    /** A hit on its crystals mines them (a pickaxe is needed); the colossus itself doesn't feel it. */
+    @Override
+    public boolean skipAttackInteraction(Entity attacker) {
+        if (!isCrystals()) {
+            return super.skipAttackInteraction(attacker);
+        }
+        if (attacker instanceof ServerPlayer player && !player.isSpectator()) {
+            getParent().mineCrystals(index - ColossusPose.LEFT_CRYSTALS, player);
+        }
+        return true;
     }
 
     @Override

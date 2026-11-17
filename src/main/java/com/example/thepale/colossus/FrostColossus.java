@@ -6,6 +6,10 @@ import com.example.thepale.mixin.LivingEntityAccessor;
 import java.util.UUID;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.BlockParticleOption;
+import net.minecraft.core.particles.ItemParticleOption;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.Items;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -98,10 +102,13 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
     private static final EntityDataAccessor<Integer> DATA_SEAT_RIGHT = SynchedEntityData.defineId(FrostColossus.class, EntityDataSerializers.INT);
     /** How many may ride it (the server's config; the client's hint needs it). */
     private static final EntityDataAccessor<Byte> DATA_MAX_RIDERS = SynchedEntityData.defineId(FrostColossus.class, EntityDataSerializers.BYTE);
-    /** Which caches it still carries: a bit each for the left shoulder, the right shoulder and the back. */
-    private static final EntityDataAccessor<Byte> DATA_CACHES = SynchedEntityData.defineId(FrostColossus.class, EntityDataSerializers.BYTE);
-    public static final int ALL_CACHES = 0b111;
-    /** What a rider is given on top of their reach, so that from a shoulder they reach the cache on its back. */
+    /**
+     * How much is left of each cluster of diamond crystals (the left shoulder's, the right's, the back's), 0 to
+     * {@link #CRYSTAL_HEALTH}, five bits each.
+     */
+    private static final EntityDataAccessor<Integer> DATA_CRYSTALS = SynchedEntityData.defineId(FrostColossus.class, EntityDataSerializers.INT);
+    public static final int CRYSTAL_HEALTH = 24;
+    /** What a rider is given on top of their reach, so that from a shoulder they reach the crystals on its back. */
     private static final ResourceLocation RIDER_REACH = ThePale.id("colossus_rider_reach");
     private static final double RIDER_REACH_BONUS = 3;
 
@@ -315,7 +322,7 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
         builder.define(DATA_SEAT_LEFT, 0);
         builder.define(DATA_SEAT_RIGHT, 0);
         builder.define(DATA_MAX_RIDERS, (byte) 2);
-        builder.define(DATA_CACHES, (byte) 0);
+        builder.define(DATA_CRYSTALS, 0);
     }
 
     @Override
@@ -465,7 +472,7 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
         if (anchor != null) {
             tag.put("Anchor", NbtUtils.writeBlockPos(anchor));
         }
-        tag.putByte("Caches", entityData.get(DATA_CACHES));
+        tag.putInt("Crystals", entityData.get(DATA_CRYSTALS));
         if (journey != null) {
             tag.putDouble("JourneyX", journey.x);
             tag.putDouble("JourneyZ", journey.z);
@@ -482,7 +489,7 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
             wantsRest = true;
         }
         anchor = NbtUtils.readBlockPos(tag, "Anchor").orElse(null);
-        entityData.set(DATA_CACHES, (byte) (tag.getByte("Caches") & ALL_CACHES));
+        entityData.set(DATA_CRYSTALS, tag.getInt("Crystals") & 0x7FFF);
         if (tag.contains("JourneyX")) {
             journey = new Vec3(tag.getDouble("JourneyX"), 0, tag.getDouble("JourneyZ"));
             journeyTicks = tag.getInt("JourneyTicks");
@@ -548,24 +555,35 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
         return isAlive() && activity() == Activity.AWAKE && handPhase() == HandPhase.NONE && taken < entityData.get(DATA_MAX_RIDERS);
     }
 
-    /** {@return whether it still carries this cache (0 the left shoulder's, 1 the right's, 2 the back's)} */
-    public boolean hasCache(int cache) {
-        return (entityData.get(DATA_CACHES) & (1 << cache)) != 0;
+    /** {@return how much is left of this cluster of crystals (0 the left shoulder's, 1 the right's, 2 the back's)} */
+    public int crystalsLeft(int cluster) {
+        return Math.min(CRYSTAL_HEALTH, (entityData.get(DATA_CRYSTALS) >> (5 * cluster)) & 31);
     }
 
-    /** {@return whether this hitbox is there now}: a cache's only while it holds something */
+    public boolean hasCrystals(int cluster) {
+        return crystalsLeft(cluster) > 0;
+    }
+
+    private void setCrystals(int cluster, int left) {
+        int all = entityData.get(DATA_CRYSTALS) & ~(31 << (5 * cluster));
+        entityData.set(DATA_CRYSTALS, all | (Mth.clamp(left, 0, CRYSTAL_HEALTH) << (5 * cluster)));
+    }
+
+    /** {@return whether this hitbox is there now}: a cluster of crystals only while some of it is left */
     public boolean partThere(int index) {
-        return index < ColossusPose.LEFT_CACHE || hasCache(index - ColossusPose.LEFT_CACHE);
+        return index < ColossusPose.LEFT_CRYSTALS || hasCrystals(index - ColossusPose.LEFT_CRYSTALS);
     }
 
-    /** Loads it with all three caches. */
-    public void fillCaches() {
-        entityData.set(DATA_CACHES, (byte) ALL_CACHES);
+    /** Grows all three clusters of crystals back in full. */
+    public void growCrystals() {
+        for (int cluster = 0; cluster < 3; cluster++) {
+            setCrystals(cluster, CRYSTAL_HEALTH);
+        }
     }
 
     /**
      * Sends it on a walk: straight on this way (its heading in degrees), across whatever land there is, until nobody
-     * is near (then the keeper takes it away). It doesn't sleep on the way, and it carries all three caches.
+     * is near (then the keeper takes it away). It doesn't sleep on the way, and it carries all three clusters of crystals.
      */
     public void beginJourney(float yaw) {
         double radians = Math.toRadians(yaw);
@@ -575,7 +593,7 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
         wantsRest = false;
         hasWaypoint = false;
         pause = 20;
-        fillCaches();
+        growCrystals();
     }
 
     /** {@return whether it is on a walk past a player} */
@@ -1122,7 +1140,7 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
                 .append(String.format(", pause %d, speed %.3f, blocked %d, y %.1f, feet %.1f", pause, speed, blocked, getY(), gait.placed() ? gait.support() : Double.NaN))
                 .append(journey != null ? String.format(", on a walk for %d s heading %.0f", journeyTicks / 20, Mth.atan2(-journey.x, journey.z) * Mth.RAD_TO_DEG)
                         : ColossusRange.allowed(getX(), getZ(), anchor) ? ", in range" : ", OUT OF RANGE")
-                .append(String.format(", caches %s%s%s", hasCache(0) ? "L" : "-", hasCache(1) ? "R" : "-", hasCache(2) ? "B" : "-"))
+                .append(String.format(", crystals %d/%d/%d", crystalsLeft(0), crystalsLeft(1), crystalsLeft(2)))
                 .append(anchor != null ? ", anchored at " + anchor.toShortString() : "")
                 .append(". Clear ahead by direction:");
         for (int i = 0; i < 8; i++) {
@@ -1246,8 +1264,9 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
 
     /** A click on any of its parts: with an empty hand, it lifts the player onto a shoulder. */
     InteractionResult interactPart(ColossusPart part, Player player, InteractionHand hand) {
-        if (part.isCache()) {
-            return hand == InteractionHand.MAIN_HAND && !player.isSpectator() ? openCache(part.index - ColossusPose.LEFT_CACHE, player) : InteractionResult.PASS;
+        if (part.isCrystals()) {
+            // They are mined with a pickaxe (a hit), not opened.
+            return InteractionResult.PASS;
         }
         if (hand != InteractionHand.MAIN_HAND || !player.getMainHandItem().isEmpty() || player.isSpectator() || player.getVehicle() == this) {
             return InteractionResult.PASS;
@@ -1292,17 +1311,34 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
         return InteractionResult.SUCCESS;
     }
 
-    /** A click on a cache: whoever reaches it takes what is in it, and the cache is gone. */
-    private InteractionResult openCache(int cache, Player player) {
-        if (!hasCache(cache)) {
-            return InteractionResult.PASS;
+    /**
+     * A hit on a cluster of its crystals: with a pickaxe that could mine diamond ore, it chips them down (the better
+     * the pickaxe, the faster; a half-charged swing does less), and the last hit breaks them off for its loot.
+     */
+    void mineCrystals(int cluster, ServerPlayer player) {
+        if (!hasCrystals(cluster) || !(level() instanceof ServerLevel level)) {
+            return;
         }
-        if (!(level() instanceof ServerLevel level)) {
-            return InteractionResult.SUCCESS;
+        ItemStack tool = player.getMainHandItem();
+        BlockState ore = Blocks.DIAMOND_ORE.defaultBlockState();
+        if (!tool.is(ItemTags.PICKAXES) || !tool.isCorrectToolForDrops(ore)) {
+            tell(player, "crystals_need_pickaxe");
+            return;
         }
-        entityData.set(DATA_CACHES, (byte) (entityData.get(DATA_CACHES) & ~(1 << cache)));
+        float strength = player.getAttackStrengthScale(0.5f);
+        player.resetAttackStrengthTicker();
+        double power = (tool.getDestroySpeed(ore) + player.getAttributeValue(Attributes.MINING_EFFICIENCY)) * (0.2 + 0.8 * strength * strength);
+        int left = Math.max(0, crystalsLeft(cluster) - Math.max(1, (int) Math.round(power)));
+        setCrystals(cluster, left);
+        tool.hurtAndBreak(1, player, EquipmentSlot.MAINHAND);
+        Vec3 at = parts[ColossusPose.LEFT_CRYSTALS + cluster].getBoundingBox().getCenter();
+        level.sendParticles(new ItemParticleOption(ParticleTypes.ITEM, new ItemStack(Items.DIAMOND)), at.x, at.y, at.z, 10, 0.5, 0.8, 0.5, 0.08);
+        if (left > 0) {
+            level.playSound(null, at.x, at.y, at.z, SoundEvents.AMETHYST_BLOCK_HIT, getSoundSource(), 1.2f, 0.7f + random.nextFloat() * 0.2f);
+            return;
+        }
         ResourceKey<LootTable> key = ResourceKey.create(Registries.LOOT_TABLE,
-                ThePale.id(cache == 2 ? "colossus/back_cache" : "colossus/shoulder_cache"));
+                ThePale.id(cluster == 2 ? "colossus/back_crystals" : "colossus/shoulder_crystals"));
         LootTable table = level.getServer().reloadableRegistries().getLootTable(key);
         LootParams params = new LootParams.Builder(level)
                 .withParameter(LootContextParams.ORIGIN, player.position())
@@ -1314,17 +1350,12 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
                 player.drop(stack, false);
             }
         }
-        ColossusPart part = parts[ColossusPose.LEFT_CACHE + cache];
-        Vec3 at = part.getBoundingBox().getCenter();
-        level.playSound(null, at.x, at.y, at.z, SoundEvents.CHEST_OPEN, getSoundSource(), 1f, 0.8f);
-        level.playSound(null, at.x, at.y, at.z, SoundEvents.GLASS_BREAK, getSoundSource(), 0.8f, 1.2f);
-        level.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, Blocks.PACKED_ICE.defaultBlockState()), at.x, at.y, at.z, 30, 0.6, 0.4, 0.6, 0.1);
-        level.sendParticles(ParticleTypes.WAX_OFF, at.x, at.y + 0.4, at.z, 12, 0.5, 0.3, 0.5, 0.05);
-        if (player instanceof ServerPlayer serverPlayer) {
-            ColossusAdvancements.award(serverPlayer, ColossusAdvancements.CACHE);
-            tell(player, "cache_taken");
-        }
-        return InteractionResult.SUCCESS;
+        level.playSound(null, at.x, at.y, at.z, SoundEvents.AMETHYST_CLUSTER_BREAK, getSoundSource(), 1.5f, 0.8f);
+        level.playSound(null, at.x, at.y, at.z, SoundEvents.GLASS_BREAK, getSoundSource(), 0.8f, 1.3f);
+        level.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, Blocks.DIAMOND_BLOCK.defaultBlockState()), at.x, at.y, at.z, 40, 0.8, 1.2, 0.8, 0.15);
+        level.sendParticles(ParticleTypes.GLOW, at.x, at.y, at.z, 20, 0.8, 1.2, 0.8, 0.05);
+        ColossusAdvancements.award(player, ColossusAdvancements.DIAMONDS);
+        tell(player, "crystals_mined");
     }
 
     private static void tell(Player player, String message, Object... arguments) {

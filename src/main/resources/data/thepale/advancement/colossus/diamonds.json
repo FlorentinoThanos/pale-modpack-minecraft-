@@ -1,14 +1,14 @@
 {
-  "parent": "thepale:colossus/seen",
+  "parent": "thepale:colossus/ride",
   "display": {
     "icon": {
-      "id": "minecraft:chest"
+      "id": "minecraft:diamond"
     },
     "title": {
-      "translate": "advancements.thepale.colossus.cache.title"
+      "translate": "advancements.thepale.colossus.diamonds.title"
     },
     "description": {
-      "translate": "advancements.thepale.colossus.cache.description"
+      "translate": "advancements.thepale.colossus.diamonds.description"
     },
     "frame": "goal",
     "show_toast": true,
