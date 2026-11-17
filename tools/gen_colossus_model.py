@@ -51,6 +51,11 @@ SNOW_SIDE = (192, 128, 64, 5)
 ICICLE = (192, 144, 8, 32)
 EYE = (200, 144, 16, 4)
 SOCKET = (216, 144, 32, 8)
+# The caches it carries on a walk: chests of dark wood bound with iron, a gold latch that glints.
+CHEST_SIDE = (0, 192, 32, 16)
+CHEST_TOP = (32, 192, 32, 16)
+LATCH = (64, 192, 4, 4)
+CRUST = (72, 192, 32, 16)
 
 rng = random.Random(30)
 
@@ -111,6 +116,26 @@ def icicle(x, top, z, length, thick=4):
     upper = length // 2
     return [cube(x - thick / 2, top - upper, z - thick / 2, thick, upper, thick, side=ICE, up=ICE, down=ICE),
             cube(x - thick / 4, top - length, z - thick / 4, thick / 2, length - upper, thick / 2, side=ICICLE, up=ICE, down=ICE)]
+
+
+def fixed(x0, y0, z0, w, h, d, side, up, down=None, inflate=0):
+    """A box whose faces are cut from the top left of their regions, with no randomness."""
+    def at(region, fw, fh):
+        return {"uv": [region[0], region[1]], "uv_size": [min(fw, region[2]), min(fh, region[3])]}
+    faces = {"north": at(side, w, h), "south": at(side, w, h), "east": at(side, d, h), "west": at(side, d, h),
+             "up": at(up, w, d), "down": at(down or up, w, d)}
+    out = {"origin": [x0, y0, z0], "size": [w, h, d], "uv": faces}
+    if inflate:
+        out["inflate"] = inflate
+    return out
+
+
+def chest(x0, y0, z0, w, h, d):
+    """A chest, frozen over: the box, its lid's rim, the latch on the front, a crust of ice over one corner."""
+    return [fixed(x0, y0, z0, w, h, d, CHEST_SIDE, CHEST_TOP),
+            fixed(x0 - 0.5, y0 + h - 4, z0 - 0.5, w + 1, 1, d + 1, DARK, DARK),
+            fixed(x0 + w / 2 - 1, y0 + h - 6, z0 - 1, 2, 3, 1, LATCH, LATCH),
+            fixed(x0 - 1, y0 - 1, z0 + d / 2, w / 2 + 1, h / 2 + 2, d / 2 + 1, CRUST, CRUST)]
 
 
 def bone(name, parent, pivot, cubes=()):
@@ -215,6 +240,13 @@ def geometry():
             cube(5, 0, -24, 32, 14, 40, side=FROST, anchor_top=True),    # the foot
         ], left))
         bones.append(side_bones("snow_foot", s + "_leg", (21, 14, -4), snow(4, 14, -25, 34, 42, thick=3), left))
+
+    # The caches it carries on a walk (shown while they hold something). Drawn last and cut from fixed places in the
+    # texture, so nothing above changes when they do.
+    for name, (x0, y0, z0, w, h, d) in (("cache_left", (39, 199, 2, 14, 10, 12)),
+                                        ("cache_right", (-53, 201, 2, 14, 10, 12)),
+                                        ("cache_back", (-6, 219, 2, 12, 11, 12))):
+        bones.append(bone(name, "torso", (x0 + w / 2, y0, z0 + d / 2), chest(x0, y0, z0, w, h, d)))
 
     return {
         "format_version": "1.12.0",
@@ -455,6 +487,37 @@ def textures():
     fill(img, EYE, eye_at)
     fill(glow, EYE, eye_at)
     fill(img, SOCKET, lambda x, y, w, h: (22 + rng.randrange(6), 22 + rng.randrange(6), 30 + rng.randrange(8), 255))
+
+    # The chests: their own random numbers, so the rest of the texture stays as it was.
+    crng = random.Random(77)
+
+    def plank_at(x, y, w, h):
+        if y in (0, h - 1) or x in (0, w - 1) or y == 5:
+            return (62, 64, 72, 255)                                   # iron bands and the lid's seam
+        if x % 8 == 0:
+            return (58, 36, 22, 255)
+        k = crng.uniform(-0.08, 0.08) + (0.06 if (y // 3) % 2 else 0)
+        return (clamp(112 * (1 + k)), clamp(74 * (1 + k)), clamp(44 * (1 + k)), 255)
+    fill(img, CHEST_SIDE, plank_at)
+
+    def lid_at(x, y, w, h):
+        if x in (0, w - 1) or y in (0, h - 1):
+            return (62, 64, 72, 255)
+        if y % 5 == 0:
+            return (58, 36, 22, 255)
+        k = crng.uniform(-0.08, 0.08)
+        return (clamp(124 * (1 + k)), clamp(84 * (1 + k)), clamp(50 * (1 + k)), 255)
+    fill(img, CHEST_TOP, lid_at)
+
+    def latch_at(x, y, w, h):
+        return (255, 226, 96, 255) if (x + y) % 3 else (255, 248, 190, 255)
+    fill(img, LATCH, latch_at)
+    fill(glow, LATCH, lambda x, y, w, h: (255, 226, 96, 150))
+
+    def crust_at(x, y, w, h):
+        k = crng.uniform(0, 0.25) + (0.3 if (x + 2 * y) % 11 == 0 else 0)
+        return (clamp(170 + 70 * k), clamp(214 + 40 * k), 250, clamp(150 + 80 * k))
+    fill(img, CRUST, crust_at)
 
     out = os.path.join(ASSETS, "textures", "entity")
     os.makedirs(out, exist_ok=True)

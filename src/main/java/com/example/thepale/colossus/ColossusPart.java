@@ -53,12 +53,17 @@ public final class ColossusPart extends PartEntity<FrostColossus> {
 
     @Override
     public boolean isPickable() {
-        return getParent().isAlive();
+        return getParent().isAlive() && getParent().partThere(index);
     }
 
     @Override
     public boolean canBeCollidedWith() {
-        return getParent().isAlive();
+        return getParent().isAlive() && !isCache();
+    }
+
+    /** {@return whether this is one of the caches it carries on a walk} */
+    public boolean isCache() {
+        return index >= ColossusPose.LEFT_CACHE;
     }
 
     @Override

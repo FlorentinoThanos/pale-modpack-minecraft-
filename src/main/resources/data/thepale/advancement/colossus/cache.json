@@ -1,0 +1,23 @@
+{
+  "parent": "thepale:colossus/seen",
+  "display": {
+    "icon": {
+      "id": "minecraft:chest"
+    },
+    "title": {
+      "translate": "advancements.thepale.colossus.cache.title"
+    },
+    "description": {
+      "translate": "advancements.thepale.colossus.cache.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "done": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

@@ -1,10 +1,24 @@
 package com.example.thepale.colossus;
 
+import com.example.thepale.ThePale;
 import com.example.thepale.config.CommonConfig;
 import com.example.thepale.mixin.LivingEntityAccessor;
 import java.util.UUID;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.chat.Component;
@@ -84,6 +98,12 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
     private static final EntityDataAccessor<Integer> DATA_SEAT_RIGHT = SynchedEntityData.defineId(FrostColossus.class, EntityDataSerializers.INT);
     /** How many may ride it (the server's config; the client's hint needs it). */
     private static final EntityDataAccessor<Byte> DATA_MAX_RIDERS = SynchedEntityData.defineId(FrostColossus.class, EntityDataSerializers.BYTE);
+    /** Which caches it still carries: a bit each for the left shoulder, the right shoulder and the back. */
+    private static final EntityDataAccessor<Byte> DATA_CACHES = SynchedEntityData.defineId(FrostColossus.class, EntityDataSerializers.BYTE);
+    public static final int ALL_CACHES = 0b111;
+    /** What a rider is given on top of their reach, so that from a shoulder they reach the cache on its back. */
+    private static final ResourceLocation RIDER_REACH = ThePale.id("colossus_rider_reach");
+    private static final double RIDER_REACH_BONUS = 3;
 
     /**
      * What the colossus looks and sounds like on a client beyond its model: footfalls, falling snow, the screen shake.
@@ -137,6 +157,8 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
     /** The highest step it climbs and the deepest water it wades, in blocks. */
     private static final int MAX_STEP = 4;
     private static final int MAX_WADE = 3;
+    /** On a walk past a player it takes bigger steps: over a bank or a ledge rather than around it. */
+    private static final int JOURNEY_STEP = 6;
     /** How fast it turns as it walks and on the spot, in degrees a tick. */
     private static final float WALK_TURN = 0.7f;
     private static final float SPOT_TURN = 0.9f;
@@ -250,6 +272,12 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
     /** Where a rider is put when they get off: set just before they do. Otherwise they are left where they sit. */
     @Nullable
     private Vec3 dismountTo;
+    /** On a walk past a player: the way it is going (a level unit vector), and how long it has been walking. Else null. */
+    @Nullable
+    private Vec3 journey;
+    private int journeyTicks;
+    /** On a walk, boxed in: it goes straight on to its waypoint over whatever is there. */
+    private boolean pushingThrough;
 
     public FrostColossus(EntityType<? extends FrostColossus> type, Level level) {
         super(type, level);
@@ -287,6 +315,7 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
         builder.define(DATA_SEAT_LEFT, 0);
         builder.define(DATA_SEAT_RIGHT, 0);
         builder.define(DATA_MAX_RIDERS, (byte) 2);
+        builder.define(DATA_CACHES, (byte) 0);
     }
 
     @Override
@@ -436,6 +465,12 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
         if (anchor != null) {
             tag.put("Anchor", NbtUtils.writeBlockPos(anchor));
         }
+        tag.putByte("Caches", entityData.get(DATA_CACHES));
+        if (journey != null) {
+            tag.putDouble("JourneyX", journey.x);
+            tag.putDouble("JourneyZ", journey.z);
+            tag.putInt("JourneyTicks", journeyTicks);
+        }
     }
 
     @Override
@@ -447,6 +482,11 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
             wantsRest = true;
         }
         anchor = NbtUtils.readBlockPos(tag, "Anchor").orElse(null);
+        entityData.set(DATA_CACHES, (byte) (tag.getByte("Caches") & ALL_CACHES));
+        if (tag.contains("JourneyX")) {
+            journey = new Vec3(tag.getDouble("JourneyX"), 0, tag.getDouble("JourneyZ"));
+            journeyTicks = tag.getInt("JourneyTicks");
+        }
     }
 
     // ----- State both sides see -----
@@ -506,6 +546,51 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
     public boolean offersRide() {
         int taken = (entityData.get(DATA_SEAT_LEFT) != 0 ? 1 : 0) + (entityData.get(DATA_SEAT_RIGHT) != 0 ? 1 : 0);
         return isAlive() && activity() == Activity.AWAKE && handPhase() == HandPhase.NONE && taken < entityData.get(DATA_MAX_RIDERS);
+    }
+
+    /** {@return whether it still carries this cache (0 the left shoulder's, 1 the right's, 2 the back's)} */
+    public boolean hasCache(int cache) {
+        return (entityData.get(DATA_CACHES) & (1 << cache)) != 0;
+    }
+
+    /** {@return whether this hitbox is there now}: a cache's only while it holds something */
+    public boolean partThere(int index) {
+        return index < ColossusPose.LEFT_CACHE || hasCache(index - ColossusPose.LEFT_CACHE);
+    }
+
+    /** Loads it with all three caches. */
+    public void fillCaches() {
+        entityData.set(DATA_CACHES, (byte) ALL_CACHES);
+    }
+
+    /**
+     * Sends it on a walk: straight on this way (its heading in degrees), across whatever land there is, until nobody
+     * is near (then the keeper takes it away). It doesn't sleep on the way, and it carries all three caches.
+     */
+    public void beginJourney(float yaw) {
+        double radians = Math.toRadians(yaw);
+        journey = new Vec3(-Math.sin(radians), 0, Math.cos(radians));
+        journeyTicks = 0;
+        anchor = null;
+        wantsRest = false;
+        hasWaypoint = false;
+        pause = 20;
+        fillCaches();
+    }
+
+    /** {@return whether it is on a walk past a player} */
+    public boolean onJourney() {
+        return journey != null;
+    }
+
+    /** {@return how long it has been on its walk, in ticks} */
+    public int journeyTicks() {
+        return journeyTicks;
+    }
+
+    /** {@return whether it may walk here}: on a walk, any land off the coast; else its own country, or near its anchor */
+    private boolean mayWalk(double x, double z) {
+        return journey != null ? ColossusRange.inland(x, z) : ColossusRange.allowed(x, z, anchor);
     }
 
     /** {@return whether it is walking: the walk animation plays} */
@@ -737,7 +822,10 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
         if (headBusy > 0) {
             headBusy--;
         }
-        if (tickCount % 20 == 0) {
+        if (journey != null) {
+            journeyTicks++;
+            wantsRest = false;
+        } else if (tickCount % 20 == 0) {
             keepHours(level, config);
         }
         if (--sighIn <= 0) {
@@ -859,7 +947,7 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
                 want = fullSpeed * Mth.clamp(1.5 - Math.abs(off) / 40.0, 0, 1);
                 // And slowing in time to stop there.
                 want = Math.min(want, Math.max(fullSpeed * 0.15, Math.sqrt(2 * (fullSpeed / 30) * Math.max(distance - 2, 0))));
-                if (tickCount % 5 == 0 && speed > 0.01 && clearFor(level, getX(), getZ(), yaw, 7) < 7) {
+                if (tickCount % 5 == 0 && speed > 0.01 && !pushingThrough && clearFor(level, getX(), getZ(), yaw, 7) < 7) {
                     // A cliff, a wall, deep water or the edge of its range: stop and look for another way.
                     hasWaypoint = false;
                     blocked++;
@@ -868,6 +956,8 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
             }
         } else if (pause > 0) {
             pause--;
+        } else if (journey != null) {
+            walkOn(level);
         } else if (!wantsRest || !getPassengers().isEmpty()) {
             chooseWaypoint(level);
         }
@@ -894,6 +984,12 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
     private void arrive() {
         hasWaypoint = false;
         blocked = 0;
+        pushingThrough = false;
+        if (journey != null) {
+            // On a walk it doesn't stop to look about.
+            pause = 0;
+            return;
+        }
         pause = 80 + random.nextInt(260);
         float whim = random.nextFloat();
         if (whim < 0.3f) {
@@ -907,6 +1003,38 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
     private void playHead(String animation, int ticks) {
         headBusy = ticks;
         triggerAnim("head", animation);
+    }
+
+    /**
+     * On a walk: straight on, or around what is in the way (a little off to one side, and back to its way after);
+     * where nothing will do, back the way it came.
+     */
+    private void walkOn(ServerLevel level) {
+        float ahead = (float) (Mth.atan2(-journey.x, journey.z) * Mth.RAD_TO_DEG);
+        for (float off : new float[] {0, 25, -25, 50, -50, 80, -80}) {
+            if (off != 0 && random.nextBoolean()) {
+                off = -off;
+            }
+            double clear = clearFor(level, getX(), getZ(), ahead + off, off == 0 ? 48 : 24);
+            if (clear >= (off == 0 ? 10 : 14)) {
+                double radians = Math.toRadians(ahead + off);
+                waypointX = getX() - Math.sin(radians) * (clear - 3);
+                waypointZ = getZ() + Math.cos(radians) * (clear - 3);
+                hasWaypoint = true;
+                return;
+            }
+        }
+        if (blocked >= 2) {
+            // Turned back and boxed in again (a gully, a ring of hills): straight on, whatever is in the way.
+            waypointX = getX() + journey.x * 24;
+            waypointZ = getZ() + journey.z * 24;
+            hasWaypoint = true;
+            pushingThrough = true;
+            return;
+        }
+        journey = journey.reverse();
+        blocked++;
+        pause = 20;
     }
 
     private void chooseWaypoint(ServerLevel level) {
@@ -945,10 +1073,17 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
         double radians = Math.toRadians(angle);
         double stepX = -Math.sin(radians);
         double stepZ = Math.cos(radians);
-        boolean lost = !ColossusRange.allowed(fromX, fromZ, anchor);
+        boolean lost = !mayWalk(fromX, fromZ);
         double[] heart = anchor != null ? new double[] {anchor.getX(), anchor.getZ()} : ColossusRange.heart();
         double startAway = Mth.square(fromX - heart[0]) + Mth.square(fromZ - heart[1]);
         double before = gait.placed() ? gait.support() : getY();
+        if (journey != null) {
+            // On a walk it measures from the ground it stands over, not from a foot that has sunk into a ditch.
+            double here = ColossusGround.height(level, fromX, fromZ);
+            if (!Double.isNaN(here)) {
+                before = Math.max(before, here);
+            }
+        }
         // Standing in deeper water than it wades (put there by hand), it may at least walk out through it.
         int wade = Math.max(MAX_WADE, ColossusGround.waterDepth(level, fromX, fromZ));
         BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
@@ -956,15 +1091,19 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
         for (double along = Math.min(3, distance); reached < distance; along = Math.min(along + 3, distance)) {
             double x = fromX + stepX * along;
             double z = fromZ + stepZ * along;
-            if (!ColossusRange.allowed(x, z, anchor)
-                    && !(lost && Mth.square(x - heart[0]) + Mth.square(z - heart[1]) < startAway)) {
+            if (journey != null && !level.isPositionEntityTicking(pos.set(Mth.floor(x), 64, Mth.floor(z)))) {
+                // On a walk, beyond where anybody is: on it goes, out of the world's sight.
+                return distance;
+            }
+            if (!mayWalk(x, z) && !(lost && journey == null && Mth.square(x - heart[0]) + Mth.square(z - heart[1]) < startAway)) {
                 break;
             }
             if (!level.isPositionEntityTicking(pos.set(Mth.floor(x), 64, Mth.floor(z)))) {
                 break;
             }
             double ground = ColossusGround.underFoot(level, x, z, angle);
-            if (Double.isNaN(ground) || Math.abs(ground - before) > MAX_STEP || ColossusGround.waterDepth(level, x, z) > wade) {
+            if (Double.isNaN(ground) || Math.abs(ground - before) > (journey != null ? JOURNEY_STEP : MAX_STEP)
+                    || ColossusGround.waterDepth(level, x, z) > wade) {
                 break;
             }
             before = ground;
@@ -981,7 +1120,9 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
                 .append(String.format(", hand %s %s (bow %.2f reach %.2f carry %.2f), riders %d",
                         handPhase(), handSide() < 0 ? "left" : "right", bow, reach, carry, getPassengers().size()))
                 .append(String.format(", pause %d, speed %.3f, blocked %d, y %.1f, feet %.1f", pause, speed, blocked, getY(), gait.placed() ? gait.support() : Double.NaN))
-                .append(ColossusRange.allowed(getX(), getZ(), anchor) ? ", in range" : ", OUT OF RANGE")
+                .append(journey != null ? String.format(", on a walk for %d s heading %.0f", journeyTicks / 20, Mth.atan2(-journey.x, journey.z) * Mth.RAD_TO_DEG)
+                        : ColossusRange.allowed(getX(), getZ(), anchor) ? ", in range" : ", OUT OF RANGE")
+                .append(String.format(", caches %s%s%s", hasCache(0) ? "L" : "-", hasCache(1) ? "R" : "-", hasCache(2) ? "B" : "-"))
                 .append(anchor != null ? ", anchored at " + anchor.toShortString() : "")
                 .append(". Clear ahead by direction:");
         for (int i = 0; i < 8; i++) {
@@ -1105,6 +1246,9 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
 
     /** A click on any of its parts: with an empty hand, it lifts the player onto a shoulder. */
     InteractionResult interactPart(ColossusPart part, Player player, InteractionHand hand) {
+        if (part.isCache()) {
+            return hand == InteractionHand.MAIN_HAND && !player.isSpectator() ? openCache(part.index - ColossusPose.LEFT_CACHE, player) : InteractionResult.PASS;
+        }
         if (hand != InteractionHand.MAIN_HAND || !player.getMainHandItem().isEmpty() || player.isSpectator() || player.getVehicle() == this) {
             return InteractionResult.PASS;
         }
@@ -1145,6 +1289,41 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
         entityData.set(DATA_HAND_SIDE, (byte) side);
         hasWaypoint = false;
         setHandPhase(HandPhase.TURN);
+        return InteractionResult.SUCCESS;
+    }
+
+    /** A click on a cache: whoever reaches it takes what is in it, and the cache is gone. */
+    private InteractionResult openCache(int cache, Player player) {
+        if (!hasCache(cache)) {
+            return InteractionResult.PASS;
+        }
+        if (!(level() instanceof ServerLevel level)) {
+            return InteractionResult.SUCCESS;
+        }
+        entityData.set(DATA_CACHES, (byte) (entityData.get(DATA_CACHES) & ~(1 << cache)));
+        ResourceKey<LootTable> key = ResourceKey.create(Registries.LOOT_TABLE,
+                ThePale.id(cache == 2 ? "colossus/back_cache" : "colossus/shoulder_cache"));
+        LootTable table = level.getServer().reloadableRegistries().getLootTable(key);
+        LootParams params = new LootParams.Builder(level)
+                .withParameter(LootContextParams.ORIGIN, player.position())
+                .withParameter(LootContextParams.THIS_ENTITY, player)
+                .withLuck(player.getLuck())
+                .create(LootContextParamSets.GIFT);
+        for (ItemStack stack : table.getRandomItems(params)) {
+            if (!player.getInventory().add(stack) && !stack.isEmpty()) {
+                player.drop(stack, false);
+            }
+        }
+        ColossusPart part = parts[ColossusPose.LEFT_CACHE + cache];
+        Vec3 at = part.getBoundingBox().getCenter();
+        level.playSound(null, at.x, at.y, at.z, SoundEvents.CHEST_OPEN, getSoundSource(), 1f, 0.8f);
+        level.playSound(null, at.x, at.y, at.z, SoundEvents.GLASS_BREAK, getSoundSource(), 0.8f, 1.2f);
+        level.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, Blocks.PACKED_ICE.defaultBlockState()), at.x, at.y, at.z, 30, 0.6, 0.4, 0.6, 0.1);
+        level.sendParticles(ParticleTypes.WAX_OFF, at.x, at.y + 0.4, at.z, 12, 0.5, 0.3, 0.5, 0.05);
+        if (player instanceof ServerPlayer serverPlayer) {
+            ColossusAdvancements.award(serverPlayer, ColossusAdvancements.CACHE);
+            tell(player, "cache_taken");
+        }
         return InteractionResult.SUCCESS;
     }
 
@@ -1216,6 +1395,10 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
                 seatId(seat, 0);
                 continue;
             }
+            AttributeInstance reach = rider.getAttribute(Attributes.ENTITY_INTERACTION_RANGE);
+            if (reach != null && !reach.hasModifier(RIDER_REACH)) {
+                reach.addTransientModifier(new AttributeModifier(RIDER_REACH, RIDER_REACH_BONUS, AttributeModifier.Operation.ADD_VALUE));
+            }
             boolean jump = ((LivingEntityAccessor) rider).thepale$isJumping();
             if (jump && !heldJump[seat] && config.riderSteering() && handPhase() == HandPhase.NONE && steerCooldown <= 0) {
                 steerCooldown = 15;
@@ -1255,7 +1438,7 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
             }
         }
         if (place == null
-                || !ColossusRange.allowed(place.x, place.z, anchor)
+                || !mayWalk(place.x, place.z)
                 || ColossusGround.waterDepth(level, place.x, place.z) > MAX_WADE
                 || Mth.square(place.x - getX()) + Mth.square(place.z - getZ()) < 6 * 6) {
             playHead("shake_head", 50);
@@ -1538,6 +1721,9 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
         }
         if (entityData.get(DATA_HELD) == passenger.getId()) {
             entityData.set(DATA_HELD, 0);
+        }
+        if (passenger instanceof LivingEntity living && living.getAttribute(Attributes.ENTITY_INTERACTION_RANGE) != null) {
+            living.getAttribute(Attributes.ENTITY_INTERACTION_RANGE).removeModifier(RIDER_REACH);
         }
         if (dismountTo == null && passenger instanceof ServerPlayer player && player.isAlive() && !player.hasDisconnected()) {
             // Off its shoulder some other way (the colossus is gone, a command): they drift down unharmed.

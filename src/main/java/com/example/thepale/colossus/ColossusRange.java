@@ -9,8 +9,9 @@ import net.minecraft.world.level.levelgen.RandomState;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * Where the Frost Colossus lives: the land of the cold island (in a world with one island, its cold north), well
- * away from the coast, so it never comes near the water's edge or the Pale beyond it.
+ * Where the Frost Colossus may walk. On its walk past a player: any land, off the coast ({@link #inland}). Otherwise
+ * (summoned by a command) its own country: the land of the cold island (in a world with one island, its cold north),
+ * well away from the coast, so it never comes near the water's edge or the Pale beyond it.
  */
 public final class ColossusRange {
     /** It keeps this far from the coast, in blocks. */
@@ -34,6 +35,15 @@ public final class ColossusRange {
             return dx * dx + dz * dz <= LEASH * LEASH;
         }
         return home(x, z);
+    }
+
+    /** On a walk it keeps this far from the coast, in blocks. */
+    public static final double WALK_COAST_MARGIN = 24;
+
+    /** {@return whether the colossus may walk here on its walk past a player}: anywhere on land, off the coast */
+    public static boolean inland(double x, double z) {
+        PaleShape shape = PaleShape.server();
+        return shape.effectiveRadius(x, z) <= shape.landEnd() - WALK_COAST_MARGIN;
     }
 
     /** {@return whether this is the colossus's own country, the coast aside} */

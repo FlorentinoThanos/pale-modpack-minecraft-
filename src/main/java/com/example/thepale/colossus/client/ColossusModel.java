@@ -20,6 +20,8 @@ import software.bernie.geckolib.model.DefaultedEntityGeoModel;
  * the head turns toward whoever it is watching, and the arm that lifts a rider reaches for where its hand has to be.
  */
 public final class ColossusModel extends DefaultedEntityGeoModel<FrostColossus> {
+    /** The caches it carries on a walk, in the order of {@link FrostColossus#hasCache}. */
+    private static final String[] CACHES = {"cache_left", "cache_right", "cache_back"};
     /** The snow caps, and how many times thicker they get over a night's sleep. */
     private static final String[] SNOW_BONES = {
         "snow_shoulders", "snow_head", "snow_left_arm", "snow_right_arm", "snow_left_forearm", "snow_right_forearm"};
@@ -71,6 +73,12 @@ public final class ColossusModel extends DefaultedEntityGeoModel<FrostColossus> 
         leg("left_leg", pose, 0, awake);
         leg("right_leg", pose, 1, awake);
         // Asleep, its eyes go dark and the snow piles up on it; getting up, it shakes the snow off.
+        for (int cache = 0; cache < CACHES.length; cache++) {
+            GeoBone bone = getBone(CACHES[cache]).orElse(null);
+            if (bone != null) {
+                bone.setHidden(!colossus.hasCache(cache));
+            }
+        }
         GeoBone eyes = getBone("eyes").orElse(null);
         if (eyes != null) {
             eyes.setHidden(colossus.eyesClosed(partialTick));

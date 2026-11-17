@@ -56,7 +56,9 @@ public final class CommonConfig {
     private static final ModConfigSpec.BooleanValue COLOSSUS_SLEEP_AT_NIGHT;
     private static final ModConfigSpec.IntValue COLOSSUS_MAX_RIDERS;
     private static final ModConfigSpec.BooleanValue COLOSSUS_RIDER_STEERING;
-    private static final ModConfigSpec.DoubleValue COLOSSUS_RESPAWN_MINUTES;
+    private static final ModConfigSpec.BooleanValue COLOSSUS_EVENTS;
+    private static final ModConfigSpec.DoubleValue COLOSSUS_EVENT_MIN_MINUTES;
+    private static final ModConfigSpec.DoubleValue COLOSSUS_EVENT_MAX_MINUTES;
 
     static {
         ModConfigSpec.Builder builder = new ModConfigSpec.Builder();
@@ -324,14 +326,14 @@ public final class CommonConfig {
         builder.push("colossus");
         COLOSSUS_ENABLED = builder
                 .comment(
-                        "The Frost Colossus: a peaceful stone giant, about 30 blocks tall, that wanders the cold island (the cold",
-                        "north of the island in a one-island world). There is only ever one. false = it never appears, and one",
-                        "that is already in the world goes away.")
+                        "The Frost Colossus: a peaceful stone giant, about 30 blocks tall. Now and then it walks straight past a",
+                        "player, carrying caches of loot on its shoulders and back, and goes on its way (see the event settings).",
+                        "There is only ever one. false = it never appears, and one that is already in the world goes away.")
                 .define("enabled", true);
         COLOSSUS_INVULNERABLE = builder
                 .comment(
                         "Nothing hurts it: a hit only makes it turn its head and hum, and /kill does nothing to it. A creative",
-                        "player who hits it while sneaking still removes it (it comes back after respawnMinutes).",
+                        "player who hits it while sneaking still removes it.",
                         "false = it has 400 health and can be killed like any mob; it drops nothing either way.")
                 .define("invulnerable", true);
         COLOSSUS_WALK_SPEED = builder
@@ -355,11 +357,19 @@ public final class CommonConfig {
                         "A rider can point the way: look at a place on the island and press jump, and the colossus walks",
                         "there. false = it only ever wanders where it likes.")
                 .define("riderSteering", true);
-        COLOSSUS_RESPAWN_MINUTES = builder
+        COLOSSUS_EVENTS = builder
                 .comment(
-                        "If the colossus is gone (killed, removed, lost with a broken chunk), it appears again on the cold island",
-                        "after this many minutes.")
-                .defineInRange("respawnMinutes", 30.0, 0.0, 10_000.0);
+                        "The colossus's walk: every eventMinMinutes to eventMaxMinutes of play it appears some 100 blocks from a",
+                        "random player in the Overworld, walks straight past them with three caches of loot on its shoulders and",
+                        "back, and goes away once nobody is near. Everyone is told in chat when it comes and when it goes.",
+                        "false = it never comes by itself (/thepale colossus event still sends it).")
+                .define("events", true);
+        COLOSSUS_EVENT_MIN_MINUTES = builder
+                .comment("The shortest time between two walks, in minutes of play (the server running).")
+                .defineInRange("eventMinMinutes", 60.0, 1.0, 10_000.0);
+        COLOSSUS_EVENT_MAX_MINUTES = builder
+                .comment("The longest time between two walks, in minutes. Below eventMinMinutes, eventMinMinutes is used.")
+                .defineInRange("eventMaxMinutes", 120.0, 1.0, 10_000.0);
         builder.pop();
 
         SPEC = builder.build();
@@ -413,7 +423,9 @@ public final class CommonConfig {
             boolean sleepAtNight,
             int maxRiders,
             boolean riderSteering,
-            double respawnMinutes) {}
+            boolean events,
+            double eventMinMinutes,
+            double eventMaxMinutes) {}
 
     private static volatile Settings current = read(true);
 
@@ -486,7 +498,9 @@ public final class CommonConfig {
                         defaults ? COLOSSUS_SLEEP_AT_NIGHT.getDefault() : COLOSSUS_SLEEP_AT_NIGHT.get(),
                         defaults ? COLOSSUS_MAX_RIDERS.getDefault() : COLOSSUS_MAX_RIDERS.get(),
                         defaults ? COLOSSUS_RIDER_STEERING.getDefault() : COLOSSUS_RIDER_STEERING.get(),
-                        value(COLOSSUS_RESPAWN_MINUTES, defaults)));
+                        defaults ? COLOSSUS_EVENTS.getDefault() : COLOSSUS_EVENTS.get(),
+                        value(COLOSSUS_EVENT_MIN_MINUTES, defaults),
+                        value(COLOSSUS_EVENT_MAX_MINUTES, defaults)));
     }
 
     private static double value(ModConfigSpec.DoubleValue value, boolean useDefault) {

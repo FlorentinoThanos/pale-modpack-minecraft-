@@ -10,6 +10,7 @@ import net.minecraft.commands.Commands;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.Vec3;
@@ -18,7 +19,8 @@ import net.neoforged.neoforge.event.RegisterCommandsEvent;
 /**
  * {@code /thepale colossus ...}: finding the Frost Colossus and, for operators, putting it somewhere.
  * <ul>
- * <li>{@code where}: where it is (anybody may ask).</li>
+ * <li>{@code where}: where it is, or when it comes next (anybody may ask).</li>
+ * <li>{@code event}: sends it on a walk past the operator now (or past a random player, from the console).</li>
  * <li>{@code summon}: puts it down where the operator stands, taking away any other.</li>
  * <li>{@code home}: sends it back to the middle of the cold island.</li>
  * <li>{@code sleep}, {@code wake}: makes it sit down and sleep, or get up.</li>
@@ -35,6 +37,7 @@ public final class ColossusCommands {
     private static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(Commands.literal("thepale").then(Commands.literal("colossus")
                 .then(Commands.literal("where").executes(ColossusCommands::where))
+                .then(Commands.literal("event").requires(source -> source.hasPermission(2)).executes(ColossusCommands::event))
                 .then(Commands.literal("summon").requires(source -> source.hasPermission(2)).executes(ColossusCommands::summon))
                 .then(Commands.literal("home").requires(source -> source.hasPermission(2)).executes(ColossusCommands::home))
                 .then(Commands.literal("status").requires(source -> source.hasPermission(2)).executes(context -> {
@@ -65,20 +68,18 @@ public final class ColossusCommands {
         if (found.isEmpty()) {
             ServerLevel overworld = source.getServer().overworld();
             ColossusKeeper keeper = ColossusKeeper.get(overworld);
-            long back = keeper.comesBackIn(overworld);
+            long next = keeper.nextWalkIn(overworld);
             Vec3 last = keeper.last();
-            if (back >= 0) {
-                // Gone: back on the cold island after a while.
-                long minutes = Math.max(1, (back + 1199) / 1200);
-                source.sendSuccess(() -> Component.translatable("commands.thepale.colossus.where.gone", minutes), false);
-            } else if (last != null) {
+            if (last != null) {
                 Vec3 from = source.getPosition();
                 int distance = (int) Math.sqrt(Mth.square(from.x - last.x) + Mth.square(from.z - last.z));
                 source.sendSuccess(() -> Component.translatable(keeper.asleep() ? "commands.thepale.colossus.where.last_asleep" : "commands.thepale.colossus.where.last",
                         Mth.floor(last.x), Mth.floor(last.y), Mth.floor(last.z), distance), false);
+            } else if (next >= 0) {
+                long minutes = Math.max(1, (next + 1199) / 1200);
+                source.sendSuccess(() -> Component.translatable("commands.thepale.colossus.where.next", minutes), false);
             } else {
-                double[] heart = ColossusRange.heart();
-                source.sendSuccess(() -> Component.translatable("commands.thepale.colossus.where.none", Mth.floor(heart[0]), Mth.floor(heart[1])), false);
+                source.sendSuccess(() -> Component.translatable("commands.thepale.colossus.where.none"), false);
             }
             return 0;
         }
@@ -90,6 +91,27 @@ public final class ColossusCommands {
                     "commands.thepale.colossus.where", pos.getX(), pos.getY(), pos.getZ(), distance), false);
         }
         return found.size();
+    }
+
+    private static int event(CommandContext<CommandSourceStack> context) {
+        CommandSourceStack source = context.getSource();
+        ServerLevel overworld = source.getServer().overworld();
+        if (!CommonConfig.get().colossus().enabled()) {
+            source.sendFailure(Component.translatable("commands.thepale.colossus.disabled"));
+            return 0;
+        }
+        ServerPlayer near = source.getPlayer();
+        if (near != null && near.level() != overworld) {
+            source.sendFailure(Component.translatable("commands.thepale.colossus.overworld"));
+            return 0;
+        }
+        ServerPlayer passed = ColossusKeeper.start(overworld, near);
+        if (passed == null) {
+            source.sendFailure(Component.translatable("commands.thepale.colossus.no_place"));
+            return 0;
+        }
+        source.sendSuccess(() -> Component.translatable("commands.thepale.colossus.event", passed.getDisplayName()), true);
+        return 1;
     }
 
     private static int summon(CommandContext<CommandSourceStack> context) {
@@ -118,6 +140,7 @@ public final class ColossusCommands {
             // Not its own country: it stays around where it was put.
             colossus.setAnchor(BlockPos.containing(at));
         }
+        colossus.fillCaches();
         overworld.addFreshEntity(colossus);
         source.sendSuccess(() -> Component.translatable("commands.thepale.colossus.summoned"), true);
         return 1;

@@ -153,6 +153,14 @@ public final class ColossusEffects implements FrostColossus.ClientEffects {
         if (player == null || player.distanceToSqr(colossus) > 96 * 96) {
             return;
         }
+        // A glint of gold about each cache it still carries, so that it is seen from the ground.
+        for (int cache = 0; cache < 3; cache++) {
+            if (colossus.hasCache(cache) && random.nextFloat() < 0.3f) {
+                Vec3 at = colossus.toWorld(pose.part[ColossusPose.LEFT_CACHE + cache], 1f);
+                level.addParticle(ParticleTypes.WAX_ON, at.x + (random.nextDouble() - 0.5) * 2, at.y + (random.nextDouble() - 0.3) * 1.5,
+                        at.z + (random.nextDouble() - 0.5) * 2, 0, 0.02, 0);
+            }
+        }
         // Snow sifting off its shoulders and arms, and now and then a drop from its ice.
         if (random.nextFloat() < (activity == FrostColossus.Activity.ASLEEP ? 0.15f : 0.4f)) {
             Vec3 at = colossus.toWorld(pose.part[SNOWY_PARTS[random.nextInt(SNOWY_PARTS.length)]], 1f);

@@ -124,14 +124,20 @@ public final class ColossusPose {
     public static final int RIGHT_FOREARM = 10;
     public static final int LEFT_HAND = 11;
     public static final int RIGHT_HAND = 12;
-    public static final int PART_COUNT = 13;
+    /** The caches it carries on a walk: behind each seat, and wedged between the rocks on its back. */
+    public static final int LEFT_CACHE = 13;
+    public static final int RIGHT_CACHE = 14;
+    public static final int BACK_CACHE = 15;
+    public static final int PART_COUNT = 16;
     public static final String[] PART_NAMES = {
         "left_leg", "right_leg", "hips", "chest", "left_shoulder", "right_shoulder", "head",
-        "left_upper_arm", "right_upper_arm", "left_forearm", "right_forearm", "left_hand", "right_hand"};
+        "left_upper_arm", "right_upper_arm", "left_forearm", "right_forearm", "left_hand", "right_hand",
+        "left_cache", "right_cache", "back_cache"};
     /** Width and height of each hitbox, in blocks. */
     public static final float[][] PART_SIZE = {
         {3.6f, 10.5f}, {3.6f, 10.5f}, {8.0f, 6.5f}, {9.0f, 8.0f}, {4.4f, 3.0f}, {4.4f, 3.0f}, {3.8f, 3.4f},
-        {3.6f, 7.0f}, {3.6f, 7.0f}, {4.4f, 8.0f}, {4.4f, 8.0f}, {4.6f, 5.6f}, {4.6f, 5.6f}};
+        {3.6f, 7.0f}, {3.6f, 7.0f}, {4.4f, 8.0f}, {4.4f, 8.0f}, {4.6f, 5.6f}, {4.6f, 5.6f},
+        {2.0f, 1.6f}, {2.0f, 1.6f}, {2.8f, 2.0f}};
 
     private final double[] torso = new double[9];
     private final double[] torsoAt = new double[3];
@@ -213,6 +219,11 @@ public final class ColossusPose {
         onTorso(part[LEFT_SHOULDER], -SEAT_X, 186, 0);
         onTorso(part[RIGHT_SHOULDER], SEAT_X, 186, 0);
         onTorso(part[HEAD], 0, 205, -8);
+        // The chests (gen_colossus_model.py: its x is the other way round). A little roomier than they are drawn, so
+        // that a rider reaches the one on the back.
+        onTorso(part[LEFT_CACHE], -46, 204, 8);
+        onTorso(part[RIGHT_CACHE], 46, 206, 8);
+        onTorso(part[BACK_CACHE], 0, 225, 8);
         onTorso(seat[0], -SEAT_X, SEAT_Y, SEAT_Z);
         onTorso(seat[1], SEAT_X, SEAT_Y, SEAT_Z);
 
