@@ -17,7 +17,7 @@ import software.bernie.geckolib.model.DefaultedEntityGeoModel;
  * <p>The animation file moves the arms, the hands, the head's gestures and the whole body when it sits down, sleeps
  * and gets up. The rest is put here every frame from {@link ColossusPose}, the same pose the server has its hitboxes
  * at: the body sinks and leans with the steps, each leg reaches from its hip to where its foot stands on the ground,
- * and the head turns toward whoever it is watching.
+ * the head turns toward whoever it is watching, and the arm that lifts a rider reaches for where its hand has to be.
  */
 public final class ColossusModel extends DefaultedEntityGeoModel<FrostColossus> {
     private double armLeft;
@@ -65,6 +65,22 @@ public final class ColossusModel extends DefaultedEntityGeoModel<FrostColossus> 
         boolean awake = colossus.activity() == FrostColossus.Activity.AWAKE;
         leg("left_leg", pose, 0, awake);
         leg("right_leg", pose, 1, awake);
+        // The arm that lifts somebody reaches for where its hand has to be.
+        if (pose.reachSide != 0) {
+            String side = pose.reachSide < 0 ? "left" : "right";
+            turn(side + "_arm", pose.armRot);
+            turn(side + "_forearm", pose.forearmRot);
+            turn(side + "_hand", pose.handRot);
+        }
+    }
+
+    private void turn(String name, double[] angles) {
+        GeoBone bone = getBone(name).orElse(null);
+        if (bone != null) {
+            bone.setRotX((float) angles[0]);
+            bone.setRotY((float) angles[1]);
+            bone.setRotZ((float) angles[2]);
+        }
     }
 
     private void leg(String name, ColossusPose pose, int leg, boolean awake) {

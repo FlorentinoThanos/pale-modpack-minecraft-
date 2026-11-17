@@ -7,6 +7,7 @@ import com.example.thepale.client.PaleShaderFog;
 import com.example.thepale.client.PaleWallRenderer;
 import com.example.thepale.client.compat.PaleDistantHorizons;
 import com.example.thepale.colossus.ColossusRegistry;
+import com.example.thepale.colossus.client.ColossusHints;
 import com.example.thepale.colossus.client.ColossusRenderer;
 import com.example.thepale.config.ClientConfig;
 import com.example.thepale.worldgen.PaleShape;
@@ -45,6 +46,7 @@ public final class ThePaleClient {
         NeoForge.EVENT_BUS.addListener(PaleFog::onRenderFog);
         NeoForge.EVENT_BUS.addListener(PaleFog::onComputeFogColor);
         NeoForge.EVENT_BUS.addListener(PaleParticles::onClientTick);
+        NeoForge.EVENT_BUS.addListener(ColossusHints::onClientTick);
         NeoForge.EVENT_BUS.addListener(PaleShaderFog::onRenderLevelStage);
         NeoForge.EVENT_BUS.addListener(PaleShaderFog::onRenderGui);
         NeoForge.EVENT_BUS.addListener(EventPriority.LOWEST, PaleShaderFog::onComputeFov);

@@ -15,5 +15,13 @@
   "commands.thepale.colossus.overworld": "Ледяной Колосс живёт только в Верхнем мире.",
   "commands.thepale.colossus.disabled": "Ледяной Колосс выключен в настройках (colossus.enabled).",
   "commands.thepale.colossus.sleep": "Ледяной Колосс сядет и уснёт.",
-  "commands.thepale.colossus.wake": "Ледяной Колосс встанет."
+  "commands.thepale.colossus.wake": "Ледяной Колосс встанет.",
+  "message.thepale.colossus.climb": "ПКМ, чтобы забраться на плечо",
+  "message.thepale.colossus.asleep": "Ледяной Колосс спит",
+  "message.thepale.colossus.busy": "Его рука занята, подожди немного",
+  "message.thepale.colossus.full": "На его плечах больше нет места",
+  "message.thepale.colossus.come_closer": "Встань на его ладонь",
+  "message.thepale.colossus.riding": "%1$s: спуститься. Посмотри на место и нажми %2$s: идти туда",
+  "message.thepale.colossus.riding_plain": "%1$s: спуститься",
+  "message.thepale.colossus.no_way": "Туда Ледяной Колосс не пойдёт"
 }

@@ -29,13 +29,18 @@ public final class ColossusPose {
     public static final double FOREARM = 62;
     public static final double SEAT_X = 46;
     public static final double SEAT_Y = 200;
+    /** Toward the front edge of the shoulder, so that a rider looking ahead and down sees the ground, not snow. */
+    public static final double SEAT_Z = -10;
     /** How far the hips come down to sit, and how far the chest sinks forward over the legs (the sit_down animation). */
     public static final double SIT_DROP = 62;
     public static final double SIT_HUNCH = Math.toRadians(34);
     public static final double SIT_LEGS = Math.toRadians(82);
     /** Where somebody sits in the open hand, from the wrist: on the palm (toward the body), a little down the hand. */
-    private static final double PALM_OUT = 9;
+    public static final double PALM_OUT = 9;
     private static final double PALM_DOWN = 10;
+    /** Where the palm is held when the hand is up at the shoulder: level with the seat and this far in front of it. */
+    private static final double HAND_AT_SEAT_X = SEAT_X;
+    private static final double HAND_AT_SEAT_Z = -44;
     /** The arms hang this far out from the body with the elbows bent this much (the idle animation). */
     private static final double ARM_OUT = Math.toRadians(4);
     private static final double ARM_BEND = Math.toRadians(9);
@@ -57,8 +62,8 @@ public final class ColossusPose {
     public static final double FOOT_TURN = Math.toRadians(26);
 
     // ----- Bowing down to offer a hand -----
-    private static final double BOW_PITCH = Math.toRadians(52);
-    private static final double BOW_CROUCH = 24;
+    private static final double BOW_PITCH = Math.toRadians(60);
+    private static final double BOW_CROUCH = 30;
 
     // ----- What goes in -----
     /** Where each foot stands against the colossus's own place on the ground, in pixels (0 = left, 1 = right). */
@@ -79,9 +84,10 @@ public final class ColossusPose {
     public int reachSide;
     public double reach;
     public double palmUp;
-    /** Where the palm should be, and which way the fingers point (a direction on the ground). */
-    public final double[] palmTarget = new double[3];
-    public final double[] fingers = {0, 0, -1};
+    /** Where the open palm lies when it is offered on the ground (the place somebody sits in it). */
+    public final double[] palmGround = new double[3];
+    /** How far the hand has carried its palm from there up to the shoulder, 0 to 1. */
+    public double carry;
 
     // ----- What comes out -----
     public double bodyY;
@@ -96,7 +102,9 @@ public final class ColossusPose {
     public final double[] armRot = new double[3];
     public final double[] forearmRot = new double[3];
     public final double[] handRot = new double[3];
-    /** Where the palm ended up (the arm may not reach its target). */
+    /** Where the palm should be, which way its fingers point (a direction on the ground), and where it ended up (the arm may not reach). */
+    public final double[] palmTarget = new double[3];
+    public final double[] fingers = {0, 0, -1};
     public final double[] palm = new double[3];
     /** The seats on the shoulders (0 = left, 1 = right). */
     public final double[][] seat = new double[2][3];
@@ -205,9 +213,23 @@ public final class ColossusPose {
         onTorso(part[LEFT_SHOULDER], -SEAT_X, 186, 0);
         onTorso(part[RIGHT_SHOULDER], SEAT_X, 186, 0);
         onTorso(part[HEAD], 0, 205, -8);
-        onTorso(seat[0], -SEAT_X, SEAT_Y, 0);
-        onTorso(seat[1], SEAT_X, SEAT_Y, 0);
+        onTorso(seat[0], -SEAT_X, SEAT_Y, SEAT_Z);
+        onTorso(seat[1], SEAT_X, SEAT_Y, SEAT_Z);
 
+        if (reachSide != 0 && reach > 0) {
+            // The palm's way from the ground to the shoulder: it ends level with the seat, in front of it, fingers
+            // toward the neck, so whoever sits in it only has to shift back onto the shoulder. On the way it swings
+            // out and forward, around the body.
+            double k = smooth(carry);
+            onTorso(v2, reachSide * HAND_AT_SEAT_X, SEAT_Y, HAND_AT_SEAT_Z);
+            double around = Math.sin(Math.PI * k);
+            palmTarget[0] = palmGround[0] + (v2[0] - palmGround[0]) * k + reachSide * 14 * around;
+            palmTarget[1] = palmGround[1] + (v2[1] - palmGround[1]) * k;
+            palmTarget[2] = palmGround[2] + (v2[2] - palmGround[2]) * k - 12 * around;
+            fingers[0] = -reachSide * k;
+            fingers[1] = 0;
+            fingers[2] = -(1 - k);
+        }
         for (int arm = 0; arm < 2; arm++) {
             int side = arm == 0 ? -1 : 1;
             if (side == reachSide && reach > 0) {

@@ -1316,6 +1316,52 @@
      }
     }
    }
+  },
+  "rest_hand": {
+   "loop": "hold_on_last_frame",
+   "animation_length": 0.8,
+   "bones": {
+    "right_fingers": {
+     "rotation": {
+      "0.0": [
+       0,
+       0,
+       -4
+      ],
+      "0.80": {
+       "vector": [
+        0,
+        0,
+        -32
+       ],
+       "easing": "easeInOutSine"
+      }
+     }
+    }
+   }
+  },
+  "rest_hand_left": {
+   "loop": "hold_on_last_frame",
+   "animation_length": 0.8,
+   "bones": {
+    "left_fingers": {
+     "rotation": {
+      "0.0": [
+       0,
+       0,
+       4
+      ],
+      "0.80": {
+       "vector": [
+        0,
+        0,
+        32
+       ],
+       "easing": "easeInOutSine"
+      }
+     }
+    }
+   }
   }
  }
 }

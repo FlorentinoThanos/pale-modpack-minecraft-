@@ -37,7 +37,7 @@ SHOULDER = (64, 178, 0)       # left; the right side is mirrored
 ELBOW = (64, 124, 0)
 WRIST = (64, 62, 0)
 KNUCKLES = (64, 40, 0)
-SEAT = (46, 200, 0)            # on top of the snow
+SEAT = (46, 200, -10)          # on top of the snow, toward the front edge
 SIT_DROP = 62                 # how far the hips come down to sit
 
 # ----- The texture's regions: (u, v, width, height) -----
@@ -322,8 +322,8 @@ def animations():
     sleep["torso"]["rotation"] = keys([(0, rt(-34, 0, 0)), (4, rt(-32.5, 0, 0)), (8, rt(-34, 0, 0))])
     sleep["head_tilt"]["rotation"] = keys([(0, rt(-26, 0, 0)), (4, rt(-24.5, 0, 0)), (8, rt(-26, 0, 0))])
 
-    def hand(s, sign, curl_to):
-        return {s + "_fingers": {"rotation": keys([(0, rt(0, 0, -sign * CURL)), (0.6, rt(0, 0, -sign * curl_to))])}}
+    def hand(s, sign, curl_to, curl_from=CURL, length=0.6):
+        return {s + "_fingers": {"rotation": keys([(0, rt(0, 0, -sign * curl_from)), (length, rt(0, 0, -sign * curl_to))])}}
 
     return {"format_version": "1.8.0", "animations": {
         "idle": {"loop": True, "animation_length": 60 / 7.0, "bones": idle},
@@ -340,6 +340,9 @@ def animations():
         "offer_hand_left": {"loop": "hold_on_last_frame", "animation_length": 0.6, "bones": hand("left", -1, 4)},
         "cradle": {"loop": "hold_on_last_frame", "animation_length": 0.6, "bones": hand("right", 1, 50)},
         "cradle_left": {"loop": "hold_on_last_frame", "animation_length": 0.6, "bones": hand("left", -1, 50)},
+        # And the fingers curl back to how they hang.
+        "rest_hand": {"loop": "hold_on_last_frame", "animation_length": 0.8, "bones": hand("right", 1, CURL, 4, 0.8)},
+        "rest_hand_left": {"loop": "hold_on_last_frame", "animation_length": 0.8, "bones": hand("left", -1, CURL, 4, 0.8)},
     }}
 
 

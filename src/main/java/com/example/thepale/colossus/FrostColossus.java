@@ -1,13 +1,18 @@
 package com.example.thepale.colossus;
 
 import com.example.thepale.config.CommonConfig;
+import com.example.thepale.mixin.LivingEntityAccessor;
+import java.util.UUID;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.Mth;
@@ -15,6 +20,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
@@ -31,6 +37,7 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.entity.PartEntity;
 import net.neoforged.neoforge.fluids.FluidType;
 import org.jetbrains.annotations.Nullable;
+import org.joml.Vector3f;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.animation.AnimatableManager;
@@ -66,8 +73,44 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
     private static final EntityDataAccessor<Float> DATA_LOOK_YAW = SynchedEntityData.defineId(FrostColossus.class, EntityDataSerializers.FLOAT);
     private static final EntityDataAccessor<Float> DATA_LOOK_PITCH = SynchedEntityData.defineId(FrostColossus.class, EntityDataSerializers.FLOAT);
 
+    /** What its hand is doing ({@link HandPhase}) and which hand it is (-1 the left, 1 the right). */
+    private static final EntityDataAccessor<Byte> DATA_HAND_PHASE = SynchedEntityData.defineId(FrostColossus.class, EntityDataSerializers.BYTE);
+    private static final EntityDataAccessor<Byte> DATA_HAND_SIDE = SynchedEntityData.defineId(FrostColossus.class, EntityDataSerializers.BYTE);
+    /** Where the open palm lies on the ground when it is offered: the place somebody sits in it. */
+    private static final EntityDataAccessor<Vector3f> DATA_PALM = SynchedEntityData.defineId(FrostColossus.class, EntityDataSerializers.VECTOR3);
+    /** The entity ids of whoever is in the hand and on the left and the right shoulder (0: nobody). */
+    private static final EntityDataAccessor<Integer> DATA_HELD = SynchedEntityData.defineId(FrostColossus.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> DATA_SEAT_LEFT = SynchedEntityData.defineId(FrostColossus.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> DATA_SEAT_RIGHT = SynchedEntityData.defineId(FrostColossus.class, EntityDataSerializers.INT);
+    /** How many may ride it (the server's config; the client's hint needs it). */
+    private static final EntityDataAccessor<Byte> DATA_MAX_RIDERS = SynchedEntityData.defineId(FrostColossus.class, EntityDataSerializers.BYTE);
+
     /** What it is doing with its whole body. */
     public enum Activity { AWAKE, SITTING_DOWN, ASLEEP, STANDING_UP }
+
+    /**
+     * Lifting somebody onto a shoulder, and setting them down again.
+     * <ul>
+     * <li>Up: {@code TURN} (it stops and turns so that the hand can reach them), {@code OFFER} (it bows and lays its
+     * open hand on the ground), {@code WAIT} (until they are at the hand; then they are in it), {@code LIFT} (the
+     * hand goes up to the shoulder), {@code SEAT} (they shift from the palm onto the shoulder), {@code RETURN}.</li>
+     * <li>Down: {@code TURN} (it stops), {@code FETCH} (the hand goes up, empty), {@code TAKE} (they shift onto the
+     * palm), {@code LOWER} (it bows and brings the hand down), {@code RELEASE} (they step off), {@code RETURN}.</li>
+     * </ul>
+     */
+    public enum HandPhase {
+        NONE, TURN, OFFER, WAIT, LIFT, SEAT, FETCH, TAKE, LOWER, RELEASE, RETURN;
+
+        /** The hand is (going) down on the ground, and the body bowed over it. */
+        boolean down() {
+            return this == OFFER || this == WAIT || this == LOWER || this == RELEASE;
+        }
+
+        /** The hand is (going) up at the shoulder. */
+        boolean up() {
+            return this == LIFT || this == SEAT || this == FETCH || this == TAKE;
+        }
+    }
 
     /** The length of the sit_down and stand_up animations. */
     private static final int SIT_TICKS = 60;
@@ -82,6 +125,21 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
     private static final float LOOK_SIDEWAYS = 62;
     private static final float LOOK_DOWN = -46;
     private static final float LOOK_UP = 30;
+    /** How long the body takes to bow, the arm to reach out and the hand to go between the ground and the shoulder. */
+    private static final double BOW_TICKS = 45;
+    private static final double REACH_TICKS = 40;
+    private static final double CARRY_TICKS = 64;
+    /** How long somebody takes to shift between the palm and the shoulder, and to be gathered into the palm. */
+    private static final int SHIFT_TICKS = 18;
+    private static final int GATHER_TICKS = 12;
+    /** Where the hand can lie on the ground, from the colossus, in blocks: this far to its side and ahead, give or take. */
+    private static final double OFFER_SIDE = 8.5;
+    private static final double OFFER_AHEAD = 10;
+    private static final double OFFER_SLACK = 5.5;
+    /** The palm is this far above the ground the hand lies on (the hand's thickness), in blocks. */
+    private static final double PALM_HEIGHT = 2 * ColossusPose.PALM_OUT * ColossusPose.PX + 0.05;
+    /** Whoever is this near the offered palm is gathered into it. */
+    private static final double GATHER_DISTANCE = 5.5;
 
     private static final RawAnimation IDLE = RawAnimation.begin().thenLoop("idle");
     private static final RawAnimation WALK = RawAnimation.begin().thenLoop("walk");
@@ -92,6 +150,12 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
     private static final RawAnimation LOOK_SKY = RawAnimation.begin().thenPlay("look_sky");
     private static final RawAnimation SHAKE_HEAD = RawAnimation.begin().thenPlay("shake_head");
     private static final RawAnimation NOD = RawAnimation.begin().thenPlay("nod");
+    private static final RawAnimation[] OPEN_HAND = {
+        RawAnimation.begin().thenPlayAndHold("offer_hand_left"), RawAnimation.begin().thenPlayAndHold("offer_hand")};
+    private static final RawAnimation[] CRADLE = {
+        RawAnimation.begin().thenPlayAndHold("cradle_left"), RawAnimation.begin().thenPlayAndHold("cradle")};
+    private static final RawAnimation[] REST_HAND = {
+        RawAnimation.begin().thenPlayAndHold("rest_hand_left"), RawAnimation.begin().thenPlayAndHold("rest_hand")};
 
     private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
     private final ColossusPart[] parts = new ColossusPart[ColossusPose.PART_COUNT];
@@ -111,6 +175,18 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
     private float lookYawOld;
     private float lookPitch;
     private float lookPitchOld;
+
+    /** How far it is bowed, its arm reached out and its hand carried up to the shoulder, each 0 to 1. */
+    private double bow;
+    private double bowOld;
+    private double reach;
+    private double reachOld;
+    private double carry;
+    private double carryOld;
+    private int handTicks;
+    /** Where the one being gathered into the palm was when the hand took them. */
+    @Nullable
+    private Vec3 gatheredFrom;
 
     // The client's own, eased copy of the heading.
     private boolean yawSeen;
@@ -133,6 +209,19 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
     private int noticedTicks;
     private int headBusy;
     private int humCooldown;
+    /** Who the hand is busy with, whether it is setting them down, and where it should turn to for them. */
+    @Nullable
+    private UUID handPlayer;
+    private boolean settingDown;
+    private float handYaw;
+    /** Who sits on the left and the right shoulder, who of them has asked to get down, and who held jump last tick. */
+    private final UUID[] seats = new UUID[2];
+    private final boolean[] wantsDown = new boolean[2];
+    private final boolean[] heldJump = new boolean[2];
+    private int steerCooldown;
+    /** Where a rider is put when they get off: set just before they do. Otherwise they are left where they sit. */
+    @Nullable
+    private Vec3 dismountTo;
 
     public FrostColossus(EntityType<? extends FrostColossus> type, Level level) {
         super(type, level);
@@ -163,6 +252,13 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
         builder.define(DATA_FULL_SPEED, 0.1f);
         builder.define(DATA_LOOK_YAW, 0f);
         builder.define(DATA_LOOK_PITCH, 0f);
+        builder.define(DATA_HAND_PHASE, (byte) 0);
+        builder.define(DATA_HAND_SIDE, (byte) 1);
+        builder.define(DATA_PALM, new Vector3f());
+        builder.define(DATA_HELD, 0);
+        builder.define(DATA_SEAT_LEFT, 0);
+        builder.define(DATA_SEAT_RIGHT, 0);
+        builder.define(DATA_MAX_RIDERS, (byte) 2);
     }
 
     @Override
@@ -171,6 +267,12 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
         if (DATA_ACTIVITY.equals(key) && level().isClientSide) {
             // Just come into view asleep: it isn't shown sitting down first.
             activityTicks = tickCount < 2 ? SIT_TICKS : 0;
+        }
+        if (DATA_HAND_PHASE.equals(key) && level().isClientSide) {
+            handTicks = 0;
+            if (handPhase() != HandPhase.LIFT) {
+                gatheredFrom = null;
+            }
         }
     }
 
@@ -355,6 +457,29 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
         return Mth.lerp(partialTick, lookPitchOld, lookPitch) * Mth.DEG_TO_RAD;
     }
 
+    public HandPhase handPhase() {
+        return HandPhase.values()[Mth.clamp(entityData.get(DATA_HAND_PHASE), 0, HandPhase.values().length - 1)];
+    }
+
+    /** {@return the hand that is busy: -1 the left, 1 the right} */
+    public int handSide() {
+        return entityData.get(DATA_HAND_SIDE) < 0 ? -1 : 1;
+    }
+
+    private void setHandPhase(HandPhase phase) {
+        entityData.set(DATA_HAND_PHASE, (byte) phase.ordinal());
+        handTicks = 0;
+        if (phase != HandPhase.LIFT) {
+            gatheredFrom = null;
+        }
+    }
+
+    /** {@return whether a click on it now would have it lift somebody up, as far as a client can tell} */
+    public boolean offersRide() {
+        int taken = (entityData.get(DATA_SEAT_LEFT) != 0 ? 1 : 0) + (entityData.get(DATA_SEAT_RIGHT) != 0 ? 1 : 0);
+        return isAlive() && activity() == Activity.AWAKE && handPhase() == HandPhase.NONE && taken < entityData.get(DATA_MAX_RIDERS);
+    }
+
     /** {@return whether it is walking: the walk animation plays} */
     public boolean walking() {
         return pace > 0.03;
@@ -407,10 +532,18 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
         }
         pose.speed = Mth.lerp(partialTick, paceOld, pace);
         pose.sit = sitting(partialTick);
-        pose.bow = 0;
+        pose.bow = Mth.lerp(partialTick, bowOld, bow);
         pose.time = tickCount + partialTick;
-        pose.reachSide = 0;
-        pose.reach = 0;
+        pose.reach = Mth.lerp(partialTick, reachOld, reach);
+        pose.reachSide = pose.reach > 0 ? handSide() : 0;
+        pose.palmUp = Math.min(1, pose.reach * 1.6);
+        pose.carry = Mth.lerp(partialTick, carryOld, carry);
+        Vector3f palm = entityData.get(DATA_PALM);
+        double palmX = palm.x - base.x;
+        double palmZ = palm.z - base.z;
+        pose.palmGround[0] = (palmX * cos - palmZ * sin) / ColossusPose.PX;
+        pose.palmGround[1] = (palm.y - base.y) / ColossusPose.PX;
+        pose.palmGround[2] = (palmX * sin + palmZ * cos) / ColossusPose.PX;
         pose.solve();
     }
 
@@ -434,6 +567,7 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
         // Nothing but its own walking moves it.
         setDeltaMovement(Vec3.ZERO);
         activityTicks++;
+        handTicks++;
         lookYawOld = lookYaw;
         lookPitchOld = lookPitch;
         paceOld = pace;
@@ -459,11 +593,37 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
         }
         setYBodyRot(getYRot());
         setYHeadRot(getYRot());
+        moveHand();
         fillPose(tickPose, 1f);
         moveParts();
         if (level().isClientSide) {
             keepPlayerOut();
         }
+    }
+
+    /** The bow, the reach and the carry ease toward what the hand's phase asks for, alike on both sides. */
+    private void moveHand() {
+        HandPhase phase = handPhase();
+        bowOld = bow;
+        reachOld = reach;
+        carryOld = carry;
+        bow = approach(bow, phase.down() ? 1 : 0, 1 / BOW_TICKS);
+        boolean reaching = phase != HandPhase.NONE && phase != HandPhase.TURN && phase != HandPhase.RETURN;
+        if (reach == 0 && reaching) {
+            // The arm sets out for the ground or for the shoulder; where the hand was last doesn't matter.
+            carry = phase.up() ? 1 : 0;
+            carryOld = carry;
+        }
+        reach = approach(reach, reaching ? 1 : 0, 1 / REACH_TICKS);
+        if (phase.up()) {
+            carry = approach(carry, 1, 1 / CARRY_TICKS);
+        } else if (phase.down()) {
+            carry = approach(carry, 0, 1 / CARRY_TICKS);
+        }
+    }
+
+    private static double approach(double value, double target, double step) {
+        return value < target ? Math.min(target, value + step) : Math.max(target, value - step);
     }
 
     /** The client: the heading and the head ease toward what the server sent. */
@@ -495,6 +655,10 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
         if (entityData.get(DATA_FULL_SPEED) != fullSpeed) {
             entityData.set(DATA_FULL_SPEED, fullSpeed);
         }
+        byte maxRiders = (byte) Mth.clamp(config.maxRiders(), 0, 2);
+        if (entityData.get(DATA_MAX_RIDERS) != maxRiders) {
+            entityData.set(DATA_MAX_RIDERS, maxRiders);
+        }
         if (humCooldown > 0) {
             humCooldown--;
         }
@@ -503,7 +667,10 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
         }
         switch (activity()) {
             case AWAKE -> {
-                if (wantsRest && speed == 0 && !hasWaypoint && gait.settled(getX(), getZ(), getYRot())) {
+                tickRiders(level, config);
+                if (handPhase() != HandPhase.NONE) {
+                    tickHand(level, fullSpeed);
+                } else if (wantsRest && getPassengers().isEmpty() && speed == 0 && !hasWaypoint && gait.settled(getX(), getZ(), getYRot())) {
                     setActivity(Activity.SITTING_DOWN);
                 } else {
                     wander(level, fullSpeed);
@@ -526,6 +693,9 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
                 }
             }
         }
+        if (activity() != Activity.AWAKE && handPhase() != HandPhase.NONE) {
+            endHand();
+        }
         if (tickCount % 4 == 0) {
             watch(level);
         }
@@ -540,7 +710,7 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
         float yaw = getYRot();
         double want = 0;
         float wantTurn = 0;
-        if (wantsRest) {
+        if (wantsRest && getPassengers().isEmpty()) {
             hasWaypoint = false;
         }
         if (hasWaypoint) {
@@ -566,9 +736,15 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
             }
         } else if (pause > 0) {
             pause--;
-        } else if (!wantsRest) {
+        } else if (!wantsRest || !getPassengers().isEmpty()) {
             chooseWaypoint(level);
         }
+        drive(want, wantTurn, fullSpeed);
+    }
+
+    /** Eases its speed and its turning toward what is wanted, and moves it. */
+    private void drive(double want, float wantTurn, double fullSpeed) {
+        float yaw = getYRot();
         turn += (wantTurn - turn) * 0.12f;
         if (wantTurn == 0 && Math.abs(turn) < 0.01f) {
             turn = 0;
@@ -669,7 +845,9 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
     public String status() {
         ServerLevel level = (ServerLevel) level();
         StringBuilder out = new StringBuilder();
-        out.append(activity()).append(hasWaypoint ? String.format(" walking to %.0f %.0f", waypointX, waypointZ) : " no waypoint")
+        out.append(activity()).append(hasWaypoint ? String.format(", walking to %.0f %.0f", waypointX, waypointZ) : ", no waypoint")
+                .append(String.format(", hand %s %s (bow %.2f reach %.2f carry %.2f), riders %d",
+                        handPhase(), handSide() < 0 ? "left" : "right", bow, reach, carry, getPassengers().size()))
                 .append(String.format(", pause %d, speed %.3f, blocked %d, y %.1f, feet %.1f", pause, speed, blocked, getY(), gait.placed() ? gait.support() : Double.NaN))
                 .append(ColossusRange.allowed(getX(), getZ(), anchor) ? ", in range" : ", OUT OF RANGE")
                 .append(anchor != null ? ", anchored at " + anchor.toShortString() : "")
@@ -706,7 +884,8 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
             double nearest = WATCH_DISTANCE * WATCH_DISTANCE;
             for (Player player : level.players()) {
                 double distance = Mth.square(player.getX() - getX()) + Mth.square(player.getZ() - getZ());
-                if (distance < nearest && player.isAlive() && !player.isSpectator() && !player.isInvisible()) {
+                // Its riders are out of its sight, up on its shoulders.
+                if (distance < nearest && player.isAlive() && !player.isSpectator() && !player.isInvisible() && player.getVehicle() != this) {
                     nearest = distance;
                     target = player;
                 }
@@ -739,13 +918,13 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
             return false;
         }
         Entity attacker = source.getEntity();
-        if (attacker instanceof Player player && player.isCreative() && player.isShiftKeyDown()) {
+        if (attacker instanceof Player player && player.isCreative() && player.isShiftKeyDown() && player.getVehicle() != this) {
             // The one way to take it out of the world by hand: a creative player, sneaking.
             ejectPassengers();
             discard();
             return true;
         }
-        if (attacker instanceof LivingEntity living && attacker != this) {
+        if (attacker instanceof LivingEntity living && attacker != this && living.getVehicle() != this) {
             notice(living);
         }
         if (CommonConfig.get().colossus().invulnerable()) {
@@ -773,9 +952,446 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
         }
     }
 
-    /** A click on any of its parts. */
+    /** A click on any of its parts: with an empty hand, it lifts the player onto a shoulder. */
     InteractionResult interactPart(ColossusPart part, Player player, InteractionHand hand) {
-        return InteractionResult.PASS;
+        if (hand != InteractionHand.MAIN_HAND || !player.getMainHandItem().isEmpty() || player.isSpectator() || player.getVehicle() == this) {
+            return InteractionResult.PASS;
+        }
+        if (level().isClientSide) {
+            return InteractionResult.SUCCESS;
+        }
+        CommonConfig.Colossus config = CommonConfig.get().colossus();
+        if (!config.enabled() || config.maxRiders() <= 0 || player.isPassenger()) {
+            return InteractionResult.PASS;
+        }
+        if (activity() != Activity.AWAKE) {
+            tell(player, "asleep");
+            return InteractionResult.SUCCESS;
+        }
+        if (handPhase() != HandPhase.NONE) {
+            // Whoever it is already reaching for needn't be told.
+            if (!player.getUUID().equals(handPlayer)) {
+                tell(player, "busy");
+            }
+            return InteractionResult.SUCCESS;
+        }
+        int taken = (seats[0] != null ? 1 : 0) + (seats[1] != null ? 1 : 0);
+        if (taken >= Math.min(2, config.maxRiders())) {
+            playHead("shake_head", 50);
+            tell(player, "full");
+            return InteractionResult.SUCCESS;
+        }
+        // The free shoulder; with both free, the one on the player's side.
+        int side = seats[0] != null ? 1 : seats[1] != null ? -1 : toItsRight(player.getX(), player.getZ()) < 0 ? -1 : 1;
+        handPlayer = player.getUUID();
+        settingDown = false;
+        entityData.set(DATA_HAND_SIDE, (byte) side);
+        hasWaypoint = false;
+        setHandPhase(HandPhase.TURN);
+        return InteractionResult.SUCCESS;
+    }
+
+    private static void tell(Player player, String message, Object... arguments) {
+        player.displayClientMessage(Component.translatable("message.thepale.colossus." + message, arguments), true);
+    }
+
+    /** {@return how far to the colossus's right this place is, in blocks (negative: to its left)} */
+    private double toItsRight(double x, double z) {
+        double turnBy = Math.toRadians(180 - getYRot());
+        return (x - getX()) * Math.cos(turnBy) - (z - getZ()) * Math.sin(turnBy);
+    }
+
+    /** {@return a place given from the colossus (blocks to its right and ahead of it) as a place in the world, on the ground} */
+    private Vec3 groundFromIt(double right, double ahead) {
+        double turnBy = Math.toRadians(180 - getYRot());
+        double x = getX() + right * Math.cos(turnBy) - ahead * Math.sin(turnBy);
+        double z = getZ() - right * Math.sin(turnBy) - ahead * Math.cos(turnBy);
+        double feet = gait.placed() ? gait.support() : getY();
+        double ground = ColossusGround.height(level(), x, z);
+        // Where the ground can't be known or the hand couldn't follow it, the level it stands on.
+        return new Vec3(x, Double.isNaN(ground) ? feet : Mth.clamp(ground, feet - 4, feet + 4), z);
+    }
+
+    // ----- Riders (server) -----
+
+    @Nullable
+    private ServerPlayer rider(int seat) {
+        UUID id = seats[seat];
+        if (id != null) {
+            for (Entity passenger : getPassengers()) {
+                if (passenger instanceof ServerPlayer player && player.getUUID().equals(id)) {
+                    return player;
+                }
+            }
+        }
+        return null;
+    }
+
+    private void seatId(int seat, int id) {
+        EntityDataAccessor<Integer> key = seat == 0 ? DATA_SEAT_LEFT : DATA_SEAT_RIGHT;
+        if (entityData.get(key) != id) {
+            entityData.set(key, id);
+        }
+    }
+
+    /** What the riders ask for: sneaking to be set down, jump to point the way. */
+    private void tickRiders(ServerLevel level, CommonConfig.Colossus config) {
+        if (steerCooldown > 0) {
+            steerCooldown--;
+        }
+        for (Entity passenger : getPassengers()) {
+            // Sneaking would have a rider jump off, from this height. The hand sets them down instead.
+            if (passenger instanceof ServerPlayer player && player.isShiftKeyDown()) {
+                player.setShiftKeyDown(false);
+                for (int seat = 0; seat < 2; seat++) {
+                    if (player.getUUID().equals(seats[seat]) && !player.getUUID().equals(handPlayer)) {
+                        wantsDown[seat] = true;
+                    }
+                }
+            }
+        }
+        for (int seat = 0; seat < 2; seat++) {
+            ServerPlayer rider = rider(seat);
+            if (rider == null) {
+                seats[seat] = null;
+                wantsDown[seat] = false;
+                heldJump[seat] = false;
+                seatId(seat, 0);
+                continue;
+            }
+            boolean jump = ((LivingEntityAccessor) rider).thepale$isJumping();
+            if (jump && !heldJump[seat] && config.riderSteering() && handPhase() == HandPhase.NONE && steerCooldown <= 0) {
+                steerCooldown = 15;
+                steer(level, rider);
+            }
+            heldJump[seat] = jump;
+        }
+        for (int seat = 0; seat < 2 && handPhase() == HandPhase.NONE; seat++) {
+            if (wantsDown[seat] && seats[seat] != null) {
+                wantsDown[seat] = false;
+                handPlayer = seats[seat];
+                settingDown = true;
+                entityData.set(DATA_HAND_SIDE, (byte) (seat == 0 ? -1 : 1));
+                hasWaypoint = false;
+                setHandPhase(HandPhase.TURN);
+            }
+        }
+    }
+
+    /** A rider looked at a place and pressed jump: it goes there, if that is land it may walk on. */
+    private void steer(ServerLevel level, ServerPlayer rider) {
+        Vec3 eye = rider.getEyePosition();
+        Vec3 look = rider.getLookAngle();
+        Vec3 place = null;
+        // Along their line of sight to the ground; only through chunks that are loaded.
+        for (double along = 6; along <= 220; along += 1) {
+            double x = eye.x + look.x * along;
+            double y = eye.y + look.y * along;
+            double z = eye.z + look.z * along;
+            double ground = ColossusGround.height(level, x, z);
+            if (Double.isNaN(ground)) {
+                break;
+            }
+            if (y <= ground) {
+                place = new Vec3(x, ground, z);
+                break;
+            }
+        }
+        if (place == null
+                || !ColossusRange.allowed(place.x, place.z, anchor)
+                || ColossusGround.waterDepth(level, place.x, place.z) > MAX_WADE
+                || Mth.square(place.x - getX()) + Mth.square(place.z - getZ()) < 6 * 6) {
+            playHead("shake_head", 50);
+            tell(rider, "no_way");
+            return;
+        }
+        waypointX = place.x;
+        waypointZ = place.z;
+        hasWaypoint = true;
+        pause = 0;
+        blocked = 0;
+        playHead("nod", 28);
+        // Only they see where they pointed.
+        level.sendParticles(rider, ParticleTypes.SNOWFLAKE, true, place.x, place.y + 1.5, place.z, 40, 0.8, 1.5, 0.8, 0.02);
+        level.sendParticles(rider, ParticleTypes.END_ROD, true, place.x, place.y + 2.5, place.z, 12, 0.3, 2.0, 0.3, 0.01);
+    }
+
+    // ----- The hand (server) -----
+
+    private void tickHand(ServerLevel level, double fullSpeed) {
+        int side = handSide();
+        int seat = side < 0 ? 0 : 1;
+        ServerPlayer player = handPlayer == null ? null : level.getServer().getPlayerList().getPlayer(handPlayer);
+        boolean here = player != null && player.isAlive() && !player.isSpectator() && player.level() == level;
+        boolean riding = here && player.getVehicle() == this;
+        float wantTurn = 0;
+        switch (handPhase()) {
+            case TURN -> {
+                if (settingDown) {
+                    if (!riding) {
+                        endHand();
+                    } else if (speed == 0) {
+                        setHandPhase(HandPhase.FETCH);
+                    }
+                } else if (!here || player.isPassenger() || distanceToSqr(player) > 28 * 28) {
+                    endHand();
+                } else {
+                    // Turn so that they are off to the side of the hand, where it reaches the ground.
+                    double dx = player.getX() - getX();
+                    double dz = player.getZ() - getZ();
+                    float toward = (float) (Mth.atan2(-dx, dz) * Mth.RAD_TO_DEG);
+                    float bearing = (float) (Mth.atan2(OFFER_SIDE, OFFER_AHEAD) * Mth.RAD_TO_DEG);
+                    float off = dx * dx + dz * dz < 4 * 4 ? 0 : Mth.wrapDegrees(toward - side * bearing - getYRot());
+                    if (speed == 0 && (Math.abs(off) < 6 || handTicks > 200)) {
+                        offerPalm(player, side);
+                        setHandPhase(HandPhase.OFFER);
+                    } else if (speed < 0.01) {
+                        wantTurn = Mth.clamp(off * 0.12f, -SPOT_TURN, SPOT_TURN);
+                    }
+                }
+            }
+            case OFFER -> {
+                if (!here || player.isPassenger()) {
+                    setHandPhase(HandPhase.RETURN);
+                } else if (bow >= 1 && reach >= 1) {
+                    setHandPhase(HandPhase.WAIT);
+                }
+            }
+            case WAIT -> {
+                if (!here || player.isPassenger() || handTicks > 240) {
+                    setHandPhase(HandPhase.RETURN);
+                    break;
+                }
+                Vec3 palm = toWorld(tickPose.palm, 1f);
+                boolean near = Mth.square(player.getX() - palm.x) + Mth.square(player.getZ() - palm.z) < GATHER_DISTANCE * GATHER_DISTANCE
+                        && Math.abs(player.getY() - (palm.y - PALM_HEIGHT)) < 5;
+                if (near) {
+                    // Into the hand: from here on they ride, first in the palm.
+                    entityData.set(DATA_HELD, player.getId());
+                    setHandPhase(HandPhase.LIFT);
+                    if (!player.startRiding(this, true)) {
+                        entityData.set(DATA_HELD, 0);
+                        setHandPhase(HandPhase.RETURN);
+                    }
+                } else if (handTicks == 30) {
+                    tell(player, "come_closer");
+                }
+            }
+            case LIFT -> {
+                if (!riding) {
+                    entityData.set(DATA_HELD, 0);
+                    setHandPhase(HandPhase.RETURN);
+                } else if (carry >= 1 && bow <= 0) {
+                    setHandPhase(HandPhase.SEAT);
+                }
+            }
+            case SEAT -> {
+                if (!riding) {
+                    entityData.set(DATA_HELD, 0);
+                    setHandPhase(HandPhase.RETURN);
+                } else if (handTicks >= SHIFT_TICKS) {
+                    seats[seat] = player.getUUID();
+                    seatId(seat, player.getId());
+                    entityData.set(DATA_HELD, 0);
+                    setHandPhase(HandPhase.RETURN);
+                    tell(player, CommonConfig.get().colossus().riderSteering() ? "riding" : "riding_plain",
+                            Component.keybind("key.sneak"), Component.keybind("key.jump"));
+                }
+            }
+            case FETCH -> {
+                if (!riding) {
+                    setHandPhase(HandPhase.RETURN);
+                } else if (reach >= 1 && carry >= 1) {
+                    entityData.set(DATA_HELD, player.getId());
+                    seatId(seat, 0);
+                    setHandPhase(HandPhase.TAKE);
+                }
+            }
+            case TAKE -> {
+                if (!riding) {
+                    entityData.set(DATA_HELD, 0);
+                    setHandPhase(HandPhase.RETURN);
+                } else if (handTicks >= SHIFT_TICKS) {
+                    setDownPalm(level, side);
+                    setHandPhase(HandPhase.LOWER);
+                }
+            }
+            case LOWER -> {
+                if (!riding) {
+                    entityData.set(DATA_HELD, 0);
+                    setHandPhase(HandPhase.RELEASE);
+                } else if (carry <= 0 && bow >= 1) {
+                    // Off the hand, onto the ground beside it, on the side away from the colossus.
+                    Vec3 palm = toWorld(tickPose.palm, 1f);
+                    double awayX = palm.x - getX();
+                    double awayZ = palm.z - getZ();
+                    double length = Math.max(Math.sqrt(awayX * awayX + awayZ * awayZ), 1.0E-3);
+                    double x = palm.x + awayX / length * 3.4;
+                    double z = palm.z + awayZ / length * 3.4;
+                    double ground = ColossusGround.height(level, x, z);
+                    double floor = palm.y - PALM_HEIGHT;
+                    dismountTo = new Vec3(x, Double.isNaN(ground) || Math.abs(ground - floor) > 4 ? palm.y : ground, z);
+                    player.stopRiding();
+                    dismountTo = null;
+                    entityData.set(DATA_HELD, 0);
+                    setHandPhase(HandPhase.RELEASE);
+                }
+            }
+            case RELEASE -> {
+                if (handTicks >= 25) {
+                    setHandPhase(HandPhase.RETURN);
+                }
+            }
+            case RETURN -> {
+                if (reach <= 0 && bow <= 0) {
+                    endHand();
+                }
+            }
+            case NONE -> {}
+        }
+        drive(0, wantTurn, fullSpeed);
+    }
+
+    private void endHand() {
+        setHandPhase(HandPhase.NONE);
+        entityData.set(DATA_HELD, 0);
+        handPlayer = null;
+        settingDown = false;
+        pause = Math.max(pause, 30);
+    }
+
+    /** Where the open hand is laid for this player: beside them if the arm reaches that far, else as near as it reaches. */
+    private void offerPalm(Player player, int side) {
+        double turnBy = Math.toRadians(180 - getYRot());
+        double dx = player.getX() - getX();
+        double dz = player.getZ() - getZ();
+        double right = dx * Math.cos(turnBy) - dz * Math.sin(turnBy);
+        double ahead = -(dx * Math.sin(turnBy) + dz * Math.cos(turnBy));
+        // From the player a little toward the middle of where the hand reaches, and no further from that middle
+        // than the arm allows.
+        double offRight = right - side * OFFER_SIDE;
+        double offAhead = ahead - OFFER_AHEAD;
+        double off = Math.sqrt(offRight * offRight + offAhead * offAhead);
+        double keep = off < 1.0E-3 ? 0 : Mth.clamp(off - 2.6, 0, OFFER_SLACK) / off;
+        Vec3 ground = groundFromIt(side * OFFER_SIDE + offRight * keep, OFFER_AHEAD + offAhead * keep);
+        entityData.set(DATA_PALM, new Vector3f((float) ground.x, (float) (ground.y + PALM_HEIGHT), (float) ground.z));
+    }
+
+    /** Where the hand comes down to let somebody off: beside and ahead of the colossus, on ground that isn't under water. */
+    private void setDownPalm(ServerLevel level, int side) {
+        double[][] places = {{OFFER_SIDE, OFFER_AHEAD}, {OFFER_SIDE + 2.5, OFFER_AHEAD - 3}, {OFFER_SIDE - 3, OFFER_AHEAD + 2.5}, {OFFER_SIDE + 4, OFFER_AHEAD - 6}};
+        Vec3 chosen = null;
+        double feet = gait.placed() ? gait.support() : getY();
+        for (double[] place : places) {
+            Vec3 ground = groundFromIt(side * place[0], place[1]);
+            double real = ColossusGround.height(level, ground.x, ground.z);
+            if (chosen == null) {
+                chosen = ground;
+            }
+            if (!Double.isNaN(real) && Math.abs(real - feet) <= 3.5 && ColossusGround.waterDepth(level, ground.x, ground.z) <= 1) {
+                chosen = ground;
+                break;
+            }
+        }
+        entityData.set(DATA_PALM, new Vector3f((float) chosen.x, (float) (chosen.y + PALM_HEIGHT), (float) chosen.z));
+    }
+
+    /**
+     * Takes a rider off at once and puts them on the ground beside the colossus: when they die or leave the game,
+     * so that neither they nor what they leave behind stays up in the air.
+     */
+    public void putDown(ServerPlayer player) {
+        if (player.getVehicle() != this) {
+            return;
+        }
+        int side = player.getUUID().equals(seats[0]) ? -1 : 1;
+        dismountTo = groundFromIt(side * (OFFER_SIDE + 1), 3);
+        player.stopRiding();
+        dismountTo = null;
+    }
+
+    // ----- Carrying riders (both sides) -----
+
+    /** Only players ride it, and only by its hand. */
+    @Override
+    protected boolean canAddPassenger(Entity passenger) {
+        return passenger instanceof Player && getPassengers().size() < Mth.clamp(CommonConfig.get().colossus().maxRiders(), 0, 2);
+    }
+
+    /** No health bar of its own over the rider's hotbar: their food bar stays. */
+    @Override
+    public boolean showVehicleHealth() {
+        return false;
+    }
+
+    /** A player who leaves the game on its shoulder doesn't take the colossus out of the world with them. */
+    @Override
+    public boolean hasExactlyOnePlayerPassenger() {
+        return false;
+    }
+
+    @Override
+    public Vec3 getPassengerRidingPosition(Entity passenger) {
+        int id = passenger.getId();
+        int handSeat = handSide() < 0 ? 0 : 1;
+        if (entityData.get(DATA_HELD) == id) {
+            Vec3 palm = toWorld(tickPose.palm, 1f);
+            Vec3 seat = toWorld(tickPose.seat[handSeat], 1f);
+            double shift = Mth.clamp(handTicks / (double) SHIFT_TICKS, 0, 1);
+            shift = shift * shift * (3 - 2 * shift);
+            switch (handPhase()) {
+                case LIFT -> {
+                    // Gathered into the palm from where they stood.
+                    if (gatheredFrom == null) {
+                        gatheredFrom = passenger.position().add(passenger.getVehicleAttachmentPoint(this));
+                    }
+                    double gather = Mth.clamp(handTicks / (double) GATHER_TICKS, 0, 1);
+                    return gatheredFrom.lerp(palm, gather * gather * (3 - 2 * gather));
+                }
+                case SEAT -> {
+                    return palm.lerp(seat, shift);
+                }
+                case TAKE -> {
+                    return seat.lerp(palm, shift);
+                }
+                case NONE, TURN, RETURN -> {
+                    return seat;
+                }
+                default -> {
+                    return palm;
+                }
+            }
+        }
+        return toWorld(tickPose.seat[entityData.get(DATA_SEAT_RIGHT) == id ? 1 : entityData.get(DATA_SEAT_LEFT) == id ? 0 : handSeat], 1f);
+    }
+
+    @Override
+    protected void removePassenger(Entity passenger) {
+        super.removePassenger(passenger);
+        if (level().isClientSide) {
+            return;
+        }
+        for (int seat = 0; seat < 2; seat++) {
+            if (passenger.getUUID().equals(seats[seat])) {
+                seats[seat] = null;
+                wantsDown[seat] = false;
+                seatId(seat, 0);
+            }
+        }
+        if (entityData.get(DATA_HELD) == passenger.getId()) {
+            entityData.set(DATA_HELD, 0);
+        }
+        if (dismountTo == null && passenger instanceof ServerPlayer player && player.isAlive() && !player.hasDisconnected()) {
+            // Off its shoulder some other way (the colossus is gone, a command): they drift down unharmed.
+            player.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, 100, 0, false, false, true));
+            ColossusRiding.protectFromFall(player);
+        }
+    }
+
+    /** By its hand they are put on the ground; any other way they are left where they sat, to drift down. */
+    @Override
+    public Vec3 getDismountLocationForPassenger(LivingEntity passenger) {
+        return dismountTo != null ? dismountTo : passenger.position();
     }
 
     // ----- The hitboxes -----
@@ -838,6 +1454,16 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
                 .triggerableAnim("look_sky", LOOK_SKY)
                 .triggerableAnim("shake_head", SHAKE_HEAD)
                 .triggerableAnim("nod", NOD));
+        // The fingers of the hand that lifts somebody: open to offer, closed around them, and back to rest.
+        controllers.add(new AnimationController<>(this, "hands", 6, state -> {
+            int hand = handSide() < 0 ? 0 : 1;
+            return switch (handPhase()) {
+                case OFFER, WAIT, SEAT, FETCH, RELEASE -> state.setAndContinue(OPEN_HAND[hand]);
+                case LIFT, TAKE, LOWER -> state.setAndContinue(CRADLE[hand]);
+                case RETURN -> state.setAndContinue(REST_HAND[hand]);
+                default -> PlayState.STOP;
+            };
+        }));
     }
 
     @Override

@@ -7,6 +7,7 @@
   "mixins": [
     "BiomeSourceMixin",
     "ChunkGeneratorStructureStateMixin",
+    "LivingEntityAccessor",
     "MultiNoiseBiomeSourceMixin",
     "NetherPortalBlockMixin",
     "PlacedFeatureMixin",

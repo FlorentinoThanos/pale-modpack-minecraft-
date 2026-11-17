@@ -32,5 +32,13 @@
   "commands.thepale.colossus.overworld": "The Frost Colossus only lives in the Overworld.",
   "commands.thepale.colossus.disabled": "The Frost Colossus is turned off in the config (colossus.enabled).",
   "commands.thepale.colossus.sleep": "The Frost Colossus will sit down and sleep.",
-  "commands.thepale.colossus.wake": "The Frost Colossus will get up."
+  "commands.thepale.colossus.wake": "The Frost Colossus will get up.",
+  "message.thepale.colossus.climb": "Right-click to climb onto its shoulder",
+  "message.thepale.colossus.asleep": "The Frost Colossus is asleep",
+  "message.thepale.colossus.busy": "Its hand is busy, wait a moment",
+  "message.thepale.colossus.full": "There is no room left on its shoulders",
+  "message.thepale.colossus.come_closer": "Step onto its palm",
+  "message.thepale.colossus.riding": "%1$s: get down. Look at a place and press %2$s: go there",
+  "message.thepale.colossus.riding_plain": "%1$s: get down",
+  "message.thepale.colossus.no_way": "The Frost Colossus won't go there"
 }
