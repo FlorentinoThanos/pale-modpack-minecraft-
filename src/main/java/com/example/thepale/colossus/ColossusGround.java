@@ -21,8 +21,8 @@ public final class ColossusGround {
     /** The corners of a foot, from its middle, in blocks. */
     private static final double FOOT_HALF_WIDTH = 1.25;
     private static final double FOOT_HALF_LENGTH = 1.75;
-    /** Out at sea it wades no deeper than this, in blocks: its legs and belly in the water, its shoulders well above. */
-    public static final int MAX_DEPTH = 14;
+    /** Out at sea it wades no deeper than this, in blocks: the water comes up to its knees, the rest of it stands clear. */
+    public static final int MAX_DEPTH = 5;
 
     private ColossusGround() {}
 
