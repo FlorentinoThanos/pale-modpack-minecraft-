@@ -85,6 +85,26 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
     /** How many may ride it (the server's config; the client's hint needs it). */
     private static final EntityDataAccessor<Byte> DATA_MAX_RIDERS = SynchedEntityData.defineId(FrostColossus.class, EntityDataSerializers.BYTE);
 
+    /**
+     * What the colossus looks and sounds like on a client beyond its model: footfalls, falling snow, the screen shake.
+     * Set by the client; a dedicated server keeps the one that does nothing.
+     */
+    public interface ClientEffects {
+        /** A foot came down at this place, this hard (0 to 1). */
+        void footfall(FrostColossus colossus, double x, double y, double z, float yaw, double weight);
+
+        /** A tick of the colossus on the client. */
+        void tick(FrostColossus colossus);
+    }
+
+    public static ClientEffects clientEffects = new ClientEffects() {
+        @Override
+        public void footfall(FrostColossus colossus, double x, double y, double z, float yaw, double weight) {}
+
+        @Override
+        public void tick(FrostColossus colossus) {}
+    };
+
     /** What it is doing with its whole body. */
     public enum Activity { AWAKE, SITTING_DOWN, ASLEEP, STANDING_UP }
 
@@ -190,6 +210,9 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
 
     // The client's own, eased copy of the heading.
     private boolean yawSeen;
+    /** How deep the snow has piled on it while it slept, 0 to 1 (the client's, for the model). */
+    private double snow;
+    private double snowOld;
 
     // The server's: where it is going.
     private boolean hasWaypoint;
@@ -209,6 +232,11 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
     private int noticedTicks;
     private int headBusy;
     private int humCooldown;
+    /** Ticks until it sighs. */
+    private int sighIn = 600;
+    /** Whether it was night (or a thunderstorm) when last looked: it lies down and gets up as that changes. */
+    @Nullable
+    private Boolean wasNight;
     /** Who the hand is busy with, whether it is setting them down, and where it should turn to for them. */
     @Nullable
     private UUID handPlayer;
@@ -239,7 +267,7 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
 
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 1000.0)
+                .add(Attributes.MAX_HEALTH, 400.0)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1.0)
                 .add(Attributes.ARMOR, 20.0);
     }
@@ -586,6 +614,14 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
         lastZ = getZ();
         double fullSpeed = entityData.get(DATA_FULL_SPEED);
         gait.tick(level(), getX(), getY(), getZ(), getYRot(), movedX, movedZ, fullSpeed, activity() == Activity.AWAKE);
+        if (gait.landed >= 0 && isAlive()) {
+            int foot = gait.landed;
+            if (level().isClientSide) {
+                clientEffects.footfall(this, gait.x[foot], gait.y[foot], gait.z[foot], gait.yaw[foot], gait.landedWeight);
+            } else {
+                flatten((ServerLevel) level(), gait.x[foot], gait.y[foot], gait.z[foot], gait.yaw[foot]);
+            }
+        }
         double moved = Math.sqrt(movedX * movedX + movedZ * movedZ);
         pace += (Mth.clamp(moved / Math.max(fullSpeed, 1.0E-4), 0, 1) - pace) * 0.2;
         if (!level().isClientSide && isAlive()) {
@@ -598,6 +634,7 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
         moveParts();
         if (level().isClientSide) {
             keepPlayerOut();
+            clientEffects.tick(this);
         }
     }
 
@@ -643,6 +680,33 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
         }
         lookYaw += (entityData.get(DATA_LOOK_YAW) - lookYaw) * 0.09f;
         lookPitch += (entityData.get(DATA_LOOK_PITCH) - lookPitch) * 0.09f;
+        snowOld = snow;
+        switch (activity()) {
+            // Come into view asleep: it has been asleep a while.
+            case ASLEEP -> snow = tickCount < 3 ? 1 : Math.min(1, snow + 1 / 1800.0);
+            case SITTING_DOWN -> snow = Math.min(1, snow + 1 / 1800.0);
+            // Shaken off as it gets up.
+            case STANDING_UP -> snow = activityTicks < 10 ? snow : Math.max(0, snow - 1 / 30.0);
+            case AWAKE -> snow = Math.max(0, snow - 1 / 200.0);
+        }
+        if (tickCount < 3) {
+            snowOld = snow;
+        }
+    }
+
+    /** {@return how deep the snow lies on it from its sleep, 0 to 1} (client only) */
+    public double snowCover(float partialTick) {
+        return Mth.lerp(partialTick, snowOld, snow);
+    }
+
+    /** {@return whether its eyes are dark: it has nodded off, or not yet woken} */
+    public boolean eyesClosed(float partialTick) {
+        return switch (activity()) {
+            case AWAKE -> false;
+            case ASLEEP -> true;
+            case SITTING_DOWN -> activityTicks + partialTick > SIT_TICKS * 0.75;
+            case STANDING_UP -> activityTicks + partialTick < SIT_TICKS * 0.3;
+        };
     }
 
     private void serverStep(ServerLevel level) {
@@ -664,6 +728,12 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
         }
         if (headBusy > 0) {
             headBusy--;
+        }
+        if (tickCount % 20 == 0) {
+            keepHours(level, config);
+        }
+        if (--sighIn <= 0) {
+            sigh(level);
         }
         switch (activity()) {
             case AWAKE -> {
@@ -701,6 +771,57 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
         }
         if (entityData.get(DATA_YAW) != getYRot()) {
             entityData.set(DATA_YAW, getYRot());
+        }
+    }
+
+    /**
+     * It lies down when night falls or a thunderstorm comes, and gets up when it is over. Only as that changes: put
+     * to sleep or woken by a command or a click, it stays so until the next dusk or dawn.
+     */
+    private void keepHours(ServerLevel level, CommonConfig.Colossus config) {
+        long time = level.getDayTime() % 24000;
+        boolean night = (time >= 13000 && time < 23300) || level.isThundering();
+        if (wasNight == null || night != wasNight) {
+            if (config.sleepAtNight() && (wasNight != null || night)) {
+                wantsRest = night;
+            }
+            wasNight = night;
+        }
+    }
+
+    /** Now and then a long, low breath: awake, a sigh; asleep, slower and softer. */
+    private void sigh(ServerLevel level) {
+        boolean asleep = activity() == Activity.ASLEEP;
+        sighIn = asleep ? 300 + random.nextInt(300) : 1200 + random.nextInt(1800);
+        if (activity() == Activity.SITTING_DOWN || activity() == Activity.STANDING_UP) {
+            return;
+        }
+        Vec3 head = toWorld(tickPose.part[ColossusPose.HEAD], 1f);
+        level.playSound(null, head.x, head.y, head.z, ColossusRegistry.SIGH.get(), getSoundSource(),
+                asleep ? 2.5f : 4f, (asleep ? 0.8f : 0.95f) + random.nextFloat() * 0.1f);
+    }
+
+    /** Where a foot came down: snow layers, grass, flowers and leaves under it are trodden flat, if the config allows. */
+    private void flatten(ServerLevel level, double x, double y, double z, float yaw) {
+        if (!CommonConfig.get().colossus().breakSoftBlocks() || !net.neoforged.neoforge.event.EventHooks.canEntityGrief(level, this)) {
+            return;
+        }
+        double sin = Math.sin(Math.toRadians(yaw));
+        double cos = Math.cos(Math.toRadians(yaw));
+        BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
+        for (double along = -1.5; along <= 1.5; along += 1) {
+            for (double across = -1; across <= 1; across += 1) {
+                int blockX = Mth.floor(x - sin * along + cos * across);
+                int blockZ = Mth.floor(z + cos * along + sin * across);
+                for (int up = -1; up <= 2; up++) {
+                    pos.set(blockX, Mth.floor(y) + up, blockZ);
+                    BlockState state = level.getBlockState(pos);
+                    if (!state.isAir() && (state.canBeReplaced() || state.is(net.minecraft.tags.BlockTags.LEAVES))
+                            && state.getFluidState().isEmpty()) {
+                        level.destroyBlock(pos, false, this);
+                    }
+                }
+            }
         }
     }
 
@@ -965,7 +1086,13 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
             return InteractionResult.PASS;
         }
         if (activity() != Activity.AWAKE) {
-            tell(player, "asleep");
+            // Asleep it is woken; it gets up, and then it can be asked again.
+            if (activity() == Activity.ASLEEP || activity() == Activity.SITTING_DOWN) {
+                wantsRest = false;
+                tell(player, "waking");
+            } else {
+                tell(player, "busy");
+            }
             return InteractionResult.SUCCESS;
         }
         if (handPhase() != HandPhase.NONE) {

@@ -20,6 +20,11 @@ import software.bernie.geckolib.model.DefaultedEntityGeoModel;
  * the head turns toward whoever it is watching, and the arm that lifts a rider reaches for where its hand has to be.
  */
 public final class ColossusModel extends DefaultedEntityGeoModel<FrostColossus> {
+    /** The snow caps, and how many times thicker they get over a night's sleep. */
+    private static final String[] SNOW_BONES = {
+        "snow_shoulders", "snow_head", "snow_left_arm", "snow_right_arm", "snow_left_forearm", "snow_right_forearm"};
+    private static final float SNOW_DEEPEN = 1.0f;
+
     private double armLeft;
     private double armRight;
     private double stride;
@@ -65,6 +70,18 @@ public final class ColossusModel extends DefaultedEntityGeoModel<FrostColossus> 
         boolean awake = colossus.activity() == FrostColossus.Activity.AWAKE;
         leg("left_leg", pose, 0, awake);
         leg("right_leg", pose, 1, awake);
+        // Asleep, its eyes go dark and the snow piles up on it; getting up, it shakes the snow off.
+        GeoBone eyes = getBone("eyes").orElse(null);
+        if (eyes != null) {
+            eyes.setHidden(colossus.eyesClosed(partialTick));
+        }
+        float snow = (float) colossus.snowCover(partialTick);
+        for (String name : SNOW_BONES) {
+            GeoBone bone = getBone(name).orElse(null);
+            if (bone != null) {
+                bone.setScaleY(1 + SNOW_DEEPEN * snow);
+            }
+        }
         // The arm that lifts somebody reaches for where its hand has to be.
         if (pose.reachSide != 0) {
             String side = pose.reachSide < 0 ? "left" : "right";

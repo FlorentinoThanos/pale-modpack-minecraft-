@@ -31,6 +31,9 @@ public final class ColossusRegistry {
 
     /** It was struck and has noticed. */
     public static final DeferredHolder<SoundEvent, SoundEvent> HUM = sound("colossus.hum");
+    public static final DeferredHolder<SoundEvent, SoundEvent> STEP = sound("colossus.step");
+    public static final DeferredHolder<SoundEvent, SoundEvent> SIGH = sound("colossus.sigh");
+    public static final DeferredHolder<SoundEvent, SoundEvent> SHAKE_OFF = sound("colossus.shake_off");
 
     private ColossusRegistry() {}
 

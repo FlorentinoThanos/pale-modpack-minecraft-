@@ -23,5 +23,9 @@
   "message.thepale.colossus.come_closer": "Встань на его ладонь",
   "message.thepale.colossus.riding": "%1$s: спуститься. Посмотри на место и нажми %2$s: идти туда",
   "message.thepale.colossus.riding_plain": "%1$s: спуститься",
-  "message.thepale.colossus.no_way": "Туда Ледяной Колосс не пойдёт"
+  "message.thepale.colossus.no_way": "Туда Ледяной Колосс не пойдёт",
+  "subtitles.thepale.colossus.step": "Шаги Ледяного Колосса",
+  "subtitles.thepale.colossus.sigh": "Ледяной Колосс вздыхает",
+  "subtitles.thepale.colossus.shake_off": "Ледяной Колосс стряхивает снег",
+  "message.thepale.colossus.waking": "Ледяной Колосс просыпается"
 }

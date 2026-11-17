@@ -40,5 +40,9 @@
   "message.thepale.colossus.come_closer": "Step onto its palm",
   "message.thepale.colossus.riding": "%1$s: get down. Look at a place and press %2$s: go there",
   "message.thepale.colossus.riding_plain": "%1$s: get down",
-  "message.thepale.colossus.no_way": "The Frost Colossus won't go there"
+  "message.thepale.colossus.no_way": "The Frost Colossus won't go there",
+  "subtitles.thepale.colossus.step": "Frost Colossus steps",
+  "subtitles.thepale.colossus.sigh": "Frost Colossus sighs",
+  "subtitles.thepale.colossus.shake_off": "Frost Colossus shakes off snow",
+  "message.thepale.colossus.waking": "The Frost Colossus is waking up"
 }

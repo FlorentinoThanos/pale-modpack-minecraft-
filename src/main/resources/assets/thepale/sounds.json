@@ -19,5 +19,94 @@
         "pitch": 0.5
       }
     ]
+  },
+  "colossus.step": {
+    "subtitle": "subtitles.thepale.colossus.step",
+    "sounds": [
+      {
+        "name": "minecraft:mob/irongolem/walk1",
+        "volume": 1.0,
+        "pitch": 0.45,
+        "attenuation_distance": 48
+      },
+      {
+        "name": "minecraft:mob/irongolem/walk2",
+        "volume": 1.0,
+        "pitch": 0.42,
+        "attenuation_distance": 48
+      },
+      {
+        "name": "minecraft:mob/irongolem/walk3",
+        "volume": 1.0,
+        "pitch": 0.48,
+        "attenuation_distance": 48
+      },
+      {
+        "name": "minecraft:mob/warden/step_1",
+        "volume": 1.0,
+        "pitch": 0.5,
+        "attenuation_distance": 48
+      },
+      {
+        "name": "minecraft:mob/warden/step_3",
+        "volume": 1.0,
+        "pitch": 0.5,
+        "attenuation_distance": 48
+      }
+    ]
+  },
+  "colossus.sigh": {
+    "subtitle": "subtitles.thepale.colossus.sigh",
+    "sounds": [
+      {
+        "name": "minecraft:mob/sniffer/idle1",
+        "volume": 1.0,
+        "pitch": 0.45,
+        "attenuation_distance": 40
+      },
+      {
+        "name": "minecraft:mob/sniffer/idle2",
+        "volume": 1.0,
+        "pitch": 0.42,
+        "attenuation_distance": 40
+      },
+      {
+        "name": "minecraft:mob/horse/breathe1",
+        "volume": 1.0,
+        "pitch": 0.3,
+        "attenuation_distance": 40
+      },
+      {
+        "name": "minecraft:mob/horse/breathe2",
+        "volume": 1.0,
+        "pitch": 0.32,
+        "attenuation_distance": 40
+      }
+    ]
+  },
+  "colossus.shake_off": {
+    "subtitle": "subtitles.thepale.colossus.shake_off",
+    "sounds": [
+      {
+        "name": "minecraft:block/powder_snow/break1",
+        "volume": 1.0,
+        "pitch": 0.6
+      },
+      {
+        "name": "minecraft:block/powder_snow/break2",
+        "volume": 1.0,
+        "pitch": 0.55
+      },
+      {
+        "name": "minecraft:dig/snow1",
+        "volume": 1.0,
+        "pitch": 0.5
+      },
+      {
+        "name": "minecraft:dig/snow2",
+        "volume": 1.0,
+        "pitch": 0.5
+      }
+    ]
   }
 }

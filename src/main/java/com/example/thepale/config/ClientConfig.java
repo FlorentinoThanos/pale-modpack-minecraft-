@@ -21,6 +21,7 @@ public final class ClientConfig {
     private static final ModConfigSpec.DoubleValue FOG_ENTRY_VISIBILITY;
     private static final ModConfigSpec.DoubleValue FOG_FULL_VISIBILITY;
     private static final ModConfigSpec.ConfigValue<List<? extends String>> DIMENSIONS;
+    private static final ModConfigSpec.DoubleValue COLOSSUS_SCREEN_SHAKE;
 
     static {
         ModConfigSpec.Builder builder = new ModConfigSpec.Builder();
@@ -50,6 +51,11 @@ public final class ClientConfig {
                         List.of("minecraft:overworld"),
                         () -> "minecraft:overworld",
                         value -> value instanceof String s && ResourceLocation.tryParse(s) != null);
+        COLOSSUS_SCREEN_SHAKE = builder
+                .comment(
+                        "How much the screen shakes when the Frost Colossus steps nearby (within 32 blocks, less the further",
+                        "away; very little for its riders). 0 = not at all, 1 = a soft tremble.")
+                .defineInRange("colossusScreenShake", 1.0, 0.0, 1.0);
         SPEC = builder.build();
     }
 
@@ -60,7 +66,8 @@ public final class ClientConfig {
             int layerCount,
             double fogEntryVisibility,
             double fogFullVisibility,
-            Set<ResourceLocation> dimensions) {
+            Set<ResourceLocation> dimensions,
+            double colossusScreenShake) {
         /** Radius of cylinder {@code layer}, where 0 is the innermost. */
         public double layerRadius(int layer) {
             return layerCount == 1 ? innerRadius : innerRadius + (outerRadius - innerRadius) * layer / (layerCount - 1);
@@ -103,6 +110,7 @@ public final class ClientConfig {
                 LAYER_COUNT.get(),
                 FOG_ENTRY_VISIBILITY.get(),
                 Math.min(FOG_FULL_VISIBILITY.get(), FOG_ENTRY_VISIBILITY.get()),
-                dimensions);
+                dimensions,
+                COLOSSUS_SCREEN_SHAKE.get());
     }
 }
