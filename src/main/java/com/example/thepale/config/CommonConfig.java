@@ -326,8 +326,8 @@ public final class CommonConfig {
         builder.push("colossus");
         COLOSSUS_ENABLED = builder
                 .comment(
-                        "The Frost Colossus: a peaceful stone giant, about 30 blocks tall. Now and then it walks straight past a",
-                        "player, carrying caches of loot on its shoulders and back, and goes on its way (see the event settings).",
+                        "The Frost Colossus: a peaceful stone giant, about 30 blocks tall. Now and then it walks out of the Pale,",
+                        "across the northern island and back into the Pale, with diamonds on its shoulders (see the event settings).",
                         "There is only ever one. false = it never appears, and one that is already in the world goes away.")
                 .define("enabled", true);
         COLOSSUS_INVULNERABLE = builder
@@ -359,10 +359,12 @@ public final class CommonConfig {
                 .define("riderSteering", true);
         COLOSSUS_EVENTS = builder
                 .comment(
-                        "The colossus's walk: every eventMinMinutes to eventMaxMinutes of play it appears some 100 blocks from a",
-                        "random player in the Overworld, walks straight past them with three caches of loot on its shoulders and",
-                        "back, and goes away once nobody is near. Everyone is told in chat when it comes and when it goes.",
-                        "false = it never comes by itself (/thepale colossus event still sends it).")
+                        "The colossus's walk: every eventMinMinutes to eventMaxMinutes of play, if somebody is on the northern",
+                        "(cold) island, it comes out of the Pale beyond the coast, wades through the sea, crosses the island in a",
+                        "straight line past that player with diamond crystals on its shoulders and back (mined with an iron",
+                        "pickaxe or better), and wades back into the Pale on the far side. It stops at the coast while anybody is",
+                        "on it. Everyone is told in chat when it comes and when it goes. The world around it stays loaded while it",
+                        "walks (a few chunks). false = it never comes by itself (/thepale colossus event still sends it).")
                 .define("events", true);
         COLOSSUS_EVENT_MIN_MINUTES = builder
                 .comment("The shortest time between two walks, in minutes of play (the server running).")

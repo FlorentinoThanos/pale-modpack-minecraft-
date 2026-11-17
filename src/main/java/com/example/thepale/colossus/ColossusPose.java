@@ -216,8 +216,8 @@ public final class ColossusPose {
 
         onTorso(part[HIPS], 0, 100, 0);
         onTorso(part[CHEST], 0, 158, 0);
-        onTorso(part[LEFT_SHOULDER], -SEAT_X, 186, 0);
-        onTorso(part[RIGHT_SHOULDER], SEAT_X, 186, 0);
+        onTorso(part[LEFT_SHOULDER], -SEAT_X, 188, 0);
+        onTorso(part[RIGHT_SHOULDER], SEAT_X, 188, 0);
         onTorso(part[HEAD], 0, 205, -8);
         // The crystals (gen_colossus_model.py: its x is the other way round).
         onTorso(part[LEFT_CRYSTALS], -53, 222, 9);

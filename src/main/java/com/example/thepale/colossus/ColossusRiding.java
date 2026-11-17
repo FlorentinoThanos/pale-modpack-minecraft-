@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageTypes;
@@ -49,7 +50,7 @@ public final class ColossusRiding {
         }
     }
 
-    /** On its shoulder, a wall the colossus walks them through doesn't smother them and no fall hurts them. */
+    /** On its shoulder or standing on it, a wall the colossus walks them through doesn't smother them and no fall hurts them. */
     public static void onIncomingDamage(LivingIncomingDamageEvent event) {
         LivingEntity entity = event.getEntity();
         boolean wall = event.getSource().is(DamageTypes.IN_WALL);
@@ -58,6 +59,10 @@ public final class ColossusRiding {
             return;
         }
         if (entity.getVehicle() instanceof FrostColossus) {
+            event.setCanceled(true);
+        } else if (wall && entity instanceof Player player && !player.level().getEntitiesOfClass(FrostColossus.class,
+                player.getBoundingBox().inflate(16, 40, 16), colossus -> colossus.standsOn(player)).isEmpty()) {
+            // Standing on it as it walks through the trees.
             event.setCanceled(true);
         } else if (fall && entity instanceof ServerPlayer player) {
             Integer since = SOFT_LANDINGS.remove(player.getUUID());

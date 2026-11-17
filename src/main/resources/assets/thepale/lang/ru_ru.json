@@ -38,12 +38,13 @@
   "advancements.thepale.colossus.excursion.description": "Проехать на Ледяном Колоссе 500 блоков",
   "commands.thepale.colossus.where.next": "Ледяного Колосса сейчас нет в мире. Он пройдёт мимо кого-нибудь примерно через %s мин.",
   "commands.thepale.colossus.event": "Ледяной Колосс идёт мимо игрока %s.",
-  "commands.thepale.colossus.no_place": "Не нашлось места для Ледяного Колосса: нужна загруженная суша в 50–110 блоках от игрока, не у самого берега.",
-  "message.thepale.colossus.event.start": "Земля дрожит! Ледяной Колосс идёт мимо игрока %1$s (около %2$s, %3$s). На его плечах и спине растут алмазные кристаллы: забирайся к нему с киркой, пока он не ушёл.",
-  "message.thepale.colossus.event.end": "Ледяной Колосс ушёл за горизонт.",
+  "commands.thepale.colossus.no_place": "На северном острове никого нет: Ледяной Колосс проходит только мимо игрока там.",
+  "message.thepale.colossus.event.start": "Земля дрожит! Ледяной Колосс вышел из Пустоши и бредёт по морю к острову. Он пройдёт мимо игрока %1$s (около %2$s, %3$s) и уйдёт обратно в Пустошь на другой стороне. На его плечах и спине растут алмазные кристаллы: забирайся к нему с киркой.",
+  "message.thepale.colossus.event.end": "Ледяной Колосс ушёл обратно в Пустошь.",
   "message.thepale.colossus.crystals": "Бей киркой: добыть алмазы",
   "message.thepale.colossus.crystals_need_pickaxe": "Эти кристаллы берёт только железная кирка или лучше",
   "message.thepale.colossus.crystals_mined": "Кристаллы откололись: алмазы твои",
   "advancements.thepale.colossus.diamonds.title": "Алмазы великана",
-  "advancements.thepale.colossus.diamonds.description": "Отбить киркой алмазные кристаллы с Ледяного Колосса"
+  "advancements.thepale.colossus.diamonds.description": "Отбить киркой алмазные кристаллы с Ледяного Колосса",
+  "message.thepale.colossus.shore": "Колосс остановился у берега: в Пустошь он тебя не понесёт. Слезай, когда будешь готов"
 }

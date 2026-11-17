@@ -55,12 +55,13 @@
   "advancements.thepale.colossus.excursion.description": "Ride the Frost Colossus for 500 blocks",
   "commands.thepale.colossus.where.next": "The Frost Colossus is not in the world now. It comes by somebody in about %s min.",
   "commands.thepale.colossus.event": "The Frost Colossus is on its way past %s.",
-  "commands.thepale.colossus.no_place": "No place for the Frost Colossus turned up: it needs dry, loaded land 50 to 110 blocks from the player, off the coast.",
-  "message.thepale.colossus.event.start": "The ground shakes! The Frost Colossus is walking past %1$s (near %2$s, %3$s). Diamond crystals grow on its shoulders and back: climb up with a pickaxe before it is gone.",
-  "message.thepale.colossus.event.end": "The Frost Colossus has walked on, over the horizon.",
+  "commands.thepale.colossus.no_place": "Nobody is on the northern island: the Frost Colossus only walks past somebody there.",
+  "message.thepale.colossus.event.start": "The ground shakes! The Frost Colossus has come out of the Pale and is wading toward the island: it will pass %1$s (near %2$s, %3$s) and go back into the Pale on the far side. Diamond crystals grow on its shoulders and back: climb up with a pickaxe.",
+  "message.thepale.colossus.event.end": "The Frost Colossus has gone back into the Pale.",
   "message.thepale.colossus.crystals": "Hit with the pickaxe: mine the diamonds",
   "message.thepale.colossus.crystals_need_pickaxe": "These crystals need an iron pickaxe or better",
   "message.thepale.colossus.crystals_mined": "The crystals broke off: the diamonds are yours",
   "advancements.thepale.colossus.diamonds.title": "The Giant's Diamonds",
-  "advancements.thepale.colossus.diamonds.description": "Mine the diamond crystals off the Frost Colossus with a pickaxe"
+  "advancements.thepale.colossus.diamonds.description": "Mine the diamond crystals off the Frost Colossus with a pickaxe",
+  "message.thepale.colossus.shore": "The colossus stops at the shore: it won't carry you out into the Pale. Get down when you're ready"
 }

@@ -57,8 +57,18 @@ public final class ColossusPart extends PartEntity<FrostColossus> {
         return getParent().isAlive() && getParent().partThere(index);
     }
 
+    /**
+     * Solid to stand on, but only on the clients, where players move themselves. The server's parts are a little ahead
+     * of what a client sees, so a player standing on a shoulder would look to it as if inside one, and it would put
+     * them back every few steps.
+     */
     @Override
     public boolean canBeCollidedWith() {
+        return level().isClientSide && solid();
+    }
+
+    /** {@return whether one can stand on it: all but the crystals} */
+    public boolean solid() {
         return getParent().isAlive() && !isCrystals();
     }
 

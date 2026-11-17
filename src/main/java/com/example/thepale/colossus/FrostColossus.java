@@ -2,6 +2,10 @@ package com.example.thepale.colossus;
 
 import com.example.thepale.ThePale;
 import com.example.thepale.config.CommonConfig;
+import com.example.thepale.worldgen.PaleShape;
+import java.util.Comparator;
+import net.minecraft.server.level.TicketType;
+import net.minecraft.world.level.ChunkPos;
 import com.example.thepale.mixin.LivingEntityAccessor;
 import java.util.UUID;
 import net.minecraft.core.BlockPos;
@@ -164,8 +168,12 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
     /** The highest step it climbs and the deepest water it wades, in blocks. */
     private static final int MAX_STEP = 4;
     private static final int MAX_WADE = 3;
-    /** On a walk past a player it takes bigger steps: over a bank or a ledge rather than around it. */
+    /** With somebody aboard it goes no nearer the sea than this, in blocks inland of the coast. */
+    private static final double SHORE = 6;
+    /** On its walk it takes bigger steps: over a bank or a ledge rather than around it. */
     private static final int JOURNEY_STEP = 6;
+    /** Keeps the world loaded around it on its walk; renewed every second, so it lapses soon after it is gone. */
+    static final TicketType<ChunkPos> WALK_TICKET = TicketType.create("thepale_colossus", Comparator.comparingLong(ChunkPos::toLong), 300);
     /** How fast it turns as it walks and on the spot, in degrees a tick. */
     private static final float WALK_TURN = 0.7f;
     private static final float SPOT_TURN = 0.9f;
@@ -279,7 +287,10 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
     /** Where a rider is put when they get off: set just before they do. Otherwise they are left where they sit. */
     @Nullable
     private Vec3 dismountTo;
-    /** On a walk past a player: the way it is going (a level unit vector), and how long it has been walking. Else null. */
+    /**
+     * On its walk out of the Pale and back into it: the place in the Pale it is walking to (x and z), and how long it
+     * has been walking. Else null.
+     */
     @Nullable
     private Vec3 journey;
     private int journeyTicks;
@@ -474,8 +485,8 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
         }
         tag.putInt("Crystals", entityData.get(DATA_CRYSTALS));
         if (journey != null) {
-            tag.putDouble("JourneyX", journey.x);
-            tag.putDouble("JourneyZ", journey.z);
+            tag.putDouble("JourneyToX", journey.x);
+            tag.putDouble("JourneyToZ", journey.z);
             tag.putInt("JourneyTicks", journeyTicks);
         }
     }
@@ -490,8 +501,8 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
         }
         anchor = NbtUtils.readBlockPos(tag, "Anchor").orElse(null);
         entityData.set(DATA_CRYSTALS, tag.getInt("Crystals") & 0x7FFF);
-        if (tag.contains("JourneyX")) {
-            journey = new Vec3(tag.getDouble("JourneyX"), 0, tag.getDouble("JourneyZ"));
+        if (tag.contains("JourneyToX")) {
+            journey = new Vec3(tag.getDouble("JourneyToX"), 0, tag.getDouble("JourneyToZ"));
             journeyTicks = tag.getInt("JourneyTicks");
         }
     }
@@ -582,12 +593,11 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
     }
 
     /**
-     * Sends it on a walk: straight on this way (its heading in degrees), across whatever land there is, until nobody
-     * is near (then the keeper takes it away). It doesn't sleep on the way, and it carries all three clusters of crystals.
+     * Sends it on its walk: straight to this place (in the Pale, across the island), over land and through the sea,
+     * where it is gone. It doesn't sleep on the way, and it carries all three clusters of crystals.
      */
-    public void beginJourney(float yaw) {
-        double radians = Math.toRadians(yaw);
-        journey = new Vec3(-Math.sin(radians), 0, Math.cos(radians));
+    public void beginJourney(double toX, double toZ) {
+        journey = new Vec3(toX, 0, toZ);
         journeyTicks = 0;
         anchor = null;
         wantsRest = false;
@@ -606,9 +616,47 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
         return journeyTicks;
     }
 
-    /** {@return whether it may walk here}: on a walk, any land off the coast; else its own country, or near its anchor */
+    /** {@return which way its walk goes from here, in degrees} */
+    private float journeyHeading() {
+        return (float) (Mth.atan2(-(journey.x - getX()), journey.z - getZ()) * Mth.RAD_TO_DEG);
+    }
+
+    /** {@return whether it may walk here}: on its walk anywhere at all; else its own country, or near its anchor */
     private boolean mayWalk(double x, double z) {
-        return journey != null ? ColossusRange.inland(x, z) : ColossusRange.allowed(x, z, anchor);
+        return journey != null || ColossusRange.allowed(x, z, anchor);
+    }
+
+    /**
+     * {@return whether somebody is aboard}: riding a shoulder, or standing on it (or anywhere up on it). It doesn't
+     * carry them out to sea.
+     */
+    public boolean hasPeopleAboard() {
+        if (!getPassengers().isEmpty()) {
+            return true;
+        }
+        for (Player player : level().players()) {
+            if (standsOn(player)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /** {@return whether the player stands on top of it (a shoulder, its head, a hand), not on the ground beside it} */
+    public boolean standsOn(Player player) {
+        if (player.isSpectator() || !player.isAlive() || player.isPassenger() || player.getY() < getY() + 8
+                || player.distanceToSqr(this) > 48 * 48) {
+            return false;
+        }
+        AABB feet = player.getBoundingBox();
+        for (ColossusPart part : parts) {
+            AABB top = part.getBoundingBox();
+            if (part.solid() && feet.minY > top.maxY - 1 && feet.minY < top.maxY + 2.5
+                    && feet.maxX > top.minX - 1 && feet.minX < top.maxX + 1 && feet.maxZ > top.minZ - 1 && feet.minZ < top.maxZ + 1) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /** {@return whether it is walking: the walk animation plays} */
@@ -830,6 +878,14 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
         if (entityData.get(DATA_FULL_SPEED) != fullSpeed) {
             entityData.set(DATA_FULL_SPEED, fullSpeed);
         }
+        if (tickCount % 5 == 0) {
+            // Standing on it: a stumble off it, or a slide down it, doesn't hurt.
+            for (ServerPlayer player : level.players()) {
+                if (standsOn(player)) {
+                    ColossusRiding.protectFromFall(player);
+                }
+            }
+        }
         byte maxRiders = (byte) Mth.clamp(config.maxRiders(), 0, 2);
         if (entityData.get(DATA_MAX_RIDERS) != maxRiders) {
             entityData.set(DATA_MAX_RIDERS, maxRiders);
@@ -843,6 +899,16 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
         if (journey != null) {
             journeyTicks++;
             wantsRest = false;
+            if (tickCount % 20 == 0) {
+                // Wherever it walks, the world around it stays loaded: it walks the whole way, watched or not.
+                ChunkPos chunk = chunkPosition();
+                level.getChunkSource().addRegionTicket(WALK_TICKET, chunk, 3, chunk);
+            }
+            if (Mth.square(journey.x - getX()) + Mth.square(journey.z - getZ()) < 8 * 8 && !hasPeopleAboard()) {
+                // Into the Pale, out of the world's sight: gone (the keeper tells everybody).
+                discard();
+                return;
+            }
         } else if (tickCount % 20 == 0) {
             keepHours(level, config);
         }
@@ -1024,35 +1090,51 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
     }
 
     /**
-     * On a walk: straight on, or around what is in the way (a little off to one side, and back to its way after);
-     * where nothing will do, back the way it came.
+     * On its walk: straight on toward the far Pale, or around what is in the way (a little off to one side, and back
+     * to its way after); boxed in, straight on whatever is there. With somebody aboard it stops at the coast instead
+     * of wading out to sea, until they get off.
      */
     private void walkOn(ServerLevel level) {
-        float ahead = (float) (Mth.atan2(-journey.x, journey.z) * Mth.RAD_TO_DEG);
+        float ahead = journeyHeading();
+        double left = Math.sqrt(Mth.square(journey.x - getX()) + Mth.square(journey.z - getZ()));
         for (float off : new float[] {0, 25, -25, 50, -50, 80, -80}) {
             if (off != 0 && random.nextBoolean()) {
                 off = -off;
             }
-            double clear = clearFor(level, getX(), getZ(), ahead + off, off == 0 ? 48 : 24);
-            if (clear >= (off == 0 ? 10 : 14)) {
+            double clear = Math.min(clearFor(level, getX(), getZ(), ahead + off, off == 0 ? 48 : 24), left);
+            if (clear >= (off == 0 ? Math.min(10, left) : 14)) {
                 double radians = Math.toRadians(ahead + off);
-                waypointX = getX() - Math.sin(radians) * (clear - 3);
-                waypointZ = getZ() + Math.cos(radians) * (clear - 3);
-                hasWaypoint = true;
+                aimAt(level, getX() - Math.sin(radians) * Math.max(clear - 3, 1), getZ() + Math.cos(radians) * Math.max(clear - 3, 1), false);
                 return;
             }
         }
-        if (blocked >= 2) {
-            // Turned back and boxed in again (a gully, a ring of hills): straight on, whatever is in the way.
-            waypointX = getX() + journey.x * 24;
-            waypointZ = getZ() + journey.z * 24;
-            hasWaypoint = true;
-            pushingThrough = true;
-            return;
+        // Boxed in (a gully, a ring of hills): straight on, whatever is in the way.
+        double radians = Math.toRadians(ahead);
+        aimAt(level, getX() - Math.sin(radians) * Math.min(24, left), getZ() + Math.cos(radians) * Math.min(24, left), true);
+    }
+
+    /** Walks on to here, unless that takes whoever is aboard out to sea: then it waits at the coast. */
+    private void aimAt(ServerLevel level, double x, double z, boolean through) {
+        if (hasPeopleAboard()) {
+            PaleShape shape = PaleShape.server();
+            double coast = shape.landEnd() - SHORE;
+            if (shape.effectiveRadius(x, z) > coast && shape.effectiveRadius(x, z) > shape.effectiveRadius(getX(), getZ()) - 0.5) {
+                hasWaypoint = false;
+                pause = 40;
+                if (journeyTicks % 400 < 40) {
+                    for (Entity passenger : getPassengers()) {
+                        if (passenger instanceof Player player) {
+                            tell(player, "shore");
+                        }
+                    }
+                }
+                return;
+            }
         }
-        journey = journey.reverse();
-        blocked++;
-        pause = 20;
+        waypointX = x;
+        waypointZ = z;
+        hasWaypoint = true;
+        pushingThrough = through;
     }
 
     private void chooseWaypoint(ServerLevel level) {
@@ -1121,7 +1203,7 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
             }
             double ground = ColossusGround.underFoot(level, x, z, angle);
             if (Double.isNaN(ground) || Math.abs(ground - before) > (journey != null ? JOURNEY_STEP : MAX_STEP)
-                    || ColossusGround.waterDepth(level, x, z) > wade) {
+                    || (journey == null && ColossusGround.waterDepth(level, x, z) > wade)) {
                 break;
             }
             before = ground;
@@ -1138,7 +1220,8 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
                 .append(String.format(", hand %s %s (bow %.2f reach %.2f carry %.2f), riders %d",
                         handPhase(), handSide() < 0 ? "left" : "right", bow, reach, carry, getPassengers().size()))
                 .append(String.format(", pause %d, speed %.3f, blocked %d, y %.1f, feet %.1f", pause, speed, blocked, getY(), gait.placed() ? gait.support() : Double.NaN))
-                .append(journey != null ? String.format(", on a walk for %d s heading %.0f", journeyTicks / 20, Mth.atan2(-journey.x, journey.z) * Mth.RAD_TO_DEG)
+                .append(journey != null ? String.format(", on its walk for %d s, to %.0f %.0f (%.0f blocks)", journeyTicks / 20, journey.x, journey.z,
+                        Math.sqrt(Mth.square(journey.x - getX()) + Mth.square(journey.z - getZ())))
                         : ColossusRange.allowed(getX(), getZ(), anchor) ? ", in range" : ", OUT OF RANGE")
                 .append(String.format(", crystals %d/%d/%d", crystalsLeft(0), crystalsLeft(1), crystalsLeft(2)))
                 .append(anchor != null ? ", anchored at " + anchor.toShortString() : "")
@@ -1469,7 +1552,7 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
             }
         }
         if (place == null
-                || !mayWalk(place.x, place.z)
+                || !(journey != null ? ColossusRange.inland(place.x, place.z) : mayWalk(place.x, place.z))
                 || ColossusGround.waterDepth(level, place.x, place.z) > MAX_WADE
                 || Mth.square(place.x - getX()) + Mth.square(place.z - getZ()) < 6 * 6) {
             playHead("shake_head", 50);
@@ -1785,6 +1868,46 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
     }
 
     /**
+     * Somebody standing on top of it (on a shoulder, its head, a hand) goes along with it: as it walks and turns they
+     * keep their place on it, and as it rises and sinks they stay on its top, instead of sliding off. Their own client
+     * does it, as it does all their movement.
+     */
+    private void carry(Player player) {
+        AABB box = player.getBoundingBox();
+        for (ColossusPart part : parts) {
+            if (!part.canBeCollidedWith()) {
+                continue;
+            }
+            AABB now = part.getBoundingBox();
+            double dx = part.getX() - part.xo;
+            double dy = part.getY() - part.yo;
+            double dz = part.getZ() - part.zo;
+            double oldTop = now.maxY - dy;
+            boolean onTop = box.minY > oldTop - 0.5 && box.minY < oldTop + 0.45
+                    && box.maxX > now.minX - dx && box.minX < now.maxX - dx
+                    && box.maxZ > now.minZ - dz && box.minZ < now.maxZ - dz;
+            if (!onTop) {
+                continue;
+            }
+            // Where they stand on it, as so far to its right and ahead of it, before and after this tick's move.
+            double before = Math.toRadians(yRotO);
+            double after = Math.toRadians(getYRot());
+            double ox = player.getX() - xo;
+            double oz = player.getZ() - zo;
+            double ahead = -ox * Math.sin(before) + oz * Math.cos(before);
+            double right = -ox * Math.cos(before) - oz * Math.sin(before);
+            double x = getX() - Math.sin(after) * ahead - Math.cos(after) * right;
+            double z = getZ() + Math.cos(after) * ahead - Math.sin(after) * right;
+            player.setPos(x, now.maxY, z);
+            float turn = Mth.wrapDegrees(getYRot() - yRotO);
+            player.setYRot(player.getYRot() + turn);
+            player.setYHeadRot(player.getYHeadRot() + turn);
+            player.resetFallDistance();
+            return;
+        }
+    }
+
+    /**
      * A part that moves into a player (a foot coming down, a swinging hand) would leave them standing inside it:
      * the player is eased out sideways. Their own client does it, as it does all their movement. Standing on top of
      * a part is left alone.
@@ -1794,10 +1917,11 @@ public class FrostColossus extends PathfinderMob implements GeoEntity {
             if (!player.isLocalPlayer() || player.isSpectator() || player.isPassenger() || player.distanceToSqr(this) > 48 * 48) {
                 continue;
             }
+            carry(player);
             AABB box = player.getBoundingBox();
             for (ColossusPart part : parts) {
                 AABB solid = part.getBoundingBox();
-                if (!box.intersects(solid) || box.minY > solid.maxY - 0.6) {
+                if (!part.canBeCollidedWith() || !box.intersects(solid) || box.minY > solid.maxY - 0.6) {
                     continue;
                 }
                 double dx = player.getX() - part.getX();

@@ -1,6 +1,7 @@
 package com.example.thepale.colossus;
 
 import com.example.thepale.config.CommonConfig;
+import com.example.thepale.worldgen.PaleShape;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -11,9 +12,9 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.saveddata.SavedData;
 import net.minecraft.world.phys.Vec3;
@@ -25,29 +26,24 @@ import org.jetbrains.annotations.Nullable;
 /**
  * The Frost Colossus's walks, and keeping it one of a kind.
  *
- * <p>Every {@code eventMinMinutes} to {@code eventMaxMinutes} of play it appears some 100 blocks from a random player
- * in the Overworld, walks straight past them with its diamond crystals, and is taken away once nobody is near it. Everybody in
- * the Overworld is told in chat when it comes and when it goes. The Overworld remembers which colossus is the world's
- * and where it was last; another one that turns up is sent away (the newest one put down by hand wins).
- *
- * <p>Nothing here loads a chunk: it looks every five seconds at what is loaded already.
+ * <p>Every {@code eventMinMinutes} to {@code eventMaxMinutes} of play, if somebody is on the northern (cold) island,
+ * it comes out of the Pale beyond that island's coast, wades through the sea, crosses the island in a straight line
+ * past that player and wades out into the Pale on the far side, where it is gone. Everybody in the Overworld is told
+ * in chat when it comes and when it goes. It walks the whole way watched or not: the world around it stays loaded
+ * (see {@link FrostColossus}). The Overworld remembers which colossus is the world's and where it was last; another
+ * one that turns up is sent away (the newest one put down by hand wins).
  */
 public final class ColossusKeeper extends SavedData {
     private static final String NAME = "thepale_colossus";
     private static final int CHECK_TICKS = 100;
-    /** It appears this far from the player it walks past, at most and at least (as near as the loaded world allows). */
-    private static final int FAR = 112;
-    private static final int NEAR = 48;
+    /** It comes out of the Pale, and goes back into it, this far out past the coast: deep in the fog. */
+    private static final double PALE_DEPTH = 210;
     /** Its way passes the player this far to one side, so that it walks past them and not over them. */
-    private static final double PASS_BY = 14;
-    private static final double PASS_BY_MORE = 14;
-    /** It doesn't appear right in front of somebody: nobody may be this near the place. */
-    private static final double UNSEEN = 40;
-    /** Once nobody is this near (and nobody rides it), it has gone on its way. */
-    private static final double GONE = 128;
-    /** How long a walk lasts at least before it may go, in ticks. */
-    private static final int LEAST_WALK = 20 * 20;
-    /** When no place for it turns up, the next try is this much later, in ticks. */
+    private static final double PASS_BY = 30;
+    private static final double PASS_BY_MORE = 40;
+    /** Somebody this far past the coast at most counts as on the island. */
+    private static final double ON_ISLAND = 40;
+    /** When nobody is on the northern island, the next try is this much later, in ticks. */
     private static final int RETRY = 20 * 60;
 
     @Nullable
@@ -61,6 +57,9 @@ public final class ColossusKeeper extends SavedData {
     private long nextWalk = -1;
     /** How many checks in a row the walking colossus was nowhere in the loaded world. */
     private int missing;
+    /** A walk about to begin: where it comes out of the Pale, its heading and where it goes (until it is there). */
+    @Nullable
+    private double[] pending;
 
     private ColossusKeeper() {}
 
@@ -80,6 +79,10 @@ public final class ColossusKeeper extends SavedData {
         }
         keeper.asleep = tag.getBoolean("Asleep");
         keeper.nextWalk = tag.contains("NextWalk") ? tag.getLong("NextWalk") : -1;
+        if (tag.contains("Pending")) {
+            CompoundTag pending = tag.getCompound("Pending");
+            keeper.pending = new double[] {pending.getDouble("X"), pending.getDouble("Z"), pending.getDouble("Yaw"), pending.getDouble("ToX"), pending.getDouble("ToZ")};
+        }
         return keeper;
     }
 
@@ -96,12 +99,24 @@ public final class ColossusKeeper extends SavedData {
         }
         tag.putBoolean("Asleep", asleep);
         tag.putLong("NextWalk", nextWalk);
+        if (pending != null) {
+            CompoundTag out = new CompoundTag();
+            out.putDouble("X", pending[0]);
+            out.putDouble("Z", pending[1]);
+            out.putDouble("Yaw", pending[2]);
+            out.putDouble("ToX", pending[3]);
+            out.putDouble("ToZ", pending[4]);
+            tag.put("Pending", out);
+        }
         return tag;
     }
 
-    /** {@return where it was when last seen, or null if it is not in the world} */
+    /** {@return where it was when last seen (or where it is about to come out of the Pale), or null if it is not in the world} */
     @Nullable
     public Vec3 last() {
+        if (pending != null) {
+            return new Vec3(pending[0], 64, pending[1]);
+        }
         return id == null ? null : last;
     }
 
@@ -111,7 +126,7 @@ public final class ColossusKeeper extends SavedData {
 
     /** {@return how many ticks until its next walk, if it is not out on one and walks are on; else -1} */
     public long nextWalkIn(ServerLevel overworld) {
-        if (walking || nextWalk < 0 || !CommonConfig.get().colossus().events()) {
+        if (walking || pending != null || nextWalk < 0 || !CommonConfig.get().colossus().events()) {
             return -1;
         }
         return Math.max(0, nextWalk - overworld.getGameTime());
@@ -119,7 +134,8 @@ public final class ColossusKeeper extends SavedData {
 
     /** {@return what it knows, for /thepale colossus status} */
     public String status(ServerLevel overworld) {
-        return "World's colossus: " + (id == null ? "none" : id + (walking ? " (on a walk)" : " (summoned)"))
+        return "World's colossus: " + (id == null ? (pending != null ? String.format("coming out of the Pale at %.0f %.0f", pending[0], pending[1]) : "none")
+                        : id + (walking ? " (on its walk)" : " (summoned)"))
                 + (last == null || id == null ? "" : String.format(", last at %.0f %.0f %.0f%s", last.x, last.y, last.z, asleep ? " asleep" : ""))
                 + (nextWalkIn(overworld) >= 0 ? ", next walk in " + nextWalkIn(overworld) / 20 + " s" : "");
     }
@@ -218,21 +234,25 @@ public final class ColossusKeeper extends SavedData {
     }
 
     private void check(ServerLevel level) {
+        if (pending != null) {
+            comeOut(level);
+            return;
+        }
         if (id != null) {
             if (level.getEntity(id) instanceof FrostColossus colossus && colossus.isAlive()) {
                 see(colossus);
-                if (walking && hasGone(level, colossus)) {
-                    // It walked on, out of everybody's way: removing it tells everybody (onLeave).
-                    colossus.discard();
-                }
                 return;
             }
-            if (walking && ++missing >= 6) {
-                // Nowhere in the loaded world for half a minute: it has walked on.
-                announce(level, "end");
-                forget(level);
-            }
             if (walking) {
+                // Not loaded (the server was restarted): its place is loaded again, and it walks on from there.
+                if (last != null) {
+                    ChunkPos chunk = new ChunkPos(BlockPos.containing(last));
+                    level.getChunkSource().addRegionTicket(FrostColossus.WALK_TICKET, chunk, 3, chunk);
+                }
+                if (++missing >= 24) {
+                    announce(level, "end");
+                    forget(level);
+                }
                 return;
             }
         }
@@ -249,130 +269,91 @@ public final class ColossusKeeper extends SavedData {
         }
     }
 
-    /** {@return whether nobody rides it or is near it any more, after a while on its way} */
-    private static boolean hasGone(ServerLevel level, FrostColossus colossus) {
-        if (colossus.journeyTicks() < LEAST_WALK || !colossus.getPassengers().isEmpty()) {
-            return false;
+    /** The place it comes out of the Pale is kept loaded; once it is, out it comes. */
+    private void comeOut(ServerLevel level) {
+        BlockPos at = BlockPos.containing(pending[0], 64, pending[1]);
+        ChunkPos chunk = new ChunkPos(at);
+        level.getChunkSource().addRegionTicket(FrostColossus.WALK_TICKET, chunk, 3, chunk);
+        if (!level.isPositionEntityTicking(at)) {
+            return;
         }
-        if (!level.isPositionEntityTicking(colossus.blockPosition())) {
-            return true;
+        double ground = ColossusGround.height(level, pending[0], pending[1]);
+        FrostColossus colossus = ColossusRegistry.FROST_COLOSSUS.get().create(level);
+        if (colossus == null || Double.isNaN(ground)) {
+            return;
         }
-        for (ServerPlayer player : level.players()) {
-            if (!player.isSpectator() && Mth.square(player.getX() - colossus.getX()) + Mth.square(player.getZ() - colossus.getZ()) < GONE * GONE) {
-                return false;
-            }
+        colossus.moveTo(pending[0], ground, pending[1], (float) pending[2], 0);
+        colossus.beginJourney(pending[3], pending[4]);
+        pending = null;
+        setDirty();
+        if (level.addFreshEntity(colossus)) {
+            track(colossus);
         }
-        return true;
     }
 
     /**
-     * Sends the colossus on a walk past a player: {@code near}, or else somebody picked at random. Any other colossus
-     * gives way to it.
+     * Sends the colossus on its walk past a player: {@code near}, or else somebody on the northern island picked at
+     * random. It comes out of the Pale beyond the coast of that player's island, crosses the island past them and goes
+     * into the Pale on the far side. Any other colossus gives way to it.
      *
-     * @return the player it walks past, or null if there was nobody, or no place for it near them
+     * @return the player it walks past, or null if nobody is on the island
      */
     @Nullable
     public static ServerPlayer start(ServerLevel level, @Nullable ServerPlayer near) {
+        PaleShape shape = PaleShape.server();
         List<ServerPlayer> players = new ArrayList<>();
         if (near != null) {
             players.add(near);
         } else {
             for (ServerPlayer player : level.players()) {
-                if (!player.isSpectator() && player.isAlive()) {
+                if (!player.isSpectator() && player.isAlive() && ColossusRange.home(player.getX(), player.getZ())
+                        && shape.effectiveRadius(player.getX(), player.getZ()) < shape.landEnd() + ON_ISLAND) {
                     players.add(player);
                 }
             }
         }
-        while (!players.isEmpty()) {
-            ServerPlayer player = players.remove(level.random.nextInt(players.size()));
-            if (player.level() != level) {
-                continue;
-            }
-            double[] place = findStart(level, player);
-            if (place == null) {
-                continue;
-            }
-            FrostColossus colossus = ColossusRegistry.FROST_COLOSSUS.get().create(level);
-            if (colossus == null) {
-                return null;
-            }
-            colossus.moveTo(place[0], place[1], place[2], (float) place[3], 0);
-            colossus.beginJourney((float) place[3]);
-            if (!level.addFreshEntity(colossus)) {
-                return null;
-            }
-            ColossusKeeper keeper = get(level);
-            keeper.track(colossus);
-            keeper.nextWalk = -1;
-            keeper.setDirty();
-            Vec3 by = player.position();
-            announce(level, "start", player.getDisplayName(), Mth.floor(by.x), Mth.floor(by.z));
-            for (ServerPlayer listener : level.players()) {
-                if (listener.distanceToSqr(colossus) < 200 * 200) {
-                    // Far off, the first heavy step.
-                    listener.playNotifySound(ColossusRegistry.STEP.get(), SoundSource.NEUTRAL, 1.5f, 0.7f);
-                }
-            }
-            return player;
+        if (players.isEmpty()) {
+            return null;
         }
-        return null;
+        ServerPlayer player = players.get(level.random.nextInt(players.size()));
+        if (player.level() != level) {
+            return null;
+        }
+        float yaw = level.random.nextFloat() * 360;
+        double radians = Math.toRadians(yaw);
+        double forwardX = -Math.sin(radians);
+        double forwardZ = Math.cos(radians);
+        double side = (level.random.nextBoolean() ? 1 : -1) * (PASS_BY + level.random.nextDouble() * PASS_BY_MORE);
+        // The point of its way nearest the player, beside them; from there back to the Pale it comes out of, and on to
+        // the Pale it goes into.
+        double byX = player.getX() + forwardZ * side;
+        double byZ = player.getZ() - forwardX * side;
+        double[] from = intoThePale(shape, byX, byZ, -forwardX, -forwardZ);
+        double[] to = intoThePale(shape, byX, byZ, forwardX, forwardZ);
+        ColossusKeeper keeper = get(level);
+        if (keeper.id != null && level.getEntity(keeper.id) instanceof FrostColossus previous) {
+            previous.ejectPassengers();
+            previous.discard();
+        }
+        keeper.pending = new double[] {from[0], from[1], yaw, to[0], to[1]};
+        keeper.nextWalk = -1;
+        keeper.setDirty();
+        keeper.comeOut(level);
+        Vec3 by = player.position();
+        announce(level, "start", player.getDisplayName(), Mth.floor(by.x), Mth.floor(by.z));
+        return player;
     }
 
-    /**
-     * {@return where it appears to walk past this player, and its heading: x, y, z, yaw}, or null where no such place
-     * is loaded: dry, inland ground, out of everybody's way, as far from the player as the loaded world allows, with
-     * land on its way to them.
-     */
-    @Nullable
-    private static double[] findStart(ServerLevel level, ServerPlayer player) {
-        for (int attempt = 0; attempt < 24; attempt++) {
-            float yaw = level.random.nextFloat() * 360;
-            double radians = Math.toRadians(yaw);
-            double forwardX = -Math.sin(radians);
-            double forwardZ = Math.cos(radians);
-            double side = (level.random.nextBoolean() ? 1 : -1) * (PASS_BY + level.random.nextDouble() * PASS_BY_MORE);
-            // The point of its way nearest the player, beside them.
-            double byX = player.getX() + forwardZ * side;
-            double byZ = player.getZ() - forwardX * side;
-            for (int back = FAR; back >= NEAR; back -= 8) {
-                double x = byX - forwardX * back;
-                double z = byZ - forwardZ * back;
-                if (fits(level, x, z) && clearOfPlayers(level, x, z) && landBetween(level, x, z, byX, byZ)) {
-                    double ground = ColossusGround.height(level, x, z);
-                    return new double[] {x, ground, z, yaw};
-                }
+    /** {@return the place this far out in the Pale, going from here in this direction} */
+    private static double[] intoThePale(PaleShape shape, double x, double z, double stepX, double stepZ) {
+        for (int along = 0; along < 20_000; along += 4) {
+            double atX = x + stepX * along;
+            double atZ = z + stepZ * along;
+            if (shape.effectiveRadius(atX, atZ) >= shape.landEnd() + PALE_DEPTH) {
+                return new double[] {atX, atZ};
             }
         }
-        return null;
-    }
-
-    private static boolean fits(ServerLevel level, double x, double z) {
-        return level.isPositionEntityTicking(BlockPos.containing(x, 64, z))
-                && ColossusRange.inland(x, z)
-                && !Double.isNaN(ColossusGround.height(level, x, z))
-                && ColossusGround.waterDepth(level, x, z) <= 1;
-    }
-
-    private static boolean clearOfPlayers(ServerLevel level, double x, double z) {
-        for (ServerPlayer other : level.players()) {
-            if (Mth.square(other.getX() - x) + Mth.square(other.getZ() - z) < UNSEEN * UNSEEN) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    /** {@return whether the way from here to there is land it can wade (no sea, nothing unloaded)} */
-    private static boolean landBetween(ServerLevel level, double fromX, double fromZ, double toX, double toZ) {
-        double length = Math.sqrt(Mth.square(toX - fromX) + Mth.square(toZ - fromZ));
-        for (double along = 8; along < length; along += 8) {
-            double x = fromX + (toX - fromX) * along / length;
-            double z = fromZ + (toZ - fromZ) * along / length;
-            if (!ColossusRange.inland(x, z) || Double.isNaN(ColossusGround.height(level, x, z)) || ColossusGround.waterDepth(level, x, z) > 3) {
-                return false;
-            }
-        }
-        return true;
+        return new double[] {x + stepX * 20_000, z + stepZ * 20_000};
     }
 
     /** Tells everybody in the Overworld: {@code message.thepale.colossus.event.<what>}. */

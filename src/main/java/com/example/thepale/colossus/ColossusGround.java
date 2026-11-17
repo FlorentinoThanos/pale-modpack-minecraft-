@@ -12,7 +12,8 @@ import net.minecraft.world.level.levelgen.Heightmap;
 /**
  * The ground the Frost Colossus walks on: what its feet stand on, on the server and on the client alike.
  *
- * <p>Trees don't count (it wades through a forest like through grass), nor does water (it stands on the bottom).
+ * <p>Trees don't count (it wades through a forest like through grass), nor does water (it stands on the bottom, or
+ * where the sea is deep, wades as if the bottom were {@link #MAX_DEPTH} blocks under the surface).
  * Only columns of chunks that are already loaded are looked at, so asking never loads or generates anything; the
  * answer for a column that isn't there is {@link Double#NaN}.
  */
@@ -20,6 +21,8 @@ public final class ColossusGround {
     /** The corners of a foot, from its middle, in blocks. */
     private static final double FOOT_HALF_WIDTH = 1.25;
     private static final double FOOT_HALF_LENGTH = 1.75;
+    /** Out at sea it wades no deeper than this, in blocks: its legs and belly in the water, its shoulders well above. */
+    public static final int MAX_DEPTH = 14;
 
     private ColossusGround() {}
 
@@ -36,12 +39,18 @@ public final class ColossusGround {
         int top = chunk.getHeight(Heightmap.Types.MOTION_BLOCKING, blockX & 15, blockZ & 15);
         int bottom = level.getMinBuildHeight();
         BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
+        int surface = Integer.MIN_VALUE;
         for (int y = top; y >= bottom; y--) {
-            if (isGround(chunk.getBlockState(pos.set(blockX, y, blockZ)))) {
-                return y + 1;
+            BlockState state = chunk.getBlockState(pos.set(blockX, y, blockZ));
+            if (surface == Integer.MIN_VALUE && state.getFluidState().is(FluidTags.WATER)) {
+                surface = y + 1;
+            }
+            if (isGround(state)) {
+                // In deep water it wades, as if on a bottom no deeper than this under the surface.
+                return surface != Integer.MIN_VALUE ? Math.max(y + 1, surface - MAX_DEPTH) : y + 1;
             }
         }
-        return bottom;
+        return surface != Integer.MIN_VALUE ? surface - MAX_DEPTH : bottom;
     }
 
     /**
