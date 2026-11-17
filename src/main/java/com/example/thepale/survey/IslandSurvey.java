@@ -51,9 +51,9 @@ public final class IslandSurvey {
     }
 
     private static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
+        // The permission is on each subcommand: /thepale colossus where is for everybody (see ColossusCommands).
         dispatcher.register(Commands.literal("thepale")
-                .requires(source -> source.hasPermission(2))
-                .then(Commands.literal("survey").executes(context -> {
+                .then(Commands.literal("survey").requires(source -> source.hasPermission(2)).executes(context -> {
                     CommandSourceStack source = context.getSource();
                     ServerLevel overworld = source.getServer().overworld();
                     source.sendSuccess(() -> Component.literal("Surveying the island..."), false);

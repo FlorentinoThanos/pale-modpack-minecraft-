@@ -49,6 +49,14 @@ public final class CommonConfig {
     private static final ModConfigSpec.ConfigValue<List<? extends Number>> RAMPAGE_SPEED_BONUS;
     private static final ModConfigSpec.IntValue DARK_METAL_SET_STRENGTH;
     private static final ModConfigSpec.BooleanValue ANCHOR_KEEPS_INVENTORY;
+    private static final ModConfigSpec.BooleanValue COLOSSUS_ENABLED;
+    private static final ModConfigSpec.BooleanValue COLOSSUS_INVULNERABLE;
+    private static final ModConfigSpec.DoubleValue COLOSSUS_WALK_SPEED;
+    private static final ModConfigSpec.BooleanValue COLOSSUS_BREAK_SOFT_BLOCKS;
+    private static final ModConfigSpec.BooleanValue COLOSSUS_SLEEP_AT_NIGHT;
+    private static final ModConfigSpec.IntValue COLOSSUS_MAX_RIDERS;
+    private static final ModConfigSpec.BooleanValue COLOSSUS_RIDER_STEERING;
+    private static final ModConfigSpec.DoubleValue COLOSSUS_RESPAWN_MINUTES;
 
     static {
         ModConfigSpec.Builder builder = new ModConfigSpec.Builder();
@@ -313,6 +321,47 @@ public final class CommonConfig {
                 .define("anchorKeepsInventory", true);
         builder.pop();
 
+        builder.push("colossus");
+        COLOSSUS_ENABLED = builder
+                .comment(
+                        "The Frost Colossus: a peaceful stone giant, about 30 blocks tall, that wanders the cold island (the cold",
+                        "north of the island in a one-island world). There is only ever one. false = it never appears, and one",
+                        "that is already in the world goes away.")
+                .define("enabled", true);
+        COLOSSUS_INVULNERABLE = builder
+                .comment(
+                        "Nothing hurts it: a hit only makes it turn its head and hum, and /kill does nothing to it. A creative",
+                        "player who hits it while sneaking still removes it (it comes back after respawnMinutes).",
+                        "false = it has 400 health and can be killed like any mob; it drops nothing either way.")
+                .define("invulnerable", true);
+        COLOSSUS_WALK_SPEED = builder
+                .comment("How fast it walks, in blocks per second. One of its steps is 5 blocks long.")
+                .defineInRange("walkSpeed", 2.0, 0.2, 6.0);
+        COLOSSUS_BREAK_SOFT_BLOCKS = builder
+                .comment(
+                        "false = it never changes a block. true = where a foot comes down it flattens snow layers, grass, flowers",
+                        "and leaves (nothing else, and only if the mobGriefing game rule allows it).")
+                .define("breakSoftBlocks", false);
+        COLOSSUS_SLEEP_AT_NIGHT = builder
+                .comment(
+                        "At night and in a thunderstorm it sits down and sleeps until morning, unless somebody is riding it.",
+                        "Right-clicking it wakes it up.")
+                .define("sleepAtNight", true);
+        COLOSSUS_MAX_RIDERS = builder
+                .comment("How many players can ride on its shoulders at once (one on each). 0 = nobody can climb on.")
+                .defineInRange("maxRiders", 2, 0, 2);
+        COLOSSUS_RIDER_STEERING = builder
+                .comment(
+                        "A rider can point the way: look at a place on the island and press jump, and the colossus walks",
+                        "there. false = it only ever wanders where it likes.")
+                .define("riderSteering", true);
+        COLOSSUS_RESPAWN_MINUTES = builder
+                .comment(
+                        "If the colossus is gone (killed, removed, lost with a broken chunk), it appears again on the cold island",
+                        "after this many minutes.")
+                .defineInRange("respawnMinutes", 30.0, 0.0, 10_000.0);
+        builder.pop();
+
         SPEC = builder.build();
     }
 
@@ -352,7 +401,19 @@ public final class CommonConfig {
             List<String> frozenIslandOnlyMobs,
             List<Double> rampageSpeedBonus,
             int darkMetalSetStrength,
-            boolean anchorKeepsInventory) {}
+            boolean anchorKeepsInventory,
+            Colossus colossus) {}
+
+    /** The [colossus] section: the Frost Colossus. */
+    public record Colossus(
+            boolean enabled,
+            boolean invulnerable,
+            double walkSpeed,
+            boolean breakSoftBlocks,
+            boolean sleepAtNight,
+            int maxRiders,
+            boolean riderSteering,
+            double respawnMinutes) {}
 
     private static volatile Settings current = read(true);
 
@@ -416,7 +477,16 @@ public final class CommonConfig {
                 (defaults ? RAMPAGE_SPEED_BONUS.getDefault() : RAMPAGE_SPEED_BONUS.get()).stream()
                         .map(Number::doubleValue).toList(),
                 defaults ? DARK_METAL_SET_STRENGTH.getDefault() : DARK_METAL_SET_STRENGTH.get(),
-                defaults ? ANCHOR_KEEPS_INVENTORY.getDefault() : ANCHOR_KEEPS_INVENTORY.get());
+                defaults ? ANCHOR_KEEPS_INVENTORY.getDefault() : ANCHOR_KEEPS_INVENTORY.get(),
+                new Colossus(
+                        defaults ? COLOSSUS_ENABLED.getDefault() : COLOSSUS_ENABLED.get(),
+                        defaults ? COLOSSUS_INVULNERABLE.getDefault() : COLOSSUS_INVULNERABLE.get(),
+                        value(COLOSSUS_WALK_SPEED, defaults),
+                        defaults ? COLOSSUS_BREAK_SOFT_BLOCKS.getDefault() : COLOSSUS_BREAK_SOFT_BLOCKS.get(),
+                        defaults ? COLOSSUS_SLEEP_AT_NIGHT.getDefault() : COLOSSUS_SLEEP_AT_NIGHT.get(),
+                        defaults ? COLOSSUS_MAX_RIDERS.getDefault() : COLOSSUS_MAX_RIDERS.get(),
+                        defaults ? COLOSSUS_RIDER_STEERING.getDefault() : COLOSSUS_RIDER_STEERING.get(),
+                        value(COLOSSUS_RESPAWN_MINUTES, defaults)));
     }
 
     private static double value(ModConfigSpec.DoubleValue value, boolean useDefault) {

@@ -3,5 +3,17 @@
   "message.thepale.portal_refused": "Что-то по ту сторону держит портал закрытым.",
   "message.thepale.north_only": "На этот зов откликается только холодный остров на севере.",
   "message.thepale.anchor_kept": "Якорь возрождения сохранил твои вещи",
-  "message.thepale.steam_failed": "[The Pale] Пар с этим шейдерпаком не запустился, поэтому рисуется старая стена тумана. Причина записана в логе игры (logs/latest.log)."
+  "message.thepale.steam_failed": "[The Pale] Пар с этим шейдерпаком не запустился, поэтому рисуется старая стена тумана. Причина записана в логе игры (logs/latest.log).",
+  "entity.thepale.frost_colossus": "Ледяной Колосс",
+  "subtitles.thepale.colossus.hum": "Ледяной Колосс гудит",
+  "commands.thepale.colossus.where": "Ледяной Колосс сейчас на %s %s %s, в %s блоках от тебя.",
+  "commands.thepale.colossus.where.none": "Ледяного Колосса нет рядом ни с одним игроком. Ищи его на холодном острове, около %s %s.",
+  "commands.thepale.colossus.summoned": "Ледяной Колосс стоит перед тобой.",
+  "commands.thepale.colossus.home": "Ледяной Колосс вернулся в сердце холодного острова: %s %s %s.",
+  "commands.thepale.colossus.no_home": "На холодном острове не нашлось места для Ледяного Колосса.",
+  "commands.thepale.colossus.not_loaded": "Ледяного Колосса нет рядом ни с одним игроком: подойди к нему или вызови его командой /thepale colossus summon.",
+  "commands.thepale.colossus.overworld": "Ледяной Колосс живёт только в Верхнем мире.",
+  "commands.thepale.colossus.disabled": "Ледяной Колосс выключен в настройках (colossus.enabled).",
+  "commands.thepale.colossus.sleep": "Ледяной Колосс сядет и уснёт.",
+  "commands.thepale.colossus.wake": "Ледяной Колосс встанет."
 }

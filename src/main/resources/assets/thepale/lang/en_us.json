@@ -20,5 +20,17 @@
   "message.thepale.north_only": "Only the frozen island in the north answers this call.",
   "thepale.configuration.frozenIslandOnlyMobs": "Frozen Island Only Mobs",
   "message.thepale.anchor_kept": "The respawn anchor kept your things",
-  "message.thepale.steam_failed": "[The Pale] The steam couldn't start with this shader pack, so the old fog wall is drawn. The game log (logs/latest.log) says why."
+  "message.thepale.steam_failed": "[The Pale] The steam couldn't start with this shader pack, so the old fog wall is drawn. The game log (logs/latest.log) says why.",
+  "entity.thepale.frost_colossus": "Frost Colossus",
+  "subtitles.thepale.colossus.hum": "Frost Colossus hums",
+  "commands.thepale.colossus.where": "The Frost Colossus is at %s %s %s, %s blocks from you.",
+  "commands.thepale.colossus.where.none": "The Frost Colossus isn't near any player. Look for it on the cold island, around %s %s.",
+  "commands.thepale.colossus.summoned": "The Frost Colossus stands before you.",
+  "commands.thepale.colossus.home": "The Frost Colossus is back in the heart of the cold island, at %s %s %s.",
+  "commands.thepale.colossus.no_home": "Found no place for the Frost Colossus on the cold island.",
+  "commands.thepale.colossus.not_loaded": "The Frost Colossus isn't near any player; go to it, or use /thepale colossus summon.",
+  "commands.thepale.colossus.overworld": "The Frost Colossus only lives in the Overworld.",
+  "commands.thepale.colossus.disabled": "The Frost Colossus is turned off in the config (colossus.enabled).",
+  "commands.thepale.colossus.sleep": "The Frost Colossus will sit down and sleep.",
+  "commands.thepale.colossus.wake": "The Frost Colossus will get up."
 }

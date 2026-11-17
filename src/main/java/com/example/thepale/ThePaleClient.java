@@ -6,6 +6,8 @@ import com.example.thepale.client.PaleParticles;
 import com.example.thepale.client.PaleShaderFog;
 import com.example.thepale.client.PaleWallRenderer;
 import com.example.thepale.client.compat.PaleDistantHorizons;
+import com.example.thepale.colossus.ColossusRegistry;
+import com.example.thepale.colossus.client.ColossusRenderer;
 import com.example.thepale.config.ClientConfig;
 import com.example.thepale.worldgen.PaleShape;
 import net.neoforged.api.distmarker.Dist;
@@ -19,6 +21,7 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.client.event.ClientPlayerNetworkEvent;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.common.NeoForge;
 
 /** The Pale, client side: the fog wall, the camera fog and the ash. Purely visual. */
@@ -33,6 +36,8 @@ public final class ThePaleClient {
         modBus.addListener(ClientConfig::onReload);
         modBus.addListener(PaleWallRenderer::onRegisterShaders);
         modBus.addListener(PaleShaderFog::onRegisterShaders);
+        modBus.addListener((EntityRenderersEvent.RegisterRenderers event) ->
+                event.registerEntityRenderer(ColossusRegistry.FROST_COLOSSUS.get(), ColossusRenderer::new));
 
         NeoForge.EVENT_BUS.addListener(PaleWallRenderer::onRenderLevelStage);
         NeoForge.EVENT_BUS.addListener(PaleCloudSea::onRenderLevelStage);

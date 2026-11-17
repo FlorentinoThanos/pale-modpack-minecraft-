@@ -1,5 +1,7 @@
 package com.example.thepale;
 
+import com.example.thepale.colossus.ColossusCommands;
+import com.example.thepale.colossus.ColossusRegistry;
 import com.example.thepale.config.CommonConfig;
 import com.example.thepale.survey.IslandSurvey;
 import com.example.thepale.worldgen.SeedSearch;
@@ -26,6 +28,7 @@ public final class ThePale {
         modBus.addListener(CommonConfig::onLoad);
         modBus.addListener(CommonConfig::onReload);
         PaleWorldgen.register(modBus);
+        ColossusRegistry.register(modBus);
 
         NeoForge.EVENT_BUS.addListener(PaleBiomes::onServerAboutToStart);
         NeoForge.EVENT_BUS.addListener(PalePoison::onPlayerTick);
@@ -35,6 +38,7 @@ public final class ThePale {
         NeoForge.EVENT_BUS.addListener(IslandMobs::onServerStarted);
         NeoForge.EVENT_BUS.addListener(IslandMobs::onRightClickBlock);
         NeoForge.EVENT_BUS.addListener(IslandSurvey::onRegisterCommands);
+        NeoForge.EVENT_BUS.addListener(ColossusCommands::onRegisterCommands);
         NeoForge.EVENT_BUS.addListener(SeedSearch::onPlayerLoggedIn);
         NeoForge.EVENT_BUS.addListener(ShapePayload::onPlayerLoggedIn);
         modBus.addListener(ShapePayload::onRegisterPayloads);

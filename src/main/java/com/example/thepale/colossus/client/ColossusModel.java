@@ -1,0 +1,82 @@
+package com.example.thepale.colossus.client;
+
+import com.example.thepale.ThePale;
+import com.example.thepale.colossus.ColossusPose;
+import com.example.thepale.colossus.FrostColossus;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.resources.ResourceLocation;
+import software.bernie.geckolib.animation.AnimationState;
+import software.bernie.geckolib.cache.object.GeoBone;
+import software.bernie.geckolib.loading.math.MathParser;
+import software.bernie.geckolib.model.DefaultedEntityGeoModel;
+
+/**
+ * The Frost Colossus's model (assets/thepale/geo/entity/frost_colossus.geo.json with its animations and texture, all
+ * written by tools/gen_colossus_model.py).
+ *
+ * <p>The animation file moves the arms, the hands, the head's gestures and the whole body when it sits down, sleeps
+ * and gets up. The rest is put here every frame from {@link ColossusPose}, the same pose the server has its hitboxes
+ * at: the body sinks and leans with the steps, each leg reaches from its hip to where its foot stands on the ground,
+ * and the head turns toward whoever it is watching.
+ */
+public final class ColossusModel extends DefaultedEntityGeoModel<FrostColossus> {
+    private double armLeft;
+    private double armRight;
+    private double stride;
+
+    public ColossusModel() {
+        super(ThePale.id("frost_colossus"));
+        // What the walk animation reads (see the generator script).
+        MathParser.setVariable("query.colossus_arm_left", () -> armLeft);
+        MathParser.setVariable("query.colossus_arm_right", () -> armRight);
+        MathParser.setVariable("query.colossus_stride", () -> stride);
+    }
+
+    /** The ice is a little see-through. */
+    @Override
+    public RenderType getRenderType(FrostColossus colossus, ResourceLocation texture) {
+        return RenderType.entityTranslucent(texture);
+    }
+
+    @Override
+    public void applyMolangQueries(AnimationState<FrostColossus> state, double animTime) {
+        ColossusPose pose = state.getAnimatable().pose(state.getPartialTick());
+        armLeft = pose.armSwing[0];
+        armRight = pose.armSwing[1];
+        stride = pose.speed;
+    }
+
+    @Override
+    public void setCustomAnimations(FrostColossus colossus, long instanceId, AnimationState<FrostColossus> state) {
+        float partialTick = state.getPartialTick();
+        ColossusPose pose = colossus.pose(partialTick);
+        GeoBone body = getBone("body").orElse(null);
+        if (body != null) {
+            body.setPosY((float) pose.bodyY);
+            body.setRotX((float) pose.bodyPitch);
+            body.setRotZ((float) pose.bodyRoll);
+        }
+        GeoBone head = getBone("head").orElse(null);
+        if (head != null) {
+            head.setRotY(colossus.lookYaw(partialTick));
+            head.setRotX(colossus.lookPitch(partialTick));
+        }
+        // Sitting down, asleep and getting up, the animation folds the legs; awake, each reaches for its foot.
+        boolean awake = colossus.activity() == FrostColossus.Activity.AWAKE;
+        leg("left_leg", pose, 0, awake);
+        leg("right_leg", pose, 1, awake);
+    }
+
+    private void leg(String name, ColossusPose pose, int leg, boolean awake) {
+        GeoBone bone = getBone(name).orElse(null);
+        if (bone == null) {
+            return;
+        }
+        bone.setPosY((float) pose.legY[leg]);
+        if (awake) {
+            bone.setRotX((float) pose.legRot[leg][0]);
+            bone.setRotY((float) pose.legRot[leg][1]);
+            bone.setRotZ((float) pose.legRot[leg][2]);
+        }
+    }
+}

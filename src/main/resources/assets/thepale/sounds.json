@@ -1,7 +1,23 @@
 {
   "ambient.hum": {
     "sounds": [
-      { "name": "minecraft:ambient/nether/basalt_deltas/ambience", "stream": true, "volume": 0.35, "pitch": 0.7 }
+      {
+        "name": "minecraft:ambient/nether/basalt_deltas/ambience",
+        "stream": true,
+        "volume": 0.35,
+        "pitch": 0.7
+      }
+    ]
+  },
+  "colossus.hum": {
+    "subtitle": "subtitles.thepale.colossus.hum",
+    "sounds": [
+      {
+        "name": "minecraft:block.beacon.activate",
+        "type": "event",
+        "volume": 1.0,
+        "pitch": 0.5
+      }
     ]
   }
 }
